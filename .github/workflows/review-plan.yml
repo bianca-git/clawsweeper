@@ -40,7 +40,7 @@ on:
       target_repo:
         description: "Repository to sweep"
         required: false
-        default: "openclaw/openclaw"
+        default: "bianca-git/skills-idea-to-merge-with-the-copilot-app"
       target_branch:
         description: "Target repository branch to review"
         required: false
@@ -65,14 +65,6 @@ on:
         description: "Run the low-latency intake lane for new/active issues and PRs"
         required: false
         default: "false"
-  schedule:
-    - cron: "*/5 * * * *"
-    # ClawHub review/apply schedules stay opt-in until the ClawSweeper app is installed there.
-    - cron: "2/5 * * * *"
-    # openclaw/openclaw normal backfill offers every 20 minutes; the Worker's
-    # shared admission budget (organic first) bounds what becomes a review.
-    - cron: "9/20 * * * *"
-    - cron: "22 * * * *"
 
 permissions:
   contents: write
