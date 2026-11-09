@@ -52,7 +52,7 @@ on:
       target_repo:
         description: "Repository to sweep"
         required: false
-        default: "openclaw/openclaw"
+        default: "bianca-git/skills-idea-to-merge-with-the-copilot-app"
       apply_existing:
         description: "Apply existing proposed close decisions without rerunning Codex; skips items changed since review"
         required: false
@@ -101,13 +101,6 @@ on:
         description: "Fresh closes per checkpoint commit in apply-existing mode"
         required: false
         default: "40"
-  schedule:
-    - cron: "3 * * * *"
-    - cron: "18 * * * *"
-    - cron: "33 * * * *"
-    - cron: "48 * * * *"
-    - cron: "8,23,38,53 * * * *"
-    - cron: "6,21,36,51 * * * *"
 
 permissions:
   contents: write
