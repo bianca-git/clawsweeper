@@ -128,7 +128,7 @@ jobs:
         with:
           client-id: ${{ env.CLAWSWEEPER_APP_CLIENT_ID }}
           private-key: ${{ secrets.CLAWSWEEPER_APP_PRIVATE_KEY }}
-          owner: openclaw
+          owner: bianca-git
           repositories: openclaw
           permission-issues: write
           permission-pull-requests: write

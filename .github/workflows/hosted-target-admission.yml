@@ -141,7 +141,7 @@ jobs:
         with:
           client-id: Iv23li6B8j8HW3hPaYdA
           private-key: ${{ secrets.CLAWSWEEPER_APP_PRIVATE_KEY }}
-          owner: openclaw
+          owner: bianca-git
           repositories: clawsweeper
           permission-metadata: read
 

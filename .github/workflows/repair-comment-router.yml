@@ -157,7 +157,7 @@ jobs:
         with:
           client-id: ${{ env.CLAWSWEEPER_APP_CLIENT_ID }}
           private-key: ${{ secrets.CLAWSWEEPER_APP_PRIVATE_KEY }}
-          owner: openclaw
+          owner: bianca-git
           repositories: clawsweeper
           # The router enqueues through Worker HMAC; this legacy env token is unused.
           permission-metadata: read

@@ -103,7 +103,7 @@ jobs:
         with:
           client-id: ${{ env.CLAWSWEEPER_APP_CLIENT_ID }}
           private-key: ${{ secrets.CLAWSWEEPER_APP_PRIVATE_KEY }}
-          owner: openclaw
+          owner: bianca-git
           # Inventory discovery needs the installation's as-yet-unknown repository set.
           permission-metadata: read
 
@@ -125,7 +125,7 @@ jobs:
         with:
           client-id: ${{ env.CLAWSWEEPER_APP_CLIENT_ID }}
           private-key: ${{ secrets.CLAWSWEEPER_APP_PRIVATE_KEY }}
-          owner: openclaw
+          owner: bianca-git
           repositories: clawsweeper
           permission-metadata: read
 
@@ -161,7 +161,7 @@ jobs:
         with:
           client-id: ${{ env.CLAWSWEEPER_APP_CLIENT_ID }}
           private-key: ${{ secrets.CLAWSWEEPER_APP_PRIVATE_KEY }}
-          owner: openclaw
+          owner: bianca-git
           # Inventory discovery needs the installation's as-yet-unknown repository set.
           permission-metadata: read
 
