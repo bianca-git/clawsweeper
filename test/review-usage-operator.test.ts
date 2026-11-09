@@ -225,7 +225,7 @@ test("operator CLI exercises fixed transport, UInt64 JSON strings, guards and re
   );
   for (const call of f.calls) {
     assert.equal(call.url.origin, "https://api.cloudflare.com");
-    assert.match(call.url.pathname, /^\/client\/v4\/accounts\/91b59577e757131d68d55a471fe32aca\//);
+    assert.match(call.url.pathname, /^\/client\/v4\/accounts\/a88bb8ce6a4a830a112001904440a990\//);
     assert.equal(call.headers.authorization, "Bearer synthetic-read-token");
     assert.equal(call.headers["x-clawsweeper-exact-review-signature"], undefined);
   }

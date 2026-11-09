@@ -69,7 +69,7 @@ jobs:
     timeout-minutes: 20
     env:
       CLAWSWEEPER_APP_CLIENT_ID: Iv23li6B8j8HW3hPaYdA
-      CLOUDFLARE_ACCOUNT_ID: 91b59577e757131d68d55a471fe32aca
+      CLOUDFLARE_ACCOUNT_ID: a88bb8ce6a4a830a112001904440a990
       PAGES_PROJECT: clawsweeper-dashboard
     steps:
       - uses: actions/checkout@v7

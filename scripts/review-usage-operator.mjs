@@ -1,7 +1,7 @@
 import { createHmac } from "node:crypto";
 import { appendFileSync } from "node:fs";
 
-const ACCOUNT = "91b59577e757131d68d55a471fe32aca";
+const ACCOUNT = "a88bb8ce6a4a830a112001904440a990";
 const WORKER = "clawsweeper-status";
 const DATASET = "clawsweeper_review_usage";
 const REPOSITORY = "openclaw/__review_usage_canary__";

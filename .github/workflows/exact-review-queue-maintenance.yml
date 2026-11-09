@@ -299,7 +299,7 @@ jobs:
           build-script: build:repair
       - name: Preview or execute explicit canonical body maintenance
         env:
-          CLOUDFLARE_ACCOUNT_ID: 91b59577e757131d68d55a471fe32aca
+          CLOUDFLARE_ACCOUNT_ID: a88bb8ce6a4a830a112001904440a990
           CLOUDFLARE_API_TOKEN: ${{ secrets.OPENCLAW_CLOUDFLARE_WORKERS_API_TOKEN || secrets.OPENCLAW_CLOUDFLARE_API_TOKEN }}
           CLAWSWEEPER_WEBHOOK_SECRET: ${{ secrets.CLAWSWEEPER_WEBHOOK_SECRET }}
           EXACT_REVIEW_QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
