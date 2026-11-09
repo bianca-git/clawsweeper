@@ -68,7 +68,7 @@ function coverageProbeInventoryException(
     return false;
   assert.equal(step.uses, appTokenRef.split(" ")[0]);
   assert.deepEqual(step.with, {
-    "client-id": "Iv23liOECG0slfuhz093",
+    "client-id": "Iv23li6B8j8HW3hPaYdA",
     "private-key": "$" + "{{ secrets.CLAWSWEEPER_APP_PRIVATE_KEY }}",
     owner: "openclaw",
     "permission-metadata": "read",
@@ -83,7 +83,7 @@ test("coverage probe inventory exception is exact and cannot widen ordinary App 
     id: "inventory",
     uses: appTokenRef.split(" ")[0],
     with: {
-      "client-id": "Iv23liOECG0slfuhz093",
+      "client-id": "Iv23li6B8j8HW3hPaYdA",
       "private-key": "$" + "{{ secrets.CLAWSWEEPER_APP_PRIVATE_KEY }}",
       owner: "openclaw",
       "permission-metadata": "read",

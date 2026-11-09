@@ -1122,7 +1122,7 @@ Required secrets:
   proxy. Codex subprocesses inherit only the proxy-backed `CODEX_HOME`, not the
   raw API key.
 - `CLAWSWEEPER_APP_CLIENT_ID`: public GitHub App client ID for `clawsweeper`.
-  Currently `Iv23liOECG0slfuhz093`.
+  Currently `Iv23li6B8j8HW3hPaYdA`.
 - `CLAWSWEEPER_APP_PRIVATE_KEY`: private key for `clawsweeper`; plan/review
   jobs use a short-lived GitHub App installation token for read-heavy target API
   calls, and apply/comment-sync/check jobs use the app token for comments,

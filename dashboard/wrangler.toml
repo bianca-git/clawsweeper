@@ -48,7 +48,7 @@ new_sqlite_classes = ["GithubEtagCache"]
 
 [vars]
 CLAWSWEEPER_REPO = "bianca-git/clawsweeper"
-CLAWSWEEPER_APP_CLIENT_ID = "Iv23liOECG0slfuhz093"
+CLAWSWEEPER_APP_CLIENT_ID = "Iv23li6B8j8HW3hPaYdA"
 TARGET_REPOS = "bianca-git/skills-idea-to-merge-with-the-copilot-app"
 # Explicit public-only allowlist for canonical repository + issue/PR references
 # rendered in Overview. Repositories must be verified public before addition.

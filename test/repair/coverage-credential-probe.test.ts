@@ -409,7 +409,7 @@ test("manual workflow contract has one guarded read-only job and no production c
     "actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1",
   );
   assert.deepEqual(mint.with, {
-    "client-id": "Iv23liOECG0slfuhz093",
+    "client-id": "Iv23li6B8j8HW3hPaYdA",
     "private-key": "$" + "{{ secrets.CLAWSWEEPER_APP_PRIVATE_KEY }}",
     owner: "openclaw",
     "permission-metadata": "read",

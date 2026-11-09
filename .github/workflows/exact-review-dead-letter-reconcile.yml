@@ -43,7 +43,7 @@ jobs:
     environment: exact-review-operator
     env:
       EXACT_REVIEW_QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
-      CLAWSWEEPER_APP_CLIENT_ID: Iv23liOECG0slfuhz093
+      CLAWSWEEPER_APP_CLIENT_ID: Iv23li6B8j8HW3hPaYdA
       EXACT_REVIEW_DLQ_ARTIFACT: exact-review-dlq-reconcile
     steps:
       - name: Establish reconciliation deadline
