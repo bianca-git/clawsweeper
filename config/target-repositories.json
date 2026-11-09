@@ -2,101 +2,26 @@
   "schema_version": 2,
   "repositories": [
     {
-      "target_repo": "openclaw/clawhub",
-      "display_name": "ClawHub",
-      "checkout_dir": "clawhub",
-      "community_url": "https://clawhub.ai/",
-      "prompt_note": "Use the ClawHub source tree and current main branch. Review every issue and PR with the same evidence standard. Propose auto-close for issues and pull requests that are certainly implemented on main; for pull requests only, also allow age-gated mostly implemented on main. Keep everything else open.",
-      "apply_close_rules": {
-        "issue": ["implemented_on_main"],
-        "pull_request": ["implemented_on_main", "mostly_implemented_on_main"]
-      },
-      "package_manager": "bun"
-    },
-    {
-      "target_repo": "bianca-git/clawsweeper",
-      "display_name": "ClawSweeper",
-      "checkout_dir": "clawsweeper",
-      "prompt_note": "Use the ClawSweeper source tree and current main branch. Review bot automation, workflow, and documentation changes conservatively. Propose auto-close for issues and pull requests that are certainly implemented on main; for pull requests only, also allow age-gated mostly implemented on main. Keep everything else open for maintainer triage.",
-      "apply_close_rules": {
-        "issue": ["implemented_on_main"],
-        "pull_request": ["implemented_on_main", "mostly_implemented_on_main"]
-      },
-      "package_manager": "pnpm"
-    },
-    {
-      "target_repo": "openclaw/openclaw-enterprise",
-      "display_name": "OpenClaw Enterprise",
-      "checkout_dir": "openclaw-enterprise",
-      "prompt_note": "Use the OpenClaw Enterprise source tree and current main branch. Follow its AGENTS.md and authoritative platform design, verify implementation status before treating target-design capabilities as implemented, and preserve workspace, architecture, IAM, audit, persistence, and deployment boundaries. Require target-native integration evidence for platform behavior. Review only: keep issues and pull requests open for maintainer triage.",
+      "target_repo": "bianca-git/skills-idea-to-merge-with-the-copilot-app",
+      "display_name": "Skills: idea to merge",
+      "checkout_dir": "skills-idea-to-merge-with-the-copilot-app",
+      "prompt_note": "Use the repository source tree and current default branch. Review conservatively and propose only; this deployment is review-only.",
       "apply_close_rules": {
         "issue": [],
         "pull_request": []
       },
       "package_manager": "pnpm"
-    },
-    {
-      "target_repo": "openclaw/openclaw-facetime",
-      "display_name": "OpenClaw FaceTime",
-      "checkout_dir": "openclaw-facetime",
-      "prompt_note": "Use the openclaw-facetime source tree and current main branch. This is a macOS-native project: reviews touch SIP constraints, helper-process injection, Core Audio, and realtime capture paths, so weigh platform-specific evidence carefully and never assume Linux-runner reproduction proves or disproves macOS behavior. Propose auto-close only for issues and pull requests that are certainly implemented on main; keep anything platform-uncertain open for maintainer triage.",
-      "apply_close_rules": {
-        "issue": ["implemented_on_main"],
-        "pull_request": ["implemented_on_main"]
-      },
-      "package_manager": "pnpm"
-    },
-    {
-      "target_repo": "openclaw/fs-safe",
-      "display_name": "fs-safe",
-      "checkout_dir": "fs-safe",
-      "prompt_note": "Use the fs-safe source tree and current main branch. Review filesystem-safety, path-handling, and package changes conservatively. Propose auto-close for issues and pull requests that are certainly implemented on main; for pull requests only, also allow age-gated mostly implemented on main. Keep everything else open for maintainer triage.",
-      "apply_close_rules": {
-        "issue": ["implemented_on_main"],
-        "pull_request": ["implemented_on_main", "mostly_implemented_on_main"]
-      },
-      "package_manager": "pnpm"
-    },
-    {
-      "target_repo": "openclaw/crabbox",
-      "display_name": "Crabbox",
-      "checkout_dir": "crabbox",
-      "prompt_note": "Use the Crabbox source tree and current default branch. Review its Go CLI, portable Node/PostgreSQL coordinator, Cloudflare coordinator, and documentation using target-native tooling and evidence. Propose auto-close for issues and pull requests that are certainly implemented on main; for pull requests only, also allow age-gated mostly implemented on main. Keep everything else open for maintainer triage.",
-      "apply_close_rules": {
-        "issue": ["implemented_on_main"],
-        "pull_request": ["implemented_on_main", "mostly_implemented_on_main"]
-      },
-      "package_manager": "npm"
-    },
-    {
-      "target_repo": "steipete/camsnap",
-      "display_name": "camsnap",
-      "checkout_dir": "camsnap",
-      "prompt_note": "Use the camsnap source tree and current main branch. Review camera discovery, RTSP/ONVIF behavior, Go changes, and cross-platform build behavior conservatively. Keep issues and pull requests open for maintainer triage.",
-      "apply_close_rules": {
-        "issue": [],
-        "pull_request": []
-      },
-      "package_manager": "npm"
     }
   ],
   "generic_fallbacks": [
     {
-      "owner": "openclaw",
-      "deny_repositories": ["bianca-git/clawsweeper-state", "openclaw/.github"],
+      "owner": "bianca-git",
+      "deny_repositories": [
+        "bianca-git/clawsweeper-state",
+        "bianca-git/clawsweeper"
+      ],
       "allow_repo_name_pattern": "^[A-Za-z0-9_.-]+$",
       "prompt_note": "Use the {target_repo} source tree and current default branch. This repository is using the generic OpenClaw onboarding profile, so keep review conservative: issues and pull requests may be auto-closed only when the exact change is certainly already implemented on the default branch; pull requests may also be age-gated mostly implemented there.",
-      "apply_close_rules": {
-        "issue": ["implemented_on_main"],
-        "pull_request": ["implemented_on_main", "mostly_implemented_on_main"]
-      },
-      "package_manager": "pnpm"
-    },
-    {
-      "owner": "steipete",
-      "deny_repositories": [],
-      "allow_repo_name_pattern": "^[A-Za-z0-9_.-]+$",
-      "prompt_note": "Use the {target_repo} source tree and current default branch. This repository is using the generic personal-repository onboarding profile, so review conservatively and do not auto-close issues or pull requests unless a repository-specific profile later enables that policy.",
       "apply_close_rules": {
         "issue": [],
         "pull_request": []
@@ -105,8 +30,13 @@
     }
   ],
   "target_inventory": {
-    "owners": ["openclaw", "steipete"],
-    "deny_repositories": ["bianca-git/clawsweeper-state", "openclaw/.github"],
+    "owners": [
+      "bianca-git"
+    ],
+    "deny_repositories": [
+      "bianca-git/clawsweeper-state",
+      "bianca-git/clawsweeper"
+    ],
     "include_private": false,
     "include_archived": false,
     "include_forks": false,
