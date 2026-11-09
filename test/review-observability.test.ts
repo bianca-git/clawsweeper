@@ -24,7 +24,7 @@ function wave(
     target_repo: "openclaw/openclaw",
     started_at: new Date(NOW - (minutesAgo + 5) * 60_000).toISOString(),
     completed_at: completedAt,
-    run_url: `https://github.com/openclaw/clawsweeper/actions/runs/${10000 + minutesAgo}`,
+    run_url: `https://github.com/bianca-git/clawsweeper/actions/runs/${10000 + minutesAgo}`,
     plan_count: 1,
     item_count: 2,
     publication_count: 1,

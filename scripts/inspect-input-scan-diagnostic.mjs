@@ -229,7 +229,7 @@ export function inspectInputScanDiagnostic(options) {
     artifactUrl
       ? `[Download diagnostic artifact](${artifactUrl}) (\`${name}\`).`
       : `Find artifact \`${name}\` on that run.`,
-    "Use the [authenticated inspection recipe](https://github.com/openclaw/clawsweeper/blob/main/docs/input-scan-diagnostics.md) to verify its identity and read sanitized metadata.",
+    "Use the [authenticated inspection recipe](https://github.com/bianca-git/clawsweeper/blob/main/docs/input-scan-diagnostics.md) to verify its identity and read sanitized metadata.",
     "Diagnostic contents are intentionally omitted here. Inspection does not authorize a retry or a fixture exemption.",
     "",
   ].join("\n");

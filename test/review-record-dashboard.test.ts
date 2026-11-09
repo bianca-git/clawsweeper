@@ -161,8 +161,8 @@ test("audit projection preserves metadata and output while filtering other repos
   f.put(42, typed);
   f.put(43, legacy);
   f.put(42, typed, true);
-  f.put(90, report(90, { repository: "openclaw/clawsweeper" }));
-  f.put(91, report(91, { repository: "openclaw/clawsweeper" }), true);
+  f.put(90, report(90, { repository: "bianca-git/clawsweeper" }));
+  f.put(91, report(91, { repository: "bianca-git/clawsweeper" }), true);
 
   const before = f.auditResult();
   assert.equal(before.counts.itemRecords, 2);

@@ -72,7 +72,7 @@ test("command profiles select real record trees and restore nested repository li
       assert.equal(new URL(repoUrl()).pathname, `/${repo}`);
       assert.equal(
         new URL(reportFileUrl(42)).pathname,
-        `/openclaw/clawsweeper/blob/main/records/${profile.slug}/items/42.md`,
+        `/bianca-git/clawsweeper/blob/main/records/${profile.slug}/items/42.md`,
       );
       assert.throws(
         () =>
@@ -203,7 +203,7 @@ test("dashboard targets stay an explicit public-output scope, not hosted admissi
   assert.deepEqual(dashboardTargets, [
     "openclaw/openclaw",
     "openclaw/clawhub",
-    "openclaw/clawsweeper",
+    "bianca-git/clawsweeper",
     "openclaw/fs-safe",
   ]);
   const bayTargets = wrangler.match(/^PUBLIC_BAY_REPOS = "([^"]+)"$/m)?.[1]?.split(",");
@@ -224,7 +224,7 @@ test("dashboard targets stay an explicit public-output scope, not hosted admissi
 
 test("generic OpenClaw fallback keeps denied repositories unsupported", () => {
   assert.throws(
-    () => repositoryProfileFor("openclaw/clawsweeper-state"),
+    () => repositoryProfileFor("bianca-git/clawsweeper-state"),
     /Unsupported target repo: openclaw\/clawsweeper-state/,
   );
 });

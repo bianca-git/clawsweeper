@@ -691,7 +691,7 @@ function typedRendererReport(report: string, overrides: Partial<Decision> = {}):
 
 function implementedCloseReport(overrides = {}, decision: Partial<Decision> = {}) {
   const frontmatter = {
-    repository: "openclaw/clawsweeper",
+    repository: "bianca-git/clawsweeper",
     number: 321,
     type: "issue",
     title: "Render work plans",
@@ -725,8 +725,8 @@ function implementedCloseReport(overrides = {}, decision: Partial<Decision> = {}
       "## Evidence",
       "",
       "- **main fix:** git show confirms current main has the replacement implementation and it is not in the latest release yet",
-      "  - file: [src/clawsweeper.ts](https://github.com/openclaw/clawsweeper/blob/1234567890abcdef1234567890abcdef12345678/src/clawsweeper.ts)",
-      "  - sha: [1234567890ab](https://github.com/openclaw/clawsweeper/commit/1234567890abcdef1234567890abcdef12345678)",
+      "  - file: [src/clawsweeper.ts](https://github.com/bianca-git/clawsweeper/blob/1234567890abcdef1234567890abcdef12345678/src/clawsweeper.ts)",
+      "  - sha: [1234567890ab](https://github.com/bianca-git/clawsweeper/commit/1234567890abcdef1234567890abcdef12345678)",
       "",
       "## Close Comment",
       "",
@@ -741,7 +741,7 @@ function implementedCloseReport(overrides = {}, decision: Partial<Decision> = {}
       fixedAt: "2026-05-01T02:00:00Z",
       evidence: [
         {
-          repo: "openclaw/clawsweeper",
+          repo: "bianca-git/clawsweeper",
           label: "main fix",
           detail:
             "git show confirms current main has the replacement implementation and it is not in the latest release yet",
@@ -1712,12 +1712,12 @@ test("high-confidence root-cause clusters appear in close comments", () => {
       {
         rootCauseCluster: {
           confidence: "high",
-          canonicalRef: "https://github.com/openclaw/clawsweeper/issues/400",
+          canonicalRef: "https://github.com/bianca-git/clawsweeper/issues/400",
           currentItemRelationship: "duplicate",
           summary: "The canonical issue tracks the remaining work.",
           members: [
             {
-              ref: "https://github.com/openclaw/clawsweeper/issues/400",
+              ref: "https://github.com/bianca-git/clawsweeper/issues/400",
               relationship: "canonical",
               reason: "This issue has the broader accepted scope.",
             },
@@ -1734,9 +1734,9 @@ test("high-confidence root-cause clusters appear in close comments", () => {
 });
 
 const verifiedPredecessor = {
-  repo: "openclaw/clawsweeper",
+  repo: "bianca-git/clawsweeper",
   pullRequestNumber: 936,
-  pullRequestUrl: "https://github.com/openclaw/clawsweeper/pull/936",
+  pullRequestUrl: "https://github.com/bianca-git/clawsweeper/pull/936",
   mergeCommitSha: "a".repeat(40),
   sourcePath: "src/clawsweeper-review-runtime.ts",
   sourceLine: 42,
@@ -1806,8 +1806,8 @@ test("legacy provenance fields cannot supply or override typed provenance", () =
     "model_claim",
   ]) {
     const metadata = {
-      regression_provenance_repo: "openclaw/clawsweeper",
-      regression_provenance_pr_url: "https://github.com/openclaw/clawsweeper/pull/1023",
+      regression_provenance_repo: "bianca-git/clawsweeper",
+      regression_provenance_pr_url: "https://github.com/bianca-git/clawsweeper/pull/1023",
       regression_provenance_pr_number: "1023",
       regression_provenance_merge_sha: "c".repeat(40),
       regression_provenance_source_path: "src/clawsweeper-review-runtime.ts",
@@ -1857,7 +1857,7 @@ test("malformed typed provenance fails closed rather than falling back to legacy
               evidenceType: "rewrite_equivalent",
               relatedPullRequestNumber: 1023,
               relatedPullRequestUrl: "https://example.test/not-a-pr",
-              relatedRepo: "openclaw/clawsweeper",
+              relatedRepo: "bianca-git/clawsweeper",
             },
           ]),
     ];
@@ -1895,8 +1895,8 @@ test("suspected and rewrite-equivalent provenance supplement regression assessme
             ...(evidenceType === "rewrite_equivalent"
               ? {
                   relatedPullRequestNumber: 1023,
-                  relatedPullRequestUrl: "https://github.com/openclaw/clawsweeper/pull/1023",
-                  relatedRepo: "openclaw/clawsweeper",
+                  relatedPullRequestUrl: "https://github.com/bianca-git/clawsweeper/pull/1023",
+                  relatedRepo: "bianca-git/clawsweeper",
                 }
               : {}),
           },
@@ -1948,7 +1948,7 @@ test("regression assessments retain confidence and evidence without attributing 
     const comment = renderReviewCommentFromReport(
       implementedCloseReport(
         {
-          regression_provenance_pr_url: "https://github.com/openclaw/clawsweeper/pull/936",
+          regression_provenance_pr_url: "https://github.com/bianca-git/clawsweeper/pull/936",
         },
         { regressionAssessment, regressionProvenance: null },
       ),

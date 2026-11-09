@@ -20,7 +20,7 @@ import { refreshSourceAfterStatePublish } from "../../dist/repair/git-publish.js
 test("event record directories stay inside the isolated worker root", () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "clawsweeper-event-record-dirs-"));
   const paths = eventRecordPaths({
-    targetRepo: "openclaw/clawsweeper",
+    targetRepo: "bianca-git/clawsweeper",
     itemNumber: "828",
     snapshotDir: path.join(root, "snapshot"),
   });

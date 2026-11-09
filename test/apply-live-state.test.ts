@@ -578,8 +578,8 @@ if (args[0] === "api" && /\\/issues\\/321$/.test(path)) {
   console.error("gh: Not Found (HTTP 404)");
   process.exit(1);
 }
-if (args[0] === "api" && path === "repos/openclaw/clawsweeper") {
-  console.log(JSON.stringify({ full_name: "openclaw/clawsweeper" }));
+if (args[0] === "api" && path === "repos/bianca-git/clawsweeper") {
+  console.log(JSON.stringify({ full_name: "bianca-git/clawsweeper" }));
   process.exit(0);
 }
 console.error("unexpected gh args", JSON.stringify(args));
@@ -631,8 +631,8 @@ if (args[0] === "api" && /\\/issues\\/321$/.test(path)) {
   console.error("gh: Not Found (HTTP 404)");
   process.exit(1);
 }
-if (args[0] === "api" && path === "repos/openclaw/clawsweeper") {
-  console.log(JSON.stringify({ full_name: "openclaw/clawsweeper" }));
+if (args[0] === "api" && path === "repos/bianca-git/clawsweeper") {
+  console.log(JSON.stringify({ full_name: "bianca-git/clawsweeper" }));
   process.exit(0);
 }
 console.error("unexpected gh args", JSON.stringify(args));
@@ -678,7 +678,7 @@ test("apply-decisions fails safely when a missing repository also returns 404", 
 const rawArgs = process.argv.slice(2);
 const args = rawArgs[0] === "--repo" ? rawArgs.slice(2) : rawArgs;
 const path = args[1] || "";
-if (args[0] === "api" && (/\\/issues\\/321$/.test(path) || path === "repos/openclaw/clawsweeper")) {
+if (args[0] === "api" && (/\\/issues\\/321$/.test(path) || path === "repos/bianca-git/clawsweeper")) {
   console.error("gh: Not Found (HTTP 404)");
   process.exit(1);
 }
@@ -726,7 +726,7 @@ if (args[0] === "api" && /\\/issues\\/321$/.test(path)) {
   console.log(JSON.stringify({
     number: 321,
     title: "Policy-forbidden duplicate",
-    html_url: "https://github.com/openclaw/clawsweeper/issues/321",
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/321",
     body: "",
     created_at: "2026-05-01T00:00:00Z",
     updated_at: "2026-05-01T00:00:00Z",
@@ -760,7 +760,7 @@ if (args[0] === "api" && /\\/issues\\/321$/.test(path)) {
         number: 321,
         action: "skipped_invalid_decision",
         reason:
-          "duplicate_or_superseded is not allowed for openclaw/clawsweeper issue apply policy",
+          "duplicate_or_superseded is not allowed for bianca-git/clawsweeper issue apply policy",
       },
     ]);
     assert.match(readText(join(itemsDir, "321.md")), /^action_taken: skipped_invalid_decision$/m);
@@ -830,7 +830,7 @@ if (args[0] === "api" && /\\/issues\\/321\\/comments(?:\\?|$)/.test(path)) {
   console.log(JSON.stringify({
     number: 321,
     title: "Protected issue",
-    html_url: "https://github.com/openclaw/clawsweeper/issues/321",
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/321",
     body: "",
     created_at: "2026-05-01T00:00:00Z",
     updated_at: "2026-05-01T00:00:00Z",
@@ -927,7 +927,7 @@ if (args[0] === "api" && /\\/issues\\/321\\/comments(?:\\?|$)/.test(path)) {
   console.log(JSON.stringify({
     number: 321,
     title: "Locked issue",
-    html_url: "https://github.com/openclaw/clawsweeper/issues/321",
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/321",
     body: "",
     created_at: "2026-05-01T00:00:00Z",
     updated_at: "2026-05-01T00:00:00Z",
@@ -1432,7 +1432,7 @@ test("guarded reports reject changed snapshots even with a zero publication cool
         .replace(/^review_comment_synced_at:.*$/m, `review_comment_synced_at: ${syncedAt}`)
         .replace(/^item_updated_at:.*\n/m, "")
         .replaceAll(
-          "https://github.com/openclaw/clawsweeper/issues/321",
+          "https://github.com/bianca-git/clawsweeper/issues/321",
           "https://github.com/openclaw/openclaw/issues/321",
         ),
     );
@@ -1622,7 +1622,7 @@ test("protected source drift preserves its original guard after lock or label re
   ]) {
     const root = mkdtempSync(tmpPrefix);
     try {
-      const targetRepo = scenario.locked ? "openclaw/openclaw" : "openclaw/clawsweeper";
+      const targetRepo = scenario.locked ? "openclaw/openclaw" : "bianca-git/clawsweeper";
       const itemsDir = join(root, "items");
       const closedDir = join(root, "closed");
       const plansDir = join(root, "plans");
@@ -1707,7 +1707,7 @@ if (args[0] === "api" && /\\/issues\\/321\\/(comments|timeline)(?:\\?|$)/.test(p
 test("live protected labels and maintainer ownership take precedence over source drift", () => {
   for (const scenario of [
     {
-      targetRepo: "openclaw/clawsweeper",
+      targetRepo: "bianca-git/clawsweeper",
       labels: ["security"],
       association: "CONTRIBUTOR",
       closeReason: "implemented_on_main",
@@ -1852,7 +1852,7 @@ test("locked failed reviews honor the comment-sync cooldown and release their le
       reviewed.report
         .replace(/^review_comment_synced_at:.*$/m, `review_comment_synced_at: ${syncedAt}`)
         .replaceAll(
-          "https://github.com/openclaw/clawsweeper/issues/321",
+          "https://github.com/bianca-git/clawsweeper/issues/321",
           "https://github.com/openclaw/openclaw/issues/321",
         ),
     );
@@ -1950,7 +1950,7 @@ test("closed typed reports archive without hydrating their incomplete source sna
     const closedIssue = {
       number: 321,
       title: "Render work plans",
-      html_url: "https://github.com/openclaw/clawsweeper/issues/321",
+      html_url: "https://github.com/bianca-git/clawsweeper/issues/321",
       created_at: "2026-05-01T00:00:00Z",
       updated_at: "2026-05-01T00:00:00Z",
       closed_at: "2026-05-02T00:00:00Z",
@@ -2411,7 +2411,7 @@ test("metadata-only comment verification never hides newer human source activity
       reviewed.report
         .replace(/^review_comment_synced_at:.*\n/m, "")
         .replaceAll(
-          "https://github.com/openclaw/clawsweeper/issues/321",
+          "https://github.com/bianca-git/clawsweeper/issues/321",
           "https://github.com/openclaw/openclaw/issues/321",
         ),
     );
@@ -2553,7 +2553,7 @@ test("locked, already-synchronized maintainer and invalid reports refresh local 
       const report = reviewed.report
         .replace(/^review_comment_synced_at:.*$/m, `review_comment_synced_at: ${syncedAt}`)
         .replaceAll(
-          "https://github.com/openclaw/clawsweeper/issues/321",
+          "https://github.com/bianca-git/clawsweeper/issues/321",
           "https://github.com/openclaw/openclaw/issues/321",
         )
         .replace(/^---\n/, `---\napply_checked_at: ${new Date().toISOString()}\n`);
@@ -2681,7 +2681,7 @@ test("locked metadata synchronization adopts and releases its existing review le
       reviewed.report
         .replace(/^review_comment_synced_at:.*$/m, `review_comment_synced_at: ${syncedAt}`)
         .replaceAll(
-          "https://github.com/openclaw/clawsweeper/issues/321",
+          "https://github.com/bianca-git/clawsweeper/issues/321",
           "https://github.com/openclaw/openclaw/issues/321",
         ),
     );
@@ -2777,7 +2777,7 @@ test("comment-only apply repairs timestamps and references without editing GitHu
       "none",
     );
     const canonicalReport = reviewed.report.replaceAll(
-      "https://github.com/openclaw/clawsweeper/issues/321",
+      "https://github.com/bianca-git/clawsweeper/issues/321",
       "https://github.com/openclaw/openclaw/issues/321",
     );
     const existing = {
@@ -2915,7 +2915,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
   console.log(JSON.stringify({
     number: 321,
     title: "Exempt PR",
-    html_url: "https://github.com/openclaw/clawsweeper/pull/321",
+    html_url: "https://github.com/bianca-git/clawsweeper/pull/321",
     body: "",
     created_at: "2026-01-01T00:00:00Z",
     updated_at: "2026-01-01T00:00:00Z",
@@ -2927,13 +2927,13 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
     user: { login: "reporter" },
     labels: ${JSON.stringify(labels)},
     comments: 0,
-    pull_request: { url: "https://api.github.com/repos/openclaw/clawsweeper/pulls/321" }
+    pull_request: { url: "https://api.github.com/repos/bianca-git/clawsweeper/pulls/321" }
   }));
 } else if (args[0] === "api" && /\\/pulls\\/321$/.test(path)) {
   console.log(JSON.stringify({
     number: 321,
     title: "Exempt PR",
-    html_url: "https://github.com/openclaw/clawsweeper/pull/321",
+    html_url: "https://github.com/bianca-git/clawsweeper/pull/321",
     state: "open",
     draft: false,
     created_at: "2026-01-01T00:00:00Z",
@@ -2944,7 +2944,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
     requested_teams: [],
     body: "",
     head: { sha: "head-sha", ref: "branch", repo: { full_name: "fork/clawsweeper" } },
-    base: { sha: "base-sha", ref: "main", repo: { full_name: "openclaw/clawsweeper" } },
+    base: { sha: "base-sha", ref: "main", repo: { full_name: "bianca-git/clawsweeper" } },
     user: { login: "reporter" }
   }));
 } else if (args[0] === "api" && /\\/pulls\\/321\\/(files|commits|comments|reviews)(?:\\?|$)/.test(path)) {
@@ -2987,7 +2987,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
                 number: 321,
                 action: "skipped_invalid_decision",
                 reason:
-                  "stalled_unproven_pr is not allowed for openclaw/clawsweeper pull_request apply policy",
+                  "stalled_unproven_pr is not allowed for bianca-git/clawsweeper pull_request apply policy",
               },
             ],
       );

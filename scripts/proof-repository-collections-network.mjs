@@ -16,7 +16,7 @@ fixture.queue.warning_evidence = {
       total: 1,
       items: [
         {
-          repository: "openclaw/clawsweeper",
+          repository: "bianca-git/clawsweeper",
           item_number: 1,
           item_kind: "issue",
           revision: 1,
@@ -46,14 +46,14 @@ const response = (data, status = 200) => Response.json(data, { status });
 globalThis.fetch = async (input, options) => {
   const url = new URL(String(input));
   if (options?.method && options.method !== "GET") throw new Error("Fixture forbids mutations");
-  const publicNames = ["openclaw/openclaw", "openclaw/clawsweeper", "openclaw/clawhub"];
+  const publicNames = ["openclaw/openclaw", "bianca-git/clawsweeper", "openclaw/clawhub"];
   if (url.origin === "https://api.github.com") {
     if (url.pathname === "/users/openclaw/repos")
       return response(
         publicNames.map((full_name) => ({ full_name, visibility: "public", private: false })),
       );
     if (url.pathname === "/users/fixture-withdrawn/repos") return response([]);
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs")
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs")
       return response({ total_count: 0, workflow_runs: [] });
     if (url.pathname.startsWith("/repos/")) {
       const name = url.pathname.slice(7);

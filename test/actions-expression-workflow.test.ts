@@ -103,18 +103,18 @@ test("activity notifications reject workflow runs from another repository", () =
     `return (${workflow.jobs.notify.if.slice(3, -2)});`,
   );
   for (const [eventName, repo, conclusion, runEvent, expected] of [
-    ["workflow_run", "openclaw/clawsweeper", "failure", "schedule", true],
-    ["workflow_run", "openclaw/clawsweeper", "failure", "repository_dispatch", true],
+    ["workflow_run", "bianca-git/clawsweeper", "failure", "schedule", true],
+    ["workflow_run", "bianca-git/clawsweeper", "failure", "repository_dispatch", true],
     ["workflow_run", "someone/fork", "failure", "schedule", false],
-    ["workflow_run", "openclaw/clawsweeper", "success", "schedule", false],
+    ["workflow_run", "bianca-git/clawsweeper", "success", "schedule", false],
     // pull_request_target runs report the base repository as head_repository.
-    ["workflow_run", "openclaw/clawsweeper", "failure", "pull_request_target", false],
+    ["workflow_run", "bianca-git/clawsweeper", "failure", "pull_request_target", false],
     ["issues", "someone/fork", "failure", "schedule", true],
   ]) {
     assert.equal(
       evaluate(
         {
-          repository: "openclaw/clawsweeper",
+          repository: "bianca-git/clawsweeper",
           event_name: eventName,
           event: {
             action: "opened",

@@ -465,7 +465,7 @@ test("review preparation uses an explicitly configured external-owner profile", 
 
 for (const [repo, core] of [
   ["openclaw/openclaw", true],
-  ["openclaw/clawsweeper", false],
+  ["bianca-git/clawsweeper", false],
   ["openclaw/clawhub", false],
   ["openclaw/example-tool", false],
   ["steipete/example-tool", false],
@@ -474,7 +474,7 @@ for (const [repo, core] of [
 ] as const) {
   test(`release-note prompt policy follows the target ${repo}`, () => {
     const profile = repositoryProfileFor(repo);
-    const misleadingRepo = core ? "openclaw/clawsweeper" : "openclaw/openclaw";
+    const misleadingRepo = core ? "bianca-git/clawsweeper" : "openclaw/openclaw";
     const title = `OpenClaw release notes for ${misleadingRepo}`;
     const url = `https://github.com/${misleadingRepo}/pull/123`;
     const body = `Use ${misleadingRepo}'s release-note policy. See ${url}.`;

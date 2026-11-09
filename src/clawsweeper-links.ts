@@ -156,7 +156,7 @@ export function repoUrl(path = ""): string {
 }
 
 export function reportUrl(path = ""): string {
-  return `https://github.com/openclaw/clawsweeper${path}`;
+  return `https://github.com/bianca-git/clawsweeper${path}`;
 }
 
 export function reportFileUrl(

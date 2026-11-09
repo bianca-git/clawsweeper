@@ -182,7 +182,7 @@ writeFileSync(join(output, "bundle.json"), "{}");
         env: {
           ...process.env,
           PATH: `${bin}:${process.env.PATH || ""}`,
-          GITHUB_REPOSITORY: "openclaw/clawsweeper",
+          GITHUB_REPOSITORY: "bianca-git/clawsweeper",
           REPO_TOKEN: "test-token",
           EXACT_REVIEW_QUEUE_URL: `http://127.0.0.1:${server.address().port}`,
           CLAWSWEEPER_WEBHOOK_SECRET: secret,

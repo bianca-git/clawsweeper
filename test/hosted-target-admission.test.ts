@@ -18,7 +18,7 @@ test("hosted target eligibility is configured profiles plus owner fallbacks", ()
     genericFallbacks: [
       {
         owner: "openclaw",
-        denyRepositories: ["openclaw/clawsweeper-state"],
+        denyRepositories: ["bianca-git/clawsweeper-state"],
         allowRepoNamePattern: /^[a-z0-9_.-]+$/,
       },
       {
@@ -31,7 +31,7 @@ test("hosted target eligibility is configured profiles plus owner fallbacks", ()
   assert.equal(isHostedTargetEligible("partner/configured-repo", policy), true);
   assert.equal(isHostedTargetEligible("OpenClaw/new-repo", policy), true);
   assert.equal(isHostedTargetEligible("Steipete/new-repo", policy), true);
-  assert.equal(isHostedTargetEligible("openclaw/clawsweeper-state", policy), false);
+  assert.equal(isHostedTargetEligible("bianca-git/clawsweeper-state", policy), false);
   assert.equal(isHostedTargetEligible("partner/other-repo", policy), false);
   assert.equal(isHostedTargetEligible("outside/repo", policy), false);
   assert.equal(isHostedTargetEligible("outside", policy), false);
@@ -47,7 +47,7 @@ test("hosted target eligibility reads configured profiles and fallback deny poli
       generic_fallbacks: [
         {
           owner: "openclaw",
-          deny_repositories: ["openclaw/clawsweeper-state", "openclaw/.github"],
+          deny_repositories: ["bianca-git/clawsweeper-state", "openclaw/.github"],
           allow_repo_name_pattern: "^[A-Za-z0-9_.-]+$",
         },
         {
@@ -62,7 +62,7 @@ test("hosted target eligibility reads configured profiles and fallback deny poli
   assert.deepEqual(await resolveHostedTargetEligibility("openclaw/new-repo", reader), {
     outcome: "eligible",
   });
-  assert.deepEqual(await resolveHostedTargetEligibility("openclaw/clawsweeper-state", reader), {
+  assert.deepEqual(await resolveHostedTargetEligibility("bianca-git/clawsweeper-state", reader), {
     outcome: "terminal",
   });
   assert.deepEqual(await resolveHostedTargetEligibility("openclaw/.github", reader), {
@@ -240,7 +240,7 @@ globalThis.fetch = async (url, init) => {
       generic_fallbacks: [
         {
           owner: "openclaw",
-          deny_repositories: ["openclaw/clawsweeper-state"],
+          deny_repositories: ["bianca-git/clawsweeper-state"],
           allow_repo_name_pattern: "^[a-z0-9-]+$",
         },
       ],
@@ -250,7 +250,7 @@ globalThis.fetch = async (url, init) => {
     for (const [target, reply, outcome] of [
       ["partner/configured", registry, "eligible"],
       ["openclaw/new-plugin", registry, "eligible"],
-      ["openclaw/clawsweeper-state", registry, "terminal"],
+      ["bianca-git/clawsweeper-state", registry, "terminal"],
       ["partner/unlisted", registry, "terminal"],
       ["partner/configured", { status: 500, body: {} }, "retryable"],
       ["partner/configured", { status: 0, body: {} }, "retryable"],
@@ -260,7 +260,7 @@ globalThis.fetch = async (url, init) => {
       assert.equal(result.requests.length, 1);
       assert.equal(
         result.requests[0].url,
-        "https://raw.githubusercontent.com/openclaw/clawsweeper/main/config/target-repositories.json",
+        "https://raw.githubusercontent.com/bianca-git/clawsweeper/main/config/target-repositories.json",
       );
       assert.equal(result.requests[0].cache, "no-store");
       assert.equal(result.requests[0].redirect, "manual");

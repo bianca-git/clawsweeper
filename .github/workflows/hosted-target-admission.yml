@@ -44,7 +44,7 @@ jobs:
           } else if (/^(main|[0-9a-f]{40})$/.test(registryRef)) {
             try {
               const response = await fetch(
-                `https://raw.githubusercontent.com/openclaw/clawsweeper/${registryRef}/config/target-repositories.json`,
+                `https://raw.githubusercontent.com/bianca-git/clawsweeper/${registryRef}/config/target-repositories.json`,
                 {
                   cache: "no-store",
                   redirect: "manual",

@@ -54,7 +54,7 @@ import { importActionEventShards } from "../dist/action-ledger-runtime.js";
 import { stableJson } from "../dist/stable-json.js";
 
 const producer: ActionEventProducer = {
-  repository: "openclaw/clawsweeper",
+  repository: "bianca-git/clawsweeper",
   sha: "abc123",
   workflow: "sweep",
   job: "review-3",
@@ -127,7 +127,7 @@ function reviewInput(overrides: Partial<ActionEventInput> = {}): ActionEventInpu
         kind: "review_record",
         reportPath: "records/openclaw-openclaw/items/42.md",
         sha256: "a".repeat(64),
-        runUrl: "https://github.com/openclaw/clawsweeper/actions/runs/100",
+        runUrl: "https://github.com/bianca-git/clawsweeper/actions/runs/100",
       },
     ],
     attributes: {
@@ -749,7 +749,7 @@ test("privacy normalization preserves public machine identifiers", () => {
     "2001:4860:4860::8888",
     "status:0:0::ffff:808:808",
     "status:2001:4860:4860::8888",
-    "https://github.com/openclaw/clawsweeper/actions/runs/100",
+    "https://github.com/bianca-git/clawsweeper/actions/runs/100",
   ]) {
     const event = createActionEvent(
       reviewInput({
@@ -2216,12 +2216,12 @@ test("run URLs are limited to public GitHub workflow evidence", () => {
     "https://[fc00::1]/actions/runs/100",
     "https://internal.example/actions/runs/100",
     "https://service.internal./actions/runs/100",
-    "https://user@github.com/openclaw/clawsweeper/actions/runs/100",
+    "https://user@github.com/bianca-git/clawsweeper/actions/runs/100",
     "https://github.com/login/oauth/authorize?client_secret=PLACEHOLDER",
-    "https://github.com/openclaw/clawsweeper/actions/runs/100?token=PLACEHOLDER",
-    "https://github.com/openclaw/clawsweeper/actions/runs/100?",
-    "https://github.com/openclaw/clawsweeper/actions/runs/100#",
-    "https://github.com/openclaw/clawsweeper/issues/100",
+    "https://github.com/bianca-git/clawsweeper/actions/runs/100?token=PLACEHOLDER",
+    "https://github.com/bianca-git/clawsweeper/actions/runs/100?",
+    "https://github.com/bianca-git/clawsweeper/actions/runs/100#",
+    "https://github.com/bianca-git/clawsweeper/issues/100",
   ]) {
     assert.throws(
       () =>

@@ -242,12 +242,12 @@ test("assembled PR prompt scopes optional Team provenance without weakening cont
   const context = { issue: { body }, comments: [], timeline: [] };
   const git = { mainSha: "a".repeat(40), latestRelease: null };
   for (const [author, authorAssociation, repo, allowed] of [
-    ["roboclaw-bot", "NONE", "openclaw/clawsweeper", true],
-    ["human", "MEMBER", "openclaw/clawsweeper", true],
-    ["human", "NONE", "openclaw/clawsweeper", false],
-    ["human", "COLLABORATOR", "openclaw/clawsweeper", false],
+    ["roboclaw-bot", "NONE", "bianca-git/clawsweeper", true],
+    ["human", "MEMBER", "bianca-git/clawsweeper", true],
+    ["human", "NONE", "bianca-git/clawsweeper", false],
+    ["human", "COLLABORATOR", "bianca-git/clawsweeper", false],
     ["human", "MEMBER", "steipete/camsnap", false],
-    ["dependabot[bot]", "NONE", "openclaw/clawsweeper", false],
+    ["dependabot[bot]", "NONE", "bianca-git/clawsweeper", false],
   ] as const) {
     const prompt = reviewPromptForTest(
       item({ kind: "pull_request", author, authorAssociation, repo }),

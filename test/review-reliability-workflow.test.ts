@@ -147,7 +147,7 @@ test("dead-letter reconcile restores zombie state from the newest live artifact 
           CALLS: join(root, "calls"),
           EXACT_REVIEW_DLQ_ARTIFACT: artifactName,
           GH_TOKEN: "fixture-token",
-          GITHUB_REPOSITORY: "openclaw/clawsweeper",
+          GITHUB_REPOSITORY: "bianca-git/clawsweeper",
           MOCK_BODY: body,
           MOCK_STATUS: status,
           MOCK_ZIP: join(root, "prior.zip"),
@@ -182,8 +182,8 @@ test("dead-letter reconcile restores zombie state from the newest live artifact 
   );
   assert.equal(listed.status, 0, listed.stderr);
   assert.deepEqual(listed.calls, [
-    `gh api --include -X GET repos/openclaw/clawsweeper/actions/artifacts -f name=${artifactName} -F per_page=100`,
-    "gh api repos/openclaw/clawsweeper/actions/artifacts/2/zip",
+    `gh api --include -X GET repos/bianca-git/clawsweeper/actions/artifacts -f name=${artifactName} -F per_page=100`,
+    "gh api repos/bianca-git/clawsweeper/actions/artifacts/2/zip",
   ]);
   assert.equal(listed.restored, zombies);
   assert.match(listed.stdout, /restored queued-run zombie state from artifact 2/);

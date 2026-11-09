@@ -9,7 +9,7 @@ import {
   terminalReviewStatusCopy,
 } from "../../dist/repair/update-review-status.js";
 
-const runUrl = "https://github.com/openclaw/clawsweeper/actions/runs/12345";
+const runUrl = "https://github.com/bianca-git/clawsweeper/actions/runs/12345";
 
 test("all scanner refusals accept and render terminal review status", () => {
   for (const reason of AGENT_INPUT_SCAN_FAILURE_REASONS) {

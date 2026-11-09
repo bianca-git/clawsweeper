@@ -198,7 +198,7 @@ if (process.argv[2] === "--gh") {
   try {
     withGitHubRun(() =>
       withTargetProfile(
-        { ...repositoryProfileFor("openclaw/clawsweeper"), targetRepo: repo },
+        { ...repositoryProfileFor("bianca-git/clawsweeper"), targetRepo: repo },
         () => {
           for (const [count, unknown] of [
             [0, false],

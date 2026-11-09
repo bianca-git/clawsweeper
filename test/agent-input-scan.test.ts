@@ -2750,7 +2750,7 @@ process.exit(scenario === 'unexpected successful output' ? 0 : 183);
           prompt: "Review the change.",
           model: "internal",
           classification: "codex_execution",
-          repo: "openclaw/clawsweeper",
+          repo: "bianca-git/clawsweeper",
           itemKind: "pull_request",
           itemNumber: 1,
           sourceSha: headSha,

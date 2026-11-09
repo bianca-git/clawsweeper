@@ -10,7 +10,7 @@ import {
 } from "./exact-review-bundle.js";
 import type { ExactReviewBatchQueueClient } from "./exact-review-batch-queue-client.js";
 
-const REPOSITORY = "openclaw/clawsweeper";
+const REPOSITORY = "bianca-git/clawsweeper";
 const API = "https://api.github.com";
 const WORKFLOW = ".github/workflows/sweep.yml";
 const MAX_JSON_BYTES = 2 * 1024 * 1024;

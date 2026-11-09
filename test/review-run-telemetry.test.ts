@@ -18,7 +18,7 @@ function run(overrides: Record<string, unknown> = {}) {
     display_title: "Review event item openclaw/openclaw#674 [router-command]",
     run_started_at: "2026-07-19T10:00:00Z",
     updated_at: "2026-07-19T10:05:00Z",
-    html_url: "https://github.com/openclaw/clawsweeper/actions/runs/1234",
+    html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/1234",
     ...overrides,
   };
 }
@@ -214,7 +214,7 @@ test("review observer paginates jobs instead of silently undercounting large mat
   try {
     const jobs = await fetchJobs(run(), {
       token: "test-token-placeholder",
-      repository: "openclaw/clawsweeper",
+      repository: "bianca-git/clawsweeper",
       apiUrl: "https://api.github.test",
     });
     assert.equal(jobs.length, 101);
@@ -244,7 +244,7 @@ test("review observer accepts exactly its 1000-job fetch bound", async () => {
   try {
     const jobs = await fetchJobs(run(), {
       token: "test-token-placeholder",
-      repository: "openclaw/clawsweeper",
+      repository: "bianca-git/clawsweeper",
       apiUrl: "https://api.github.test",
     });
     assert.equal(jobs.length, 1_000);
@@ -265,7 +265,7 @@ test("review observer rejects runs beyond its 1000-job fetch bound", async () =>
     await assert.rejects(
       fetchJobs(run(), {
         token: "test-token-placeholder",
-        repository: "openclaw/clawsweeper",
+        repository: "bianca-git/clawsweeper",
         apiUrl: "https://api.github.test",
       }),
       /exceeds observer bound of 1000/,

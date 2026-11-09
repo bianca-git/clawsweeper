@@ -64,7 +64,7 @@ test("apply-decisions starts same-author pair closes from the PR side", () => {
     );
     for (const synced of [issueSynced, pullSynced, laterPullSynced]) {
       synced.report = synced.report.replaceAll(
-        "github.com/openclaw/clawsweeper/issues/",
+        "github.com/bianca-git/clawsweeper/issues/",
         "github.com/openclaw/openclaw/issues/",
       );
     }

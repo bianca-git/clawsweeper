@@ -374,7 +374,7 @@ test("apply observability accepts signed durable events and exposes the API summ
       started_at: now,
       lifecycle_started: true,
       outcome: "success",
-      run_url: "https://github.com/openclaw/clawsweeper/actions/runs/98765",
+      run_url: "https://github.com/bianca-git/clawsweeper/actions/runs/98765",
       queue: {
         active: 1,
         capacity: 1,
@@ -783,7 +783,7 @@ test("dashboard rejects a current snapshot from a different public scope", async
       {
         CACHE_TTL_SECONDS: "60",
         STATUS_STORE: statusStore,
-        PUBLIC_BAY_REPOS: "openclaw/clawsweeper",
+        PUBLIC_BAY_REPOS: "bianca-git/clawsweeper",
       },
       { waitUntil: () => undefined },
     );
@@ -837,7 +837,7 @@ test("dashboard isolates fresh edge caches by public Bay scope", async () => {
 
   try {
     const response = await worker.fetch(new Request("https://clawsweeper.openclaw.ai/api/status"), {
-      PUBLIC_BAY_REPOS: "openclaw/clawsweeper",
+      PUBLIC_BAY_REPOS: "bianca-git/clawsweeper",
     });
     const status = await response.json();
     assert.equal(response.status, 200);
@@ -1249,7 +1249,7 @@ test("dashboard cron records only exact-review history without GitHub queries", 
   globalThis.fetch = async (input) => {
     const url = new URL(String(input));
     requests.push(url.toString());
-    assert.equal(url.pathname, "/repos/openclaw/clawsweeper/actions/runs");
+    assert.equal(url.pathname, "/repos/bianca-git/clawsweeper/actions/runs");
     const status = url.searchParams.get("status");
     return jsonResponse({
       workflow_runs:
@@ -1269,7 +1269,7 @@ test("dashboard cron records only exact-review history without GitHub queries", 
     await worker.scheduled(
       {},
       {
-        CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+        CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         EXACT_REVIEW_QUEUE: exactReviewQueue,
         STATUS_STORE: namespace,
       },
@@ -1300,7 +1300,7 @@ test("dashboard cron records only exact-review history without GitHub queries", 
     await worker.scheduled(
       {},
       {
-        CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+        CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         EXACT_REVIEW_QUEUE: {
           idFromName: () => "global",
           get: () => ({ fetch: async () => Promise.reject(new Error("queue unavailable")) }),

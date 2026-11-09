@@ -3225,7 +3225,7 @@ test("rollout dispatches one full batch workflow without admitting legacy publis
   });
   globalThis.fetch = async (input, init) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/installation") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/installation") {
       return new Response(JSON.stringify({ id: 999 }), {
         headers: { "content-type": "application/json" },
       });
@@ -3260,7 +3260,7 @@ test("rollout dispatches one full batch workflow without admitting legacy publis
     }
     if (
       url.pathname ===
-      "/repos/openclaw/clawsweeper/actions/workflows/exact-review-batch-publish.yml/dispatches"
+      "/repos/bianca-git/clawsweeper/actions/workflows/exact-review-batch-publish.yml/dispatches"
     ) {
       assert.equal(new Headers(init?.headers).get("authorization"), "Bearer test-token");
       dispatches.push(JSON.parse(String(init?.body)));
@@ -3269,12 +3269,12 @@ test("rollout dispatches one full batch workflow without admitting legacy publis
       await batchDispatchRelease;
       return new Response(null, { status: 204 });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/workflows/sweep.yml") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/workflows/sweep.yml") {
       return new Response(JSON.stringify({ state: "active" }), {
         headers: { "content-type": "application/json" },
       });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/dispatches") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/dispatches") {
       regularDispatches.push(JSON.parse(String(init?.body)));
       return new Response(null, { status: 204 });
     }
@@ -3455,7 +3455,7 @@ test("rollout refills concurrent batch owner slots without exceeding the cap", a
   const dispatches: unknown[] = [];
   globalThis.fetch = async (input, init) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/installation") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/installation") {
       return new Response(JSON.stringify({ id: 999 }), {
         headers: { "content-type": "application/json" },
       });
@@ -3467,12 +3467,12 @@ test("rollout refills concurrent batch owner slots without exceeding the cap", a
     }
     if (
       url.pathname ===
-      "/repos/openclaw/clawsweeper/actions/workflows/exact-review-batch-publish.yml/dispatches"
+      "/repos/bianca-git/clawsweeper/actions/workflows/exact-review-batch-publish.yml/dispatches"
     ) {
       dispatches.push(JSON.parse(String(init?.body)));
       return new Response(null, { status: 204 });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/workflows/sweep.yml") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/workflows/sweep.yml") {
       return new Response(JSON.stringify({ state: "active" }), {
         headers: { "content-type": "application/json" },
       });
@@ -4307,7 +4307,7 @@ test("aged superseded publication does not dispatch a fresh owner before its dea
   const dispatches: Array<{ inputs: Record<string, string> }> = [];
   globalThis.fetch = async (input, init) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/installation") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/installation") {
       return new Response(JSON.stringify({ id: 999 }), {
         headers: { "content-type": "application/json" },
       });
@@ -4335,7 +4335,7 @@ test("aged superseded publication does not dispatch a fresh owner before its dea
     }
     if (
       url.pathname ===
-      "/repos/openclaw/clawsweeper/actions/workflows/exact-review-batch-publish.yml/dispatches"
+      "/repos/bianca-git/clawsweeper/actions/workflows/exact-review-batch-publish.yml/dispatches"
     ) {
       dispatches.push(JSON.parse(String(init?.body)));
       return new Response(null, { status: 204 });
@@ -4406,7 +4406,7 @@ test("oldest publication aging deadline drives the alarm and then its owner clai
   const checkedTargets: string[] = [];
   globalThis.fetch = async (input, init) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/installation") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/installation") {
       return new Response(JSON.stringify({ id: 999 }), {
         headers: { "content-type": "application/json" },
       });
@@ -4434,7 +4434,7 @@ test("oldest publication aging deadline drives the alarm and then its owner clai
     }
     if (
       url.pathname ===
-      "/repos/openclaw/clawsweeper/actions/workflows/exact-review-batch-publish.yml/dispatches"
+      "/repos/bianca-git/clawsweeper/actions/workflows/exact-review-batch-publish.yml/dispatches"
     ) {
       dispatches.push(JSON.parse(String(init?.body)));
       return new Response(null, { status: 204 });
@@ -4519,7 +4519,7 @@ test("an aged publication retains one owner through dispatch and heartbeat", asy
   const dispatches: Array<{ inputs: Record<string, string> }> = [];
   globalThis.fetch = async (input, init) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/installation") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/installation") {
       return new Response(JSON.stringify({ id: 999 }), {
         headers: { "content-type": "application/json" },
       });
@@ -4546,7 +4546,7 @@ test("an aged publication retains one owner through dispatch and heartbeat", asy
     }
     if (
       url.pathname ===
-      "/repos/openclaw/clawsweeper/actions/workflows/exact-review-batch-publish.yml/dispatches"
+      "/repos/bianca-git/clawsweeper/actions/workflows/exact-review-batch-publish.yml/dispatches"
     ) {
       dispatches.push(JSON.parse(String(init?.body)));
       return new Response(null, { status: 204 });
@@ -5797,7 +5797,7 @@ test("repository Actions circuit blocks every publication batch until reset", as
   ).json();
   assert.equal(blocked.claimed, false, JSON.stringify(blocked));
   const stats = await (await queue.fetch(new Request("https://queue/stats"))).json();
-  assert.equal(stats.lanes.publication.credential_circuits[0].pool, "actions:openclaw/clawsweeper");
+  assert.equal(stats.lanes.publication.credential_circuits[0].pool, "actions:bianca-git/clawsweeper");
   assert.equal(stats.lanes.publication.credential_circuits[0].affected_pending, 2);
   assert.ok(Date.parse(stats.lanes.publication.credential_circuits[0].recovery_until) > resetAt);
 

@@ -313,7 +313,7 @@ export {
 const RECENT_DURABLE_PUBLICATION_EVENTS_CACHE_MS = 60_000;
 
 const GITHUB_TIMEOUT_MS = 4500;
-const CLAWSWEEPER_REVIEW_REPO = "openclaw/clawsweeper";
+const CLAWSWEEPER_REVIEW_REPO = "bianca-git/clawsweeper";
 
 type ExactReviewBackoffReason =
   | "dispatch_debounce"
@@ -19389,7 +19389,7 @@ function exactReviewGithubCredentialPoolKey(
   targetOwner?: string,
 ) {
   return scope === "repository_actions"
-    ? "actions:openclaw/clawsweeper"
+    ? "actions:bianca-git/clawsweeper"
     : `target_app:${String(targetOwner || "").toLowerCase()}`;
 }
 

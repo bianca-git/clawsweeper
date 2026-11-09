@@ -9,7 +9,7 @@ import { pathToFileURL } from "node:url";
 const source = process.cwd();
 const productHoldProof = process.env.PROOF_PRODUCT_DIRECTION_HOLD === "1";
 const holdProof = productHoldProof || process.env.PROOF_CLOSE_POLICY_HOLD === "1";
-const targetRepo = holdProof ? "openclaw/openclaw" : "openclaw/clawsweeper";
+const targetRepo = holdProof ? "openclaw/openclaw" : "bianca-git/clawsweeper";
 const staleProof = process.env.PROOF_STALE_REVIEW_PUBLICATION === "1";
 const publisherProof = staleProof || holdProof || process.env.PROOF_ACTIVE_LEASE_DEFERRAL === "1";
 const deferralProof = process.env.PROOF_ACTIVE_LEASE_DEFERRAL === "1";

@@ -5,8 +5,8 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
 
-const previousRun = "https://github.com/openclaw/clawsweeper/actions/runs/29091427650";
-const currentRun = "https://github.com/openclaw/clawsweeper/actions/runs/29091585991";
+const previousRun = "https://github.com/bianca-git/clawsweeper/actions/runs/29091427650";
+const currentRun = "https://github.com/bianca-git/clawsweeper/actions/runs/29091585991";
 
 // The status CLI writes under the repository root of its dist build. Link the built
 // dist into a private root so each run reads and writes only its own status file.

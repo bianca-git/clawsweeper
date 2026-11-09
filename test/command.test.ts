@@ -330,7 +330,7 @@ test("local exact review history is keyed by repository and item", () => {
   const artifactDir = join("artifacts", "reviews");
   const first = localExactReviewHistoryPathForTest(artifactDir, "openclaw/openclaw", 357);
   const second = localExactReviewHistoryPathForTest(artifactDir, "openclaw/openclaw", 358);
-  const otherRepo = localExactReviewHistoryPathForTest(artifactDir, "openclaw/clawsweeper", 357);
+  const otherRepo = localExactReviewHistoryPathForTest(artifactDir, "bianca-git/clawsweeper", 357);
 
   assert.equal(first, join(artifactDir, "local-review-history-openclaw-openclaw-357.md"));
   assert.equal(second, join(artifactDir, "local-review-history-openclaw-openclaw-358.md"));

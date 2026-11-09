@@ -125,7 +125,7 @@ test("valid recorded N/A proof fields and summary survive decision parsing", () 
 
 test("renderer-produced reports preserve nested statistics and authoritative metadata through quotes", () => {
   const subject = item({
-    repo: "openclaw/clawsweeper",
+    repo: "bianca-git/clawsweeper",
     number: 321,
     kind: "pull_request",
     title: "Original",
@@ -162,7 +162,7 @@ test("renderer-produced reports preserve nested statistics and authoritative met
     } as Parameters<typeof document.markdownFor>[0]),
   );
   assert.equal(frontMatterValue(report, "title"), "Original");
-  assert.equal(frontMatterValue(report, "repository"), "openclaw/clawsweeper");
+  assert.equal(frontMatterValue(report, "repository"), "bianca-git/clawsweeper");
   assert.equal(JSON.parse(frontMatterValue(report, "pr_surface_files")!).length, 2);
   assert.equal(buildDecisionPacketFromReport(report), null);
   const headerOnly = report.slice(0, report.indexOf("\n---\n") + 5);
@@ -1489,7 +1489,7 @@ function renderedPullRequestReport(
   contextPatch: Partial<Parameters<typeof document.markdownFor>[0]["context"]> = {},
 ): string {
   const subject = item({
-    repo: "openclaw/clawsweeper",
+    repo: "bianca-git/clawsweeper",
     number: 953,
     kind: "pull_request",
     title: "Forged finding lines",

@@ -502,7 +502,7 @@ test("hosted pull request private transition stops before queue and target crede
   console.error = (...args) => consoleCalls.push(args);
   globalThis.fetch = async (input, init) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/installation") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/installation") {
       return jsonResponse({ id: 999 });
     }
     if (url.pathname === "/app/installations/999/access_tokens") {
@@ -708,7 +708,7 @@ test("hosted webhook preserves central metadata mint backoff without persistence
       const resetAt = Date.now() + 90_000;
       globalThis.fetch = async (input, init) => {
         const url = new URL(String(input));
-        if (url.pathname === "/repos/openclaw/clawsweeper/installation") {
+        if (url.pathname === "/repos/bianca-git/clawsweeper/installation") {
           return jsonResponse({ id: 999 });
         }
         if (url.pathname === "/app/installations/999/access_tokens") {
@@ -3287,7 +3287,7 @@ test("hosted webhook reuses existing fast ack comments on redelivery", async () 
   globalThis.fetch = async (input, init) => {
     const url = new URL(String(input));
     const authorization = new Headers(init?.headers).get("authorization");
-    if (url.pathname === "/repos/openclaw/clawsweeper/installation") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/installation") {
       return jsonResponse({ id: 999 });
     }
     if (url.pathname === "/app/installations/999/access_tokens") {
@@ -3315,7 +3315,7 @@ test("hosted webhook reuses existing fast ack comments on redelivery", async () 
       assert.equal(authorization, "Bearer target-token");
       return jsonResponse({});
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/dispatches") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/dispatches") {
       assert.equal(authorization, "Bearer dispatch-token");
       dispatchBody = JSON.parse(String(init?.body));
       return new Response(null, { status: 204 });
@@ -3410,7 +3410,7 @@ test("hosted webhook coalesces concurrent duplicate fast ack comments", async ()
   globalThis.fetch = async (input, init) => {
     const url = new URL(String(input));
     const authorization = new Headers(init?.headers).get("authorization");
-    if (url.pathname === "/repos/openclaw/clawsweeper/installation") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/installation") {
       return jsonResponse({ id: 999 });
     }
     if (url.pathname === "/app/installations/999/access_tokens") {
@@ -3443,7 +3443,7 @@ test("hosted webhook coalesces concurrent duplicate fast ack comments", async ()
       reactions += 1;
       return jsonResponse({});
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/dispatches") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/dispatches") {
       assert.equal(authorization, "Bearer dispatch-token");
       dispatchBodies.push(JSON.parse(String(init?.body)));
       return new Response(null, { status: 204 });
@@ -3536,7 +3536,7 @@ test("hosted webhook removes duplicate fast ack comments after concurrent redeli
   let dispatchBody: unknown = null;
   globalThis.fetch = async (input, init) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/installation") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/installation") {
       return jsonResponse({ id: 999 });
     }
     if (url.pathname === "/app/installations/999/access_tokens") {
@@ -3576,7 +3576,7 @@ test("hosted webhook removes duplicate fast ack comments after concurrent redeli
     if (url.pathname === "/repos/openclaw/fs-safe/issues/comments/456/reactions") {
       return jsonResponse({});
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/dispatches") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/dispatches") {
       dispatchBody = JSON.parse(String(init?.body));
       return new Response(null, { status: 204 });
     }
@@ -3655,7 +3655,7 @@ test("hosted webhook schedules post-dispatch fast ack cleanup", async () => {
   const waitUntilPromises: Promise<unknown>[] = [];
   globalThis.fetch = async (input, init) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/installation") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/installation") {
       return jsonResponse({ id: 999 });
     }
     if (url.pathname === "/app/installations/999/access_tokens") {
@@ -3710,7 +3710,7 @@ test("hosted webhook schedules post-dispatch fast ack cleanup", async () => {
     if (url.pathname === "/repos/openclaw/fs-safe/issues/comments/456/reactions") {
       return jsonResponse({});
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/dispatches") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/dispatches") {
       return new Response(null, { status: 204 });
     }
     throw new Error(`unexpected fetch ${url}`);
@@ -3815,7 +3815,7 @@ test("dashboard shares in-flight GitHub App installation token across parallel r
       {
         CLAWSWEEPER_APP_CLIENT_ID: "Iv23parallel",
         CLAWSWEEPER_APP_PRIVATE_KEY: String(privateKey),
-        CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+        CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
         CACHE_TTL_SECONDS: "0",
       },

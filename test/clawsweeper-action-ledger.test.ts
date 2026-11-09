@@ -563,7 +563,7 @@ const LEDGER_ENV = {
   CLAWSWEEPER_ACTION_LEDGER_DISABLED: "0",
   CLAWSWEEPER_ACTION_LEDGER_PARTITION_DATE: "2026-07-12",
   CLAWSWEEPER_CRABFLEET_AGENT_TOKEN: "",
-  GITHUB_REPOSITORY: "openclaw/clawsweeper",
+  GITHUB_REPOSITORY: "bianca-git/clawsweeper",
   GITHUB_RUN_ID: "100",
   GITHUB_RUN_ATTEMPT: "1",
   GITHUB_WORKFLOW: "fixture",
@@ -895,13 +895,13 @@ const args = rawArgs[0] === "--repo" ? rawArgs.slice(2) : rawArgs;
 const path = args[1] === "-i" ? args[2] || "" : args[1] || "";
 if (args[0] === "api" && /\\/issues\\/comments\\/9321$/.test(path)) {
   const body = JSON.parse(readFileSync(args[args.indexOf("--input") + 1], "utf8")).body;
-  console.log(JSON.stringify({ id: 9321, html_url: "https://github.com/openclaw/clawsweeper/issues/321#issuecomment-9321", updated_at: "2026-05-01T01:02:00Z", user: { login: "clawsweeper[bot]" }, body }));
+  console.log(JSON.stringify({ id: 9321, html_url: "https://github.com/bianca-git/clawsweeper/issues/321#issuecomment-9321", updated_at: "2026-05-01T01:02:00Z", user: { login: "clawsweeper[bot]" }, body }));
 } else if (args[0] === "api" && /\\/issues\\/321\\/timeline(?:\\?|$)/.test(path)) {
   console.log("HTTP/2 200\\n\\n[]");
 } else if (args[0] === "api" && /\\/issues\\/321\\/comments(?:\\?|$)/.test(path)) {
-  console.log(JSON.stringify([[{ id: 9321, html_url: "https://github.com/openclaw/clawsweeper/issues/321#issuecomment-9321", created_at: "2026-05-01T01:00:00Z", updated_at: "2026-05-01T01:00:00Z", user: { login: "clawsweeper[bot]" }, body: ${JSON.stringify(first.comment)} }]]));
+  console.log(JSON.stringify([[{ id: 9321, html_url: "https://github.com/bianca-git/clawsweeper/issues/321#issuecomment-9321", created_at: "2026-05-01T01:00:00Z", updated_at: "2026-05-01T01:00:00Z", user: { login: "clawsweeper[bot]" }, body: ${JSON.stringify(first.comment)} }]]));
 } else if (args[0] === "api" && /\\/issues\\/321$/.test(path)) {
-  console.log(JSON.stringify({ number: 321, title: "Render work plans", html_url: "https://github.com/openclaw/clawsweeper/issues/321", created_at: "2026-05-01T00:00:00Z", updated_at: "2026-05-01T00:00:00Z", closed_at: null, state: "open", locked: false, active_lock_reason: null, author_association: "CONTRIBUTOR", user: { login: "reporter" }, labels: ["stale"], pull_request: null }));
+  console.log(JSON.stringify({ number: 321, title: "Render work plans", html_url: "https://github.com/bianca-git/clawsweeper/issues/321", created_at: "2026-05-01T00:00:00Z", updated_at: "2026-05-01T00:00:00Z", closed_at: null, state: "open", locked: false, active_lock_reason: null, author_association: "CONTRIBUTOR", user: { login: "reporter" }, labels: ["stale"], pull_request: null }));
 } else if (args[0] === "issue" && args[1] === "view") {
   console.log(JSON.stringify({ closedByPullRequestsReferences: [] }));
 } else if (args[0] === "label" && args[1] === "create") {
@@ -922,7 +922,7 @@ if (args[0] === "api" && /\\/issues\\/comments\\/9321$/.test(path)) {
     return [
       "apply-decisions",
       "--target-repo",
-      "openclaw/clawsweeper",
+      "bianca-git/clawsweeper",
       "--items-dir",
       itemsDir,
       "--closed-dir",
@@ -980,7 +980,7 @@ if (args[0] === "api" && /\\/issues\\/comments\\/9321$/.test(path)) {
   );
   // The local apply report is digest evidence, not a durable record path.
   assert.deepEqual(events.at(-1)?.subject, {
-    repository: "openclaw/clawsweeper",
+    repository: "bianca-git/clawsweeper",
     kind: "publication",
   });
   assert.deepEqual(events.at(-1)?.evidence?.[0], {
@@ -1139,7 +1139,7 @@ test("GitHub throttles abort apply lease checks and preserve durable lease owner
       const startedAt = new Date(Date.now() - 120_000).toISOString();
       const issue = {
         number: 321,
-        html_url: "https://github.com/openclaw/clawsweeper/issues/321",
+        html_url: "https://github.com/bianca-git/clawsweeper/issues/321",
         title: "Keep the lease under GitHub throttling",
         created_at: "2026-05-01T00:00:00Z",
         updated_at: reviewedAt,
@@ -1152,7 +1152,7 @@ test("GitHub throttles abort apply lease checks and preserve durable lease owner
       const synced = reportWithSyncedReviewComment(
         workPlanCandidateReport({
           number: 321,
-          repository: "openclaw/clawsweeper",
+          repository: "bianca-git/clawsweeper",
           type: "issue",
           title: issue.title,
           reviewed_at: reviewedAt,
@@ -1170,7 +1170,7 @@ test("GitHub throttles abort apply lease checks and preserve durable lease owner
       const comments = [
         {
           id: 9321,
-          html_url: "https://github.com/openclaw/clawsweeper/issues/321#issuecomment-9321",
+          html_url: "https://github.com/bianca-git/clawsweeper/issues/321#issuecomment-9321",
           created_at: reviewedAt,
           updated_at: reviewedAt,
           user: { login: "clawsweeper[bot]" },
@@ -1178,7 +1178,7 @@ test("GitHub throttles abort apply lease checks and preserve durable lease owner
         },
         {
           id: 700321,
-          html_url: "https://github.com/openclaw/clawsweeper/issues/321#issuecomment-700321",
+          html_url: "https://github.com/bianca-git/clawsweeper/issues/321#issuecomment-700321",
           created_at: startedAt,
           updated_at: startedAt,
           user: { login: "clawsweeper[bot]" },
@@ -1351,7 +1351,7 @@ test("apply failure finalization survives report publication errors", () => {
     return [
       "apply-decisions",
       "--target-repo",
-      "openclaw/clawsweeper",
+      "bianca-git/clawsweeper",
       "--items-dir",
       itemsDir,
       "--closed-dir",

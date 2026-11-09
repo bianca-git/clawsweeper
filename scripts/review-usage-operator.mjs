@@ -215,7 +215,7 @@ async function main(env) {
   const sha = env.USAGE_DEPLOY_SHA || "";
   const version = env.USAGE_VERSION_ID || "";
   requireCondition(
-    env.GITHUB_REPOSITORY === "openclaw/clawsweeper" &&
+    env.GITHUB_REPOSITORY === "bianca-git/clawsweeper" &&
       env.GITHUB_REF === "refs/heads/main" &&
       env.GITHUB_EVENT_NAME === "workflow_dispatch" &&
       /^[a-f0-9]{40}$/.test(env.GITHUB_SHA || ""),

@@ -222,7 +222,7 @@ process.exitCode = Number(process.env.LOCAL_REVIEW_EXIT_STATUS || "0");
           dir,
           [
             "--target-repo",
-            "openclaw/clawsweeper",
+            "bianca-git/clawsweeper",
             "--base",
             "local-base",
             "--result-format",
@@ -285,7 +285,7 @@ process.stdout.write("x".repeat(4 * 1024 * 1024 + 1) + "\\n");
         dir,
         [
           "--target-repo",
-          "openclaw/clawsweeper",
+          "bianca-git/clawsweeper",
           "--base",
           "local-base",
           "--output-retention",
@@ -319,7 +319,7 @@ test("local-review refuses a dirty working tree", () => {
     writeFileSync(join(dir, "dirty.txt"), "x\n"); // untracked -> dirty
     const { status, out } = runLocalReview(dir, [
       "--target-repo",
-      "openclaw/clawsweeper",
+      "bianca-git/clawsweeper",
       "--base",
       "HEAD",
     ]);
@@ -337,7 +337,7 @@ test("local-review JSON preflight failure leaves no scratch or receipt directory
     writeFileSync(join(dir, "dirty.txt"), "x\n");
     const result = runLocalReview(
       dir,
-      ["--target-repo", "openclaw/clawsweeper", "--base", "HEAD", "--result-format", "json"],
+      ["--target-repo", "bianca-git/clawsweeper", "--base", "HEAD", "--result-format", "json"],
       { TMPDIR: scratch },
     );
     assert.equal(result.status, 1, result.out);
@@ -393,7 +393,7 @@ test("local-review reports nothing to review when HEAD has no commits beyond bas
   try {
     const { status, out } = runLocalReview(dir, [
       "--target-repo",
-      "openclaw/clawsweeper",
+      "bianca-git/clawsweeper",
       "--base",
       "HEAD",
     ]);

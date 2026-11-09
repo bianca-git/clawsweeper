@@ -438,13 +438,13 @@ test("diagnostic provenance binds the producing Actions run and attempt without 
   const root = mkdtempSync(join(tmpdir(), "clawsweeper-provenance-"));
   try {
     const env = {
-      GITHUB_REPOSITORY: "openclaw/clawsweeper",
+      GITHUB_REPOSITORY: "bianca-git/clawsweeper",
       GITHUB_RUN_ID: "123",
       GITHUB_RUN_ATTEMPT: "2",
     };
     const output = write(join(root, "valid"), new AgentInputScanError("findings"), env);
     assert.deepEqual(JSON.parse(readFileSync(join(output, "manifest.json"), "utf8")).run, {
-      repository: "openclaw/clawsweeper",
+      repository: "bianca-git/clawsweeper",
       id: "123",
       attempt: "2",
     });

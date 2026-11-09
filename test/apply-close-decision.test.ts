@@ -8,7 +8,7 @@ import { replaceFrontMatterValue, reportWithoutReviewRecord } from "../dist/repo
 import type { Decision } from "../src/clawsweeper-types.ts";
 import { implementedCloseReport, withReviewRecord } from "./helpers.ts";
 
-const issue = { repo: "openclaw/clawsweeper", kind: "issue" as const, labels: [] };
+const issue = { repo: "bianca-git/clawsweeper", kind: "issue" as const, labels: [] };
 
 function validate(markdown: string) {
   const validated: Decision[] = [];

@@ -380,7 +380,7 @@ test("the tree keeps front matter only, and the aggregate is unchanged by it", a
   const record = (number: number, decision: string) =>
     [
       "---",
-      "repository: openclaw/clawsweeper",
+      "repository: bianca-git/clawsweeper",
       `number: ${number}`,
       "type: pull_request",
       "reviewed_at: 2026-10-19T10:00:00Z",
@@ -410,7 +410,7 @@ test("the tree keeps front matter only, and the aggregate is unchanged by it", a
     writeFileSync(file, row.content!);
   }
   const visibility = {
-    "openclaw/clawsweeper": { public: true, checkedAt: new Date().toISOString() },
+    "bianca-git/clawsweeper": { public: true, checkedAt: new Date().toISOString() },
   };
   const now = Date.parse("2026-10-20T12:00:00Z");
   const strip = (value: { generatedAt?: string }) => ({ ...value, generatedAt: undefined });

@@ -14,7 +14,7 @@
       "package_manager": "bun"
     },
     {
-      "target_repo": "openclaw/clawsweeper",
+      "target_repo": "bianca-git/clawsweeper",
       "display_name": "ClawSweeper",
       "checkout_dir": "clawsweeper",
       "prompt_note": "Use the ClawSweeper source tree and current main branch. Review bot automation, workflow, and documentation changes conservatively. Propose auto-close for issues and pull requests that are certainly implemented on main; for pull requests only, also allow age-gated mostly implemented on main. Keep everything else open for maintainer triage.",
@@ -83,7 +83,7 @@
   "generic_fallbacks": [
     {
       "owner": "openclaw",
-      "deny_repositories": ["openclaw/clawsweeper-state", "openclaw/.github"],
+      "deny_repositories": ["bianca-git/clawsweeper-state", "openclaw/.github"],
       "allow_repo_name_pattern": "^[A-Za-z0-9_.-]+$",
       "prompt_note": "Use the {target_repo} source tree and current default branch. This repository is using the generic OpenClaw onboarding profile, so keep review conservative: issues and pull requests may be auto-closed only when the exact change is certainly already implemented on the default branch; pull requests may also be age-gated mostly implemented there.",
       "apply_close_rules": {
@@ -106,7 +106,7 @@
   ],
   "target_inventory": {
     "owners": ["openclaw", "steipete"],
-    "deny_repositories": ["openclaw/clawsweeper-state", "openclaw/.github"],
+    "deny_repositories": ["bianca-git/clawsweeper-state", "openclaw/.github"],
     "include_private": false,
     "include_archived": false,
     "include_forks": false,

@@ -243,7 +243,7 @@ test("review observer write is signed while aggregate telemetry remains read-onl
     target_repo: "openclaw/openclaw",
     started_at: new Date(Date.now() - 60_000).toISOString(),
     completed_at: new Date().toISOString(),
-    run_url: "https://github.com/openclaw/clawsweeper/actions/runs/60000",
+    run_url: "https://github.com/bianca-git/clawsweeper/actions/runs/60000",
     plan_count: 1,
     item_count: 4,
     publication_count: 1,
@@ -322,7 +322,7 @@ for (const hasAlarm of [false, true]) {
       target_repo: "openclaw/openclaw",
       started_at: new Date(Date.now() - 60_000).toISOString(),
       completed_at: new Date().toISOString(),
-      run_url: "https://github.com/openclaw/clawsweeper/actions/runs/60000",
+      run_url: "https://github.com/bianca-git/clawsweeper/actions/runs/60000",
       plan_count: 1,
       item_count: 4,
       publication_count: 1,
@@ -343,7 +343,7 @@ for (const hasAlarm of [false, true]) {
     const expired = {
       ...record,
       run_id: "60001",
-      run_url: "https://github.com/openclaw/clawsweeper/actions/runs/60001",
+      run_url: "https://github.com/bianca-git/clawsweeper/actions/runs/60001",
       started_at: new Date(Date.now() - 32 * 86_400_000).toISOString(),
       completed_at: new Date(Date.now() - 31 * 86_400_000).toISOString(),
     };

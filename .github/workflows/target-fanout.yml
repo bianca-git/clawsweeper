@@ -52,7 +52,7 @@ jobs:
     if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || (github.event_name == 'repository_dispatch' && github.event.action == 'clawsweeper_target_sweep') }}
     uses: ./.github/workflows/hosted-target-admission.yml
     with:
-      target_repo: openclaw/clawsweeper
+      target_repo: bianca-git/clawsweeper
     secrets:
       CLAWSWEEPER_APP_PRIVATE_KEY: ${{ secrets.CLAWSWEEPER_APP_PRIVATE_KEY }}
 

@@ -28,7 +28,7 @@ function fixture() {
   fs.mkdirSync(path.dirname(ledger), { recursive: true });
   fs.writeFileSync(ledger, '{"schema_version":1}\n');
   const context: ExactReviewBundleContext = {
-    repository: "openclaw/clawsweeper",
+    repository: "bianca-git/clawsweeper",
     sourceSha: "a".repeat(40),
     runId: "29380556291",
     runAttempt: 2,

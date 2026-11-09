@@ -40,13 +40,13 @@ test("values bound before a mutation cannot cross the generation boundary", () =
 test("fetchItem shares the full issue read and normalizes live label objects", () => {
   let calls = 0;
   const inventory = createReviewPlanningInventory({
-    targetRepo: () => "openclaw/clawsweeper",
+    targetRepo: () => "bianca-git/clawsweeper",
     ghJson: () => {
       calls += 1;
       return {
         number: 42,
         title: "Generation proof",
-        html_url: "https://github.com/openclaw/clawsweeper/issues/42",
+        html_url: "https://github.com/bianca-git/clawsweeper/issues/42",
         created_at: "2026-08-13T00:00:00Z",
         updated_at: "2026-08-13T00:00:00Z",
         state: "open",
@@ -70,7 +70,7 @@ test("planning snapshot is decision-equivalent, repairs gaps, and mutation gener
   const liveIssue = {
     number: 42,
     title: "Snapshot equivalence",
-    html_url: "https://github.com/openclaw/clawsweeper/issues/42",
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/42",
     created_at: "2026-08-13T00:00:00Z",
     updated_at: "2026-08-14T00:00:00Z",
     state: "open",
@@ -81,7 +81,7 @@ test("planning snapshot is decision-equivalent, repairs gaps, and mutation gener
   let snapshot = null;
   let repairs = 0;
   const inventory = createReviewPlanningInventory({
-    targetRepo: () => "openclaw/clawsweeper",
+    targetRepo: () => "bianca-git/clawsweeper",
     ghJson: () => {
       liveCalls += 1;
       return structuredClone(liveIssue);

@@ -52,7 +52,7 @@ const producerEnv = {
   CLAWSWEEPER_ACTION_LEDGER_FORCE: "1",
   CLAWSWEEPER_ACTION_LEDGER_ROOT: eventRoot,
   CLAWSWEEPER_ACTION_LEDGER_OUTPUT_ROOT: eventOutput,
-  GITHUB_REPOSITORY: "openclaw/clawsweeper",
+  GITHUB_REPOSITORY: "bianca-git/clawsweeper",
   GITHUB_SHA: "a".repeat(40),
   GITHUB_WORKFLOW: "Comment router loopback proof",
   GITHUB_JOB: "proof",

@@ -163,12 +163,12 @@ function workflowEnv(overrides: NodeJS.ProcessEnv = {}): NodeJS.ProcessEnv {
     CLAWSWEEPER_ACTION_LEDGER_PARTITION_DATE: "2026-07-12",
     GITHUB_ACTION: "__run_5",
     GITHUB_JOB: "review",
-    GITHUB_REPOSITORY: "openclaw/clawsweeper",
+    GITHUB_REPOSITORY: "bianca-git/clawsweeper",
     GITHUB_RUN_ATTEMPT: "2",
     GITHUB_RUN_ID: "100",
     GITHUB_SHA: "abc123",
     GITHUB_WORKFLOW: "ClawSweeper Sweep",
-    GITHUB_WORKFLOW_REF: "openclaw/clawsweeper/.github/workflows/sweep.yml@refs/heads/main",
+    GITHUB_WORKFLOW_REF: "bianca-git/clawsweeper/.github/workflows/sweep.yml@refs/heads/main",
     ...overrides,
   };
   const sessionId = String(env.CLAWSWEEPER_CRABFLEET_SESSION_ID ?? "").trim();
@@ -1942,7 +1942,7 @@ test("workflow event scopes reject confidential identifiers before persistence o
 
 test("workflow producer identity uses stable workflow and step identifiers", () => {
   assert.deepEqual(workflowActionProducer("review", workflowEnv()), {
-    repository: "openclaw/clawsweeper",
+    repository: "bianca-git/clawsweeper",
     sha: "abc123",
     workflow: "sweep.yml",
     job: "review",
@@ -1955,7 +1955,7 @@ test("workflow producer identity uses stable workflow and step identifiers", () 
       "review",
       workflowEnv({
         GITHUB_WORKFLOW_REF:
-          "openclaw/clawsweeper/.github/workflows/sweep@nightly.yml@refs/heads/main",
+          "bianca-git/clawsweeper/.github/workflows/sweep@nightly.yml@refs/heads/main",
       }),
     ).workflow,
     "sweep@nightly.yml",
@@ -2989,7 +2989,7 @@ test("full producer identity prevents cross-repository shard collisions", async 
   recordReview(
     root,
     workflowEnv({
-      GITHUB_REPOSITORY: "openclaw/clawsweeper",
+      GITHUB_REPOSITORY: "bianca-git/clawsweeper",
       GITHUB_SHA: "abc123",
     }),
   );

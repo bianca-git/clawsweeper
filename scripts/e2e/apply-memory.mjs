@@ -152,7 +152,7 @@ function main() {
       CLAWSWEEPER_ACTION_LEDGER_FORCE: "1",
       CLAWSWEEPER_ACTION_LEDGER_OUTPUT_ROOT: join(root, "ledger"),
       CLAWSWEEPER_ACTION_LEDGER_PARTITION_DATE: "2026-08-27",
-      GITHUB_REPOSITORY: "openclaw/clawsweeper",
+      GITHUB_REPOSITORY: "bianca-git/clawsweeper",
       GITHUB_SHA: "afe976209aa58a5629041b42b66f6ee11b2812a7",
       GITHUB_WORKFLOW: "apply-memory-proof",
       GITHUB_JOB: scenario,

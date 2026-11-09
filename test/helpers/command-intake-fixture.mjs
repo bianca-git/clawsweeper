@@ -91,7 +91,7 @@ if (process.argv[2] === "serve") {
     for await (const chunk of request) chunks.push(chunk);
     const body = Buffer.concat(chunks).toString("utf8");
     const json = (value) => reply.end(JSON.stringify(value));
-    if (request.method === "GET" && request.url === "/repos/openclaw/clawsweeper/installation")
+    if (request.method === "GET" && request.url === "/repos/bianca-git/clawsweeper/installation")
       return json({ id: 999 });
     if (request.method === "POST" && request.url === "/app/installations/999/access_tokens")
       return json({ token: "synthetic-token" });

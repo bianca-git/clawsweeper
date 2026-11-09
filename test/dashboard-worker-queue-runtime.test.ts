@@ -829,7 +829,7 @@ test("owner-fallback public targets are probed and admitted without configured p
           genericFallbacks: [
             {
               owner: "openclaw",
-              denyRepositories: ["openclaw/clawsweeper-state", "openclaw/.github"],
+              denyRepositories: ["bianca-git/clawsweeper-state", "openclaw/.github"],
               allowRepoNamePattern: /^[a-z0-9_.-]+$/,
             },
           ],
@@ -965,7 +965,7 @@ test("private metadata is probed with one central-only token and leaves no durab
     );
     assert.equal(response.status, 422);
     assert.deepEqual(await response.json(), { error: "private_target_unsupported" });
-    assert.deepEqual(installationRepos, ["openclaw/clawsweeper"]);
+    assert.deepEqual(installationRepos, ["bianca-git/clawsweeper"]);
     assert.equal(metadataMints, 1);
     assert.equal(targetMints, 0);
     assert.equal(metadataRequests.length, 1);
@@ -2192,7 +2192,7 @@ test("exact-review queue coalesces deliveries, dispatches a bound rollout snapsh
   });
   globalThis.fetch = async (input, init) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/workflows/sweep.yml") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/workflows/sweep.yml") {
       signalWorkflowCheckStarted();
       await workflowCheckRelease;
       return jsonResponse({ state: workflowState });
@@ -2206,7 +2206,7 @@ test("exact-review queue coalesces deliveries, dispatches a bound rollout snapsh
     if (url.pathname === "/app/installations/999/access_tokens") {
       return jsonResponse({ token: "dispatch-token" });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/dispatches") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/dispatches") {
       assert.equal(new Headers(init?.headers).get("authorization"), "Bearer dispatch-token");
       dispatched.push(JSON.parse(String(init?.body)));
       return new Response(null, { status: 204 });
@@ -6809,7 +6809,7 @@ test("exact-review queue admits at most one active item per target repository", 
   });
   globalThis.fetch = async (input, init) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/workflows/sweep.yml") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/workflows/sweep.yml") {
       return jsonResponse({ state: "active" });
     }
     if (/^\/repos\/openclaw\/(?:clawsweeper|gogcli|openclaw)\/installation$/.test(url.pathname)) {
@@ -6821,7 +6821,7 @@ test("exact-review queue admits at most one active item per target repository", 
     if (url.pathname === "/app/installations/999/access_tokens") {
       return jsonResponse({ token: "dispatch-token" });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/dispatches") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/dispatches") {
       dispatched.push(JSON.parse(String(init?.body)));
       return new Response(null, { status: 204 });
     }
@@ -6856,7 +6856,7 @@ test("exact-review queue admits at most one active item per target repository", 
         604,
         "opened",
         "issue",
-        "openclaw/clawsweeper",
+        "bianca-git/clawsweeper",
       ),
     );
 
@@ -6886,7 +6886,7 @@ test("exact-review review retries park at the attempt ceiling and recover after 
   });
   globalThis.fetch = async (input, init) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/workflows/sweep.yml") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/workflows/sweep.yml") {
       return jsonResponse({ state: "active" });
     }
     if (/^\/repos\/openclaw\/(?:clawsweeper|gogcli|openclaw)\/installation$/.test(url.pathname))
@@ -6909,7 +6909,7 @@ test("exact-review review retries park at the attempt ceiling and recover after 
     if (url.pathname === "/app/installations/999/access_tokens") {
       return jsonResponse({ token: "dispatch-token" });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/dispatches") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/dispatches") {
       dispatched.push(JSON.parse(String(init?.body)));
       return new Response(null, { status: 204 });
     }
@@ -8580,7 +8580,7 @@ const exactReviewDispatchFetch =
   (dispatched: Record<string, unknown>[]) =>
   async (input: RequestInfo | URL, init?: RequestInit) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/workflows/sweep.yml")
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/workflows/sweep.yml")
       return jsonResponse({ state: "active" });
     if (/^\/repos\/openclaw\/(?:clawsweeper|gogcli|openclaw)\/installation$/.test(url.pathname))
       return jsonResponse({ id: 999 });
@@ -8588,7 +8588,7 @@ const exactReviewDispatchFetch =
       return jsonResponse({ state: "open" });
     if (url.pathname === "/app/installations/999/access_tokens")
       return jsonResponse({ token: "dispatch-token" });
-    if (url.pathname === "/repos/openclaw/clawsweeper/dispatches") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/dispatches") {
       dispatched.push(JSON.parse(String(init?.body)));
       return new Response(null, { status: 204 });
     }
@@ -8650,7 +8650,7 @@ test("exact-review queue keeps publication artifacts durable outside review capa
   });
   globalThis.fetch = async (input, init) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/workflows/sweep.yml")
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/workflows/sweep.yml")
       return jsonResponse({ state: "active" });
     if (/^\/repos\/openclaw\/(?:clawsweeper|gogcli|openclaw)\/installation$/.test(url.pathname))
       return jsonResponse({ id: 999 });
@@ -8658,7 +8658,7 @@ test("exact-review queue keeps publication artifacts durable outside review capa
       return jsonResponse({ state: "open" });
     if (url.pathname === "/app/installations/999/access_tokens")
       return jsonResponse(Object.fromEntries([["token", "t"]]));
-    if (url.pathname === "/repos/openclaw/clawsweeper/dispatches") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/dispatches") {
       dispatched.push(JSON.parse(String(init?.body)));
       return new Response(null, { status: 204 });
     }
@@ -10081,7 +10081,7 @@ test("internal state writer routes authenticate and preserve durable ticket iden
     ticket_id: "state-writer:test-route",
     owner: "11111111-1111-4111-8111-111111111111",
     branch: "state",
-    repository: "openclaw/clawsweeper-state",
+    repository: "bianca-git/clawsweeper-state",
     workflow: "State materializer",
     job: "materialize",
     run_id: "12345",
@@ -10376,7 +10376,7 @@ test("exact-review queue retries dispatch failures and reclaims an unclaimed lea
   let workflowStatusAvailable = false;
   globalThis.fetch = async (input) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/workflows/sweep.yml") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/workflows/sweep.yml") {
       if (!workflowStatusAvailable) {
         return new Response(JSON.stringify({ message: "temporarily unavailable" }), {
           status: 503,
@@ -10390,7 +10390,7 @@ test("exact-review queue retries dispatch failures and reclaims an unclaimed lea
       return jsonResponse({ state: "open" });
     if (url.pathname === "/app/installations/999/access_tokens")
       return jsonResponse({ token: "dispatch-token" });
-    if (url.pathname === "/repos/openclaw/clawsweeper/dispatches") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/dispatches") {
       dispatchAttempts += 1;
       if (dispatchAttempts === 1) {
         return new Response(JSON.stringify({ message: "rate limited" }), { status: 429 });
@@ -10516,7 +10516,7 @@ test("exact-review queue automatically retries a parked dispatch rejection after
   let dispatchStatus = 422;
   globalThis.fetch = async (input) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/workflows/sweep.yml")
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/workflows/sweep.yml")
       return jsonResponse({ state: "active" });
     if (/^\/repos\/openclaw\/(?:clawsweeper|gogcli|openclaw)\/installation$/.test(url.pathname))
       return jsonResponse({ id: 999 });
@@ -10524,7 +10524,7 @@ test("exact-review queue automatically retries a parked dispatch rejection after
       return jsonResponse({ state: "open" });
     if (url.pathname === "/app/installations/999/access_tokens")
       return jsonResponse({ token: "dispatch-token" });
-    if (url.pathname === "/repos/openclaw/clawsweeper/dispatches")
+    if (url.pathname === "/repos/bianca-git/clawsweeper/dispatches")
       return dispatchStatus === 204
         ? new Response(null, { status: 204 })
         : new Response(
@@ -10627,20 +10627,20 @@ test("exact-review queue retains a synchronize update after an unclassified 422"
   let dispatchedPayload: Record<string, unknown> | undefined;
   globalThis.fetch = async (input, init) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/workflows/sweep.yml")
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/workflows/sweep.yml")
       return jsonResponse({ state: "active" });
     if (/^\/repos\/openclaw\/(?:clawsweeper|gogcli)\/installation$/.test(url.pathname))
       return jsonResponse({ id: 999 });
     if (/^\/repos\/openclaw\/(?:clawsweeper|gogcli)\/issues\/\d+$/.test(url.pathname))
       return jsonResponse({ state: "open" });
-    if (url.pathname === "/repos/openclaw/clawsweeper/pulls/842")
+    if (url.pathname === "/repos/bianca-git/clawsweeper/pulls/842")
       return jsonResponse({
         state: "open",
         head: { sha: "81e4abc894e7d3ec1fddbd856378b6aadb4392f3" },
       });
     if (url.pathname === "/app/installations/999/access_tokens")
       return jsonResponse({ token: "dispatch-token" });
-    if (url.pathname === "/repos/openclaw/clawsweeper/dispatches") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/dispatches") {
       dispatchedPayload = JSON.parse(String(init?.body || "{}"));
       return new Response(
         JSON.stringify({
@@ -10675,7 +10675,7 @@ test("exact-review queue retains a synchronize update after an unclassified 422"
         842,
         "legacy_dispatch",
         "pull_request",
-        "openclaw/clawsweeper",
+        "bianca-git/clawsweeper",
         { commandStatusMarker: "<!-- clawsweeper-command-status:842:re_review:old -->" },
       ),
     );
@@ -10685,7 +10685,7 @@ test("exact-review queue retains a synchronize update after an unclassified 422"
         842,
         "synchronize",
         "pull_request",
-        "openclaw/clawsweeper",
+        "bianca-git/clawsweeper",
         {
           sourceHeadSha: "81e4abc894e7d3ec1fddbd856378b6aadb4392f3",
           sourceHeadVerified: true,
@@ -10749,7 +10749,7 @@ test("exact-review queue treats a secondary-limit 422 as a global retry", async 
   });
   globalThis.fetch = async (input) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/workflows/sweep.yml")
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/workflows/sweep.yml")
       return jsonResponse({ state: "active" });
     if (/^\/repos\/openclaw\/(?:clawsweeper|gogcli)\/installation$/.test(url.pathname))
       return jsonResponse({ id: 999 });
@@ -10757,7 +10757,7 @@ test("exact-review queue treats a secondary-limit 422 as a global retry", async 
       return jsonResponse({ state: "open" });
     if (url.pathname === "/app/installations/999/access_tokens")
       return jsonResponse({ token: "dispatch-token" });
-    if (url.pathname === "/repos/openclaw/clawsweeper/dispatches")
+    if (url.pathname === "/repos/bianca-git/clawsweeper/dispatches")
       return new Response(
         JSON.stringify({ message: "You have exceeded a secondary rate limit." }),
         {
@@ -10801,7 +10801,7 @@ test("exact-review queue globally backs off GitHub outages without charging item
   });
   globalThis.fetch = async (input) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/workflows/sweep.yml")
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/workflows/sweep.yml")
       return jsonResponse({ state: "active" });
     if (/^\/repos\/openclaw\/(?:clawsweeper|gogcli|openclaw)\/installation$/.test(url.pathname))
       return jsonResponse({ id: 999 });
@@ -10809,7 +10809,7 @@ test("exact-review queue globally backs off GitHub outages without charging item
       return jsonResponse({ state: "open" });
     if (url.pathname === "/app/installations/999/access_tokens")
       return jsonResponse({ token: "dispatch-token" });
-    if (url.pathname === "/repos/openclaw/clawsweeper/dispatches")
+    if (url.pathname === "/repos/bianca-git/clawsweeper/dispatches")
       return new Response(JSON.stringify({ message: "service unavailable" }), { status: 503 });
     throw new Error(`unexpected fetch ${url}`);
   };
@@ -10864,7 +10864,7 @@ test("exact-review queue preserves a claimed lease after an ambiguous dispatch f
   });
   globalThis.fetch = async (input) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/workflows/sweep.yml")
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/workflows/sweep.yml")
       return jsonResponse({ state: "active" });
     if (/^\/repos\/openclaw\/(?:clawsweeper|gogcli|openclaw)\/installation$/.test(url.pathname))
       return jsonResponse({ id: 999 });
@@ -10872,7 +10872,7 @@ test("exact-review queue preserves a claimed lease after an ambiguous dispatch f
       return jsonResponse({ state: "open" });
     if (url.pathname === "/app/installations/999/access_tokens")
       return jsonResponse({ token: "t" });
-    if (url.pathname === "/repos/openclaw/clawsweeper/dispatches") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/dispatches") {
       signalDispatchStarted();
       await dispatchRelease;
       throw new DOMException("timeout", "AbortError");
@@ -14387,14 +14387,14 @@ test("signed exact-review reconciliation releases only immutable terminal runs",
   });
   globalThis.fetch = async (input, init) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/installation") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/installation") {
       return jsonResponse({ id: 999 });
     }
     if (url.pathname === "/app/installations/999/access_tokens") {
       assert.deepEqual(JSON.parse(String(init?.body)).permissions, { actions: "read" });
       return jsonResponse({ token: "t" });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/workflows/sweep.yml/runs") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/workflows/sweep.yml/runs") {
       assert.equal(url.searchParams.get("event"), "repository_dispatch");
       assert.equal(url.searchParams.get("status"), null);
       assert.equal(url.searchParams.get("per_page"), "100");
@@ -14418,7 +14418,7 @@ test("signed exact-review reconciliation releases only immutable terminal runs",
         ],
       });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs/9001/attempts/1") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs/9001/attempts/1") {
       return jsonResponse({
         id: 9001,
         run_attempt: 1,
@@ -14426,7 +14426,7 @@ test("signed exact-review reconciliation releases only immutable terminal runs",
         conclusion: "cancelled",
       });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs/9003/attempts/1") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs/9003/attempts/1") {
       return jsonResponse({
         id: 9003,
         run_attempt: 1,
@@ -14612,19 +14612,19 @@ test("exact-review reconciliation targets leases beyond 64 entries without accep
   });
   globalThis.fetch = async (input) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/installation") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/installation") {
       return jsonResponse({ id: 999 });
     }
     if (url.pathname === "/app/installations/999/access_tokens") {
       return jsonResponse({ token: "t" });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs/9901") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs/9901") {
       return jsonResponse({ id: 9901, run_attempt: 2, status: "completed" });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs/9902") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs/9902") {
       return jsonResponse({ id: 9902, run_attempt: 1, status: "completed" });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs/9902/attempts/1") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs/9902/attempts/1") {
       const claim = await queue.fetch(
         new Request("https://clawsweeper-exact-review-queue/claim", {
           method: "POST",
@@ -14645,10 +14645,10 @@ test("exact-review reconciliation targets leases beyond 64 entries without accep
         conclusion: "cancelled",
       });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs/9903") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs/9903") {
       return jsonResponse({ id: 9903, run_attempt: 1, status: "completed" });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs/9903/attempts/1") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs/9903/attempts/1") {
       return jsonResponse({
         id: 9903,
         run_attempt: 1,
@@ -14736,16 +14736,16 @@ test("exact-review reconciliation cannot release a later attempt with the same r
   });
   globalThis.fetch = async (input) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/installation") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/installation") {
       return jsonResponse({ id: 999 });
     }
     if (url.pathname === "/app/installations/999/access_tokens") {
       return jsonResponse({ token: "t" });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs/9010") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs/9010") {
       return jsonResponse({ id: 9010, run_attempt: 1, status: "completed" });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs/9010/attempts/1") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs/9010/attempts/1") {
       const claim = await queue.fetch(
         new Request("https://clawsweeper-exact-review-queue/claim", {
           method: "POST",
@@ -14766,16 +14766,16 @@ test("exact-review reconciliation cannot release a later attempt with the same r
         conclusion: "cancelled",
       });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs/9011") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs/9011") {
       return jsonResponse({ id: 9011, run_attempt: 2, status: "in_progress", conclusion: null });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs/9012") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs/9012") {
       return jsonResponse({ id: 9012, run_attempt: 2, status: "queued", conclusion: null });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs/9013") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs/9013") {
       return jsonResponse({ id: 9013, run_attempt: 2, status: "completed" });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs/9013/attempts/2") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs/9013/attempts/2") {
       return jsonResponse({ id: 9013, run_attempt: 2, status: "completed", conclusion: "failure" });
     }
     throw new Error(`unexpected fetch ${url}`);

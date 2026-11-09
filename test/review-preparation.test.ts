@@ -41,7 +41,7 @@ test("body-file removes advisory preflight and keeps authoritative body bytes ov
     const provided = "Provided override\r\n\r\n" + "x".repeat(12001) + "\r\nOVERRIDE_TAIL";
     const annotation = serializeReviewPreflightPayload({
       v: 1,
-      repo: "openclaw/clawsweeper",
+      repo: "bianca-git/clawsweeper",
       base: "a".repeat(40),
       head: "b".repeat(40),
       tool: { name: "clawsweeper", version: "1.0.0" },
@@ -491,7 +491,7 @@ for (const uncertain of [false, true])
           snapshots.push(snapshot);
           throw failure;
         },
-        repoFromArgs: () => repositoryProfileFor("openclaw/clawsweeper"),
+        repoFromArgs: () => repositoryProfileFor("bianca-git/clawsweeper"),
         resolveReviewCheckout: () => ({ openclawDir: root }),
         restoreTreeModes: (snapshots: Array<{ path: string; mode: number }>) => {
           restored = [...snapshots];
@@ -499,7 +499,7 @@ for (const uncertain of [false, true])
         reviewCodexForcedLoginMethod: () => "chatgpt",
         reviewPolicyHash: () => "fixture-policy",
         suppliedReviewStartLeaseFromArgs: () => null,
-        targetRepo: () => "openclaw/clawsweeper",
+        targetRepo: () => "bianca-git/clawsweeper",
       };
       const localDependencies = new Proxy(dependencies, {
         get(target, key) {
@@ -515,7 +515,7 @@ for (const uncertain of [false, true])
             parseArgs([
               "--local-range",
               "--target-repo",
-              "openclaw/clawsweeper",
+              "bianca-git/clawsweeper",
               "--target-dir",
               root,
               "--readonly-openclaw",

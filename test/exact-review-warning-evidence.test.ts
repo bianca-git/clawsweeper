@@ -12,7 +12,7 @@ import { reviewFailureDecisionFingerprint } from "../dashboard/exact-review-obse
 import type { ExactReviewQueueItem } from "../dashboard/exact-review-queue.ts";
 
 const now = Date.parse("2026-10-30T22:00:00Z");
-const repo = "openclaw/clawsweeper";
+const repo = "bianca-git/clawsweeper";
 export function heldItem(
   number: number,
   reason = "scanner_refused",

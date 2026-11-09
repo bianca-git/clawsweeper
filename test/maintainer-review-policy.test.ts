@@ -142,7 +142,7 @@ test("inert role projections leave legacy command rights and maintainer holds se
   assert.equal(requiresMaintainerReviewRequest(protectedItem), true);
 });
 
-// The verified command fields of openclaw/clawsweeper#1969's re-review request.
+// The verified command fields of bianca-git/clawsweeper#1969's re-review request.
 const request = {
   sourceAction: "re_review",
   supersedesInProgress: false,

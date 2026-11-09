@@ -8,11 +8,11 @@ import { writeExactReviewFailureDiagnostics } from "../dist/clawsweeper-review-f
 import { inspectInputScanDiagnostic } from "../scripts/inspect-input-scan-diagnostic.mjs";
 
 const identity = {
-  repository: "openclaw/clawsweeper",
+  repository: "bianca-git/clawsweeper",
   itemKind: "pull_request",
   itemNumber: 2057,
   sourceSha: "a".repeat(40),
-  runRepository: "openclaw/clawsweeper",
+  runRepository: "bianca-git/clawsweeper",
   runId: "123",
   runAttempt: "2",
 };
@@ -117,9 +117,9 @@ test("inspector rejects unsafe selectors, URLs, malformed metadata and nontermin
     { runId: "123\n" },
     { sourceSha: "a".repeat(41) },
     { itemNumber: 0 },
-    { artifactUrl: "https://evil.invalid/openclaw/clawsweeper/actions/runs/123/artifacts/1" },
-    { artifactUrl: "https://github.com/openclaw/clawsweeper/actions/runs/124/artifacts/1" },
-    { artifactUrl: "https://github.com/openclaw/clawsweeper/actions/runs/123/artifacts/1?token=x" },
+    { artifactUrl: "https://evil.invalid/bianca-git/clawsweeper/actions/runs/123/artifacts/1" },
+    { artifactUrl: "https://github.com/bianca-git/clawsweeper/actions/runs/124/artifacts/1" },
+    { artifactUrl: "https://github.com/bianca-git/clawsweeper/actions/runs/123/artifacts/1?token=x" },
   ])
     assert.throws(() => read(manifest(), overrides));
   for (const mutate of [
@@ -164,7 +164,7 @@ test("missing attribution is explicit and artifact URL is scoped to the exact ru
   const m: any = manifest();
   delete m.failure.scan;
   const result = read(m, {
-    artifactUrl: "https://github.com/openclaw/clawsweeper/actions/runs/123/artifacts/456",
+    artifactUrl: "https://github.com/bianca-git/clawsweeper/actions/runs/123/artifacts/456",
   });
   assert.equal(result.diagnostic.failure.scan, null);
   assert.match(result.summary, /artifacts\/456/);

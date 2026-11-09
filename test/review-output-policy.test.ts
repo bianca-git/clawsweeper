@@ -810,7 +810,7 @@ test("built review CLI emits one complete small JSON failure", { timeout: 15_000
       "review",
       "--local-only",
       "--target-repo",
-      "openclaw/clawsweeper",
+      "bianca-git/clawsweeper",
       "--result-format",
       "json",
       "--output-retention",
@@ -848,7 +848,7 @@ test(
       [
         "-c",
         [
-          '"$1" dist/clawsweeper.js review --local-only --target-repo openclaw/clawsweeper --result-format json --output-retention "$2" | "$1" --eval "$3"',
+          '"$1" dist/clawsweeper.js review --local-only --target-repo bianca-git/clawsweeper --result-format json --output-retention "$2" | "$1" --eval "$3"',
           'statuses=("${PIPESTATUS[@]}")',
           'printf "pipeline-status:%s,%s\\n" "${statuses[0]}" "${statuses[1]}" >&2',
           '[ "${statuses[0]}" -eq 1 ] && [ "${statuses[1]}" -eq 0 ]',

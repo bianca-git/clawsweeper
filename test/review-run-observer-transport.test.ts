@@ -28,7 +28,7 @@ function runObserver(mode: string) {
           display_title: "Review event item openclaw/openclaw#674",
           run_started_at: "2026-09-21T00:00:00Z",
           updated_at: "2026-09-21T00:01:00Z",
-          html_url: "https://github.com/openclaw/clawsweeper/actions/runs/1234",
+          html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/1234",
         },
       }),
     );
@@ -40,7 +40,7 @@ function runObserver(mode: string) {
           PATH: process.env.PATH,
           OBSERVER_FIXTURE_MODE: mode,
           GH_TOKEN: "synthetic-github-token",
-          GITHUB_REPOSITORY: "openclaw/clawsweeper",
+          GITHUB_REPOSITORY: "bianca-git/clawsweeper",
           GITHUB_API_URL: "https://github.example.test",
           QUEUE_URL: "https://queue.example.test",
           CLAWSWEEPER_WEBHOOK_SECRET: secret,

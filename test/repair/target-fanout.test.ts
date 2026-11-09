@@ -45,13 +45,13 @@ import { mockGhBinEnv } from "../helpers.ts";
 
 const config: InventoryConfig = {
   owners: ["openclaw", "steipete"],
-  denyRepositories: ["openclaw/clawsweeper-state"],
+  denyRepositories: ["bianca-git/clawsweeper-state"],
   hostedTargetPolicy: {
     configuredRepositories: ["partner/configured-repo"],
     genericFallbacks: [
       {
         owner: "openclaw",
-        denyRepositories: ["openclaw/clawsweeper-state", "openclaw/.github"],
+        denyRepositories: ["bianca-git/clawsweeper-state", "openclaw/.github"],
         allowRepoNamePattern: /^[A-Za-z0-9_.-]+$/,
       },
       {
@@ -123,7 +123,7 @@ if (args[0] === "api" && args.includes("/installation/repositories?per_page=100"
           "--owners",
           "openclaw",
           "--repo",
-          "openclaw/clawsweeper",
+          "bianca-git/clawsweeper",
           "--ref",
           "audit-ref",
           "--cursor-store-url",
@@ -146,7 +146,7 @@ if (args[0] === "api" && args.includes("/installation/repositories?per_page=100"
       assert.deepEqual(plan.commands, [
         [
           "api",
-          "repos/openclaw/clawsweeper/actions/workflows/audit.yml/dispatches",
+          "repos/bianca-git/clawsweeper/actions/workflows/audit.yml/dispatches",
           "--method",
           "POST",
           "-H",
@@ -172,7 +172,7 @@ test("audit waves retain queued slots and drain failures before dispatching all 
   let peak = 0;
   const completed: string[] = [];
   await dispatchAuditWaves(auditTargets, {
-    dispatchRepo: "openclaw/clawsweeper",
+    dispatchRepo: "bianca-git/clawsweeper",
     commandForTarget: (target) => [target.targetRepo],
     persist: async () => {},
     wait: async () => {
@@ -187,7 +187,7 @@ test("audit waves retain queued slots and drain failures before dispatching all 
       }
       assert.deepEqual(args.slice(3), [
         "--repo",
-        "openclaw/clawsweeper",
+        "bianca-git/clawsweeper",
         "--json",
         "databaseId,status,conclusion",
       ]);
@@ -214,7 +214,7 @@ test("audit waves stop on unknown dispatch or run state without admitting anothe
     let clock = 0;
     await assert.rejects(
       dispatchAuditWaves(auditTargets, {
-        dispatchRepo: "openclaw/clawsweeper",
+        dispatchRepo: "bianca-git/clawsweeper",
         commandForTarget: () => ["dispatch"],
         persist: async () => {},
         retryWait: async () => {},
@@ -694,7 +694,7 @@ test("target fanout filters eligible repositories conservatively", () => {
   const repositories: ListedRepository[] = [
     repo("openclaw/openclaw"),
     repo("openclaw/generic-public"),
-    repo("openclaw/clawsweeper-state"),
+    repo("bianca-git/clawsweeper-state"),
     repo("openclaw/archived", { isArchived: true }),
     repo("openclaw/forked", { isFork: true }),
     repo("openclaw/no-issues", { hasIssuesEnabled: false }),
@@ -802,7 +802,7 @@ process.exit(2);
       "--limit",
       "2",
       "--repo",
-      "openclaw/clawsweeper",
+      "bianca-git/clawsweeper",
     ],
     {
       cwd: process.cwd(),
@@ -886,7 +886,7 @@ globalThis.fetch = async (input, init) => {
       "--limit",
       "2",
       "--repo",
-      "openclaw/clawsweeper",
+      "bianca-git/clawsweeper",
     ],
     {
       cwd: process.cwd(),
@@ -929,11 +929,11 @@ globalThis.fetch = async (input, init) => {
       .map((call) => [call.args.join(" "), call.ghToken]),
     [
       [
-        "api repos/openclaw/clawsweeper/dispatches -f event_type=clawsweeper_target_sweep -f client_payload[target_repo]=openclaw/clawhub -f client_payload[target_branch]=main -f client_payload[hot_intake]=true -f client_payload[batch_size]=50 -f client_payload[shard_count]=1",
+        "api repos/bianca-git/clawsweeper/dispatches -f event_type=clawsweeper_target_sweep -f client_payload[target_repo]=openclaw/clawhub -f client_payload[target_branch]=main -f client_payload[hot_intake]=true -f client_payload[batch_size]=50 -f client_payload[shard_count]=1",
         "dispatch-token",
       ],
       [
-        "api repos/openclaw/clawsweeper/dispatches -f event_type=clawsweeper_target_sweep -f client_payload[target_repo]=openclaw/example-tool -f client_payload[target_branch]=trunk -f client_payload[hot_intake]=true -f client_payload[batch_size]=50 -f client_payload[shard_count]=1",
+        "api repos/bianca-git/clawsweeper/dispatches -f event_type=clawsweeper_target_sweep -f client_payload[target_repo]=openclaw/example-tool -f client_payload[target_branch]=trunk -f client_payload[hot_intake]=true -f client_payload[batch_size]=50 -f client_payload[shard_count]=1",
         "dispatch-token",
       ],
     ],
@@ -1014,7 +1014,7 @@ globalThis.fetch = async (input, init) => {
       "--cursor-store-url",
       "https://queue.example",
       "--repo",
-      "openclaw/clawsweeper",
+      "bianca-git/clawsweeper",
     ],
     {
       cwd: process.cwd(),
@@ -1251,7 +1251,7 @@ globalThis.fetch = async (input, init) => {
       "--publish-url",
       "unavailable",
       "--repo",
-      "openclaw/clawsweeper",
+      "bianca-git/clawsweeper",
     ],
     {
       cwd: process.cwd(),
@@ -1310,8 +1310,8 @@ globalThis.fetch = async (input, init) => {
       .filter((call) => call.args[0] === "api" && call.args[1]?.endsWith("/dispatches"))
       .map((call) => call.args.join(" ")),
     [
-      "api repos/openclaw/clawsweeper/dispatches -f event_type=clawsweeper_target_sweep -f client_payload[target_repo]=steipete/camsnap -f client_payload[target_branch]=master -f client_payload[hot_intake]=false -f client_payload[batch_size]=1 -f client_payload[shard_count]=1",
-      "api repos/openclaw/clawsweeper/dispatches -f event_type=clawsweeper_target_sweep -f client_payload[target_repo]=openclaw/clawhub -f client_payload[target_branch]=main -f client_payload[hot_intake]=false -f client_payload[batch_size]=1 -f client_payload[shard_count]=1",
+      "api repos/bianca-git/clawsweeper/dispatches -f event_type=clawsweeper_target_sweep -f client_payload[target_repo]=steipete/camsnap -f client_payload[target_branch]=master -f client_payload[hot_intake]=false -f client_payload[batch_size]=1 -f client_payload[shard_count]=1",
+      "api repos/bianca-git/clawsweeper/dispatches -f event_type=clawsweeper_target_sweep -f client_payload[target_repo]=openclaw/clawhub -f client_payload[target_branch]=main -f client_payload[hot_intake]=false -f client_payload[batch_size]=1 -f client_payload[shard_count]=1",
     ],
   );
   assert.deepEqual(

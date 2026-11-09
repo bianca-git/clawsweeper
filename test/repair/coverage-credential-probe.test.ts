@@ -394,7 +394,7 @@ test("manual workflow contract has one guarded read-only job and no production c
   const job = workflow.jobs["paired-read"];
   assert.equal(
     job.if,
-    "github.repository == 'openclaw/clawsweeper' && github.ref == 'refs/heads/main'",
+    "github.repository == 'bianca-git/clawsweeper' && github.ref == 'refs/heads/main'",
   );
   assert.equal(job.steps[0].with["persist-credentials"], false);
   const setup = job.steps[1];

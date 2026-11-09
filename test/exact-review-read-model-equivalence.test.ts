@@ -275,7 +275,7 @@ test("single-census read model is property-equivalent to the extracted implement
 
 function randomQueueState(random: SeededRandom, size: number): ExactReviewQueueState {
   const states = ["pending", "dispatching", "leased", "parked"] as const;
-  const targets = ["openclaw/openclaw", "openclaw/clawhub", "openclaw/clawsweeper"];
+  const targets = ["openclaw/openclaw", "openclaw/clawhub", "bianca-git/clawsweeper"];
   const items: Record<string, ExactReviewQueueItem> = {};
   for (let index = 0; index < size; index += 1) {
     const state = states[random.int(states.length)];

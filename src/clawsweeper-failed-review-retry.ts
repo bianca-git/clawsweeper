@@ -557,7 +557,7 @@ export function createFailedReviewRetryWorkflow({
     const dryRun = boolArg(args.dry_run);
     const workflowRepo = stringArg(
       args.workflow_repo,
-      process.env.GITHUB_REPOSITORY ?? "openclaw/clawsweeper",
+      process.env.GITHUB_REPOSITORY ?? "bianca-git/clawsweeper",
     );
     const workflowRef = stringArg(args.workflow_ref, "main");
     const codexTimeoutMs = numberArg(args.codex_timeout_ms, DEFAULT_REVIEW_CODEX_TIMEOUT_MS);

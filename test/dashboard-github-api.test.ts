@@ -16,8 +16,8 @@ test("GitHub API URL honors a validated loopback override", () => {
   const env = { GITHUB_API_URL: "http://127.0.0.1:8788" };
   assert.equal(githubApiBaseUrl(env), "http://127.0.0.1:8788");
   assert.equal(
-    githubApiUrl(env, "/repos/openclaw/clawsweeper"),
-    "http://127.0.0.1:8788/repos/openclaw/clawsweeper",
+    githubApiUrl(env, "/repos/bianca-git/clawsweeper"),
+    "http://127.0.0.1:8788/repos/bianca-git/clawsweeper",
   );
   assert.equal(
     githubApiBaseUrl({ GITHUB_API_URL: "http://localhost:8788" }),

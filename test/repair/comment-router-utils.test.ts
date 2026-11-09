@@ -340,8 +340,8 @@ test("synthetic dispatch receipt material is stable within an attempt and change
 test("production forced replay parsing scopes claims and dispatch keys by durable attempt", () => {
   const baseArgs = {
     repo: "openclaw/openclaw",
-    "repair-repo": "openclaw/clawsweeper",
-    "review-repo": "openclaw/clawsweeper",
+    "repair-repo": "bianca-git/clawsweeper",
+    "review-repo": "bianca-git/clawsweeper",
   };
   const baseCommand = {
     idempotency_key:

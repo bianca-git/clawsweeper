@@ -39,7 +39,7 @@ esac
     env: {
       ...process.env,
       PATH: `${binDir}${delimiter}${process.env.PATH ?? ""}`,
-      GITHUB_REPOSITORY: "openclaw/clawsweeper",
+      GITHUB_REPOSITORY: "bianca-git/clawsweeper",
       FAKE_RUNS_JSON: JSON.stringify({ workflow_runs: options.runs }),
       FAKE_JOBS_101_JSON: JSON.stringify({ jobs: options.jobs101 ?? [] }),
       FAKE_JOBS_102_JSON: JSON.stringify({ jobs: options.jobs102 ?? [] }),

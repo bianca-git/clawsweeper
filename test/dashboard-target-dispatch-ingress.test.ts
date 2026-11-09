@@ -121,7 +121,7 @@ test("target dispatch OIDC binds repository, event, branch, workflow, and run", 
       workflow_ref: "openclaw/openclaw/.github/workflows/labeler.yml@refs/heads/main",
       job_workflow_ref: "openclaw/openclaw/.github/workflows/labeler.yml@refs/heads/main",
     },
-    { job_workflow_ref: "openclaw/clawsweeper/.github/workflows/sweep.yml@refs/heads/main" },
+    { job_workflow_ref: "bianca-git/clawsweeper/.github/workflows/sweep.yml@refs/heads/main" },
     { repository: "openclaw/openclaw;rm" },
     { repository_id: "0" },
     { run_id: "abc" },
@@ -215,7 +215,7 @@ test("target dispatch intake leaves relay-only fields and foreign identities to 
     { ok: false, status: 400, error: "unsupported_target_dispatch_field" },
   );
   for (const payload of [
-    { ...pullRequestPayload, target_repo: "openclaw/clawsweeper" },
+    { ...pullRequestPayload, target_repo: "bianca-git/clawsweeper" },
     { ...pullRequestPayload, source_event: "issues", item_kind: "issue" },
     { ...pullRequestPayload, item_kind: "issue" },
     // A pull request to another base branch is minted for that branch's ref.
@@ -328,7 +328,7 @@ test("direct target dispatch fails closed before the queue", async () => {
     assert.equal(
       (
         await post(
-          { authorization: `Bearer ${oidcToken({ repository: "openclaw/clawsweeper" })}` },
+          { authorization: `Bearer ${oidcToken({ repository: "bianca-git/clawsweeper" })}` },
           payload,
         )
       ).status,
@@ -337,11 +337,11 @@ test("direct target dispatch fails closed before the queue", async () => {
     const mismatch = await post(
       {
         authorization: `Bearer ${oidcToken({
-          repository: "openclaw/clawsweeper",
+          repository: "bianca-git/clawsweeper",
           workflow_ref:
-            "openclaw/clawsweeper/.github/workflows/clawsweeper-dispatch.yml@refs/heads/main",
+            "bianca-git/clawsweeper/.github/workflows/clawsweeper-dispatch.yml@refs/heads/main",
           job_workflow_ref:
-            "openclaw/clawsweeper/.github/workflows/clawsweeper-dispatch.yml@refs/heads/main",
+            "bianca-git/clawsweeper/.github/workflows/clawsweeper-dispatch.yml@refs/heads/main",
         })}`,
       },
       payload,

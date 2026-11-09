@@ -76,7 +76,7 @@ runs:
       if: ${{ inputs.hydrate-git-state == 'true' && inputs.sparse-checkout == '' }}
       uses: actions/checkout@v7
       with:
-        repository: openclaw/clawsweeper-state
+        repository: bianca-git/clawsweeper-state
         ref: state
         path: ${{ inputs.state-path }}
         token: ${{ inputs.token }}
@@ -95,7 +95,7 @@ runs:
       if: ${{ inputs.hydrate-git-state == 'true' && inputs.sparse-checkout != '' }}
       uses: actions/checkout@v7
       with:
-        repository: openclaw/clawsweeper-state
+        repository: bianca-git/clawsweeper-state
         ref: state
         path: ${{ inputs.state-path }}
         token: ${{ inputs.token }}

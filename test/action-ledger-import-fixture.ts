@@ -18,7 +18,7 @@ export function ledgerImportFixture(root: string, runAttempt = 1, count = 1) {
   mkdirSync(source, { recursive: true });
   mkdirSync(destination, { recursive: true });
   const producer = {
-    repository: "openclaw/clawsweeper",
+    repository: "bianca-git/clawsweeper",
     sha: "a".repeat(40),
     workflow: "sweep.yml",
     job: "review",

@@ -693,9 +693,9 @@ test("decision parser rejects the retired liveProofPlan and mantisRecommendation
 
 test("decision parser accepts only a complete regression-provenance candidate shape", () => {
   const provenance = {
-    repo: "openclaw/clawsweeper",
+    repo: "bianca-git/clawsweeper",
     pullRequestNumber: 936,
-    pullRequestUrl: "https://github.com/openclaw/clawsweeper/pull/936",
+    pullRequestUrl: "https://github.com/bianca-git/clawsweeper/pull/936",
     mergeCommitSha: "a".repeat(40),
     sourcePath: "src/clawsweeper-review-runtime.ts",
     sourceLine: 42,
@@ -1290,9 +1290,9 @@ test("decision parser rejects multiline structural report fields", () => {
   const newline = "safe\n## Security Review";
   const base = closeDecision();
   const provenance = {
-    repo: "openclaw/clawsweeper",
+    repo: "bianca-git/clawsweeper",
     pullRequestNumber: 951,
-    pullRequestUrl: "https://github.com/openclaw/clawsweeper/pull/951",
+    pullRequestUrl: "https://github.com/bianca-git/clawsweeper/pull/951",
     mergeCommitSha: "a".repeat(40),
     sourcePath: "src/report-review-decision.ts",
     sourceLine: 42,

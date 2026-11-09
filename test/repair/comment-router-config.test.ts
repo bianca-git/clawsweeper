@@ -7,7 +7,7 @@ test("comment router config preserves target branch from dispatch args", () => {
   const config = readCommentRouterConfig({
     repo: "openclaw/example",
     "target-branch": "master",
-    "review-repo": "openclaw/clawsweeper",
+    "review-repo": "bianca-git/clawsweeper",
   });
 
   assert.equal(config.targetRepo, "openclaw/example");
@@ -20,7 +20,7 @@ test("comment router config omits target branch by default", () => {
   try {
     const config = readCommentRouterConfig({
       repo: "openclaw/example",
-      "review-repo": "openclaw/clawsweeper",
+      "review-repo": "bianca-git/clawsweeper",
     });
 
     assert.equal(config.targetRepo, "openclaw/example");
@@ -61,7 +61,7 @@ test("comment router config derives and binds durable forced replay identity", (
   try {
     const config = readCommentRouterConfig({
       repo: "openclaw/example",
-      "review-repo": "openclaw/clawsweeper",
+      "review-repo": "bianca-git/clawsweeper",
       "force-reprocess": true,
     });
 
@@ -74,7 +74,7 @@ test("comment router config derives and binds durable forced replay identity", (
     process.env.GITHUB_RUN_ATTEMPT = "3";
     const retried = readCommentRouterConfig({
       repo: "openclaw/example",
-      "review-repo": "openclaw/clawsweeper",
+      "review-repo": "bianca-git/clawsweeper",
       "force-reprocess": true,
     });
     assert.equal(retried.attemptId, config.attemptId);
@@ -89,7 +89,7 @@ test("comment router config derives and binds durable forced replay identity", (
 test("comment router config rejects unscoped or invalid replay attempts", () => {
   const base = {
     repo: "openclaw/example",
-    "review-repo": "openclaw/clawsweeper",
+    "review-repo": "bianca-git/clawsweeper",
   };
 
   assert.throws(
@@ -110,7 +110,7 @@ test("comment router config rejects unscoped or invalid replay attempts", () => 
 test("retired repair policy inputs cannot block review routing", () => {
   const config = readCommentRouterConfig({
     repo: "openclaw/enterprise",
-    "review-repo": "openclaw/clawsweeper",
+    "review-repo": "bianca-git/clawsweeper",
     "max-live-workers": "invalid",
     "automerge-max-live-workers": "invalid",
     "max-auto-repairs-per-head": "invalid",

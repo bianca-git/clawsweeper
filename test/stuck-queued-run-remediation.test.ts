@@ -26,7 +26,7 @@ function queuedRun(id: number, ageMinutes: number, path = ".github/workflows/swe
     status: "queued",
     created_at: new Date(nowMs - ageMinutes * 60_000).toISOString(),
     display_title: `run ${id}`,
-    html_url: `https://github.com/openclaw/clawsweeper/actions/runs/${id}`,
+    html_url: `https://github.com/bianca-git/clawsweeper/actions/runs/${id}`,
   };
 }
 
@@ -274,7 +274,7 @@ test("pre-queue rerun cancellation conflict exits successfully as a structured s
   const server = createServer((request, response) => {
     const url = new URL(request.url || "/", "http://loopback.invalid");
     requests.push(`${request.method} ${url.pathname}`);
-    const base = "/repos/openclaw/clawsweeper";
+    const base = "/repos/bianca-git/clawsweeper";
     if (request.method === "GET" && url.pathname === `${base}/actions/runs`) {
       response.writeHead(200, { "content-type": "application/json" });
       response.end(JSON.stringify({ total_count: 1, workflow_runs: [candidate] }));
@@ -349,7 +349,7 @@ test("aged pending rerun exits successfully as a structured skip before cancella
   const server = createServer((request, response) => {
     const url = new URL(request.url || "/", "http://loopback.invalid");
     requests.push(`${request.method} ${url.pathname}${url.search}`);
-    const base = "/repos/openclaw/clawsweeper";
+    const base = "/repos/bianca-git/clawsweeper";
     if (request.method === "GET" && url.pathname === `${base}/actions/runs`) {
       response.writeHead(200, { "content-type": "application/json" });
       response.end(
@@ -589,7 +589,7 @@ test("mid-remediation throttling stops after completed actions and exits success
   const server = createServer((request, response) => {
     const url = new URL(request.url || "/", "http://loopback.invalid");
     requests.push(`${request.method} ${url.pathname}`);
-    const base = "/repos/openclaw/clawsweeper";
+    const base = "/repos/bianca-git/clawsweeper";
     if (request.method === "GET" && url.pathname === `${base}/actions/runs`) {
       response.writeHead(200, { "content-type": "application/json" });
       response.end(JSON.stringify({ total_count: 2, workflow_runs: [first, second] }));
@@ -645,7 +645,7 @@ test("mid-remediation throttling stops after completed actions and exits success
     assert.deepEqual(summary.skip_samples, [
       { phase: "remediation", request_path: "/actions/runs/101" },
     ]);
-    assert.equal(requests.at(-1), "GET /repos/openclaw/clawsweeper/actions/runs/101");
+    assert.equal(requests.at(-1), "GET /repos/bianca-git/clawsweeper/actions/runs/101");
   } finally {
     server.closeAllConnections();
     await new Promise<void>((resolveClose) => server.close(() => resolveClose()));
@@ -666,7 +666,7 @@ test("slow workflow discovery stops at the shared deadline with dead-letter head
   }));
   const server = createServer((request, response) => {
     const url = new URL(request.url || "/", "http://loopback.invalid");
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs") {
       response.writeHead(200, { "content-type": "application/json" });
       response.end(JSON.stringify({ total_count: runs.length, workflow_runs: runs }));
       return;
@@ -743,7 +743,7 @@ async function runProduction({
   const args = [
     "scripts/stuck-queued-run-remediation.mjs",
     "--repository",
-    "openclaw/clawsweeper",
+    "bianca-git/clawsweeper",
     "--output",
     output,
     "--zombie-output",

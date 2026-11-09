@@ -51,13 +51,13 @@ pattern = "clawsweeper.openclaw.ai"
 custom_domain = true
 
 [vars]
-CLAWSWEEPER_REPO = "openclaw/clawsweeper"
+CLAWSWEEPER_REPO = "bianca-git/clawsweeper"
 CLAWSWEEPER_APP_CLIENT_ID = "Iv23liOECG0slfuhz093"
 CLAWSWEEPER_CRABFLEET_URL = "https://crabfleet.openclaw.ai"
-TARGET_REPOS = "openclaw/openclaw,openclaw/clawhub,openclaw/clawsweeper,openclaw/fs-safe"
+TARGET_REPOS = "openclaw/openclaw,openclaw/clawhub,bianca-git/clawsweeper,openclaw/fs-safe"
 # Explicit public-only allowlist for canonical repository + issue/PR references
 # rendered in Overview. Repositories must be verified public before addition.
-PUBLIC_BAY_REPOS = "openclaw/openclaw,openclaw/clawhub,openclaw/clawsweeper,openclaw/fs-safe"
+PUBLIC_BAY_REPOS = "openclaw/openclaw,openclaw/clawhub,bianca-git/clawsweeper,openclaw/fs-safe"
 APPLY_TARGET_REPOS = "openclaw/openclaw"
 APPLY_OPTIONAL_TARGET_REPOS = "openclaw/clawhub"
 CLAWSWEEPER_ENABLE_CLAWHUB = "1"
@@ -130,7 +130,7 @@ EXACT_REVIEW_TARGET_BURST = "24"
 EXACT_REVIEW_HOT_INTAKE_RATE_PER_HOUR = "30"
 EXACT_REVIEW_PUBLICATION_BATCHING_ENABLED = "1"
 EXACT_REVIEW_DIRECT_PUBLICATION_ENABLED = "1"
-EXACT_REVIEW_STATE_REPO = "openclaw/clawsweeper-state"
+EXACT_REVIEW_STATE_REPO = "bianca-git/clawsweeper-state"
 EXACT_REVIEW_STATE_REF = "state"
 EXACT_REVIEW_PUBLICATION_BATCH_SIZE = "8"
 EXACT_REVIEW_PUBLICATION_BATCH_MAX_CONCURRENT = "8"

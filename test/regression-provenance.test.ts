@@ -63,9 +63,9 @@ function historyFixture() {
 type Fixture = ReturnType<typeof historyFixture>;
 function candidate(sha: string, overrides = {}) {
   return {
-    repo: "openclaw/clawsweeper",
+    repo: "bianca-git/clawsweeper",
     pullRequestNumber: 936,
-    pullRequestUrl: "https://github.com/openclaw/clawsweeper/pull/936",
+    pullRequestUrl: "https://github.com/bianca-git/clawsweeper/pull/936",
     mergeCommitSha: sha,
     sourcePath: "target.ts",
     sourceLine: 1,
@@ -75,7 +75,7 @@ function candidate(sha: string, overrides = {}) {
 function mergedPull(sha: string, overrides = {}) {
   return {
     number: 936,
-    html_url: "https://github.com/openclaw/clawsweeper/pull/936",
+    html_url: "https://github.com/bianca-git/clawsweeper/pull/936",
     merged: true,
     merged_at: "2026-07-31T12:00:00Z",
     merge_commit_sha: sha,
@@ -89,7 +89,7 @@ function mergedPull(sha: string, overrides = {}) {
 function options(f: Fixture, sha = f.introduced, checkoutDir = f.source) {
   return {
     candidate: candidate(sha),
-    item: { repo: "openclaw/clawsweeper", number: 946 },
+    item: { repo: "bianca-git/clawsweeper", number: 946 },
     checkoutDir,
     targetBranch: "main",
     reviewedCommitShas: [f.tip],
@@ -577,7 +577,7 @@ test("rewrite equivalence retains only exact location-and-context-preserving pat
 });
 
 test("legacy public reports cannot publish unverified owner prose", () => {
-  const report = `${reportFrontMatter({ number: 946, repository: "openclaw/clawsweeper" })}\n## Likely Related People\n\n- **Mobile Author:** introduced the target structure\n  - reason: Blame proves feature introduction.\n  - confidence: high\n  - commits: ${"a".repeat(40)}\n  - files: target.ts\n`;
+  const report = `${reportFrontMatter({ number: 946, repository: "bianca-git/clawsweeper" })}\n## Likely Related People\n\n- **Mobile Author:** introduced the target structure\n  - reason: Blame proves feature introduction.\n  - confidence: high\n  - commits: ${"a".repeat(40)}\n  - files: target.ts\n`;
   for (const reason of ["none", "duplicate_or_superseded"]) {
     assert.throws(() => renderReviewCommentFromReport(report, reason), ReviewRecordFormatError);
     const comment = renderReviewCommentFromReport(
@@ -741,7 +741,7 @@ process.stdout.write(fs.readFileSync(process.env.FIXTURE_DECISION, 'utf8') + '\\
           "--base",
           f.unrelated,
           "--target-repo",
-          "openclaw/clawsweeper",
+          "bianca-git/clawsweeper",
           "--target-dir",
           checkout,
           "--artifact-dir",

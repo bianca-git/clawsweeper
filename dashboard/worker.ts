@@ -390,8 +390,8 @@ const HEALTH_HISTORY_KEY_PREFIX = "health-history:";
 const APPLY_OBSERVABILITY_KEY_PREFIX = "apply-observability:";
 const APPLY_OBSERVABILITY_BUCKET_KEY_PREFIX = `${APPLY_OBSERVABILITY_KEY_PREFIX}day:`;
 const APPLY_OBSERVABILITY_LEGACY_LIMIT = 5_000;
-const CLAWSWEEPER_REVIEW_REPO = "openclaw/clawsweeper";
-const CLAWSWEEPER_STATE_REPO = "openclaw/clawsweeper-state";
+const CLAWSWEEPER_REVIEW_REPO = "bianca-git/clawsweeper";
+const CLAWSWEEPER_STATE_REPO = "bianca-git/clawsweeper-state";
 const CLAWSWEEPER_STATE_REF = "state";
 const CLAWSWEEPER_ALLOWED_ASSOCIATIONS = new Set(["OWNER", "MEMBER", "COLLABORATOR"]);
 const CLAWSWEEPER_ISSUE_ITEM_ACTIONS = new Set([
@@ -454,7 +454,7 @@ class FastAckLookupLimitError extends Error {
   }
 }
 const inFlightFastAcks = new Map();
-const CLAWSWEEPER_WEBHOOK_DENY_REPOS = new Set(["openclaw/clawsweeper-state", "openclaw/.github"]);
+const CLAWSWEEPER_WEBHOOK_DENY_REPOS = new Set(["bianca-git/clawsweeper-state", "openclaw/.github"]);
 const OPTIONAL_SECTION_TIMEOUT_MS = 6000;
 // Record the failing owner before projection; upstream messages can contain
 // private routes and must never enter the public status cache.
@@ -2847,7 +2847,7 @@ export function composePublicBayActivityForTest(projection, activeTargets) {
   return composePublicBayActivity(
     projection,
     activeTargets,
-    new Set(["openclaw/openclaw", "openclaw/clawsweeper"]),
+    new Set(["openclaw/openclaw", "bianca-git/clawsweeper"]),
   );
 }
 
@@ -3145,7 +3145,7 @@ export function publicBayActiveTargetsForTest(workers) {
   return publicBayActiveTargets(
     workers,
     true,
-    new Set(["openclaw/openclaw", "openclaw/clawsweeper"]),
+    new Set(["openclaw/openclaw", "bianca-git/clawsweeper"]),
   );
 }
 
@@ -3429,7 +3429,7 @@ export function publicStatusFreshness(
 function refreshStatus(request, env, ctx?: DashboardContext, deadline?: number) {
   const key = [
     new URL(request.url).origin,
-    env.CLAWSWEEPER_REPO || "openclaw/clawsweeper",
+    env.CLAWSWEEPER_REPO || "bianca-git/clawsweeper",
     env.TARGET_REPOS || "openclaw/openclaw",
     env.PUBLIC_BAY_REPOS || "",
     env.CLAWSWEEPER_STATE_REPO || CLAWSWEEPER_STATE_REPO,
@@ -6841,7 +6841,7 @@ async function statusSnapshot(env) {
   const github = createGithubJsonCache(env);
   const generatedAt = new Date().toISOString();
   const errors = [];
-  const repo = env.CLAWSWEEPER_REPO || "openclaw/clawsweeper";
+  const repo = env.CLAWSWEEPER_REPO || "bianca-git/clawsweeper";
   const targetRepos = String(env.TARGET_REPOS || "openclaw/openclaw")
     .split(",")
     .map((value) => value.trim())

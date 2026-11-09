@@ -592,7 +592,7 @@ function applyObservation(options: {
     started_at: options.occurredAt,
     lifecycle_started: true,
     outcome: options.outcome ?? "success",
-    run_url: `https://github.com/openclaw/clawsweeper/actions/runs/${options.runId}`,
+    run_url: `https://github.com/bianca-git/clawsweeper/actions/runs/${options.runId}`,
     queue: {
       active: 0,
       capacity: 1,
@@ -676,7 +676,7 @@ function completedReviewRun(id: number, itemNumber: number, conclusion: string, 
     display_title: `Review event item openclaw/openclaw#${itemNumber}`,
     status: "completed",
     conclusion,
-    html_url: `https://github.com/openclaw/clawsweeper/actions/runs/${id}`,
+    html_url: `https://github.com/bianca-git/clawsweeper/actions/runs/${id}`,
     created_at: new Date(now - ageMs).toISOString(),
     updated_at: new Date(now - Math.max(0, ageMs - 10_000)).toISOString(),
   };
@@ -691,7 +691,7 @@ async function activePrFetch(input: RequestInfo | URL) {
   if (/^\/repos\/openclaw\/clawsweeper\/actions\/runs\/\d+\/attempts\/1\/jobs$/.test(pathname)) {
     return jsonResponse({ total_count: 0, jobs: [] });
   }
-  if (pathname === "/repos/openclaw/clawsweeper/actions/runs") {
+  if (pathname === "/repos/bianca-git/clawsweeper/actions/runs") {
     return jsonResponse({
       workflow_runs: [
         {
@@ -701,7 +701,7 @@ async function activePrFetch(input: RequestInfo | URL) {
           display_title: "Review event item openclaw/openclaw#80609",
           status: "in_progress",
           conclusion: null,
-          html_url: "https://github.com/openclaw/clawsweeper/actions/runs/1",
+          html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/1",
           created_at: new Date(Date.now() - 60_000).toISOString(),
           updated_at: new Date().toISOString(),
         },
@@ -859,7 +859,7 @@ function createExactReviewAdmissionHarness(
   });
   globalThis.fetch = async (input, init) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/workflows/sweep.yml") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/workflows/sweep.yml") {
       return options.workflow?.() ?? jsonResponse({ state: "active" });
     }
     const installation = url.pathname.match(/^\/repos\/([^/]+\/[^/]+)\/installation$/);
@@ -943,12 +943,12 @@ function createExactReviewAdmissionHarness(
     if (
       options.captureBatchDispatch &&
       url.pathname ===
-        "/repos/openclaw/clawsweeper/actions/workflows/exact-review-batch-publish.yml/dispatches"
+        "/repos/bianca-git/clawsweeper/actions/workflows/exact-review-batch-publish.yml/dispatches"
     ) {
       batchDispatches += 1;
       return options.batchDispatch?.() ?? new Response(null, { status: 204 });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/dispatches") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/dispatches") {
       dispatched.push(JSON.parse(String(init?.body)));
       return options.dispatch?.() ?? new Response(null, { status: 204 });
     }

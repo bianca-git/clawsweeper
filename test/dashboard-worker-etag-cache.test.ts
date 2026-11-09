@@ -68,10 +68,10 @@ test("cache shard comes from the validated canonical route with a fixed fallback
   assert.equal(
     githubEtagCacheShard({
       ...key,
-      route: "/api/v3/repos/openclaw/clawsweeper/actions/runs?page=2",
+      route: "/api/v3/repos/bianca-git/clawsweeper/actions/runs?page=2",
       surface: "dashboard",
     }),
-    "openclaw/clawsweeper",
+    "bianca-git/clawsweeper",
   );
   for (const value of [null, {}, { ...key, route: "/user" }, { ...key, cache_key: "forged" }]) {
     assert.equal(githubEtagCacheShard(value), GITHUB_ETAG_CACHE_FALLBACK_SHARD);
@@ -80,7 +80,7 @@ test("cache shard comes from the validated canonical route with a fixed fallback
 
 test("authenticated cache traffic bypasses the queue, isolates repos and preserves traces and stats", async () => {
   const { env, shards, calls } = harness();
-  const other = { ...key, route: "/repos/openclaw/clawsweeper/issues/7" };
+  const other = { ...key, route: "/repos/bianca-git/clawsweeper/issues/7" };
   assert.equal((await worker.fetch(signed("store", key, "operator-placeholder"), env)).status, 401);
   assert.equal(calls.length, 0);
   assert.deepEqual(await (await worker.fetch(signed("lookup", key), env)).json(), {
@@ -104,7 +104,7 @@ test("authenticated cache traffic bypasses the queue, isolates repos and preserv
   );
   assert.equal(confirmed.status, 200);
   assert.equal((await confirmed.json()).body, '{"number":7}');
-  assert.deepEqual([...shards.keys()], ["openclaw/openclaw", "openclaw/clawsweeper"]);
+  assert.deepEqual([...shards.keys()], ["openclaw/openclaw", "bianca-git/clawsweeper"]);
   assert.ok(calls.every((call) => exactReviewQueueTraceId(call.trace)));
   assert.equal(new Set(calls.map((call) => call.trace)).size, calls.length);
   assert.deepEqual(

@@ -85,7 +85,7 @@ test("exact review queue fence allows the owner and rejects supersession", async
   };
   const env = {
     QUEUE_URL: "https://clawsweeper.example",
-    EXACT_REVIEW_ITEM_KEY: "openclaw/clawsweeper#1675",
+    EXACT_REVIEW_ITEM_KEY: "bianca-git/clawsweeper#1675",
     EXACT_REVIEW_LEASE_ID: "lease-1",
     EXACT_REVIEW_LEASE_REVISION: "8",
     EXACT_REVIEW_CLAIM_GENERATION: "2",
@@ -144,7 +144,7 @@ test("terminal receipt verification accepts only the selected trusted final stat
       "Re-review progress:",
       "- State: Complete",
       "- Detail: Durable review routing completed.",
-      "- Run: https://github.com/openclaw/clawsweeper/actions/runs/older-run",
+      "- Run: https://github.com/bianca-git/clawsweeper/actions/runs/older-run",
       "- Updated: 2026-08-01T00:00:00.000Z",
       "<!-- clawsweeper-command-progress:end -->",
     ].join("\n"),
@@ -845,7 +845,7 @@ test("command status updates record the write attempt and its outcome", () => {
         CLAWSWEEPER_ACTION_LEDGER_ROOT: root,
         CLAWSWEEPER_ACTION_LEDGER_OUTPUT_ROOT: outputRoot,
         CLAWSWEEPER_ACTION_LEDGER_INVOCATION: invocation,
-        GITHUB_REPOSITORY: "openclaw/clawsweeper",
+        GITHUB_REPOSITORY: "bianca-git/clawsweeper",
         GITHUB_SHA: "a".repeat(40),
         GITHUB_WORKFLOW: "repair comment router",
         GITHUB_WORKFLOW_REF: "",
@@ -1405,7 +1405,7 @@ async function runQueueOwnedCommandStatus(
         "--detail",
         "The exact-review queue leased this run; Codex is reviewing the item.",
         "--run-url",
-        "https://github.com/openclaw/clawsweeper/actions/runs/36365358286",
+        "https://github.com/bianca-git/clawsweeper/actions/runs/36365358286",
         "--refuse-terminal-state",
         "--require-queue-authority-fence",
       ],
@@ -1461,7 +1461,7 @@ test("mergeCommandProgressSection replaces existing progress blocks in place", (
     {
       state: "Complete",
       detail: "Updated detail",
-      runUrl: "https://github.com/openclaw/clawsweeper/actions/runs/25957571980",
+      runUrl: "https://github.com/bianca-git/clawsweeper/actions/runs/25957571980",
     },
   );
 
@@ -1486,7 +1486,7 @@ test("terminal command progress releases its command-owned review lease", () => 
     {
       state: "Complete",
       detail: "Published",
-      runUrl: "https://github.com/openclaw/clawsweeper/actions/runs/1",
+      runUrl: "https://github.com/bianca-git/clawsweeper/actions/runs/1",
       verifyTerminalStatusReceipt: true,
     },
   );
@@ -1506,7 +1506,7 @@ test("terminal command progress releases its command-owned review lease", () => 
     {
       state: "Complete",
       detail: "Published",
-      runUrl: "https://github.com/openclaw/clawsweeper/actions/runs/1",
+      runUrl: "https://github.com/bianca-git/clawsweeper/actions/runs/1",
       verifyTerminalStatusReceipt: true,
     },
   );
@@ -1518,7 +1518,7 @@ test("queue-owned command progress exposes one hidden lease and failure removes 
   const active = mergeCommandProgressSection("Exact review queued.", {
     state: "Review in progress",
     detail: "Reviewing.",
-    runUrl: "https://github.com/openclaw/clawsweeper/actions/runs/1",
+    runUrl: "https://github.com/bianca-git/clawsweeper/actions/runs/1",
     queueLease: {
       itemNumber: 42,
       headSha: "a".repeat(40),
@@ -1532,7 +1532,7 @@ test("queue-owned command progress exposes one hidden lease and failure removes 
   const failed = mergeCommandProgressSection(active, {
     state: "Failed",
     detail: "Retry later.",
-    runUrl: "https://github.com/openclaw/clawsweeper/actions/runs/1",
+    runUrl: "https://github.com/bianca-git/clawsweeper/actions/runs/1",
   });
   assert.doesNotMatch(failed, /clawsweeper-(?:review-status:started|command-review-lease)/);
   assert.match(failed, /- State: Failed/);
@@ -1541,7 +1541,7 @@ test("queue-owned command progress exposes one hidden lease and failure removes 
   const refreshed = mergeCommandProgressSection(foreign, {
     state: "Review in progress",
     detail: "Reviewing again.",
-    runUrl: "https://github.com/openclaw/clawsweeper/actions/runs/2",
+    runUrl: "https://github.com/bianca-git/clawsweeper/actions/runs/2",
     queueLease: {
       itemNumber: 42,
       headSha: "a".repeat(40),

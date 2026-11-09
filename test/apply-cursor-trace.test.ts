@@ -308,7 +308,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/(10|20)\\/timeline(?:\
   console.log(JSON.stringify([[
     {
       id: 9000 + number,
-      html_url: "https://github.com/openclaw/clawsweeper/issues/" + number + "#issuecomment-" + (9000 + number),
+      html_url: "https://github.com/bianca-git/clawsweeper/issues/" + number + "#issuecomment-" + (9000 + number),
       body: comments[number],
       user: { login: "github-actions[bot]" },
       created_at: "2026-05-01T01:00:00Z",
@@ -320,7 +320,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/(10|20)\\/timeline(?:\
   console.log(JSON.stringify({
     number,
     title: "Close limit trace " + number,
-    html_url: "https://github.com/openclaw/clawsweeper/issues/" + number,
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/" + number,
     created_at: "2026-05-01T00:00:00Z",
     updated_at: "2026-05-01T00:00:00Z",
     closed_at: null,

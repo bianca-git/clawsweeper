@@ -156,7 +156,7 @@ function status(updatedAt, state, applyHealth, lastCloseApplyHealth) {
     target_repo: "openclaw/openclaw",
     state,
     detail: `${state} detail`,
-    run_url: "https://github.com/openclaw/clawsweeper/actions/runs/1",
+    run_url: "https://github.com/bianca-git/clawsweeper/actions/runs/1",
     apply_health: applyHealth,
     last_close_apply_health: lastCloseApplyHealth,
     updated_at: updatedAt,

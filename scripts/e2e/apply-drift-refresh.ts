@@ -94,7 +94,7 @@ if (tool === 'curl') {
 assert.equal(tool, 'gh'); assert.equal(args[0], 'api');
 const endpoint = args.find(arg => arg.startsWith('repos/'));
 if (args.includes('POST')) {
-  assert.equal(endpoint, 'repos/openclaw/clawsweeper/dispatches');
+  assert.equal(endpoint, 'repos/bianca-git/clawsweeper/dispatches');
   assert.ok(args.includes('--input'));
   if (process.env.FAIL_DISPATCH === 'true') { process.stderr.write('controlled dispatch HTTP 500\\n'); process.exit(1); }
   fs.appendFileSync(process.env.DISPATCHES, JSON.stringify(JSON.parse(fs.readFileSync(0,'utf8')))+'\\n'); process.exit(0);
@@ -123,7 +123,7 @@ process.stdout.write(args.includes('--jq') ? (pr ? 'pull_request' : 'issue') : J
     WORKFLOW_UTILS: path.join(sourceRoot, "dist/repair/workflow-utils.js"),
     APPLY_TARGET_REPO: "openclaw/openclaw",
     APPLY_AUTO_SELECTED_BATCH: "true",
-    DISPATCH_REPOSITORY: "openclaw/clawsweeper",
+    DISPATCH_REPOSITORY: "bianca-git/clawsweeper",
     // Actions run ids are numeric; the intake command checks this.
     GITHUB_RUN_ID: "424242",
     GITHUB_RUN_ATTEMPT: "1",

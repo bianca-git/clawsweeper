@@ -1790,7 +1790,7 @@ function activeItemQueueHarness(env: Record<string, string> = {}) {
   });
   globalThis.fetch = async (input, init) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/workflows/sweep.yml") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/workflows/sweep.yml") {
       return jsonResponse({ state: "active" });
     }
     if (/^\/repos\/openclaw\/(?:clawsweeper|openclaw)\/installation$/.test(url.pathname)) {
@@ -1815,7 +1815,7 @@ function activeItemQueueHarness(env: Record<string, string> = {}) {
         updated_at: new Date(Date.now()).toISOString(),
       });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/dispatches") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/dispatches") {
       dispatched.push(JSON.parse(String(init?.body)));
       return new Response(null, { status: 204 });
     }
@@ -2488,7 +2488,7 @@ test("direct lifecycle recovery bypasses publication batching", async () => {
   });
   globalThis.fetch = async (input, init) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/workflows/sweep.yml") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/workflows/sweep.yml") {
       return jsonResponse({ state: "active" });
     }
     if (/^\/repos\/openclaw\/(?:clawsweeper|openclaw|gogcli)\/installation$/.test(url.pathname)) {
@@ -2497,7 +2497,7 @@ test("direct lifecycle recovery bypasses publication batching", async () => {
     if (url.pathname === "/app/installations/999/access_tokens") {
       return jsonResponse({ token: "t" });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/dispatches") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/dispatches") {
       dispatched.push(JSON.parse(String(init?.body)));
       return new Response(null, { status: 204 });
     }

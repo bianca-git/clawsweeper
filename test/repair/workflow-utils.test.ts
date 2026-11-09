@@ -3014,7 +3014,7 @@ test("invalid decisions never enqueue close reasons forbidden by their target re
   for (const { targetRepo, expected } of [
     { targetRepo: "openclaw/openclaw", expected: "1,2,3" },
     { targetRepo: "openclaw/clawhub", expected: "2,3" },
-    { targetRepo: "openclaw/clawsweeper", expected: "2,3" },
+    { targetRepo: "bianca-git/clawsweeper", expected: "2,3" },
     { targetRepo: "steipete/tool.v2_debug", expected: "3" },
   ]) {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), "clawsweeper-workflow-"));

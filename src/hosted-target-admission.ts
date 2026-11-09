@@ -4,7 +4,7 @@ const HOSTED_TARGET_RETRY_MAX_MS = 2 * 60 * 60 * 1000;
 const HOSTED_TARGET_REGISTRY_TIMEOUT_MS = 5_000;
 const HOSTED_TARGET_FALLBACK_OWNERS = new Set(["openclaw", "steipete"]);
 const DEFAULT_HOSTED_TARGET_REGISTRY_URL =
-  "https://raw.githubusercontent.com/openclaw/clawsweeper/main/config/target-repositories.json";
+  "https://raw.githubusercontent.com/bianca-git/clawsweeper/main/config/target-repositories.json";
 export const HOSTED_TARGET_ELIGIBILITY_HEADER = "x-clawsweeper-hosted-target-eligible";
 
 export type GitHubRateLimitHint = {

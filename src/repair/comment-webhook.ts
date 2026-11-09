@@ -39,7 +39,7 @@ import { requiresMaintainerReviewRequest } from "../maintainer-review-policy.js"
 const DEFAULT_PORT = 8787;
 export const WEBHOOK_MAX_BODY_BYTES = 2 * 1024 * 1024;
 const GITHUB_FETCH_TIMEOUT_MS = 15_000;
-const REVIEW_REPO = "openclaw/clawsweeper";
+const REVIEW_REPO = "bianca-git/clawsweeper";
 const COMMAND_PATTERN =
   /(^|[ \t\r\n])@(?:clawsweeper|openclaw-clawsweeper)\b(?:\[bot\])?|(^|[ \t\r\n])\/(?:clawsweeper|review|re-review|rerun[ -]?review|status|explain|fix|build|implement|create[ -]?pr|fix[ -]?issue|autofix|auto[ -]?fix|automerge|auto[ -]?merge|approve|stop|autoclose)\b/i;
 const ALLOWED_ASSOCIATIONS = new Set(["OWNER", "MEMBER", "COLLABORATOR"]);

@@ -121,7 +121,7 @@ export function observeReviewFailures(status: unknown): ReviewFailureObservation
 }
 
 const LIMITS_GUIDE_URL =
-  "https://github.com/openclaw/clawsweeper/blob/main/docs/github-api-limits.md";
+  "https://github.com/bianca-git/clawsweeper/blob/main/docs/github-api-limits.md";
 
 /**
  * Observe every source and evaluate. A failed observation becomes a finding

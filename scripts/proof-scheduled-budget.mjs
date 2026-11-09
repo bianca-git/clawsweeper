@@ -288,7 +288,7 @@ const server = http.createServer(async (request, response) => {
     const itemNumber = Number(url.pathname.split("/").pop());
     body = { state: closedItems.has(itemNumber) ? "closed" : "open" };
   } else if (
-    url.pathname === "/repos/openclaw/clawsweeper/dispatches" &&
+    url.pathname === "/repos/bianca-git/clawsweeper/dispatches" &&
     request.method === "POST"
   ) {
     let text = "";

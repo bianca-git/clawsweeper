@@ -150,7 +150,7 @@ export async function runTargetFanout(argv: string[]): Promise<void> {
       args["cursor-store-url"],
       process.env.CLAWSWEEPER_CURSOR_STORE_URL ?? stringArg(args["publish-url"], ""),
     ),
-    dispatchRepo: stringArg(args.repo, process.env.GITHUB_REPOSITORY ?? "openclaw/clawsweeper"),
+    dispatchRepo: stringArg(args.repo, process.env.GITHUB_REPOSITORY ?? "bianca-git/clawsweeper"),
     workflow: stringArg(args.workflow, "audit.yml"),
     ref: stringArg(args.ref, "main"),
     dryRun: Boolean(args["dry-run"]),

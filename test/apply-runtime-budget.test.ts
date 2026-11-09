@@ -227,7 +227,7 @@ test("apply-decisions bounds a hung GitHub command and writes a resumable runtim
           "dist/clawsweeper.js",
           "apply-decisions",
           "--target-repo",
-          "openclaw/clawsweeper",
+          "bianca-git/clawsweeper",
           "--items-dir",
           fixture.itemsDir,
           "--closed-dir",
@@ -365,7 +365,7 @@ for (const { name, number, response } of [
       assert.equal(readFileSync(sleepTracePath, "utf8"), '{"event":"armed"}\n');
       assert.equal(
         readFileSync(invocationLog, "utf8"),
-        `${JSON.stringify(["api", `repos/openclaw/clawsweeper/issues/${number}`])}\n`,
+        `${JSON.stringify(["api", `repos/bianca-git/clawsweeper/issues/${number}`])}\n`,
         "apply must attempt the item fetch exactly once, without retrying",
       );
       assertRuntimeYield(fixture, maxRuntimeMs);
@@ -473,7 +473,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/724\\/timeline(?:\\?|$
   console.log(JSON.stringify({
     number: 724,
     title: "Bound one-shot search",
-    html_url: "https://github.com/openclaw/clawsweeper/issues/724",
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/724",
     created_at: "2026-05-01T00:00:00Z",
     updated_at: "2026-05-01T00:00:00Z",
     closed_at: null,

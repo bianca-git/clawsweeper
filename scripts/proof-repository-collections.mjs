@@ -36,7 +36,7 @@ const records = join(out, "records");
 const fixtureHashes = [];
 for (const [repo, count] of [
   ["openclaw/openclaw", 600],
-  ["openclaw/clawsweeper", 10],
+  ["bianca-git/clawsweeper", 10],
   ["openclaw/clawhub", 1],
   ["fixture-private/not-published", 1],
   ["fixture-withdrawn/not-published", 1],
@@ -65,7 +65,7 @@ for (const [repo, count] of [
         `repository: ${repo}`,
         `number: ${number}`,
         "type: issue",
-        `title: ${JSON.stringify(`${area === "items" ? "Review" : "Archived"} stored-corpus fixture ${n}${repo === "openclaw/clawsweeper" && n === 1 ? " — preserve the entire long repository item title alongside identity, historical assessment metadata and last-review freshness on a narrow screen without clipping" : ""}`)}`,
+        `title: ${JSON.stringify(`${area === "items" ? "Review" : "Archived"} stored-corpus fixture ${n}${repo === "bianca-git/clawsweeper" && n === 1 ? " — preserve the entire long repository item title alongside identity, historical assessment metadata and last-review freshness on a narrow screen without clipping" : ""}`)}`,
         `reviewed_at: ${reviewed}T00:00:00Z`,
         ...(area === "closed"
           ? [
@@ -158,7 +158,7 @@ try {
       for (const part of cache.repositories) delete part.collectionTotals;
     }
     if (stage === "incomplete" || stage === "contradictory") {
-      const part = cache.repositories.find((part) => part.stats.repo === "openclaw/clawsweeper");
+      const part = cache.repositories.find((part) => part.stats.repo === "bianca-git/clawsweeper");
       part.lists = { stale: [], maintainer: [], security: [] };
       part.closes.recent = [];
       if (stage === "contradictory") part.collectionTotals.stale = 0;
@@ -410,7 +410,7 @@ try {
           assert.match(await warning.innerText(), /Showing 1 of 1 records/);
           assert.equal(
             await warning.locator("a").getAttribute("href"),
-            "https://github.com/openclaw/clawsweeper/issues/1",
+            "https://github.com/bianca-git/clawsweeper/issues/1",
           );
           await page.goto(`${origin}/agent/`);
           assert.match(

@@ -428,7 +428,7 @@ export function runHydrationProof({
             reviewPath: ${JSON.stringify(root)} + "/reports/" + index + ".md",
             createdAt: ${JSON.stringify(newerTimestamp)},
             context: {
-              repository: "openclaw/clawsweeper", sourceSha: p.sourceSha,
+              repository: "bianca-git/clawsweeper", sourceSha: p.sourceSha,
               runId: String(p.producerRunId), runAttempt: 1, producerJob: "event-review-apply",
               decisionSha256: exactReviewDecisionSha256(JSON.stringify(p.producerDecision)),
               targetRepo: item.decision.targetRepo, targetBranch: "main",
@@ -468,7 +468,7 @@ export function runHydrationProof({
         CLAWSWEEPER_WEBHOOK_SECRET: "synthetic-hydration-secret",
         ...(mode === "read-timeout" ? { EXACT_REVIEW_BATCH_ITEM_TIMEOUT_MS: "2000" } : {}),
         GITHUB_WORKSPACE: workspace,
-        GITHUB_REPOSITORY: "openclaw/clawsweeper",
+        GITHUB_REPOSITORY: "bianca-git/clawsweeper",
         REPO_TOKEN: "synthetic-fixture-token",
         // Artifact downloads must replace the ambient target token with REPO_TOKEN.
         GH_TOKEN: "ambient-target-token",

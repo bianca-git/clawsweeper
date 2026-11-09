@@ -37,7 +37,7 @@ function fixture(t: { after: (fn: () => void) => void }) {
     assert.equal(result.status, 0, result.stderr);
     return result.stdout.trim();
   }
-  const name = "@openclaw/clawsweeper";
+  const name = "@bianca-git/clawsweeper";
   writeFileSync(
     join(source, "package.json"),
     JSON.stringify({ name, version: "0.3.1", private: true }),
@@ -230,7 +230,7 @@ test("release envelope rejects unqualified lock entries even with matching file 
       const f = fixture(t);
       const lock = JSON.parse(readFileSync(join(f.input, "package-lock.json"), "utf8"));
       if (kind === "local integrity")
-        lock.packages["node_modules/@openclaw/clawsweeper"].integrity = "sha512-AAAA";
+        lock.packages["node_modules/@bianca-git/clawsweeper"].integrity = "sha512-AAAA";
       else {
         const entry = {
           version: "1.0.0",

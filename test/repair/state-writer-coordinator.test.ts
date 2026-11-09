@@ -24,7 +24,7 @@ const enabledEnv = {
   CLAWSWEEPER_STATE_COORDINATOR_ENABLED: "1",
   CLAWSWEEPER_STATE_COORDINATOR_URL: "https://coordinator.example.test",
   ["CLAWSWEEPER_STATE_COORDINATOR_SECRET"]: COORDINATOR_HMAC_FIXTURE,
-  GITHUB_REPOSITORY: "openclaw/clawsweeper",
+  GITHUB_REPOSITORY: "bianca-git/clawsweeper",
   GITHUB_WORKFLOW: "Exact review batch publish",
   GITHUB_JOB: "publish",
   GITHUB_RUN_ID: "12345",
@@ -119,7 +119,7 @@ test("queued polling preserves one durable identity through heartbeat and releas
     ]),
     {
       branch: "state",
-      repository: "openclaw/clawsweeper",
+      repository: "bianca-git/clawsweeper",
       workflow: "Exact review batch publish",
       job: "publish",
       run_id: "12345",

@@ -88,7 +88,7 @@ test("public target reads preserve GitHub App mutations and every explicit crede
     for (const args of [
       ["api", "user"],
       ["api", "repos/openclaw/openclaw/collaborators/person/permission"],
-      ["api", "repos/openclaw/clawsweeper/issues/123"],
+      ["api", "repos/bianca-git/clawsweeper/issues/123"],
       ["api", "repos/private/secret/issues/123"],
       ["api", "https://api.github.com/repos/openclaw/openclaw/issues/123"],
       ["api", "repos/openclaw/openclaw/issues/../../clawsweeper/issues/123"],

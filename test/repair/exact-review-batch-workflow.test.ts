@@ -66,7 +66,7 @@ function resolveEventPayload(decision: Record<string, unknown>, configuredTimeou
         }),
         CONFIGURED_CODEX_TIMEOUT_MS: String(configuredTimeoutMs),
         GITHUB_OUTPUT: output,
-        GITHUB_REPOSITORY: "openclaw/clawsweeper",
+        GITHUB_REPOSITORY: "bianca-git/clawsweeper",
       },
     });
     return readFileSync(output, "utf8");
@@ -407,7 +407,7 @@ githubTest("sweep runtime routes only public target REST reads onto the public t
       ["api", "user"],
       ["api", "repos/openclaw/openclaw/collaborators/person/permission"],
       ["api", "repos/openclaw/private/issues/123"],
-      ["api", "repos/openclaw/clawsweeper/issues/123"],
+      ["api", "repos/bianca-git/clawsweeper/issues/123"],
       ["api", "repos/openclaw/openclaw/issues/../../clawsweeper/issues/123"],
       ["api", "repos/openclaw/openclaw/issues/%2e%2e/clawsweeper"],
       ["api", "repos/openclaw/openclaw/issues/123", "--method", "PATCH"],

@@ -242,9 +242,9 @@ for (const body of [
   "```yaml\n~~~\n```not-a-closer\n---\ntitle: Quoted title\n---\n```\n",
 ]) {
   test(`header-owned metadata survives body quotes: ${JSON.stringify(body)}`, () => {
-    const report = `---\ntitle: "Original"\nrepository: openclaw/clawsweeper\n---\n\n## Summary\n\n${body}`;
+    const report = `---\ntitle: "Original"\nrepository: bianca-git/clawsweeper\n---\n\n## Summary\n\n${body}`;
     assert.equal(frontMatterValue(report, "title"), "Original");
-    assert.equal(frontMatterValue(report, "repository"), "openclaw/clawsweeper");
+    assert.equal(frontMatterValue(report, "repository"), "bianca-git/clawsweeper");
   });
 }
 
@@ -276,9 +276,9 @@ test("missing body lookalikes remain ambiguous while genuinely absent fields per
 
 test("raw empty fields never consume the next line and paired quotes retain their existing decoding", () => {
   for (const value of ["", " ", "\t", ' ""']) {
-    const report = `---\ntitle:${value}\nrepository: openclaw/clawsweeper\n---\n`;
+    const report = `---\ntitle:${value}\nrepository: bianca-git/clawsweeper\n---\n`;
     assert.deepEqual(frontMatterField(report, "title"), { status: "ambiguous" });
-    assert.equal(frontMatterValue(report, "repository"), "openclaw/clawsweeper");
+    assert.equal(frontMatterValue(report, "repository"), "bianca-git/clawsweeper");
   }
   for (const [raw, value] of [
     ['"a\\nb"', "a\\nb"],

@@ -7,7 +7,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { setTimeout as sleep } from 'node:timers/promises';
 
-const REPOSITORY = 'openclaw/clawsweeper';
+const REPOSITORY = 'bianca-git/clawsweeper';
 const WINDOW_DAYS = 30;
 const BOOTSTRAP_DAYS = 2;
 const REFRESH_HOURS = 3;

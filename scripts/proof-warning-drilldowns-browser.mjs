@@ -171,7 +171,7 @@ try {
               assert.equal(
                 await page
                   .locator(
-                    '#warning-stale_revision a[href="https://github.com/openclaw/clawsweeper/pull/2130"]',
+                    '#warning-stale_revision a[href="https://github.com/bianca-git/clawsweeper/pull/2130"]',
                   )
                   .count(),
                 1,

@@ -61,7 +61,7 @@ try {
     GH_TOKEN: "loopback-proof-token",
     EXACT_EVENT_PUBLICATION: "false",
   });
-  setTargetRepo("openclaw/clawsweeper");
+  setTargetRepo("bianca-git/clawsweeper");
   const numbers = Array.from({ length: 8 }, (_, index) => index + 1);
 
   resetRequests();
@@ -129,7 +129,7 @@ try {
   assert.equal(telemetry.length, 1);
   assert.deepEqual(JSON.parse(telemetry[0]), {
     event: "reviewed_pr_activity_cursor_v2_fallback",
-    repo: "openclaw/clawsweeper",
+    repo: "bianca-git/clawsweeper",
     number: 1,
     from_version: 2,
     to_version: 1,

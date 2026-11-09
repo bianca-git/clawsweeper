@@ -570,7 +570,7 @@ test("bulk-filer rating exclusions opt in only for the core OpenClaw repository"
   for (const repo of [
     "OpenClaw/OpenClaw",
     "openclaw/clawhub",
-    "openclaw/clawsweeper",
+    "bianca-git/clawsweeper",
     "openclaw/openclaw-enterprise",
     "openclaw/bulk-filer-policy-fixture",
   ]) {

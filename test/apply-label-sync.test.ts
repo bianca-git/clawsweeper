@@ -180,11 +180,11 @@ if (args.includes("--input")) {
       number: 321,
       closeReason: "implemented_on_main" as const,
       markdown: implementedCloseReport({ type: "pull_request" }),
-      itemUrl: "https://github.com/openclaw/clawsweeper/pull/321",
+      itemUrl: "https://github.com/bianca-git/clawsweeper/pull/321",
       dryRun: false,
     };
     writeFileSync(statePath, "[]");
-    withTargetProfile(repositoryProfileFor("openclaw/clawsweeper"), () =>
+    withTargetProfile(repositoryProfileFor("bianca-git/clawsweeper"), () =>
       withGitHubRun(() =>
         withMockGh(root, script, () => {
           assert.equal(ensureCloseAppliedComment(options), "posted close-applied comment");
@@ -244,9 +244,9 @@ const path = actual[1] === "-i" ? actual[2] || "" : actual[1] || "";
 const stateFile = ${JSON.stringify(labelState)};
 const labels = () => JSON.parse(readFileSync(stateFile, "utf8"));
 if (actual[0] === "api" && /\\/issues\\/321\\/comments(?:\\?|$)/.test(path)) {
-  console.log(JSON.stringify([[{ id: 9321, html_url: "https://github.com/openclaw/clawsweeper/issues/321#issuecomment-9321", created_at: "2026-05-01T01:00:00Z", updated_at: "2026-05-01T01:00:00Z", user: { login: "clawsweeper[bot]" }, body: ${JSON.stringify(synced.comment)} }]]));
+  console.log(JSON.stringify([[{ id: 9321, html_url: "https://github.com/bianca-git/clawsweeper/issues/321#issuecomment-9321", created_at: "2026-05-01T01:00:00Z", updated_at: "2026-05-01T01:00:00Z", user: { login: "clawsweeper[bot]" }, body: ${JSON.stringify(synced.comment)} }]]));
 } else if (actual[0] === "api" && /\\/issues\\/321$/.test(path)) {
-  console.log(JSON.stringify({ number: 321, title: "Render work plans", html_url: "https://github.com/openclaw/clawsweeper/issues/321", created_at: "2026-05-01T00:00:00Z", updated_at: "2026-05-01T00:00:00Z", closed_at: null, state: "open", locked: false, active_lock_reason: null, author_association: "CONTRIBUTOR", user: { login: "reporter" }, labels: labels().map(name => ({ name })), pull_request: null }));
+  console.log(JSON.stringify({ number: 321, title: "Render work plans", html_url: "https://github.com/bianca-git/clawsweeper/issues/321", created_at: "2026-05-01T00:00:00Z", updated_at: "2026-05-01T00:00:00Z", closed_at: null, state: "open", locked: false, active_lock_reason: null, author_association: "CONTRIBUTOR", user: { login: "reporter" }, labels: labels().map(name => ({ name })), pull_request: null }));
 } else if (actual[0] === "issue" && actual[1] === "view") {
   console.log(JSON.stringify({ closedByPullRequestsReferences: [] }));
 } else if (actual[0] === "api" && /\\/issues\\/321\\/timeline(?:\\?|$)/.test(path)) {
@@ -299,7 +299,7 @@ test("a lost mutation lease preserves labels already applied", () => {
       number,
       title: "Preserve label state across a lease race",
       body: "Reviewed source.",
-      html_url: "https://github.com/openclaw/clawsweeper/issues/321",
+      html_url: "https://github.com/bianca-git/clawsweeper/issues/321",
       created_at: "2026-05-01T00:00:00Z",
       updated_at: reviewedAt,
       closed_at: null,
@@ -317,7 +317,7 @@ test("a lost mutation lease preserves labels already applied", () => {
       workPlanCandidateReport(
         {
           number,
-          repository: "openclaw/clawsweeper",
+          repository: "bianca-git/clawsweeper",
           type: "issue",
           title: issue.title,
           reviewed_at: reviewedAt,
@@ -339,7 +339,7 @@ test("a lost mutation lease preserves labels already applied", () => {
     writeFileSync(statePath, JSON.stringify({ labels: [], leaseActive: true }));
     const durable = {
       id: 9321,
-      html_url: "https://github.com/openclaw/clawsweeper/issues/321#issuecomment-9321",
+      html_url: "https://github.com/bianca-git/clawsweeper/issues/321#issuecomment-9321",
       created_at: reviewedAt,
       updated_at: reviewedAt,
       user: { login: "clawsweeper[bot]" },
@@ -347,7 +347,7 @@ test("a lost mutation lease preserves labels already applied", () => {
     };
     const lease = {
       id: leaseId,
-      html_url: "https://github.com/openclaw/clawsweeper/issues/321#issuecomment-700321",
+      html_url: "https://github.com/bianca-git/clawsweeper/issues/321#issuecomment-700321",
       created_at: startedAt,
       updated_at: startedAt,
       user: { login: "clawsweeper[bot]" },
@@ -393,7 +393,7 @@ if (actual[0] === "api" && /\\/issues\\/321\\/comments(?:\\?|$)/.test(path) && !
 }`;
     withMockGh(root, ghMock, () =>
       runApplyDecisionsForTest({
-        targetRepo: "openclaw/clawsweeper",
+        targetRepo: "bianca-git/clawsweeper",
         itemsDir,
         closedDir,
         plansDir,
@@ -500,11 +500,11 @@ test("apply-decisions publishes a detected bulk-filer label from a failed exact 
       join(itemsDir, `${number}.md`),
       `${withReviewRecord(
         reportFrontMatter({
-          repository: "openclaw/clawsweeper",
+          repository: "bianca-git/clawsweeper",
           type: "issue",
           number: String(number),
           title: "Publish bulk-filer label",
-          url: `https://github.com/openclaw/clawsweeper/issues/${number}`,
+          url: `https://github.com/bianca-git/clawsweeper/issues/${number}`,
           decision: "keep_open",
           close_reason: "none",
           confidence: "high",
@@ -539,7 +539,7 @@ if (args[0] === "api" && /\\/issues\\/${number}$/.test(path)) {
   console.log(JSON.stringify({
     number: ${number},
     title: "Publish bulk-filer label",
-    html_url: "https://github.com/openclaw/clawsweeper/issues/${number}",
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/${number}",
     created_at: "2026-07-17T00:00:00Z",
     updated_at: ${JSON.stringify(reviewedAt)},
     closed_at: null,
@@ -560,7 +560,7 @@ if (args[0] === "api" && /\\/issues\\/${number}$/.test(path)) {
     const body = JSON.parse(readFileSync(input, "utf8")).body;
     console.log(JSON.stringify({
       id: 987486,
-      html_url: "https://github.com/openclaw/clawsweeper/issues/${number}#issuecomment-987486",
+      html_url: "https://github.com/bianca-git/clawsweeper/issues/${number}#issuecomment-987486",
       user: { login: "clawsweeper[bot]" },
       body
     }));
@@ -625,11 +625,11 @@ test("apply-decisions clears a stale bulk-filer label for a redacted maintain ro
       join(itemsDir, `${number}.md`),
       `${withReviewRecord(
         reportFrontMatter({
-          repository: "openclaw/clawsweeper",
+          repository: "bianca-git/clawsweeper",
           type: "issue",
           number: String(number),
           title: "Clear stale bulk-filer label",
-          url: `https://github.com/openclaw/clawsweeper/issues/${number}`,
+          url: `https://github.com/bianca-git/clawsweeper/issues/${number}`,
           decision: "keep_open",
           close_reason: "none",
           confidence: "high",
@@ -664,7 +664,7 @@ if (args[0] === "api" && /\\/issues\\/${number}$/.test(path)) {
   console.log(JSON.stringify({
     number: ${number},
     title: "Clear stale bulk-filer label",
-    html_url: "https://github.com/openclaw/clawsweeper/issues/${number}",
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/${number}",
     created_at: "2026-07-17T00:00:00Z",
     updated_at: ${JSON.stringify(reviewedAt)},
     closed_at: null,
@@ -685,7 +685,7 @@ if (args[0] === "api" && /\\/issues\\/${number}$/.test(path)) {
     const body = JSON.parse(readFileSync(input, "utf8")).body;
     console.log(JSON.stringify({
       id: 987487,
-      html_url: "https://github.com/openclaw/clawsweeper/issues/${number}#issuecomment-987487",
+      html_url: "https://github.com/bianca-git/clawsweeper/issues/${number}#issuecomment-987487",
       user: { login: "clawsweeper[bot]" },
       body
     }));
@@ -770,7 +770,7 @@ function assertCompletedIssueLeaseAccepted(extraArgs: string[], reusedLease = fa
       number,
       title: `Incident issue ${number}`,
       body: "The reviewed issue source remains unchanged.",
-      html_url: `https://github.com/openclaw/clawsweeper/issues/${number}`,
+      html_url: `https://github.com/bianca-git/clawsweeper/issues/${number}`,
       created_at: "2026-04-01T00:00:00Z",
       updated_at: leaseUpdatedAt,
       closed_at: null,
@@ -785,7 +785,7 @@ function assertCompletedIssueLeaseAccepted(extraArgs: string[], reusedLease = fa
     };
     const sourceRevision = itemSourceRevisionSha256(issue, []);
     const closeReport = implementedCloseReport({
-      repository: "openclaw/clawsweeper",
+      repository: "bianca-git/clawsweeper",
       number,
       type: "issue",
       title: issue.title,
@@ -819,7 +819,7 @@ function assertCompletedIssueLeaseAccepted(extraArgs: string[], reusedLease = fa
     const comments = [
       {
         id: 9000 + number,
-        html_url: `https://github.com/openclaw/clawsweeper/issues/${number}#issuecomment-${9000 + number}`,
+        html_url: `https://github.com/bianca-git/clawsweeper/issues/${number}#issuecomment-${9000 + number}`,
         created_at: reviewedAt,
         updated_at: reviewedAt,
         user: { login: "clawsweeper[bot]" },
@@ -827,7 +827,7 @@ function assertCompletedIssueLeaseAccepted(extraArgs: string[], reusedLease = fa
       },
       {
         id: leaseCommentId,
-        html_url: `https://github.com/openclaw/clawsweeper/issues/${number}#issuecomment-${leaseCommentId}`,
+        html_url: `https://github.com/bianca-git/clawsweeper/issues/${number}#issuecomment-${leaseCommentId}`,
         created_at: leaseUpdatedAt,
         updated_at: leaseUpdatedAt,
         user: { login: "clawsweeper[bot]" },
@@ -1437,7 +1437,7 @@ for (const scenario of [
         number,
         title: "Do not apply a stale issue review",
         body: "Issue body remains unchanged while a newer exact review publishes.",
-        html_url: `https://github.com/openclaw/clawsweeper/issues/${number}`,
+        html_url: `https://github.com/bianca-git/clawsweeper/issues/${number}`,
         created_at: "2026-04-01T00:00:00Z",
         updated_at: reviewedAt,
         closed_at: null,
@@ -1503,7 +1503,7 @@ if (args[0] === "api" && args[1] === "-i" && new RegExp("/issues/${number}/timel
   const body = count >= 6 ? newerBody : oldBody;
   const comment = {
     id: ${9000 + number},
-    html_url: "https://github.com/openclaw/clawsweeper/issues/${number}#issuecomment-${
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/${number}#issuecomment-${
       9000 + number
     }",
     created_at: ${JSON.stringify(reviewedAt)},
@@ -1564,7 +1564,7 @@ if (args[0] === "api" && args[1] === "-i" && new RegExp("/issues/${number}/timel
               EXACT_REVIEW_WORK_ROOT: workRoot,
               EXACT_EVENT_PUBLICATION: "true",
               REVIEW_ONLY: "true",
-              TARGET_REPO: "openclaw/clawsweeper",
+              TARGET_REPO: "bianca-git/clawsweeper",
               ITEM_NUMBER: String(number),
               EXACT_REVIEW_BATCH_MUTATION_OUTPUT: batch,
               GITHUB_OUTPUT: output,
@@ -1618,7 +1618,7 @@ test("issue apply rejects a stable live source revision that differs from the re
       number,
       title: "Changed after review",
       body: "Live body edited after the report was created.",
-      html_url: `https://github.com/openclaw/clawsweeper/issues/${number}`,
+      html_url: `https://github.com/bianca-git/clawsweeper/issues/${number}`,
       created_at: "2026-04-01T00:00:00Z",
       updated_at: "2026-05-01T00:10:00Z",
       closed_at: null,
@@ -1716,7 +1716,7 @@ test("issue apply preserves an owned active review lease for the live source rev
       number,
       title: "Keep broad apply out of an exact issue review",
       body: "Issue source remains stable during review.",
-      html_url: `https://github.com/openclaw/clawsweeper/issues/${number}`,
+      html_url: `https://github.com/bianca-git/clawsweeper/issues/${number}`,
       created_at: "2026-04-01T00:00:00Z",
       updated_at: reviewedAt,
       closed_at: null,
@@ -1755,7 +1755,7 @@ test("issue apply preserves an owned active review lease for the live source rev
     const comments = [
       {
         id: 9000 + number,
-        html_url: `https://github.com/openclaw/clawsweeper/issues/${number}#issuecomment-${
+        html_url: `https://github.com/bianca-git/clawsweeper/issues/${number}#issuecomment-${
           9000 + number
         }`,
         created_at: reviewedAt,
@@ -1765,7 +1765,7 @@ test("issue apply preserves an owned active review lease for the live source rev
       },
       {
         id: 9300,
-        html_url: `https://github.com/openclaw/clawsweeper/issues/${number}#issuecomment-9300`,
+        html_url: `https://github.com/bianca-git/clawsweeper/issues/${number}#issuecomment-9300`,
         created_at: startedAt,
         updated_at: startedAt,
         user: { login: "clawsweeper[bot]" },
@@ -1880,7 +1880,7 @@ if (args[0] === "api" && /\\/issues\\/321\\/comments(?:\\?|$)/.test(path)) {
   console.log(JSON.stringify({
     number: 321,
     title: "Render work plans",
-    html_url: "https://github.com/openclaw/clawsweeper/issues/321",
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/321",
     created_at: "2026-05-01T00:00:00Z",
     updated_at: "2026-05-03T00:00:00Z",
     closed_at: null,
@@ -1948,11 +1948,11 @@ for (const sourceAction of ["legacy_dispatch", "command_proof_result"]) {
         itemPath,
         `${withReviewRecord(
           reportFrontMatter({
-            repository: "openclaw/clawsweeper",
+            repository: "bianca-git/clawsweeper",
             type: "pull_request",
             number: "74478",
             title: "Record PR label churn",
-            url: "https://github.com/openclaw/clawsweeper/pull/74478",
+            url: "https://github.com/bianca-git/clawsweeper/pull/74478",
             decision: "keep_open",
             close_reason: "none",
             confidence: "high",
@@ -2024,7 +2024,7 @@ if (args[0] === "api" && /\\/issues\\/74478$/.test(path)) {
   console.log(JSON.stringify({
     number: 74478,
     title: "Record PR label churn",
-    html_url: "https://github.com/openclaw/clawsweeper/pull/74478",
+    html_url: "https://github.com/bianca-git/clawsweeper/pull/74478",
     created_at: "2026-05-19T19:00:00Z",
     updated_at: commentWasPosted ? "2026-05-19T20:00:02Z" : "2026-05-19T20:00:00Z",
     closed_at: null,
@@ -2043,13 +2043,13 @@ if (args[0] === "api" && /\\/issues\\/74478$/.test(path)) {
 } else if (args[0] === "api" && /\\/pulls\\/74478$/.test(path)) {
   console.log(JSON.stringify({
     number: 74478,
-    html_url: "https://github.com/openclaw/clawsweeper/pull/74478",
+    html_url: "https://github.com/bianca-git/clawsweeper/pull/74478",
     state: "open",
     changed_files: 1,
     commits: 1,
     review_comments: 0,
     head: { sha: "abc123def456", ref: "branch", repo: { full_name: "fork/clawsweeper" } },
-    base: { sha: "base-sha", ref: "main", repo: { full_name: "openclaw/clawsweeper" } },
+    base: { sha: "base-sha", ref: "main", repo: { full_name: "bianca-git/clawsweeper" } },
     user: { login: "contributor" }
   }));
 } else if (args[0] === "api" && /\\/pulls\\/74478\\/(files|commits|comments|reviews)(?:\\?|$)/.test(path)) {
@@ -2061,7 +2061,7 @@ if (args[0] === "api" && /\\/issues\\/74478$/.test(path)) {
     appendFileSync(logPath, JSON.stringify(["posted-comment-body", body]) + "\\n");
     console.log(JSON.stringify({
       id: 987478,
-      html_url: "https://github.com/openclaw/clawsweeper/pull/74478#issuecomment-987478",
+      html_url: "https://github.com/bianca-git/clawsweeper/pull/74478#issuecomment-987478",
       user: { login: "clawsweeper[bot]" },
       body
     }));
@@ -3285,11 +3285,11 @@ test("apply-decisions clears a recovery escalation only after publishing a compl
       itemPath,
       `${withReviewRecord(
         reportFrontMatter({
-          repository: "openclaw/clawsweeper",
+          repository: "bianca-git/clawsweeper",
           type: "pull_request",
           number: "74479",
           title: "Refresh label explanation",
-          url: "https://github.com/openclaw/clawsweeper/pull/74479",
+          url: "https://github.com/bianca-git/clawsweeper/pull/74479",
           decision: "keep_open",
           close_reason: "none",
           confidence: "high",
@@ -3348,7 +3348,7 @@ if (args[0] === "api" && /\\/issues\\/74479$/.test(path)) {
   console.log(JSON.stringify({
     number: 74479,
     title: "Refresh label explanation",
-    html_url: "https://github.com/openclaw/clawsweeper/pull/74479",
+    html_url: "https://github.com/bianca-git/clawsweeper/pull/74479",
     created_at: "2026-05-19T19:00:00Z",
     updated_at: "2026-05-19T20:00:00Z",
     closed_at: null,
@@ -3367,13 +3367,13 @@ if (args[0] === "api" && /\\/issues\\/74479$/.test(path)) {
 } else if (args[0] === "api" && /\\/pulls\\/74479$/.test(path)) {
   console.log(JSON.stringify({
     number: 74479,
-    html_url: "https://github.com/openclaw/clawsweeper/pull/74479",
+    html_url: "https://github.com/bianca-git/clawsweeper/pull/74479",
     state: "open",
     changed_files: 1,
     commits: 1,
     review_comments: 0,
     head: { sha: "abc123def456", ref: "branch", repo: { full_name: "fork/clawsweeper" } },
-    base: { sha: "base-sha", ref: "main", repo: { full_name: "openclaw/clawsweeper" } },
+    base: { sha: "base-sha", ref: "main", repo: { full_name: "bianca-git/clawsweeper" } },
     user: { login: "contributor" }
   }));
 } else if (args[0] === "api" && /\\/pulls\\/74479\\/(files|commits|comments|reviews)(?:\\?|$)/.test(path)) {
@@ -3382,7 +3382,7 @@ if (args[0] === "api" && /\\/issues\\/74479$/.test(path)) {
   console.log(JSON.stringify([[
     {
       id: 987479,
-      html_url: "https://github.com/openclaw/clawsweeper/pull/74479#issuecomment-987479",
+      html_url: "https://github.com/bianca-git/clawsweeper/pull/74479#issuecomment-987479",
       body: staleCommentBody,
       user: { login: "clawsweeper[bot]" },
       created_at: "2026-05-19T23:59:00Z",
@@ -3395,7 +3395,7 @@ if (args[0] === "api" && /\\/issues\\/74479$/.test(path)) {
   appendFileSync(logPath, JSON.stringify(["patched-review-body", body]) + "\\n");
   console.log(JSON.stringify({
     id: 987479,
-    html_url: "https://github.com/openclaw/clawsweeper/pull/74479#issuecomment-987479",
+    html_url: "https://github.com/bianca-git/clawsweeper/pull/74479#issuecomment-987479",
     user: { login: "clawsweeper[bot]" },
     body
   }));
@@ -3870,17 +3870,17 @@ appendFileSync(logPath, JSON.stringify(args) + "\\n");
 const path = args[1] || "";
 if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$)/.test(args[2] || "")) {
   const timeline = Array.from({ length: 100 }, (_, index) => ({ id: index + 1 }));
-  console.log('HTTP/2 200\\nlink: <https://api.github.com/repos/openclaw/clawsweeper/issues/321/timeline?per_page=100&page=2>; rel="last"\\n\\n' + JSON.stringify(timeline));
+  console.log('HTTP/2 200\\nlink: <https://api.github.com/repos/bianca-git/clawsweeper/issues/321/timeline?per_page=100&page=2>; rel="last"\\n\\n' + JSON.stringify(timeline));
 } else if (args[0] === "issue" && args[1] === "view") {
   console.log(JSON.stringify({ closedByPullRequestsReferences: [] }));
 } else if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/456\\/timeline(?:\\?|$)/.test(args[2] || "")) {
   console.log("HTTP/2 200\\n\\n[]");
 } else if (args[0] === "api" && args[1] === "graphql") {
-  console.log(JSON.stringify({ data: { repository: { issue: { state: "CLOSED", timelineItems: { nodes: [{ __typename: "ClosedEvent", createdAt: "2026-05-01T02:00:00Z", closer: { __typename: "PullRequest", number: 900, repository: { nameWithOwner: "openclaw/clawsweeper" } } }] } } } } }));
+  console.log(JSON.stringify({ data: { repository: { issue: { state: "CLOSED", timelineItems: { nodes: [{ __typename: "ClosedEvent", createdAt: "2026-05-01T02:00:00Z", closer: { __typename: "PullRequest", number: 900, repository: { nameWithOwner: "bianca-git/clawsweeper" } } }] } } } } }));
 } else if (args[0] === "api" && /\\/issues\\/321\\/comments(?:\\?|$)/.test(path)) {
   console.log(JSON.stringify([[{
     id: 9321,
-    html_url: "https://github.com/openclaw/clawsweeper/issues/321#issuecomment-9321",
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/321#issuecomment-9321",
     created_at: "2026-05-01T01:00:00Z",
     updated_at: "2026-05-01T01:00:00Z",
     user: { login: "clawsweeper[bot]" },
@@ -3892,7 +3892,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
   console.log(JSON.stringify({
     number: 321,
     title: "Render work plans",
-    html_url: "https://github.com/openclaw/clawsweeper/issues/321",
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/321",
     created_at: "2026-05-01T00:00:00Z",
     updated_at: "2026-05-01T00:00:00Z",
     closed_at: null,
@@ -3941,8 +3941,8 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
       (args) => args[0] === "api" && args.some((arg) => arg.includes("/issues/321/timeline?")),
     );
     assert.deepEqual(timelineCalls, [
-      ["api", "-i", "repos/openclaw/clawsweeper/issues/321/timeline?per_page=100&page=1"],
-      ["api", "-i", "repos/openclaw/clawsweeper/issues/321/timeline?per_page=100&page=2"],
+      ["api", "-i", "repos/bianca-git/clawsweeper/issues/321/timeline?per_page=100&page=1"],
+      ["api", "-i", "repos/bianca-git/clawsweeper/issues/321/timeline?per_page=100&page=2"],
     ]);
     assert.deepEqual(JSON.parse(readFileSync(reportPath, "utf8")), [
       {
@@ -4054,26 +4054,26 @@ for (const scenario of [
         reproduction_confidence: "high",
         fixed_pr_url: mismatchedCanonicalRepository
           ? "https://github.com/openclaw/other-repository/pull/900"
-          : `https://github.com/openclaw/clawsweeper/pull/${mismatchedCanonical ? "901" : "900"}`,
+          : `https://github.com/bianca-git/clawsweeper/pull/${mismatchedCanonical ? "901" : "900"}`,
         fixed_pr_number: mismatchedCanonical ? "901" : "900",
         fixed_pr_confidence: "high",
         fixed_pr_source: "GitHub reviewed implementation landing",
         fixed_pr_merged_at: "2026-05-01T02:00:00Z",
         fixed_sha: "1234567890abcdef1234567890abcdef12345678",
         fixed_at: "2026-05-01T02:00:00Z",
-      })}\n\n## Evidence\n\n- **main fix:** git show confirms current main has the replacement implementation and it is not in the latest release yet\n  - file: [src/clawsweeper.ts](https://github.com/openclaw/clawsweeper/blob/1234567890abcdef1234567890abcdef12345678/src/clawsweeper.ts)\n  - sha: [1234567890ab](https://github.com/openclaw/clawsweeper/commit/1234567890abcdef1234567890abcdef12345678)\n\n## Close Comment\n\nClosing this PR because the fix is already on main.\n`;
+      })}\n\n## Evidence\n\n- **main fix:** git show confirms current main has the replacement implementation and it is not in the latest release yet\n  - file: [src/clawsweeper.ts](https://github.com/bianca-git/clawsweeper/blob/1234567890abcdef1234567890abcdef12345678/src/clawsweeper.ts)\n  - sha: [1234567890ab](https://github.com/bianca-git/clawsweeper/commit/1234567890abcdef1234567890abcdef12345678)\n\n## Close Comment\n\nClosing this PR because the fix is already on main.\n`;
       const synced = reportWithSyncedReviewComment(closeReport, 321, "implemented_on_main");
       const linkedIssueReport = implementedCloseReport({
-        repository: "openclaw/clawsweeper",
+        repository: "bianca-git/clawsweeper",
         number: 456,
         type: "issue",
         item_updated_at: pairedReviewStale ? "2026-05-01T00:00:00Z" : "2026-05-02T00:00:00Z",
-        fixed_pr_url: "https://github.com/openclaw/clawsweeper/pull/900",
+        fixed_pr_url: "https://github.com/bianca-git/clawsweeper/pull/900",
         fixed_pr_number: "900",
         fixed_pr_confidence: "high",
         fixed_pr_source: "GitHub reviewed implementation landing",
         fixed_pr_merged_at: missingCanonicalMerge ? "unknown" : "2026-05-01T02:00:00Z",
-      }).replaceAll("openclaw/openclaw", "openclaw/clawsweeper");
+      }).replaceAll("openclaw/openclaw", "bianca-git/clawsweeper");
       const linkedIssueSynced = reportWithSyncedReviewComment(
         pairedKeepOpen
           ? withReviewRecord(linkedIssueReport, { decision: "keep_open", closeReason: "none" })
@@ -4142,7 +4142,7 @@ const pairedProvenanceRetargetedBeforeClose = ${pairedProvenanceRetargetedBefore
 const pairedHumanActivityDuringLease = ${pairedHumanActivityDuringLease};
 const linkedIssueReviewComment = () => ({
   id: 9456,
-  html_url: "https://github.com/openclaw/clawsweeper/issues/456#issuecomment-9456",
+  html_url: "https://github.com/bianca-git/clawsweeper/issues/456#issuecomment-9456",
   created_at: "2026-05-01T01:00:00Z",
   updated_at: pairedFreshOwnedReviewComment ? freshOwnedReviewUpdatedAt : "2026-05-01T01:00:00Z",
   user: { login: "clawsweeper[bot]" },
@@ -4150,7 +4150,7 @@ const linkedIssueReviewComment = () => ({
 });
 if (rawArgs.includes("--url")) {
   const url = new URL(rawArgs[rawArgs.indexOf("--url") + 1]);
-  if (url.pathname !== "/repos/openclaw/clawsweeper/issues/comments/9456") throw new Error("unexpected receipt route");
+  if (url.pathname !== "/repos/bianca-git/clawsweeper/issues/comments/9456") throw new Error("unexpected receipt route");
   console.log("HTTP/1.1 200 OK\\r\\nContent-Type: application/json\\r\\n\\r\\n" + JSON.stringify(linkedIssueReviewComment()));
   process.exit(0);
 }
@@ -4182,10 +4182,10 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
               ? 457
               : 456,
           state: lifecycleDrift && existsSync(closeoutPostedPath) ? "CLOSED" : "OPEN",
-          repository: { nameWithOwner: "openclaw/clawsweeper" }
+          repository: { nameWithOwner: "bianca-git/clawsweeper" }
         }]
     : [];
-  const timelineNodes = [{ __typename: "ClosedEvent", createdAt: "2026-05-01T02:00:00Z", closer: { __typename: "PullRequest", number: 900, url: "https://github.com/openclaw/clawsweeper/pull/900", mergedAt: "2026-05-01T02:00:00Z", repository: { nameWithOwner: "openclaw/clawsweeper" } } }];
+  const timelineNodes = [{ __typename: "ClosedEvent", createdAt: "2026-05-01T02:00:00Z", closer: { __typename: "PullRequest", number: 900, url: "https://github.com/bianca-git/clawsweeper/pull/900", mergedAt: "2026-05-01T02:00:00Z", repository: { nameWithOwner: "bianca-git/clawsweeper" } } }];
   const repository = closingReferenceQuery
     ? { pullRequest: { closingIssuesReferences: { nodes: closingReferenceNodes } } }
     : { issue: { state: "CLOSED", timelineItems: { nodes: timelineNodes } } };
@@ -4211,7 +4211,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
         writeFileSync(pairedIssueHumanActivityPath, new Date(Date.now() + 60_000).toISOString());
       }
       writeFileSync(pairedIssueLeasePath, payload.body, "utf8");
-      console.log(JSON.stringify({ id: 9460, html_url: "https://github.com/openclaw/clawsweeper/issues/456#issuecomment-9460" }));
+      console.log(JSON.stringify({ id: 9460, html_url: "https://github.com/bianca-git/clawsweeper/issues/456#issuecomment-9460" }));
       process.exit(0);
     }
     if (pairedLockedCloseoutCleanup) {
@@ -4229,13 +4229,13 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
       (pairedSelfTimestampSettlesLate && payload.body.includes("clawsweeper-close-applied"))
     ) writeFileSync(pairedIssueCloseoutPostedPath, "true");
     if (pairedBotActivityDuringCloseout) writeFileSync(pairedIssueBotActivityPath, new Date(Date.now() + 60_000).toISOString());
-    console.log(JSON.stringify({ id: 9456, html_url: "https://github.com/openclaw/clawsweeper/issues/456#issuecomment-9456" }));
+    console.log(JSON.stringify({ id: 9456, html_url: "https://github.com/bianca-git/clawsweeper/issues/456#issuecomment-9456" }));
   } else {
     const comments = [linkedIssueReviewComment()];
     if (pairedFreshOwnedReviewComment) {
       comments.push({
         id: 9455,
-        html_url: "https://github.com/openclaw/clawsweeper/issues/456#issuecomment-9455",
+        html_url: "https://github.com/bianca-git/clawsweeper/issues/456#issuecomment-9455",
         created_at: "2026-05-01T00:59:00Z",
         updated_at: freshOwnedReviewUpdatedAt,
         user: { login: "clawsweeper[bot]" },
@@ -4245,7 +4245,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
     if (existsSync(pairedIssueBotActivityPath)) {
       comments.push({
         id: 9457,
-        html_url: "https://github.com/openclaw/clawsweeper/issues/456#issuecomment-9457",
+        html_url: "https://github.com/bianca-git/clawsweeper/issues/456#issuecomment-9457",
         created_at: readFileSync(pairedIssueBotActivityPath, "utf8"),
         updated_at: readFileSync(pairedIssueBotActivityPath, "utf8"),
         user: { login: "third-party[bot]", type: "Bot" },
@@ -4255,7 +4255,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
     if (existsSync(pairedIssueHumanActivityPath)) {
       comments.push({
         id: 9458,
-        html_url: "https://github.com/openclaw/clawsweeper/issues/456#issuecomment-9458",
+        html_url: "https://github.com/bianca-git/clawsweeper/issues/456#issuecomment-9458",
         created_at: readFileSync(pairedIssueHumanActivityPath, "utf8"),
         updated_at: readFileSync(pairedIssueHumanActivityPath, "utf8"),
         user: { login: "contributor", type: "User" },
@@ -4265,7 +4265,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
     if (existsSync(pairedIssueLeasePath)) {
       comments.push({
         id: 9460,
-        html_url: "https://github.com/openclaw/clawsweeper/issues/456#issuecomment-9460",
+        html_url: "https://github.com/bianca-git/clawsweeper/issues/456#issuecomment-9460",
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
         user: { login: "clawsweeper[bot]" },
@@ -4291,11 +4291,11 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
         new Date(Date.now() + 60_000).toISOString(),
       );
     }
-    console.log(JSON.stringify({ id: 9322, html_url: "https://github.com/openclaw/clawsweeper/pull/321#issuecomment-9322" }));
+    console.log(JSON.stringify({ id: 9322, html_url: "https://github.com/bianca-git/clawsweeper/pull/321#issuecomment-9322" }));
   } else {
     const comments = [{
       id: 9321,
-      html_url: "https://github.com/openclaw/clawsweeper/pull/321#issuecomment-9321",
+      html_url: "https://github.com/bianca-git/clawsweeper/pull/321#issuecomment-9321",
       created_at: "2026-05-01T01:00:00Z",
       updated_at: "2026-05-01T01:00:00Z",
       user: { login: "clawsweeper[bot]" },
@@ -4304,7 +4304,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
     if (existsSync(betweenFreshnessAndCloseoutHumanActivityPath)) {
       comments.push({
         id: 9323,
-        html_url: "https://github.com/openclaw/clawsweeper/pull/321#issuecomment-9323",
+        html_url: "https://github.com/bianca-git/clawsweeper/pull/321#issuecomment-9323",
         created_at: readFileSync(betweenFreshnessAndCloseoutHumanActivityPath, "utf8"),
         updated_at: readFileSync(betweenFreshnessAndCloseoutHumanActivityPath, "utf8"),
         user: { login: "contributor" },
@@ -4322,7 +4322,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
     pairedDurableReviewMismatch ? payload.body + "\\n\\nNewer contradictory bot verdict." : payload.body,
     "utf8"
   );
-  console.log(JSON.stringify({ id: 9456, html_url: "https://github.com/openclaw/clawsweeper/issues/456#issuecomment-9456" }));
+  console.log(JSON.stringify({ id: 9456, html_url: "https://github.com/bianca-git/clawsweeper/issues/456#issuecomment-9456" }));
 } else if (args[0] === "api" && /\\/issues\\/comments\\/9460$/.test(path) && args.includes("DELETE")) {
   if (pairedLockedCloseoutCleanup) {
     console.error("gh: conversation is locked (HTTP 403)");
@@ -4337,7 +4337,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
   writeFileSync(prCommentPath, payload.body, "utf8");
   console.log(JSON.stringify({
     id: 9321,
-    html_url: "https://github.com/openclaw/clawsweeper/pull/321#issuecomment-9321",
+    html_url: "https://github.com/bianca-git/clawsweeper/pull/321#issuecomment-9321",
     user: { login: "clawsweeper[bot]" },
     body: payload.body
   }));
@@ -4358,7 +4358,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
   console.log(JSON.stringify({
     number: 321,
     title: "Render work plans",
-    html_url: "https://github.com/openclaw/clawsweeper/pull/321",
+    html_url: "https://github.com/bianca-git/clawsweeper/pull/321",
     created_at: "2026-05-01T00:00:00Z",
     updated_at: humanActivityLanded
       ? "2026-05-01T03:00:00Z"
@@ -4373,7 +4373,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
     user: { login: "reporter" },
     labels: ["maintainer"],
     comments: 1,
-    pull_request: { url: "https://api.github.com/repos/openclaw/clawsweeper/pulls/321" }
+    pull_request: { url: "https://api.github.com/repos/bianca-git/clawsweeper/pulls/321" }
   }));
 } else if (args[0] === "api" && /\\/issues\\/456$/.test(path)) {
   const pairedIssueReadsAfterCloseout = existsSync(pairedIssueCloseoutPostedPath)
@@ -4389,7 +4389,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
     title: pairedSourceChangeDuringCloseout && existsSync(pairedIssueCloseoutPostedPath)
       ? "Render work plans with contributor changes"
       : "Render work plans",
-    html_url: "https://github.com/openclaw/clawsweeper/issues/456",
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/456",
     created_at: "2026-05-01T00:00:00Z",
     updated_at: pairedSelfTimestampSettlesLate && pairedIssueReadsAfterCloseout >= 4
       ? "2026-05-02T00:00:01Z"
@@ -4408,7 +4408,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
     comments: 0,
     pull_request: null
   }));
-} else if (args[0] === "api" && path === "repos/openclaw/clawsweeper") {
+} else if (args[0] === "api" && path === "repos/bianca-git/clawsweeper") {
   console.log(JSON.stringify({ default_branch: "main" }));
 } else if (args[0] === "api" && /\\/compare\\/fixed-sha\\.\\.\\.main$/.test(path)) {
   console.log(JSON.stringify({ status: "ahead" }));
@@ -4416,7 +4416,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
   console.log(JSON.stringify({
     number: 900,
     title: "fix: rendered work plans",
-    html_url: "https://github.com/openclaw/clawsweeper/pull/900",
+    html_url: "https://github.com/bianca-git/clawsweeper/pull/900",
     state: "closed",
     merged: true,
     merged_at: "2026-05-01T02:00:00Z",
@@ -4427,7 +4427,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
 } else if (args[0] === "api" && /\\/pulls\\/321$/.test(path)) {
   console.log(JSON.stringify({
     number: 321,
-    html_url: "https://github.com/openclaw/clawsweeper/pull/321",
+    html_url: "https://github.com/bianca-git/clawsweeper/pull/321",
     state: "open",
     changed_files: 0,
     commits: 0,
@@ -4441,7 +4441,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
         ? "Fixes #457"
         : "Fixes #456",
     head: { sha: "head-sha", ref: "branch", repo: { full_name: "fork/clawsweeper" } },
-    base: { sha: "base-sha", ref: "main", repo: { full_name: "openclaw/clawsweeper" } },
+    base: { sha: "base-sha", ref: "main", repo: { full_name: "bianca-git/clawsweeper" } },
     user: { login: "reporter" }
   }));
 } else if (args[0] === "api" && /\\/pulls\\/321\\/reviews(?:\\?|$)/.test(path)) {
@@ -4454,7 +4454,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
   console.log(JSON.stringify([[]]));
 } else if (args[0] === "pr" && args[1] === "close" && args[2] === "321") {
   console.log("");
-} else if (args[0] === "api" && path === "repos/openclaw/clawsweeper/issues/456" && args.includes("PATCH")) {
+} else if (args[0] === "api" && path === "repos/bianca-git/clawsweeper/issues/456" && args.includes("PATCH")) {
   console.log("");
 } else if (args[0] === "issue" && args[1] === "close" && args[2] === "456") {
   console.log("");
@@ -4515,7 +4515,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
       const pairedIssueCloseIndex = calls.findIndex(
         (args) =>
           args[0] === "api" &&
-          args[1] === "repos/openclaw/clawsweeper/issues/456" &&
+          args[1] === "repos/bianca-git/clawsweeper/issues/456" &&
           args.includes("PATCH"),
       );
       const pairedIssueLeaseDeleteIndex = calls.findIndex(

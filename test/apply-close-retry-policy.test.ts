@@ -48,10 +48,10 @@ test("close metadata and existing review indexes use recorded decisions with hos
   const root = mkdtempSync(tmpPrefix);
   try {
     writeFileSync(join(root, "321.md"), typed);
-    const subject = { repo: "openclaw/clawsweeper", number: 321 };
+    const subject = { repo: "bianca-git/clawsweeper", number: 321 };
     assert.equal(existingReview(subject, root)?.decision, "keep_open");
     assert.equal(
-      buildExistingReviewIndex(root).byKey.get("openclaw/clawsweeper#321")?.decision,
+      buildExistingReviewIndex(root).byKey.get("bianca-git/clawsweeper#321")?.decision,
       "keep_open",
     );
     writeFileSync(join(root, "321.md"), corrupt);
@@ -64,8 +64,8 @@ test("close metadata and existing review indexes use recorded decisions with hos
     );
     assert.equal(existingReview(subject, root), null);
     const index = buildExistingReviewIndex(root);
-    assert.equal(index.byKey.has("openclaw/clawsweeper#321"), false);
-    assert.equal(index.byKey.get("openclaw/clawsweeper#322")?.decision, "keep_open");
+    assert.equal(index.byKey.has("bianca-git/clawsweeper#321"), false);
+    assert.equal(index.byKey.get("bianca-git/clawsweeper#322")?.decision, "keep_open");
   } finally {
     rmSync(root, { recursive: true, force: true });
   }
@@ -103,10 +103,10 @@ const args = rawArgs[0] === "--repo" ? rawArgs.slice(2) : rawArgs;
 appendFileSync(logPath, JSON.stringify(args) + "\\n");
 const path = args[1] || "";
 if (args[0] === "api" && args[1] === "graphql") {
-  console.log(JSON.stringify({ data: { repository: { issue: { state: "CLOSED", timelineItems: { nodes: [{ __typename: "ClosedEvent", createdAt: "2026-05-01T02:00:00Z", closer: { __typename: "PullRequest", number: 900, repository: { nameWithOwner: "openclaw/clawsweeper" } } }] } } } } }));
+  console.log(JSON.stringify({ data: { repository: { issue: { state: "CLOSED", timelineItems: { nodes: [{ __typename: "ClosedEvent", createdAt: "2026-05-01T02:00:00Z", closer: { __typename: "PullRequest", number: 900, repository: { nameWithOwner: "bianca-git/clawsweeper" } } }] } } } } }));
   process.exit(0);
 }
-if (args[0] === "api" && path === "repos/openclaw/clawsweeper") {
+if (args[0] === "api" && path === "repos/bianca-git/clawsweeper") {
   console.log(JSON.stringify({ default_branch: "main" }));
   process.exit(0);
 }
@@ -115,7 +115,7 @@ if (args[0] === "api" && /\\/compare\\/[^/]+\\.\\.\\.main$/.test(path)) {
   process.exit(0);
 }
 if (args[0] === "api" && /\\/pulls\\/900$/.test(path)) {
-  console.log(JSON.stringify({ number: 900, html_url: "https://github.com/openclaw/clawsweeper/pull/900", title: "Current implementation", merged: true, merged_at: "2026-05-01T02:00:00Z", merge_commit_sha: "fix-sha", head: { sha: "fix-sha" }, base: { ref: "main" } }));
+  console.log(JSON.stringify({ number: 900, html_url: "https://github.com/bianca-git/clawsweeper/pull/900", title: "Current implementation", merged: true, merged_at: "2026-05-01T02:00:00Z", merge_commit_sha: "fix-sha", head: { sha: "fix-sha" }, base: { ref: "main" } }));
   process.exit(0);
 }
 if (args[0] === "api" && /\\/pulls\\/321$/.test(path) && args.includes("--jq")) {
@@ -127,7 +127,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
 } else if (args[0] === "api" && /\\/issues\\/321\\/comments(?:\\?|$)/.test(path)) {
   console.log(JSON.stringify([[{
     id: 9321,
-    html_url: "https://github.com/openclaw/clawsweeper/pull/321#issuecomment-9321",
+    html_url: "https://github.com/bianca-git/clawsweeper/pull/321#issuecomment-9321",
     created_at: "2026-05-01T01:00:00Z",
     updated_at: "2026-05-01T01:00:00Z",
     user: { login: "clawsweeper[bot]" },
@@ -142,7 +142,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
     console.log(JSON.stringify({
       number: 321,
       title: "Render work plans",
-      html_url: "https://github.com/openclaw/clawsweeper/pull/321",
+      html_url: "https://github.com/bianca-git/clawsweeper/pull/321",
       created_at: "2026-05-01T00:00:00Z",
       updated_at: "2026-05-01T00:00:00Z",
       closed_at: null,
@@ -153,7 +153,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
       user: { login: "maintainer" },
       labels: ["maintainer"],
       comments: 1,
-      pull_request: { url: "https://api.github.com/repos/openclaw/clawsweeper/pulls/321" }
+      pull_request: { url: "https://api.github.com/repos/bianca-git/clawsweeper/pulls/321" }
     }));
   }
 } else if (args[0] === "issue" && args[1] === "view") {
@@ -161,13 +161,13 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
 } else if (args[0] === "api" && /\\/pulls\\/321$/.test(path)) {
   console.log(JSON.stringify({
     number: 321,
-    html_url: "https://github.com/openclaw/clawsweeper/pull/321",
+    html_url: "https://github.com/bianca-git/clawsweeper/pull/321",
     state: "open",
     changed_files: 0,
     commits: 0,
     review_comments: 0,
     head: { sha: "head-sha", ref: "branch", repo: { full_name: "fork/clawsweeper" } },
-    base: { sha: "base-sha", ref: "main", repo: { full_name: "openclaw/clawsweeper" } },
+    base: { sha: "base-sha", ref: "main", repo: { full_name: "bianca-git/clawsweeper" } },
     user: { login: "maintainer" }
   }));
 } else if (args[0] === "api" && /\\/pulls\\/321\\/(files|commits|comments|reviews)(?:\\?|$)/.test(path)) {
@@ -230,10 +230,10 @@ const rawArgs = process.argv.slice(2);
 const args = rawArgs[0] === "--repo" ? rawArgs.slice(2) : rawArgs;
 const path = args[1] || "";
 if (args[0] === "api" && args[1] === "graphql") {
-  console.log(JSON.stringify({ data: { repository: { issue: { state: "CLOSED", timelineItems: { nodes: [{ __typename: "ClosedEvent", createdAt: "2026-05-01T02:00:00Z", closer: { __typename: "PullRequest", number: 900, repository: { nameWithOwner: "openclaw/clawsweeper" } } }] } } } } }));
+  console.log(JSON.stringify({ data: { repository: { issue: { state: "CLOSED", timelineItems: { nodes: [{ __typename: "ClosedEvent", createdAt: "2026-05-01T02:00:00Z", closer: { __typename: "PullRequest", number: 900, repository: { nameWithOwner: "bianca-git/clawsweeper" } } }] } } } } }));
   process.exit(0);
 }
-if (args[0] === "api" && path === "repos/openclaw/clawsweeper") {
+if (args[0] === "api" && path === "repos/bianca-git/clawsweeper") {
   console.log(JSON.stringify({ default_branch: "main" }));
   process.exit(0);
 }
@@ -242,7 +242,7 @@ if (args[0] === "api" && /\\/compare\\/[^/]+\\.\\.\\.main$/.test(path)) {
   process.exit(0);
 }
 if (args[0] === "api" && /\\/pulls\\/900$/.test(path)) {
-  console.log(JSON.stringify({ number: 900, html_url: "https://github.com/openclaw/clawsweeper/pull/900", title: "Current implementation", merged: true, merged_at: "2026-05-01T02:00:00Z", merge_commit_sha: "fix-sha", head: { sha: "fix-sha" }, base: { ref: "main" } }));
+  console.log(JSON.stringify({ number: 900, html_url: "https://github.com/bianca-git/clawsweeper/pull/900", title: "Current implementation", merged: true, merged_at: "2026-05-01T02:00:00Z", merge_commit_sha: "fix-sha", head: { sha: "fix-sha" }, base: { ref: "main" } }));
   process.exit(0);
 }
 if (args[0] === "api" && /\\/pulls\\/321$/.test(path) && args.includes("--jq")) {
@@ -254,7 +254,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
 } else if (args[0] === "api" && /\\/issues\\/321\\/comments(?:\\?|$)/.test(path)) {
   console.log(JSON.stringify([[{
     id: 9321,
-    html_url: "https://github.com/openclaw/clawsweeper/pull/321#issuecomment-9321",
+    html_url: "https://github.com/bianca-git/clawsweeper/pull/321#issuecomment-9321",
     created_at: "2026-05-01T01:00:00Z",
     updated_at: "2026-05-01T01:00:00Z",
     user: { login: "clawsweeper[bot]" },
@@ -266,7 +266,7 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
   console.log(JSON.stringify({
     number: 321,
     title: "Render work plans",
-    html_url: "https://github.com/openclaw/clawsweeper/pull/321",
+    html_url: "https://github.com/bianca-git/clawsweeper/pull/321",
     created_at: "2026-05-01T00:00:00Z",
     updated_at: "2026-05-01T00:00:00Z",
     closed_at: null,
@@ -277,20 +277,20 @@ if (args[0] === "api" && args[1] === "-i" && /\\/issues\\/321\\/timeline(?:\\?|$
     user: { login: "reporter" },
     labels: [],
     comments: 1,
-    pull_request: { url: "https://api.github.com/repos/openclaw/clawsweeper/pulls/321" }
+    pull_request: { url: "https://api.github.com/repos/bianca-git/clawsweeper/pulls/321" }
   }));
 } else if (args[0] === "issue" && args[1] === "view") {
   console.log(JSON.stringify({ closedByPullRequestsReferences: [] }));
 } else if (args[0] === "api" && /\\/pulls\\/321$/.test(path)) {
   console.log(JSON.stringify({
     number: 321,
-    html_url: "https://github.com/openclaw/clawsweeper/pull/321",
+    html_url: "https://github.com/bianca-git/clawsweeper/pull/321",
     state: "open",
     changed_files: 0,
     commits: 0,
     review_comments: 0,
     head: { sha: "head-sha", ref: "branch", repo: { full_name: "fork/clawsweeper" } },
-    base: { sha: "base-sha", ref: "main", repo: { full_name: "openclaw/clawsweeper" } },
+    base: { sha: "base-sha", ref: "main", repo: { full_name: "bianca-git/clawsweeper" } },
     user: { login: "reporter" }
   }));
 } else if (args[0] === "api" && /\\/pulls\\/321\\/(files|commits|comments|reviews)(?:\\?|$)/.test(path)) {

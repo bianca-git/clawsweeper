@@ -364,7 +364,7 @@ test("runtime attribution follows the selected credential instead of throttle te
     CLAWSWEEPER_PUBLIC_GH_TOKEN: "public-actions-token",
     GH_TOKEN: "target-app-token",
     REPO_TOKEN: "repository-actions-token",
-    GITHUB_REPOSITORY: "openclaw/clawsweeper",
+    GITHUB_REPOSITORY: "bianca-git/clawsweeper",
   });
   try {
     runtime.ghWithPreparedTimeout(["api", "repos/openclaw/openclaw/issues/1"], 1_000);
@@ -1088,7 +1088,7 @@ test("signed egress evidence applies only authoritative resets attributable to A
     })),
     [
       {
-        pool: "actions:openclaw/clawsweeper",
+        pool: "actions:bianca-git/clawsweeper",
         scope: "repository_actions",
         target_owner: null,
         blocked_until: new Date(resetAt + 10_000).toISOString(),
@@ -1181,7 +1181,7 @@ function observerEnv(metricsPath: string, rateLimitPath: string): NodeJS.Process
     CLAWSWEEPER_GITHUB_CLAIM_GENERATION: "2",
     CLAWSWEEPER_GITHUB_REQUEST_REPEAT: "false",
     CLAWSWEEPER_DEPLOYMENT_REVISION: "a".repeat(40),
-    GITHUB_REPOSITORY: "openclaw/clawsweeper",
+    GITHUB_REPOSITORY: "bianca-git/clawsweeper",
     EXACT_REVIEW_BATCH_MAX_ITEMS: "50",
     EXACT_REVIEW_BATCH_PREPARE_CONCURRENCY: "1",
   };

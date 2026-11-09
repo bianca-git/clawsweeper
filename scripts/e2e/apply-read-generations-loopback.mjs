@@ -96,11 +96,11 @@ function leaseGuards(generation) {
     issueReviewCommentState: (_number, _fallback, options) =>
       issueReviewCommentState(generation, options?.bypassGenerationCache === true),
     item: {
-      repo: "openclaw/clawsweeper",
+      repo: "bianca-git/clawsweeper",
       number: 42,
       kind: "pull_request",
       title: "Generation proof",
-      url: "https://github.com/openclaw/clawsweeper/pull/42",
+      url: "https://github.com/bianca-git/clawsweeper/pull/42",
       createdAt: "2026-08-13T00:00:00Z",
       updatedAt: "2026-08-13T00:00:00Z",
       author: "contributor",
@@ -118,7 +118,7 @@ function leaseGuards(generation) {
     reviewLeaseRevisionFromReport: () => reviewedHead,
     setActiveApplyMutationLease: () => {},
     shouldPreserveReviewStartLease: () => false,
-    targetRepo: () => "openclaw/clawsweeper",
+    targetRepo: () => "bianca-git/clawsweeper",
   });
 }
 

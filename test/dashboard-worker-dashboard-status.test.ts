@@ -153,7 +153,7 @@ test("dashboard polling ignores workflow snapshots without disabling other durab
     let jobReads = 0;
     globalThis.fetch = async (input) => {
       const url = new URL(String(input));
-      if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs") {
+      if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs") {
         runReads += 1;
         const status = url.searchParams.get("status");
         return jsonResponse({
@@ -204,7 +204,7 @@ test("dashboard polling ignores workflow snapshots without disabling other durab
       throw new Error(`unexpected fetch ${url}`);
     };
     const env = {
-      CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+      CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
       TARGET_REPOS: "openclaw/openclaw",
       CLAWSWEEPER_WEBHOOK_SECRET: "synthetic-polling-secret",
       EXACT_REVIEW_QUEUE: namespace,
@@ -672,7 +672,7 @@ test("dashboard exposes active worker jobs and their current steps", async () =>
     status: "in_progress",
     conclusion: null,
     run_attempt: 1,
-    html_url: "https://github.com/openclaw/clawsweeper/actions/runs/42",
+    html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/42",
     created_at: isoAgo(120_000),
     updated_at: isoAgo(10_000),
   };
@@ -683,7 +683,7 @@ test("dashboard exposes active worker jobs and their current steps", async () =>
     status: "queued",
     conclusion: null,
     run_attempt: 1,
-    html_url: "https://github.com/openclaw/clawsweeper/actions/runs/43",
+    html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/43",
     created_at: isoAgo(30_000),
     updated_at: isoAgo(5_000),
   };
@@ -694,7 +694,7 @@ test("dashboard exposes active worker jobs and their current steps", async () =>
     status: "queued",
     conclusion: null,
     run_attempt: 1,
-    html_url: "https://github.com/openclaw/clawsweeper/actions/runs/44",
+    html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/44",
     created_at: isoAgo(20_000),
     updated_at: isoAgo(2_000),
   };
@@ -716,7 +716,7 @@ test("dashboard exposes active worker jobs and their current steps", async () =>
   const exactReviewQueueNamespace = new MemoryDurableNamespace(exactReviewQueue);
   globalThis.fetch = async (input) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs") {
       const status = url.searchParams.get("status");
       return jsonResponse({
         workflow_runs: !status
@@ -728,7 +728,7 @@ test("dashboard exposes active worker jobs and their current steps", async () =>
               : [],
       });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs/42/attempts/1/jobs") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs/42/attempts/1/jobs") {
       return jsonResponse({
         total_count: 3,
         jobs: [
@@ -738,7 +738,7 @@ test("dashboard exposes active worker jobs and their current steps", async () =>
             name: "Review shard 0 · openclaw/openclaw#92521,92522",
             status: "in_progress",
             conclusion: null,
-            html_url: "https://github.com/openclaw/clawsweeper/actions/runs/42/job/4201",
+            html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/42/job/4201",
             started_at: isoAgo(90_000),
             steps: [
               {
@@ -767,7 +767,7 @@ test("dashboard exposes active worker jobs and their current steps", async () =>
             name: "Publish review artifacts",
             status: "in_progress",
             conclusion: null,
-            html_url: "https://github.com/openclaw/clawsweeper/actions/runs/42/job/4202",
+            html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/42/job/4202",
             started_at: isoAgo(60_000),
             steps: [
               {
@@ -790,7 +790,7 @@ test("dashboard exposes active worker jobs and their current steps", async () =>
             name: "publish",
             status: "in_progress",
             conclusion: null,
-            html_url: "https://github.com/openclaw/clawsweeper/actions/runs/42/job/4203",
+            html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/42/job/4203",
             started_at: isoAgo(55_000),
             steps: [
               {
@@ -810,10 +810,10 @@ test("dashboard exposes active worker jobs and their current steps", async () =>
         ],
       });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs/43/attempts/1/jobs") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs/43/attempts/1/jobs") {
       return jsonResponse({ total_count: 0, jobs: [] });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs/44/attempts/1/jobs") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs/44/attempts/1/jobs") {
       return jsonResponse({
         total_count: 1,
         jobs: [
@@ -823,7 +823,7 @@ test("dashboard exposes active worker jobs and their current steps", async () =>
             name: "publish",
             status: "queued",
             conclusion: null,
-            html_url: "https://github.com/openclaw/clawsweeper/actions/runs/44/job/4401",
+            html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/44/job/4401",
             started_at: null,
             steps: [],
           },
@@ -856,13 +856,13 @@ test("dashboard exposes active worker jobs and their current steps", async () =>
     }
     if (
       url.pathname ===
-      "/repos/openclaw/clawsweeper/actions/workflows/repair-cluster-intake.yml/runs"
+      "/repos/bianca-git/clawsweeper/actions/workflows/repair-cluster-intake.yml/runs"
     ) {
       return jsonResponse({ workflow_runs: [] });
     }
     if (
       url.pathname ===
-      "/repos/openclaw/clawsweeper/actions/workflows/repair-cluster-worker.yml/runs"
+      "/repos/bianca-git/clawsweeper/actions/workflows/repair-cluster-worker.yml/runs"
     ) {
       return jsonResponse({ workflow_runs: [] });
     }
@@ -875,9 +875,9 @@ test("dashboard exposes active worker jobs and their current steps", async () =>
     const response = await worker.fetch(
       new Request("https://clawsweeper.openclaw.ai/api/status"),
       {
-        CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+        CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
-        PUBLIC_BAY_REPOS: "openclaw/openclaw,openclaw/clawsweeper",
+        PUBLIC_BAY_REPOS: "openclaw/openclaw,bianca-git/clawsweeper",
         CACHE_TTL_SECONDS: "0",
         GITHUB_TOKEN: "test-token",
         EXACT_REVIEW_QUEUE: exactReviewQueueNamespace,
@@ -974,7 +974,7 @@ test("dashboard exposes active worker jobs and their current steps", async () =>
           item_number: 92521,
           stage: "applying",
           source: "live",
-          action_repository: "openclaw/clawsweeper",
+          action_repository: "bianca-git/clawsweeper",
           run_id: 42,
           job_id: 4203,
           status: "in_progress",
@@ -986,7 +986,7 @@ test("dashboard exposes active worker jobs and their current steps", async () =>
           item_number: 92523,
           stage: "arriving",
           source: "live",
-          action_repository: "openclaw/clawsweeper",
+          action_repository: "bianca-git/clawsweeper",
           run_id: 43,
           job_id: undefined,
           status: "queued",
@@ -998,7 +998,7 @@ test("dashboard exposes active worker jobs and their current steps", async () =>
           item_number: 92521,
           stage: "publishing",
           source: "live",
-          action_repository: "openclaw/clawsweeper",
+          action_repository: "bianca-git/clawsweeper",
           run_id: 42,
           job_id: 4202,
           status: "in_progress",
@@ -1010,7 +1010,7 @@ test("dashboard exposes active worker jobs and their current steps", async () =>
           item_number: 92522,
           stage: "reviewing",
           source: "live",
-          action_repository: "openclaw/clawsweeper",
+          action_repository: "bianca-git/clawsweeper",
           run_id: 42,
           job_id: 4201,
           status: "in_progress",
@@ -1036,9 +1036,9 @@ test("dashboard exposes active worker jobs and their current steps", async () =>
     const privacyCachedResponse = await worker.fetch(
       new Request("https://clawsweeper.openclaw.ai/api/status"),
       {
-        CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+        CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
-        PUBLIC_BAY_REPOS: "openclaw/openclaw,openclaw/clawsweeper",
+        PUBLIC_BAY_REPOS: "openclaw/openclaw,bianca-git/clawsweeper",
         CACHE_TTL_SECONDS: "0",
         GITHUB_TOKEN: "test-token",
         EXACT_REVIEW_QUEUE: exactReviewQueueNamespace,
@@ -1088,13 +1088,13 @@ test("dashboard keeps control-plane workflow fallbacks out of Codex capacity", a
     status,
     conclusion: null,
     run_attempt: 1,
-    html_url: `https://github.com/openclaw/clawsweeper/actions/runs/${id}`,
+    html_url: `https://github.com/bianca-git/clawsweeper/actions/runs/${id}`,
     created_at: isoAgo(Number(id) * 1_000),
     updated_at: isoAgo(500),
   }));
   globalThis.fetch = async (input) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs") {
       const status = url.searchParams.get("status");
       return jsonResponse({
         workflow_runs: !status ? runs : runs.filter((run) => run.status === status),
@@ -1107,13 +1107,13 @@ test("dashboard keeps control-plane workflow fallbacks out of Codex capacity", a
     }
     if (
       url.pathname ===
-      "/repos/openclaw/clawsweeper/actions/workflows/repair-cluster-intake.yml/runs"
+      "/repos/bianca-git/clawsweeper/actions/workflows/repair-cluster-intake.yml/runs"
     ) {
       return jsonResponse({ workflow_runs: [] });
     }
     if (
       url.pathname ===
-      "/repos/openclaw/clawsweeper/actions/workflows/repair-cluster-worker.yml/runs"
+      "/repos/bianca-git/clawsweeper/actions/workflows/repair-cluster-worker.yml/runs"
     ) {
       return jsonResponse({ workflow_runs: [] });
     }
@@ -1126,7 +1126,7 @@ test("dashboard keeps control-plane workflow fallbacks out of Codex capacity", a
     const response = await worker.fetch(
       new Request("https://clawsweeper.openclaw.ai/api/status"),
       {
-        CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+        CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
         CACHE_TTL_SECONDS: "0",
       },
@@ -1167,7 +1167,7 @@ test("dashboard bounds worker job detail request concurrency", async () => {
     status: "in_progress",
     conclusion: null,
     run_attempt: 1,
-    html_url: `https://github.com/openclaw/clawsweeper/actions/runs/${1000 + index}`,
+    html_url: `https://github.com/bianca-git/clawsweeper/actions/runs/${1000 + index}`,
     created_at: isoAgo((index + 1) * 1000),
     updated_at: isoAgo(1000),
   }));
@@ -1176,7 +1176,7 @@ test("dashboard bounds worker job detail request concurrency", async () => {
   let pipelineRequestsWhileJobsActive = 0;
   globalThis.fetch = async (input) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs") {
       const status = url.searchParams.get("status");
       return jsonResponse({ workflow_runs: !status || status === "in_progress" ? runs : [] });
     }
@@ -1197,7 +1197,7 @@ test("dashboard bounds worker job detail request concurrency", async () => {
             name: `Review shard ${runId}`,
             status: "in_progress",
             conclusion: null,
-            html_url: `https://github.com/openclaw/clawsweeper/actions/runs/${runId}/job/${
+            html_url: `https://github.com/bianca-git/clawsweeper/actions/runs/${runId}/job/${
               runId * 10
             }`,
             started_at: isoAgo(1000),
@@ -1229,13 +1229,13 @@ test("dashboard bounds worker job detail request concurrency", async () => {
     }
     if (
       url.pathname ===
-      "/repos/openclaw/clawsweeper/actions/workflows/repair-cluster-intake.yml/runs"
+      "/repos/bianca-git/clawsweeper/actions/workflows/repair-cluster-intake.yml/runs"
     ) {
       return jsonResponse({ workflow_runs: [] });
     }
     if (
       url.pathname ===
-      "/repos/openclaw/clawsweeper/actions/workflows/repair-cluster-worker.yml/runs"
+      "/repos/bianca-git/clawsweeper/actions/workflows/repair-cluster-worker.yml/runs"
     ) {
       return jsonResponse({ workflow_runs: [] });
     }
@@ -1248,7 +1248,7 @@ test("dashboard bounds worker job detail request concurrency", async () => {
     const response = await worker.fetch(
       new Request("https://clawsweeper.openclaw.ai/api/status"),
       {
-        CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+        CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
         WORKER_DETAIL_RUN_LIMIT: "12",
         WORKER_JOB_FETCH_CONCURRENCY: "3",
@@ -1288,20 +1288,20 @@ test("dashboard paginates worker jobs beyond GitHub's first page", async () => {
     status: "in_progress",
     conclusion: null,
     run_attempt: 1,
-    html_url: "https://github.com/openclaw/clawsweeper/actions/runs/500",
+    html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/500",
     created_at: isoAgo(60_000),
     updated_at: isoAgo(5_000),
   };
   const requestedPages = [];
   globalThis.fetch = async (input) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs") {
       const status = url.searchParams.get("status");
       return jsonResponse({
         workflow_runs: !status || status === "in_progress" ? [run] : [],
       });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs/500/attempts/1/jobs") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs/500/attempts/1/jobs") {
       const page = Number(url.searchParams.get("page") || "1");
       requestedPages.push(page);
       const count = page === 1 ? 100 : 28;
@@ -1314,7 +1314,7 @@ test("dashboard paginates worker jobs beyond GitHub's first page", async () => {
           name: `Review shard ${offset + index}`,
           status: "in_progress",
           conclusion: null,
-          html_url: `https://github.com/openclaw/clawsweeper/actions/runs/500/job/${
+          html_url: `https://github.com/bianca-git/clawsweeper/actions/runs/500/job/${
             500_000 + offset + index
           }`,
           started_at: isoAgo(30_000),
@@ -1337,7 +1337,7 @@ test("dashboard paginates worker jobs beyond GitHub's first page", async () => {
     }
     if (
       url.pathname ===
-      "/repos/openclaw/clawsweeper/actions/workflows/repair-cluster-intake.yml/runs"
+      "/repos/bianca-git/clawsweeper/actions/workflows/repair-cluster-intake.yml/runs"
     ) {
       return jsonResponse({ workflow_runs: [] });
     }
@@ -1350,7 +1350,7 @@ test("dashboard paginates worker jobs beyond GitHub's first page", async () => {
     const response = await worker.fetch(
       new Request("https://clawsweeper.openclaw.ai/api/status"),
       {
-        CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+        CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
         CACHE_TTL_SECONDS: "0",
       },
@@ -1384,7 +1384,7 @@ test("dashboard reports worker health without treating worker jobs as lifecycle 
   let jobRequests = 0;
   globalThis.fetch = async (input) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs") {
       return jsonResponse({
         workflow_runs:
           url.searchParams.get("status") === "completed"
@@ -1415,7 +1415,7 @@ test("dashboard reports worker health without treating worker jobs as lifecycle 
             name: `Review shard 0 · openclaw/openclaw#${itemNumber}`,
             status: "completed",
             conclusion: runId === 4 ? "neutral" : "success",
-            html_url: `https://github.com/openclaw/clawsweeper/actions/runs/${runId}/job/${
+            html_url: `https://github.com/bianca-git/clawsweeper/actions/runs/${runId}/job/${
               runId * 10
             }`,
             started_at: jobStartedAt,
@@ -1454,7 +1454,7 @@ test("dashboard reports worker health without treating worker jobs as lifecycle 
     }
     if (
       url.pathname ===
-      "/repos/openclaw/clawsweeper/actions/workflows/repair-cluster-intake.yml/runs"
+      "/repos/bianca-git/clawsweeper/actions/workflows/repair-cluster-intake.yml/runs"
     ) {
       return jsonResponse({ workflow_runs: [] });
     }
@@ -1465,9 +1465,9 @@ test("dashboard reports worker health without treating worker jobs as lifecycle 
 
   try {
     const env = {
-      CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+      CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
       TARGET_REPOS: "openclaw/openclaw",
-      PUBLIC_BAY_REPOS: "openclaw/openclaw,openclaw/clawsweeper",
+      PUBLIC_BAY_REPOS: "openclaw/openclaw,bianca-git/clawsweeper",
       CACHE_TTL_SECONDS: "0",
       STATUS_STORE: new MemoryKv(),
     };
@@ -1512,13 +1512,13 @@ for (const failure of ["http_503", "missing_attempt", "wrong_attempt"] as const)
     let jobRequests = 0;
     globalThis.fetch = async (input) => {
       const url = new URL(String(input));
-      if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs") {
+      if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs") {
         return jsonResponse({
           total_count: url.searchParams.get("status") === "completed" ? 1 : 0,
           workflow_runs: url.searchParams.get("status") === "completed" ? [run] : [],
         });
       }
-      if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs/101/attempts/1/jobs") {
+      if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs/101/attempts/1/jobs") {
         jobRequests += 1;
         return failure === "wrong_attempt"
           ? jsonResponse({
@@ -1585,7 +1585,7 @@ test("dashboard cold-cache status bounds a stalled forty-run worker-health refre
   let stalledJobRequests = 0;
   globalThis.fetch = async (input) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs") {
       return jsonResponse({
         workflow_runs:
           url.searchParams.get("status") === "completed"
@@ -1603,7 +1603,7 @@ test("dashboard cold-cache status bounds a stalled forty-run worker-health refre
     }
     if (
       url.pathname ===
-      "/repos/openclaw/clawsweeper/actions/workflows/repair-cluster-intake.yml/runs"
+      "/repos/bianca-git/clawsweeper/actions/workflows/repair-cluster-intake.yml/runs"
     ) {
       return jsonResponse({ workflow_runs: [] });
     }
@@ -1617,7 +1617,7 @@ test("dashboard cold-cache status bounds a stalled forty-run worker-health refre
     const response = await worker.fetch(
       new Request("https://clawsweeper.openclaw.ai/api/status"),
       {
-        CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+        CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
         CACHE_TTL_SECONDS: "0",
         WORKER_HEALTH_FETCH_CONCURRENCY: "40",
@@ -1653,10 +1653,10 @@ test("dashboard exposes apply health from sweep status without broad scans", asy
   const sweepStatus = {
     target_repo: "openclaw/openclaw",
     state: "Apply finished",
-    run_url: "https://github.com/openclaw/clawsweeper/actions/runs/99",
+    run_url: "https://github.com/bianca-git/clawsweeper/actions/runs/99",
     updated_at: "2026-07-03T10:15:00Z",
     apply_health: {
-      run_url: "https://github.com/openclaw/clawsweeper/actions/runs/98",
+      run_url: "https://github.com/bianca-git/clawsweeper/actions/runs/98",
       mode: "close",
       status: "needs_attention",
       summary:
@@ -1732,18 +1732,18 @@ test("dashboard exposes apply health from sweep status without broad scans", asy
   };
   globalThis.fetch = async (input) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs") {
       return jsonResponse({ workflow_runs: [] });
     }
     if (
       url.pathname ===
-      "/repos/openclaw/clawsweeper/actions/workflows/repair-cluster-intake.yml/runs"
+      "/repos/bianca-git/clawsweeper/actions/workflows/repair-cluster-intake.yml/runs"
     ) {
       return jsonResponse({ workflow_runs: [] });
     }
     if (
       url.pathname ===
-      "/repos/openclaw/clawsweeper-state/contents/results/sweep-status/openclaw-openclaw.json"
+      "/repos/bianca-git/clawsweeper-state/contents/results/sweep-status/openclaw-openclaw.json"
     ) {
       assert.equal(url.searchParams.get("ref"), "state");
       return jsonResponse({
@@ -1758,7 +1758,7 @@ test("dashboard exposes apply health from sweep status without broad scans", asy
   try {
     const response = await worker.fetch(new Request("https://clawsweeper.openclaw.ai/api/status"), {
       STATUS_STORE: new MemoryKv(),
-      CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+      CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
       TARGET_REPOS: "openclaw/openclaw",
       CACHE_TTL_SECONDS: "0",
     });
@@ -1821,7 +1821,7 @@ test("dashboard reads stored CI status for active PR rows", async () => {
   });
   globalThis.fetch = async (input) => {
     const url = String(input);
-    if (url.includes("/repos/openclaw/clawsweeper/actions/runs")) {
+    if (url.includes("/repos/bianca-git/clawsweeper/actions/runs")) {
       return jsonResponse({
         workflow_runs: [
           {
@@ -1831,7 +1831,7 @@ test("dashboard reads stored CI status for active PR rows", async () => {
             status: "in_progress",
             conclusion: null,
             run_attempt: 1,
-            html_url: "https://github.com/openclaw/clawsweeper/actions/runs/1",
+            html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/1",
             created_at: new Date(Date.now() - 60_000).toISOString(),
             updated_at: new Date().toISOString(),
           },
@@ -1846,7 +1846,7 @@ test("dashboard reads stored CI status for active PR rows", async () => {
     const env = {
       INGEST_TOKEN: "test-token",
       STATUS_STORE: new MemoryKv(),
-      CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+      CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
       TARGET_REPOS: "openclaw/openclaw",
       CACHE_TTL_SECONDS: "0",
     };
@@ -1919,7 +1919,7 @@ test("dashboard skips raw event persistence when the private status store is not
   try {
     const env = {
       INGEST_TOKEN: "test-token",
-      CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+      CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
       TARGET_REPOS: "openclaw/openclaw",
       CACHE_TTL_SECONDS: "0",
     };
@@ -1985,7 +1985,7 @@ test("dashboard stale refresh coalesces concurrent polling requests", async () =
       schema_version: 1,
       generated_at: "2026-06-13T18:00:00Z",
       source: {
-        clawsweeper_repo: "openclaw/clawsweeper",
+        clawsweeper_repo: "bianca-git/clawsweeper",
         target_repositories: ["openclaw/openclaw"],
       },
       fleet: { active_workflow_runs: 1 },
@@ -2056,7 +2056,7 @@ test("dashboard stale refresh coalesces concurrent polling requests", async () =
   try {
     const waitUntilPromises: Promise<unknown>[] = [];
     const env = {
-      CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+      CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
       TARGET_REPOS: "openclaw/openclaw",
       CACHE_TTL_SECONDS: "20",
       EXACT_REVIEW_QUEUE: exactReviewQueue,
@@ -2132,7 +2132,7 @@ test("dashboard status survives cache persistence failures", async () => {
 
   try {
     const response = await worker.fetch(new Request("https://clawsweeper.openclaw.ai/api/status"), {
-      CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+      CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
       TARGET_REPOS: "openclaw/openclaw",
       CACHE_TTL_SECONDS: "0",
     });
@@ -2174,7 +2174,7 @@ test("dashboard caches historical closed-item telemetry across live status refre
   try {
     const env = {
       STATUS_STORE: new MemoryKv(),
-      CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+      CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
       TARGET_REPOS: "openclaw/openclaw",
       CACHE_TTL_SECONDS: "-1",
     };
@@ -2213,7 +2213,7 @@ test("dashboard preserves repeated untargeted activity events", async () => {
     const env = {
       INGEST_TOKEN: "test-token",
       STATUS_STORE: new MemoryKv(),
-      CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+      CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
       TARGET_REPOS: "openclaw/openclaw",
       CACHE_TTL_SECONDS: "0",
     };
@@ -2277,7 +2277,7 @@ test("dashboard counts review operations without retired repair counters", async
     const env = {
       INGEST_TOKEN: "test-token",
       STATUS_STORE: new MemoryKv(),
-      CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+      CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
       TARGET_REPOS: "openclaw/openclaw",
       CACHE_TTL_SECONDS: "0",
     };
@@ -2342,7 +2342,7 @@ test("dashboard keeps workflow CI status when live PR checks fail", async () => 
   });
   globalThis.fetch = async (input) => {
     const url = String(input);
-    if (url.includes("/repos/openclaw/clawsweeper/actions/runs")) {
+    if (url.includes("/repos/bianca-git/clawsweeper/actions/runs")) {
       return jsonResponse({
         workflow_runs: [
           {
@@ -2352,7 +2352,7 @@ test("dashboard keeps workflow CI status when live PR checks fail", async () => 
             status: "in_progress",
             conclusion: null,
             run_attempt: 1,
-            html_url: "https://github.com/openclaw/clawsweeper/actions/runs/1",
+            html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/1",
             created_at: new Date(Date.now() - 60_000).toISOString(),
             updated_at: new Date().toISOString(),
           },
@@ -2370,7 +2370,7 @@ test("dashboard keeps workflow CI status when live PR checks fail", async () => 
     const response = await worker.fetch(
       new Request("https://clawsweeper.openclaw.ai/api/status"),
       {
-        CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+        CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
         CACHE_TTL_SECONDS: "0",
         INCLUDE_CI_STATUS: "1",
@@ -2405,7 +2405,7 @@ test("dashboard reuses live PR CI hydration within one status snapshot", async (
       status: "in_progress",
       conclusion: null,
       run_attempt: 1,
-      html_url: "https://github.com/openclaw/clawsweeper/actions/runs/8060901",
+      html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/8060901",
       created_at: isoAgo(120_000),
       updated_at: isoAgo(10_000),
     },
@@ -2416,7 +2416,7 @@ test("dashboard reuses live PR CI hydration within one status snapshot", async (
       status: "in_progress",
       conclusion: null,
       run_attempt: 1,
-      html_url: "https://github.com/openclaw/clawsweeper/actions/runs/8060902",
+      html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/8060902",
       created_at: isoAgo(90_000),
       updated_at: isoAgo(5_000),
     },
@@ -2425,7 +2425,7 @@ test("dashboard reuses live PR CI hydration within one status snapshot", async (
   let checkRequests = 0;
   globalThis.fetch = async (input) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs") {
       const status = url.searchParams.get("status");
       return jsonResponse({ workflow_runs: !status || status === "in_progress" ? runs : [] });
     }
@@ -2452,7 +2452,7 @@ test("dashboard reuses live PR CI hydration within one status snapshot", async (
     }
     if (
       url.pathname ===
-      "/repos/openclaw/clawsweeper/actions/workflows/repair-cluster-intake.yml/runs"
+      "/repos/bianca-git/clawsweeper/actions/workflows/repair-cluster-intake.yml/runs"
     ) {
       return jsonResponse({ workflow_runs: [] });
     }
@@ -2465,7 +2465,7 @@ test("dashboard reuses live PR CI hydration within one status snapshot", async (
     const response = await worker.fetch(
       new Request("https://clawsweeper.openclaw.ai/api/status"),
       {
-        CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+        CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
         CACHE_TTL_SECONDS: "0",
         INCLUDE_CI_STATUS: "1",
@@ -2522,7 +2522,7 @@ test("dashboard CI status counts check runs beyond the first page", async () => 
       status: "in_progress",
       conclusion: null,
       run_attempt: 1,
-      html_url: "https://github.com/openclaw/clawsweeper/actions/runs/8060901",
+      html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/8060901",
       created_at: isoAgo(120_000),
       updated_at: isoAgo(10_000),
     },
@@ -2533,7 +2533,7 @@ test("dashboard CI status counts check runs beyond the first page", async () => 
       status: "in_progress",
       conclusion: null,
       run_attempt: 1,
-      html_url: "https://github.com/openclaw/clawsweeper/actions/runs/8060902",
+      html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/8060902",
       created_at: isoAgo(90_000),
       updated_at: isoAgo(5_000),
     },
@@ -2542,7 +2542,7 @@ test("dashboard CI status counts check runs beyond the first page", async () => 
   let checkRequests = 0;
   globalThis.fetch = async (input) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs") {
       const status = url.searchParams.get("status");
       return jsonResponse({ workflow_runs: !status || status === "in_progress" ? runs : [] });
     }
@@ -2570,7 +2570,7 @@ test("dashboard CI status counts check runs beyond the first page", async () => 
     }
     if (
       url.pathname ===
-      "/repos/openclaw/clawsweeper/actions/workflows/repair-cluster-intake.yml/runs"
+      "/repos/bianca-git/clawsweeper/actions/workflows/repair-cluster-intake.yml/runs"
     ) {
       return jsonResponse({ workflow_runs: [] });
     }
@@ -2583,7 +2583,7 @@ test("dashboard CI status counts check runs beyond the first page", async () => 
     const response = await worker.fetch(
       new Request("https://clawsweeper.openclaw.ai/api/status"),
       {
-        CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+        CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
         CACHE_TTL_SECONDS: "0",
         INCLUDE_CI_STATUS: "1",
@@ -2666,7 +2666,7 @@ test("dashboard reconciles workflow observations before deriving lifecycle views
       });
       globalThis.fetch = async (input) => {
         const url = new URL(String(input));
-        if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs") {
+        if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs") {
           const status = url.searchParams.get("status");
           assert.ok(status, "workflow reads must remain status-filtered");
           const rows =
@@ -2739,7 +2739,7 @@ test("dashboard counts active runs that are older than the latest unfiltered pag
   });
   globalThis.fetch = async (input) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs") {
       const status = url.searchParams.get("status");
       if (!status) {
         return jsonResponse({
@@ -2751,7 +2751,7 @@ test("dashboard counts active runs that are older than the latest unfiltered pag
               status: "completed",
               conclusion: "success",
               run_attempt: 1,
-              html_url: "https://github.com/openclaw/clawsweeper/actions/runs/1",
+              html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/1",
               created_at: "2026-05-14T06:40:00Z",
               updated_at: "2026-05-14T06:41:00Z",
             },
@@ -2768,7 +2768,7 @@ test("dashboard counts active runs that are older than the latest unfiltered pag
               status: "in_progress",
               conclusion: null,
               run_attempt: 1,
-              html_url: "https://github.com/openclaw/clawsweeper/actions/runs/2",
+              html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/2",
               created_at: isoAgo(25 * 60_000),
               updated_at: isoAgo(20 * 60_000),
             },
@@ -2779,7 +2779,7 @@ test("dashboard counts active runs that are older than the latest unfiltered pag
               status: "in_progress",
               conclusion: null,
               run_attempt: 1,
-              html_url: "https://github.com/openclaw/clawsweeper/actions/runs/3",
+              html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/3",
               created_at: isoAgo(20 * 60_000),
               updated_at: isoAgo(15 * 60_000),
             },
@@ -2790,7 +2790,7 @@ test("dashboard counts active runs that are older than the latest unfiltered pag
               status: "in_progress",
               conclusion: null,
               run_attempt: 1,
-              html_url: "https://github.com/openclaw/clawsweeper/actions/runs/5",
+              html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/5",
               created_at: isoAgo(18 * 60_000),
               updated_at: isoAgo(16 * 60_000),
             },
@@ -2801,7 +2801,7 @@ test("dashboard counts active runs that are older than the latest unfiltered pag
               status: "in_progress",
               conclusion: null,
               run_attempt: 1,
-              html_url: "https://github.com/openclaw/clawsweeper/actions/runs/6",
+              html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/6",
               created_at: isoAgo(17 * 60_000),
               updated_at: isoAgo(15 * 60_000),
             },
@@ -2818,7 +2818,7 @@ test("dashboard counts active runs that are older than the latest unfiltered pag
               status: "queued",
               conclusion: null,
               run_attempt: 1,
-              html_url: "https://github.com/openclaw/clawsweeper/actions/runs/4",
+              html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/4",
               created_at: isoAgo(30 * 60_000),
               updated_at: isoAgo(29 * 60_000),
             },
@@ -2829,7 +2829,7 @@ test("dashboard counts active runs that are older than the latest unfiltered pag
               status: "queued",
               conclusion: null,
               run_attempt: 1,
-              html_url: "https://github.com/openclaw/clawsweeper/actions/runs/7",
+              html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/7",
               created_at: isoAgo(31 * 60_000),
               updated_at: isoAgo(30 * 60_000),
             },
@@ -2846,7 +2846,7 @@ test("dashboard counts active runs that are older than the latest unfiltered pag
     const response = await worker.fetch(
       new Request("https://clawsweeper.openclaw.ai/api/status"),
       {
-        CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+        CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
         CACHE_TTL_SECONDS: "0",
       },
@@ -2889,7 +2889,7 @@ test("dashboard bounds active-run pagination without hiding incomplete telemetry
       const requestedPages: number[] = [];
       globalThis.fetch = async (input) => {
         const url = new URL(String(input));
-        if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs") {
+        if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs") {
           if (url.searchParams.get("status") !== "queued")
             return jsonResponse({ workflow_runs: [] });
           const page = Number(url.searchParams.get("page") || 1);
@@ -2914,7 +2914,7 @@ test("dashboard bounds active-run pagination without hiding incomplete telemetry
       const response = await worker.fetch(
         new Request("https://clawsweeper.openclaw.ai/api/status"),
         {
-          CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+          CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
           TARGET_REPOS: "openclaw/openclaw",
           CACHE_TTL_SECONDS: "0",
         },
@@ -2953,7 +2953,7 @@ test("dashboard rebuilds inconsistent active censuses without replaying memoized
       let attempt = 0;
       globalThis.fetch = async (input) => {
         const url = new URL(String(input));
-        if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs") {
+        if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs") {
           const status = url.searchParams.get("status") || "recent";
           const page = Number(url.searchParams.get("page") || 1);
           requests.set(status, [...(requests.get(status) || []), page]);
@@ -2977,7 +2977,7 @@ test("dashboard rebuilds inconsistent active censuses without replaying memoized
       };
       const response = await worker.fetch(
         new Request("https://clawsweeper.openclaw.ai/api/status"),
-        { CLAWSWEEPER_REPO: "openclaw/clawsweeper", CACHE_TTL_SECONDS: "0" },
+        { CLAWSWEEPER_REPO: "bianca-git/clawsweeper", CACHE_TTL_SECONDS: "0" },
         { waitUntil: () => undefined },
       );
       const status = await response.json();
@@ -3007,7 +3007,7 @@ test("dashboard surfaces stale queue ghosts as zombies without active cards", as
   });
   globalThis.fetch = async (input) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs") {
       const status = url.searchParams.get("status");
       if (!status) return jsonResponse({ workflow_runs: [] });
       if (status === "queued") {
@@ -3020,7 +3020,7 @@ test("dashboard surfaces stale queue ghosts as zombies without active cards", as
               status: "queued",
               conclusion: null,
               run_attempt: 1,
-              html_url: "https://github.com/openclaw/clawsweeper/actions/runs/1",
+              html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/1",
               created_at: isoAgo(7 * 24 * 60 * 60_000),
               updated_at: isoAgo(7 * 24 * 60 * 60_000),
             },
@@ -3031,7 +3031,7 @@ test("dashboard surfaces stale queue ghosts as zombies without active cards", as
               status: "queued",
               conclusion: null,
               run_attempt: 1,
-              html_url: "https://github.com/openclaw/clawsweeper/actions/runs/2",
+              html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/2",
               created_at: isoAgo(10 * 60_000),
               updated_at: isoAgo(9 * 60_000),
             },
@@ -3048,7 +3048,7 @@ test("dashboard surfaces stale queue ghosts as zombies without active cards", as
               display_title: "repair publish cluster results",
               status: "pending",
               conclusion: null,
-              html_url: "https://github.com/openclaw/clawsweeper/actions/runs/3",
+              html_url: "https://github.com/bianca-git/clawsweeper/actions/runs/3",
               created_at: isoAgo(90 * 60_000),
               updated_at: isoAgo(90 * 60_000),
             },
@@ -3065,7 +3065,7 @@ test("dashboard surfaces stale queue ghosts as zombies without active cards", as
     const response = await worker.fetch(
       new Request("https://clawsweeper.openclaw.ai/api/status"),
       {
-        CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+        CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
         CACHE_TTL_SECONDS: "0",
       },
@@ -3101,7 +3101,7 @@ test("dashboard health retains in-progress runs beyond the queued ghost window",
   });
   globalThis.fetch = async (input) => {
     const url = new URL(String(input));
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs") {
       const status = url.searchParams.get("status");
       if (status === "in_progress") {
         return jsonResponse({
@@ -3128,7 +3128,7 @@ test("dashboard health retains in-progress runs beyond the queued ghost window",
     const response = await worker.fetch(
       new Request("https://clawsweeper.openclaw.ai/api/status"),
       {
-        CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+        CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
         CACHE_TTL_SECONDS: "0",
       },
@@ -3162,7 +3162,7 @@ test("dashboard exposes ClawSweeper-owned recent closes and 24h stats", async ()
     const closedAt = new Date(Date.now() - 60_000).toISOString();
     const olderClosedAt = new Date(Date.now() - 120_000).toISOString();
     const oldestClosedAt = new Date(Date.now() - 180_000).toISOString();
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs") {
       return jsonResponse({ workflow_runs: [] });
     }
     if (
@@ -3214,7 +3214,7 @@ test("dashboard exposes ClawSweeper-owned recent closes and 24h stats", async ()
     const env = {
       INGEST_TOKEN: "test-token",
       STATUS_STORE: new MemoryKv(),
-      CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+      CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
       TARGET_REPOS: "openclaw/openclaw",
       CACHE_TTL_SECONDS: "0",
     };
@@ -3329,7 +3329,7 @@ test("dashboard fetches additional closed pages only when the first page is full
   globalThis.fetch = async (input) => {
     const url = new URL(String(input));
     const closedAt = new Date(Date.now() - 60_000).toISOString();
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/runs") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/runs") {
       return jsonResponse({ workflow_runs: [] });
     }
     if (url.pathname === "/repos/openclaw/openclaw/issues") {
@@ -3367,7 +3367,7 @@ test("dashboard fetches additional closed pages only when the first page is full
     const response = await worker.fetch(
       new Request("https://clawsweeper.openclaw.ai/api/status"),
       {
-        CLAWSWEEPER_REPO: "openclaw/clawsweeper",
+        CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
         CACHE_TTL_SECONDS: "0",
       },
@@ -4407,7 +4407,7 @@ test("status timeout does not cancel shared GitHub App token acquisition", async
       tokenStarted.release();
       return tokenGate.promise;
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/auth-probe")
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/auth-probe")
       return jsonResponse({ ok: true });
     if (url.pathname.includes("/actions/")) return jsonResponse({ workflow_runs: [] });
     if (url.pathname === "/search/issues") return jsonResponse({ items: [] });
@@ -4428,7 +4428,7 @@ test("status timeout does not cancel shared GitHub App token acquisition", async
       env,
     );
     await tokenStarted.promise;
-    const unscopedReader = githubJsonForTest(env, "/repos/openclaw/clawsweeper/actions/auth-probe");
+    const unscopedReader = githubJsonForTest(env, "/repos/bianca-git/clawsweeper/actions/auth-probe");
     context.mock.timers.tick(STATUS_REFRESH_TIMEOUT_MS);
     const status = await (await statusRequest).json();
     assert.equal(status.public_projection_complete, false);

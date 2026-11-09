@@ -106,7 +106,7 @@ test("local-range proof policy ignores unverified Git author names", async (t) =
         git(dir, "commit", "-q", "--author", `${author} <test@example.com>`, "-m", "change");
         const { item, context, baseSha } = buildLocalRangeReviewForTest(
           dir,
-          "openclaw/clawsweeper",
+          "bianca-git/clawsweeper",
           "base-ref",
         );
         assert.equal(item.author, author);
@@ -217,13 +217,13 @@ test("buildLocalRangeReview synthesizes a PR item + offline diff from the local 
 
     const headSha = git(dir, "rev-parse", "HEAD");
     const committedAt = git(dir, "log", "-1", "--format=%cI", "HEAD");
-    const result = buildLocalRangeReviewForTest(dir, "openclaw/clawsweeper", "base-ref");
+    const result = buildLocalRangeReviewForTest(dir, "bianca-git/clawsweeper", "base-ref");
 
     // synthetic item: a PR #0 titled from the commit subject, no GitHub involved
     assert.equal(result.item.number, 0);
     assert.equal(result.item.kind, "pull_request");
     assert.equal(result.item.title, "feat: add a feature");
-    assert.equal(result.item.repo, "openclaw/clawsweeper");
+    assert.equal(result.item.repo, "bianca-git/clawsweeper");
     assert.equal(result.item.author, "Range Tester");
     assert.equal(result.item.authorAssociation, "CONTRIBUTOR");
     assert.deepEqual(result.item.labels, []);
@@ -283,7 +283,7 @@ test("buildLocalRangeReview falls back to a range title when the commit subject 
     git(dir, "add", "f.txt");
     git(dir, "commit", "-q", "--allow-empty-message", "-m", ""); // no subject
 
-    const result = buildLocalRangeReviewForTest(dir, "openclaw/clawsweeper", "base-ref");
+    const result = buildLocalRangeReviewForTest(dir, "bianca-git/clawsweeper", "base-ref");
     const baseSha = git(dir, "rev-parse", "base-ref");
     const headSha = git(dir, "rev-parse", "HEAD");
     // title = `local range ${baseSha.slice(0,8)}..${headSha.slice(0,8)}`
@@ -305,10 +305,10 @@ test("buildLocalRangeReview fingerprints full commit messages beyond prompt trun
     git(dir, "add", "feature.txt");
     const prefix = `feat: cache\n\n${"x".repeat(1100)}`;
     git(dir, "commit", "-q", "-m", `${prefix}a`);
-    const prior = buildLocalRangeReviewForTest(dir, "openclaw/clawsweeper", "base-ref");
+    const prior = buildLocalRangeReviewForTest(dir, "bianca-git/clawsweeper", "base-ref");
 
     git(dir, "commit", "--amend", "-q", "-m", `${prefix}b`);
-    const changed = buildLocalRangeReviewForTest(dir, "openclaw/clawsweeper", "base-ref");
+    const changed = buildLocalRangeReviewForTest(dir, "bianca-git/clawsweeper", "base-ref");
     const priorMessage = (prior.context.pullCommits?.[0] as { message?: string } | undefined)
       ?.message;
     const changedMessage = (changed.context.pullCommits?.[0] as { message?: string } | undefined)
@@ -336,7 +336,7 @@ test("buildLocalRangeReview defaults base to origin/main when baseRef is empty",
     git(dir, "commit", "-q", "-m", "feat: x");
 
     // empty baseRef → base falls back to "origin/main"
-    const result = buildLocalRangeReviewForTest(dir, "openclaw/clawsweeper", "");
+    const result = buildLocalRangeReviewForTest(dir, "bianca-git/clawsweeper", "");
     assert.equal(result.baseSha, baseSha);
   } finally {
     rmSync(dir, { recursive: true, force: true });
@@ -352,7 +352,7 @@ test("buildLocalRangeReview yields no pullFiles for a commit that changes nothin
     git(dir, "branch", "base-ref");
     git(dir, "commit", "-q", "--allow-empty", "-m", "empty: no file changes");
 
-    const result = buildLocalRangeReviewForTest(dir, "openclaw/clawsweeper", "base-ref");
+    const result = buildLocalRangeReviewForTest(dir, "bianca-git/clawsweeper", "base-ref");
     assert.deepEqual(result.context.pullFiles, []);
     assert.equal(result.context.counts.pullFiles, 0);
   } finally {
@@ -646,7 +646,7 @@ test("buildLocalRangeReview handles renamed files (new path, non-empty patch, no
     git(dir, "add", "-A");
     git(dir, "commit", "-q", "-m", "rename old-name -> new-name with one edit");
 
-    const result = buildLocalRangeReviewForTest(dir, "openclaw/clawsweeper", "base-ref");
+    const result = buildLocalRangeReviewForTest(dir, "bianca-git/clawsweeper", "base-ref");
     const files = result.context.pullFiles as Array<{
       filename: string;
       status: string;
@@ -675,7 +675,7 @@ test("buildLocalRangeReview refuses a dirty working tree (committed-range contra
     git(dir, "commit", "-q", "-m", "feat: x");
     writeFileSync(join(dir, "uncommitted.txt"), "dirty\n"); // untracked → dirty tree
 
-    assert.throws(() => buildLocalRangeReviewForTest(dir, "openclaw/clawsweeper", "base-ref"), {
+    assert.throws(() => buildLocalRangeReviewForTest(dir, "bianca-git/clawsweeper", "base-ref"), {
       message: /not clean|commit or stash/i,
     });
   } finally {
@@ -785,7 +785,7 @@ test("buildLocalRangeReview throws when HEAD has no commits beyond base", () => 
     git(dir, "commit", "-q", "-m", "init");
     git(dir, "branch", "base-ref"); // points at HEAD — empty range
 
-    assert.throws(() => buildLocalRangeReviewForTest(dir, "openclaw/clawsweeper", "base-ref"), {
+    assert.throws(() => buildLocalRangeReviewForTest(dir, "bianca-git/clawsweeper", "base-ref"), {
       message: /no commits beyond/i,
     });
   } finally {
@@ -806,7 +806,7 @@ test("review rejects --item-number combined with --local-range", () => {
         "--item-number",
         "5",
         "--target-repo",
-        "openclaw/clawsweeper",
+        "bianca-git/clawsweeper",
         "--target-dir",
         dir,
       ],
@@ -848,7 +848,7 @@ process.exit(1);
         "--base",
         "base-ref",
         "--target-repo",
-        "openclaw/clawsweeper",
+        "bianca-git/clawsweeper",
         "--result-format",
         "json",
       ],
@@ -930,7 +930,7 @@ process.exit(1);
         "--base",
         "base-ref",
         "--target-repo",
-        "openclaw/clawsweeper",
+        "bianca-git/clawsweeper",
         "--target-dir",
         dir,
         "--artifact-dir",
@@ -1123,7 +1123,7 @@ test("native local-range entrypoints retain contributor proof and unverified ide
             "--base",
             "base-ref",
             "--target-repo",
-            "openclaw/clawsweeper",
+            "bianca-git/clawsweeper",
             "--target-dir",
             dir,
             "--result-format",
@@ -1195,7 +1195,7 @@ console.log(process.argv.includes("rate_limit") ? '{"resources":{"core":{"remain
         "--base",
         "base-ref",
         "--target-repo",
-        "openclaw/clawsweeper",
+        "bianca-git/clawsweeper",
         "--target-dir",
         dir,
         "--result-format",
@@ -1444,7 +1444,7 @@ test("--local-range preserves native history and exports current preflight summa
         "--base",
         base,
         "--target-repo",
-        "openclaw/clawsweeper",
+        "bianca-git/clawsweeper",
         "--target-dir",
         dir,
         "--artifact-dir",

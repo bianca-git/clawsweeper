@@ -63,7 +63,7 @@ test("dashboard job ETags isolate workflow attempts and pages", () => {
   const key = (attempt: number, page = 1) =>
     githubEtagCacheKey({
       credentialPool: "repository_actions",
-      route: `/repos/openclaw/clawsweeper/actions/runs/42/attempts/${attempt}/jobs?per_page=100&page=${page}`,
+      route: `/repos/bianca-git/clawsweeper/actions/runs/42/attempts/${attempt}/jobs?per_page=100&page=${page}`,
       surface: "dashboard",
     });
   const first = key(1)!;
@@ -74,7 +74,7 @@ test("dashboard job ETags isolate workflow attempts and pages", () => {
     first.cacheKey,
     githubEtagCacheKey({
       credentialPool: "repository_actions",
-      route: "/repos/openclaw/clawsweeper/actions/runs/42/jobs?per_page=100&page=1",
+      route: "/repos/bianca-git/clawsweeper/actions/runs/42/jobs?per_page=100&page=1",
       surface: "dashboard",
     })?.cacheKey,
   );
@@ -728,7 +728,7 @@ test("dashboard health client counts oversized bodies through size-only stores",
       globalThis.fetch = async () => new Response(body, { headers: { etag: '"large"' } });
       try {
         assert.deepEqual(
-          await githubJsonForTest(env, "/repos/openclaw/clawsweeper/actions/runs"),
+          await githubJsonForTest(env, "/repos/bianca-git/clawsweeper/actions/runs"),
           JSON.parse(body),
         );
         assert.deepEqual(new GithubEtagResponseStore(storage).telemetry(Date.now()), {
@@ -828,7 +828,7 @@ test("dashboard health reads send If-None-Match and replay only after durable co
         });
   };
   try {
-    const path = "/repos/openclaw/clawsweeper/actions/runs?per_page=100";
+    const path = "/repos/bianca-git/clawsweeper/actions/runs?per_page=100";
     const first = await githubJsonForTest(env, path);
     const second = await githubJsonForTest(env, path);
     assert.deepEqual(second, first);
@@ -890,7 +890,7 @@ test("dashboard source reads survive a stalled advisory ETag cache", async (t) =
       };
       const pending = githubJsonForTest(
         env,
-        "/repos/openclaw/clawsweeper/actions/runs?per_page=100",
+        "/repos/bianca-git/clawsweeper/actions/runs?per_page=100",
       );
       await started;
       t.mock.timers.tick(1_001);

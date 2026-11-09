@@ -54,7 +54,7 @@ test("normalizeGithubActivity extracts pull request activity with compact untrus
         labels: [{ name: "bug" }],
       },
     },
-    env: { GITHUB_REPOSITORY: "openclaw/clawsweeper" },
+    env: { GITHUB_REPOSITORY: "bianca-git/clawsweeper" },
   });
 
   assert.equal(activity?.type, "pull_request_target");
@@ -95,7 +95,7 @@ test("normalizeGithubActivity accepts repository_dispatch activity payloads", ()
         },
       },
     },
-    env: { GITHUB_REPOSITORY: "openclaw/clawsweeper" },
+    env: { GITHUB_REPOSITORY: "bianca-git/clawsweeper" },
   });
 
   assert.equal(activity?.type, "issue_comment");
@@ -327,7 +327,7 @@ test("runGithubActivityNotifier posts one bounded forwarded push event", async (
     env: {
       GITHUB_EVENT_PATH: eventPath,
       GITHUB_EVENT_NAME: "repository_dispatch",
-      GITHUB_REPOSITORY: "openclaw/clawsweeper",
+      GITHUB_REPOSITORY: "bianca-git/clawsweeper",
       CLAWSWEEPER_OPENCLAW_HOOK_URL: "https://claw.example/hooks",
       CLAWSWEEPER_OPENCLAW_HOOK_TOKEN: "secret",
       CLAWSWEEPER_DISCORD_TARGET: "channel:123",
@@ -396,7 +396,7 @@ test("runGithubActivityNotifier skips routine noisy GitHub activity before posti
     env: {
       GITHUB_EVENT_PATH: eventPath,
       GITHUB_EVENT_NAME: "issue_comment",
-      GITHUB_REPOSITORY: "openclaw/clawsweeper",
+      GITHUB_REPOSITORY: "bianca-git/clawsweeper",
       CLAWSWEEPER_OPENCLAW_HOOK_URL: "https://claw.example/hooks",
       CLAWSWEEPER_OPENCLAW_HOOK_TOKEN: "secret",
       CLAWSWEEPER_DISCORD_TARGET: "channel:123",

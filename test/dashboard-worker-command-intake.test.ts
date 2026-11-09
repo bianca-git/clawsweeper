@@ -782,7 +782,7 @@ async function mainEquivalentOldCommandPath(origin: string) {
     },
   );
   assert.equal(acknowledgement.status, 201);
-  const dispatch = await fetch(`${origin}/repos/openclaw/clawsweeper/dispatches`, {
+  const dispatch = await fetch(`${origin}/repos/bianca-git/clawsweeper/dispatches`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ event_type: "clawsweeper_comment" }),
@@ -987,7 +987,7 @@ async function startGithubLoopback() {
     if (url.pathname === "/repos/openclaw/openclaw/installation") {
       return sendJson(response, 200, { id: 123 });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/installation") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/installation") {
       return sendJson(response, 200, { id: 777 });
     }
     if (url.pathname === "/repos/openclaw/openclaw") {
@@ -1045,10 +1045,10 @@ async function startGithubLoopback() {
       state.reactions += 1;
       return sendJson(response, 201, { id: state.reactions, content: "eyes" });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/actions/workflows/sweep.yml") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/actions/workflows/sweep.yml") {
       return sendJson(response, 200, { state: "active" });
     }
-    if (url.pathname === "/repos/openclaw/clawsweeper/dispatches") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/dispatches") {
       state.dispatches.push(body);
       if (request.headers.authorization) {
         response.writeHead(204).end();

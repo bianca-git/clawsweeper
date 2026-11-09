@@ -132,7 +132,7 @@ if (path.endsWith("/issues/${issue.number}")) {
   console.log(${JSON.stringify(JSON.stringify(issue))});
   process.exit(0);
 }
-if (path === "repos/openclaw/clawsweeper") {
+if (path === "repos/bianca-git/clawsweeper") {
   console.log("main");
   process.exit(0);
 }
@@ -206,7 +206,7 @@ test("failed review retry records the producer run URL before and after dispatch
               CLAWSWEEPER_ACTION_LEDGER_PARTITION_DATE: "2026-09-04",
               CLAWSWEEPER_ACTION_LEDGER_INVOCATION: "retry-fixture",
               CLAWSWEEPER_CRABFLEET_AGENT_TOKEN: "",
-              GITHUB_REPOSITORY: "openclaw/clawsweeper",
+              GITHUB_REPOSITORY: "bianca-git/clawsweeper",
               GITHUB_RUN_ID: "123456",
               GITHUB_RUN_ATTEMPT: "1",
               GITHUB_WORKFLOW: "fixture",
@@ -232,7 +232,7 @@ test("failed review retry records the producer run URL before and after dispatch
       assert.ok(event.evidence);
       assert.deepEqual(
         event.evidence.filter((entry) => entry.run_url).map((entry) => entry.run_url),
-        ["https://github.com/openclaw/clawsweeper/actions/runs/123456"],
+        ["https://github.com/bianca-git/clawsweeper/actions/runs/123456"],
       );
     }
   } finally {
@@ -261,7 +261,7 @@ async function runFailedIssueRetryAtDispatchDeadline(
     if (endpoint?.startsWith(`repos/openclaw/openclaw/issues/${fixture.number}/comments`)) {
       return JSON.stringify(args.includes("--slurp") ? [[]] : []);
     }
-    assert.equal(endpoint, "repos/openclaw/clawsweeper");
+    assert.equal(endpoint, "repos/bianca-git/clawsweeper");
     return "main";
   });
   const dispatch = t.mock.method(
@@ -269,7 +269,7 @@ async function runFailedIssueRetryAtDispatchDeadline(
     "spawnSync",
     (command: string, args: string[], options: { timeout?: number }): SpawnSyncReturns<string> => {
       assert.equal(command, "gh");
-      assert.ok(args.includes("repos/openclaw/clawsweeper/dispatches"));
+      assert.ok(args.includes("repos/bianca-git/clawsweeper/dispatches"));
       assert.ok(args.includes("POST"));
       assert.ok(
         args.includes(`client_payload[expected_source_revision]=${fixture.sourceRevision}`),
@@ -763,7 +763,7 @@ if (path.endsWith("/issues/4343")) {
   console.log(${JSON.stringify(JSON.stringify(issue))});
   process.exit(0);
 }
-if (path === "repos/openclaw/clawsweeper") {
+if (path === "repos/bianca-git/clawsweeper") {
   console.log("main");
   process.exit(0);
 }
@@ -827,7 +827,7 @@ process.exit(1);
     assert.equal(report[0]?.revisionKind, "item_source_revision");
     assert.equal(report[0]?.revision, sourceRevision);
     const dispatch = JSON.parse(readFileSync(dispatchPath, "utf8")) as string[];
-    assert.ok(dispatch.includes("repos/openclaw/clawsweeper/dispatches"));
+    assert.ok(dispatch.includes("repos/bianca-git/clawsweeper/dispatches"));
     assert.ok(dispatch.includes("event_type=clawsweeper_item"));
     assert.ok(dispatch.includes(`client_payload[expected_source_revision]=${sourceRevision}`));
     assert.ok(dispatch.includes("client_payload[source_action]=failed_review_shard_recovery"));
@@ -1000,7 +1000,7 @@ if (issueMatch && issues[issueMatch[1]]) {
   console.log(JSON.stringify(issues[issueMatch[1]]));
   process.exit(0);
 }
-if (path === "repos/openclaw/clawsweeper") {
+if (path === "repos/bianca-git/clawsweeper") {
   console.log("main");
   process.exit(0);
 }

@@ -1,6 +1,6 @@
 [
   {
-    "run": "https://github.com/openclaw/clawsweeper/actions/runs/37999909071",
+    "run": "https://github.com/bianca-git/clawsweeper/actions/runs/37999909071",
     "validation_commands": [
       "pnpm test test/scripts/barnacle-auto-response.test.ts --maxWorkers=1",
       "node --check scripts/github/barnacle-auto-response.mjs",
@@ -13,7 +13,7 @@
     ]
   },
   {
-    "run": "https://github.com/openclaw/clawsweeper/actions/runs/37228471223",
+    "run": "https://github.com/bianca-git/clawsweeper/actions/runs/37228471223",
     "validation_commands": [
       "pnpm --dir ui test src/pages/chat/chat-history.run-ownership.test.ts src/pages/chat/run-lifecycle.test.ts --maxWorkers=1",
       "pnpm --dir ui test src/pages/chat/chat-history-cursor.test.ts src/pages/chat/chat-history.inflight.test.ts --maxWorkers=1",

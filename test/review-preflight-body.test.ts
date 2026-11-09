@@ -18,7 +18,7 @@ import { hydratePrimaryBody, sourceTools } from "./primary-body-fixture.ts";
 
 const payload: ReviewPreflightPayload = {
   v: 1,
-  repo: "openclaw/clawsweeper",
+  repo: "bianca-git/clawsweeper",
   base: "a".repeat(40),
   head: "b".repeat(40),
   tool: { name: "autoreview", version: "1.2.3" },
@@ -35,7 +35,7 @@ test("direct source scheduler entry preserves compiled semantic identity", () =>
 
 test("published local producer example remains readable", () => {
   const native =
-    '<!-- openclaw-preflight:v1\n{"v":1,"repo":"openclaw/clawsweeper","base":"bd129c3395197feb345b67e7f6ec8d43c2e1063a","head":"5a51b89af489404f261e99222182758057daa114","tool":{"name":"clawsweeper","version":"0.3.1"},"completion":"complete","summary":"Native review complete; 0 reported findings. No summary priority filter. See the native report for coverage and policy caveats. Self-reported completion is not a clean verdict."}\n-->';
+    '<!-- openclaw-preflight:v1\n{"v":1,"repo":"bianca-git/clawsweeper","base":"bd129c3395197feb345b67e7f6ec8d43c2e1063a","head":"5a51b89af489404f261e99222182758057daa114","tool":{"name":"clawsweeper","version":"0.3.1"},"completion":"complete","summary":"Native review complete; 0 reported findings. No summary priority filter. See the native report for coverage and policy caveats. Self-reported completion is not a clean verdict."}\n-->';
   assert.equal(Buffer.byteLength(native), 429);
   assert.equal(parseReviewPreflightBody(native).status, "valid");
 });
@@ -236,7 +236,7 @@ test("existing implementation linkage ignores comment metadata without reinterpr
   assert.deepEqual(
     linkedIssueNumbersForImplementationProvenance(
       `Fixes #123\n\n${annotation}`,
-      "openclaw/clawsweeper",
+      "bianca-git/clawsweeper",
     ),
     [123],
   );

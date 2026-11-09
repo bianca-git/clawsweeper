@@ -2,7 +2,7 @@
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-export const DEFAULT_STATE_REPOSITORY = "openclaw/clawsweeper-state";
+export const DEFAULT_STATE_REPOSITORY = "bianca-git/clawsweeper-state";
 export const DEFAULT_STATE_REPO_SIZE_WARN_GB = 5;
 
 export type StateRepoSize = {

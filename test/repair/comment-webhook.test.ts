@@ -159,7 +159,7 @@ test("standalone webhook terminal admission blocks delayed private and missing t
       globalThis.fetch = (async (input: string | URL | Request, init?: RequestInit) => {
         const url = new URL(String(input));
         const method = String(init?.method ?? "GET").toUpperCase();
-        if (url.pathname === "/repos/openclaw/clawsweeper/installation" && method === "GET") {
+        if (url.pathname === "/repos/bianca-git/clawsweeper/installation" && method === "GET") {
           return jsonResponse({ id: 999 });
         }
         if (url.pathname === "/app/installations/999/access_tokens" && method === "POST") {
@@ -210,7 +210,7 @@ test("standalone webhook retryable admission defers without intake or target eff
       globalThis.fetch = (async (input: string | URL | Request, init?: RequestInit) => {
         const url = new URL(String(input));
         const method = String(init?.method ?? "GET").toUpperCase();
-        if (url.pathname === "/repos/openclaw/clawsweeper/installation" && method === "GET") {
+        if (url.pathname === "/repos/bianca-git/clawsweeper/installation" && method === "GET") {
           return jsonResponse({ id: 999 });
         }
         if (url.pathname === "/app/installations/999/access_tokens" && method === "POST") {
@@ -258,7 +258,7 @@ test("standalone webhook admits public targets before durable command intake", a
   globalThis.fetch = (async (input: string | URL | Request, init?: RequestInit) => {
     const url = new URL(String(input));
     const method = String(init?.method ?? "GET").toUpperCase();
-    if (url.pathname === "/repos/openclaw/clawsweeper/installation" && method === "GET") {
+    if (url.pathname === "/repos/bianca-git/clawsweeper/installation" && method === "GET") {
       return jsonResponse({ id: 999 });
     }
     if (url.pathname === "/app/installations/999/access_tokens" && method === "POST") {
@@ -875,7 +875,7 @@ test("pull request webhooks dispatch adaptive Codex timeout payload", async () =
     const url = new URL(String(input));
     const method = String(init?.method ?? "GET").toUpperCase();
     const path = `${url.pathname}${url.search}`;
-    if (path === "/repos/openclaw/clawsweeper/installation" && method === "GET") {
+    if (path === "/repos/bianca-git/clawsweeper/installation" && method === "GET") {
       return jsonResponse({ id: 999 });
     }
     if (path === "/app/installations/999/access_tokens" && method === "POST") {
@@ -891,7 +891,7 @@ test("pull request webhooks dispatch adaptive Codex timeout payload", async () =
         visibility: "public",
       });
     }
-    if (path === "/repos/openclaw/clawsweeper/dispatches" && method === "POST") {
+    if (path === "/repos/bianca-git/clawsweeper/dispatches" && method === "POST") {
       dispatchedBody = JSON.parse(String(init?.body ?? "{}"));
       return jsonResponse({});
     }
@@ -1177,7 +1177,7 @@ test("concurrent duplicate command webhooks converge on one fast ack comment", a
     const url = new URL(String(input));
     const method = String(init?.method ?? "GET").toUpperCase();
     const path = `${url.pathname}${url.search}`;
-    if (path === "/repos/openclaw/clawsweeper/installation" && method === "GET") {
+    if (path === "/repos/bianca-git/clawsweeper/installation" && method === "GET") {
       return jsonResponse({ id: 999 });
     }
     if (path === "/app/installations/999/access_tokens" && method === "POST") {
@@ -1215,7 +1215,7 @@ test("concurrent duplicate command webhooks converge on one fast ack comment", a
       reactions += 1;
       return jsonResponse({ id: 1 });
     }
-    if (path === "/repos/openclaw/clawsweeper/dispatches" && method === "POST") {
+    if (path === "/repos/bianca-git/clawsweeper/dispatches" && method === "POST") {
       dispatches += 1;
       dispatchBodies.push(JSON.parse(String(init?.body ?? "{}")));
       return jsonResponse({});
@@ -1312,7 +1312,7 @@ test("comment webhook settles duplicate fast ack comments after dispatch", async
     const url = new URL(String(input));
     const method = String(init?.method ?? "GET").toUpperCase();
     const path = `${url.pathname}${url.search}`;
-    if (path === "/repos/openclaw/clawsweeper/installation" && method === "GET") {
+    if (path === "/repos/bianca-git/clawsweeper/installation" && method === "GET") {
       return jsonResponse({ id: 999 });
     }
     if (path === "/app/installations/999/access_tokens" && method === "POST") {
@@ -1370,7 +1370,7 @@ test("comment webhook settles duplicate fast ack comments after dispatch", async
     if (path === "/repos/openclaw/openclaw/issues/comments/456/reactions" && method === "POST") {
       return jsonResponse({ id: 1 });
     }
-    if (path === "/repos/openclaw/clawsweeper/dispatches" && method === "POST") {
+    if (path === "/repos/bianca-git/clawsweeper/dispatches" && method === "POST") {
       return jsonResponse({});
     }
     if (path === "/repos/openclaw/openclaw/issues/comments/9001" && method === "DELETE") {

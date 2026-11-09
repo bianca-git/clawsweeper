@@ -10,7 +10,7 @@ globalThis.fetch = async (input, init) => {
     const url = new URL(request.url);
     if (
       url.href ===
-      "https://raw.githubusercontent.com/openclaw/clawsweeper/main/config/target-repositories.json"
+      "https://raw.githubusercontent.com/bianca-git/clawsweeper/main/config/target-repositories.json"
     ) {
       return await realFetch(new Request(`${upstream}/registry`, request));
     }

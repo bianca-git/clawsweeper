@@ -543,7 +543,7 @@ export function auditRecord(number, overrides = {}) {
 export function workPlanCandidateReport(overrides = {}, decisionOverrides = {}) {
   const frontmatter: Record<string, unknown> = {
     number: 321,
-    repository: "openclaw/clawsweeper",
+    repository: "bianca-git/clawsweeper",
     type: "issue",
     title: "Render work plans",
     reviewed_at: new Date().toISOString(),
@@ -558,7 +558,7 @@ export function workPlanCandidateReport(overrides = {}, decisionOverrides = {}) 
     work_confidence: "high",
     work_likely_files: JSON.stringify(["src/clawsweeper.ts", "test/clawsweeper.test.ts"]),
     work_validation: JSON.stringify(["pnpm run check"]),
-    work_cluster_refs: JSON.stringify(["openclaw/clawsweeper#26"]),
+    work_cluster_refs: JSON.stringify(["bianca-git/clawsweeper#26"]),
     ...overrides,
   };
   if (
@@ -642,12 +642,12 @@ export function implementedCloseReport(overrides = {}) {
     fixed_sha: "1234567890abcdef1234567890abcdef12345678",
     fixed_at: "2026-05-01T02:00:00Z",
     ...overrides,
-  })}\n\n## Evidence\n\n- **main fix:** git show confirms current main has the replacement implementation and it is not in the latest release yet\n  - file: [src/clawsweeper.ts](https://github.com/openclaw/clawsweeper/blob/1234567890abcdef1234567890abcdef12345678/src/clawsweeper.ts)\n  - sha: [1234567890ab](https://github.com/openclaw/clawsweeper/commit/1234567890abcdef1234567890abcdef12345678)\n\n## Close Comment\n\nClosing this because the requested behavior is already on main.\n`;
+  })}\n\n## Evidence\n\n- **main fix:** git show confirms current main has the replacement implementation and it is not in the latest release yet\n  - file: [src/clawsweeper.ts](https://github.com/bianca-git/clawsweeper/blob/1234567890abcdef1234567890abcdef12345678/src/clawsweeper.ts)\n  - sha: [1234567890ab](https://github.com/bianca-git/clawsweeper/commit/1234567890abcdef1234567890abcdef12345678)\n\n## Close Comment\n\nClosing this because the requested behavior is already on main.\n`;
 }
 
 export function verifiedImplementationPullRequestReport(overrides = {}) {
   const repository = String(
-    (overrides as { repository?: unknown }).repository ?? "openclaw/clawsweeper",
+    (overrides as { repository?: unknown }).repository ?? "bianca-git/clawsweeper",
   );
   return implementedCloseReport({
     fixed_pr_url: `https://github.com/${repository}/pull/900`,
@@ -1391,7 +1391,7 @@ export function runApplyDecisionsForTest(options: {
     "dist/clawsweeper.js",
     "apply-decisions",
     "--target-repo",
-    options.targetRepo ?? "openclaw/clawsweeper",
+    options.targetRepo ?? "bianca-git/clawsweeper",
     "--items-dir",
     options.itemsDir,
     "--closed-dir",

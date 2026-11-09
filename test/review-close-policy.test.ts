@@ -1005,9 +1005,9 @@ test("ClawHub policy requires verified fixing provenance before main-implemented
 test("ClawSweeper policy requires verified fixing provenance before self PR closure", () => {
   const implementedPr = validateCloseDecision(
     item({
-      repo: "openclaw/clawsweeper",
+      repo: "bianca-git/clawsweeper",
       kind: "pull_request",
-      url: "https://github.com/openclaw/clawsweeper/pull/17",
+      url: "https://github.com/bianca-git/clawsweeper/pull/17",
     }),
     closeDecision(),
   );
@@ -1016,9 +1016,9 @@ test("ClawSweeper policy requires verified fixing provenance before self PR clos
 
   const implementedIssue = validateCloseDecision(
     item({
-      repo: "openclaw/clawsweeper",
+      repo: "bianca-git/clawsweeper",
       kind: "issue",
-      url: "https://github.com/openclaw/clawsweeper/issues/17",
+      url: "https://github.com/bianca-git/clawsweeper/issues/17",
     }),
     closeDecision(),
   );

@@ -152,6 +152,6 @@ jobs:
         continue-on-error: true
         env:
           CLAWSWEEPER_STATE_REPO_TOKEN: ${{ steps.state-token.outputs.token }}
-          STATE_REPOSITORY: openclaw/clawsweeper-state
+          STATE_REPOSITORY: bianca-git/clawsweeper-state
           STATE_REPO_SIZE_WARN_GB: ${{ vars.STATE_REPO_SIZE_WARN_GB || '5' }}
         run: node dist/repair/state-repo-size.js

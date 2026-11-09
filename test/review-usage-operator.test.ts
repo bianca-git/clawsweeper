@@ -20,7 +20,7 @@ const bindings = [
 ];
 const baseEnv = {
   PATH: process.env.PATH,
-  GITHUB_REPOSITORY: "openclaw/clawsweeper",
+  GITHUB_REPOSITORY: "bianca-git/clawsweeper",
   GITHUB_REF: "refs/heads/main",
   GITHUB_EVENT_NAME: "workflow_dispatch",
   GITHUB_SHA: source,

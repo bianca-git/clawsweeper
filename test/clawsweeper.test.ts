@@ -192,7 +192,7 @@ if (args[0] === "api" && /\\/issues\\/321\\/comments(?:\\?|$)/.test(path)) {
   console.log(JSON.stringify({
     number: 321,
     title: "Render work plans",
-    html_url: "https://github.com/openclaw/clawsweeper/issues/321",
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/321",
     created_at: "2026-05-01T00:00:00Z",
     updated_at: "2026-05-01T00:00:00Z",
     closed_at: "2026-05-02T00:00:00Z",
@@ -259,7 +259,7 @@ if (/\\/issues\\/321\\/comments(?:\\?|$)/.test(path)) {
   console.log(JSON.stringify({
     number: 321,
     title: "Render work plans",
-    html_url: "https://github.com/openclaw/clawsweeper/issues/321",
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/321",
     created_at: "2026-05-01T00:00:00Z",
     updated_at: "2026-05-02T00:00:00Z",
     closed_at: "2026-05-02T00:00:00Z",
@@ -336,7 +336,7 @@ if (/\\/issues\\/321\\/comments(?:\\?|$)/.test(path)) {
   console.log(JSON.stringify({
     number: 321,
     title: "Render work plans",
-    html_url: "https://github.com/openclaw/clawsweeper/issues/321",
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/321",
     created_at: "2026-05-01T00:00:00Z",
     updated_at: "2026-05-02T00:00:00Z",
     closed_at: null,
@@ -404,7 +404,7 @@ test("apply-decisions keeps required maintainer decisions open", () => {
     writeFileSync(join(itemsDir, "321.md"), synced.report, "utf8");
     const existingComment = {
       id: 9321,
-      html_url: "https://github.com/openclaw/clawsweeper/issues/321#issuecomment-9321",
+      html_url: "https://github.com/bianca-git/clawsweeper/issues/321#issuecomment-9321",
       created_at: "2026-05-01T01:00:00Z",
       updated_at: "2026-05-01T01:00:00Z",
       user: { login: "clawsweeper[bot]" },
@@ -426,7 +426,7 @@ if (/\\/issues\\/321\\/comments(?:\\?|$)/.test(path)) {
   console.log(JSON.stringify({
     number: 321,
     title: "Render work plans",
-    html_url: "https://github.com/openclaw/clawsweeper/issues/321",
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/321",
     created_at: "2026-05-01T00:00:00Z",
     updated_at: "2026-05-01T00:00:00Z",
     closed_at: null,
@@ -595,7 +595,7 @@ if (args[0] === "api" && commentMatch) {
   const number = Number(commentMatch[1]);
   console.log(JSON.stringify([[{
     id: 9000 + number,
-    html_url: "https://github.com/openclaw/clawsweeper/issues/" + number + "#issuecomment-" + (9000 + number),
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/" + number + "#issuecomment-" + (9000 + number),
     created_at: "2026-05-01T01:00:00Z",
     updated_at: "2026-05-01T01:00:00Z",
     user: { login: "clawsweeper[bot]" },
@@ -606,7 +606,7 @@ if (args[0] === "api" && commentMatch) {
   console.log(JSON.stringify({
     number,
     title: "Render work plans",
-    html_url: "https://github.com/openclaw/clawsweeper/issues/" + number,
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/" + number,
     created_at: "2026-05-01T00:00:00Z",
     updated_at: updatedAt[number],
     closed_at: null,
@@ -746,7 +746,7 @@ if (args[0] === "api" && /\\/issues\\/comments\\/9321$/.test(path) && args[args.
   const inputPath = args[args.indexOf("--input") + 1];
   const body = JSON.parse(readFileSync(inputPath, "utf8")).body;
   appendFileSync(logPath, JSON.stringify(["comment-patch", body]) + "\\n");
-  console.log(JSON.stringify({ id: 9321, html_url: "https://github.com/openclaw/clawsweeper/issues/321#issuecomment-9321", updated_at: "2026-05-01T01:02:00Z", user: { login: "clawsweeper[bot]" }, body }));
+  console.log(JSON.stringify({ id: 9321, html_url: "https://github.com/bianca-git/clawsweeper/issues/321#issuecomment-9321", updated_at: "2026-05-01T01:02:00Z", user: { login: "clawsweeper[bot]" }, body }));
 } else if (args[0] === "api" && /\\/issues\\/\\d+\\/timeline(?:\\?|$)/.test(path)) {
   console.log("HTTP/2 200\\n\\n[]");
 } else if (args[0] === "api" && commentMatch) {
@@ -754,7 +754,7 @@ if (args[0] === "api" && /\\/issues\\/comments\\/9321$/.test(path) && args[args.
   const body = comments[number];
   console.log(JSON.stringify([[{
     id: 9000 + number,
-    html_url: "https://github.com/openclaw/clawsweeper/issues/" + number + "#issuecomment-" + (9000 + number),
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/" + number + "#issuecomment-" + (9000 + number),
     created_at: "2026-05-01T01:00:00Z",
     updated_at: "2026-05-01T01:00:00Z",
     user: { login: "clawsweeper[bot]" },
@@ -765,7 +765,7 @@ if (args[0] === "api" && /\\/issues\\/comments\\/9321$/.test(path) && args[args.
   console.log(JSON.stringify({
     number,
     title: "Render work plans",
-    html_url: "https://github.com/openclaw/clawsweeper/issues/" + number,
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/" + number,
     created_at: "2026-05-01T00:00:00Z",
     updated_at: "2026-05-01T00:00:00Z",
     closed_at: null,
@@ -781,7 +781,7 @@ if (args[0] === "api" && /\\/issues\\/comments\\/9321$/.test(path) && args[args.
   console.log(JSON.stringify({
     number: 87691,
     title: "fix(auto-reply): preserve post-compaction failure context",
-    html_url: "https://github.com/openclaw/clawsweeper/pull/87691",
+    html_url: "https://github.com/bianca-git/clawsweeper/pull/87691",
     state: "open",
     merged: false,
     merged_at: null,
@@ -883,7 +883,7 @@ test("apply-decisions syncs labels when first review placeholder advanced issue 
       number: 321,
       title: "Render work plans",
       body: null,
-      html_url: "https://github.com/openclaw/clawsweeper/issues/321",
+      html_url: "https://github.com/bianca-git/clawsweeper/issues/321",
       created_at: "2026-05-01T00:00:00Z",
       updated_at: "2026-05-01T00:01:01Z",
       closed_at: null,
@@ -953,7 +953,7 @@ if (args[0] === "api" && /\\/issues\\/comments\\/\\d+$/.test(path) && args.inclu
   appendFileSync(logPath, JSON.stringify(["comment-patch", body]) + "\\n");
   console.log(JSON.stringify({
     id: 9321,
-    html_url: "https://github.com/openclaw/clawsweeper/issues/321#issuecomment-9321",
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/321#issuecomment-9321",
     created_at: "2026-05-01T00:01:00Z",
     updated_at: "2026-05-01T00:06:00Z",
     user: { login: "clawsweeper[bot]" },
@@ -965,7 +965,7 @@ if (args[0] === "api" && /\\/issues\\/comments\\/\\d+$/.test(path) && args.inclu
   appendFileSync(logPath, JSON.stringify(["comment-post", body]) + "\\n");
   console.log(JSON.stringify({
     id: 9322,
-    html_url: "https://github.com/openclaw/clawsweeper/issues/321#issuecomment-9322",
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/321#issuecomment-9322",
     created_at: "2026-05-01T00:06:00Z",
     updated_at: "2026-05-01T00:06:00Z",
     user: { login: "clawsweeper[bot]" },
@@ -974,7 +974,7 @@ if (args[0] === "api" && /\\/issues\\/comments\\/\\d+$/.test(path) && args.inclu
 } else if (args[0] === "api" && commentMatch) {
   console.log(JSON.stringify([[{
     id: 9321,
-    html_url: "https://github.com/openclaw/clawsweeper/issues/321#issuecomment-9321",
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/321#issuecomment-9321",
     created_at: "2026-05-01T00:01:00Z",
     updated_at: "2026-05-01T00:01:00Z",
     user: { login: "clawsweeper[bot]" },
@@ -1083,7 +1083,7 @@ const path = args[1] || "";
 if (args[0] === "api" && /\\/issues\\/321\\/comments(?:\\?|$)/.test(path)) {
   console.log(JSON.stringify([[{
     id: 9321,
-    html_url: "https://github.com/openclaw/clawsweeper/issues/321#issuecomment-9321",
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/321#issuecomment-9321",
     created_at: "2026-05-01T01:00:00Z",
     updated_at: "2026-05-01T01:00:00Z",
     user: { login: "clawsweeper[bot]" },
@@ -1093,7 +1093,7 @@ if (args[0] === "api" && /\\/issues\\/321\\/comments(?:\\?|$)/.test(path)) {
   console.log(JSON.stringify({
     number: 321,
     title: "Render work plans",
-    html_url: "https://github.com/openclaw/clawsweeper/issues/321",
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/321",
     created_at: "2026-05-01T00:00:00Z",
     updated_at: "2026-05-01T00:00:00Z",
     closed_at: null,
@@ -1184,7 +1184,7 @@ const path = args[1] || "";
 if (args[0] === "api" && /\\/issues\\/321\\/comments(?:\\?|$)/.test(path)) {
   console.log(JSON.stringify([[{
     id: 9321,
-    html_url: "https://github.com/openclaw/clawsweeper/issues/321#issuecomment-9321",
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/321#issuecomment-9321",
     created_at: "2026-05-01T01:00:00Z",
     updated_at: "2026-05-01T01:00:00Z",
     user: { login: "clawsweeper[bot]" },
@@ -1194,7 +1194,7 @@ if (args[0] === "api" && /\\/issues\\/321\\/comments(?:\\?|$)/.test(path)) {
   console.log(JSON.stringify({
     number: 321,
     title: "Render work plans",
-    html_url: "https://github.com/openclaw/clawsweeper/issues/321",
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/321",
     created_at: "2026-05-01T00:00:00Z",
     updated_at: "2026-05-01T00:00:00Z",
     closed_at: null,
@@ -1877,7 +1877,7 @@ if (args[0] === "api" && /\\/issues\\/comments\\/\\d+$/.test(path)) {
   appendFileSync(logPath, JSON.stringify(["comment-patch", body]) + "\\n");
   console.log(JSON.stringify({
     id: 9321,
-    html_url: "https://github.com/openclaw/clawsweeper/issues/321#issuecomment-9321",
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/321#issuecomment-9321",
     created_at: "2026-05-01T00:01:00Z",
     updated_at: "2026-05-01T00:11:00Z",
     user: { login: "clawsweeper[bot]" },
@@ -1888,7 +1888,7 @@ if (args[0] === "api" && /\\/issues\\/comments\\/\\d+$/.test(path)) {
 } else if (args[0] === "api" && /\\/issues\\/321\\/comments(?:\\?|$)/.test(path)) {
   console.log(JSON.stringify([[{
     id: 9321,
-    html_url: "https://github.com/openclaw/clawsweeper/issues/321#issuecomment-9321",
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/321#issuecomment-9321",
     created_at: "2026-05-01T00:01:00Z",
     updated_at: "2026-05-01T00:10:30Z",
     user: { login: "clawsweeper[bot]" },
@@ -1898,7 +1898,7 @@ if (args[0] === "api" && /\\/issues\\/comments\\/\\d+$/.test(path)) {
   console.log(JSON.stringify({
     number: 321,
     title: "Render work plans",
-    html_url: "https://github.com/openclaw/clawsweeper/issues/321",
+    html_url: "https://github.com/bianca-git/clawsweeper/issues/321",
     created_at: "2026-05-01T00:00:00Z",
     updated_at: "2026-05-01T00:00:00Z",
     closed_at: null,

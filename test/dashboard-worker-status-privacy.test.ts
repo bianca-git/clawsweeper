@@ -806,7 +806,7 @@ test("public Bay references retain only allowlisted canonical GitHub coordinates
       recent: {},
       diagnostics: { errors: [], error_count: 0 },
     },
-    new Set(["openclaw/openclaw", "openclaw/clawsweeper"]),
+    new Set(["openclaw/openclaw", "bianca-git/clawsweeper"]),
   );
 
   assert.deepEqual(projected.exact_review_queue.bay_projection.items, [
@@ -818,7 +818,7 @@ test("public Bay references retain only allowlisted canonical GitHub coordinates
       legacy_batch_path: false,
       timing: { kind: "queue", started_at: STATUS_NOW },
       action: {
-        repository: "openclaw/clawsweeper",
+        repository: "bianca-git/clawsweeper",
         run_id: 7001,
         job_id: 8001,
         status: "in_progress",
@@ -848,7 +848,7 @@ test("public Bay references retain only allowlisted canonical GitHub coordinates
   assert.equal(serialized.includes(marker), false);
   assert.equal(serialized.includes("example.invalid"), false);
   assert.deepEqual(
-    strictPublicStatusProjection(projected, new Set(["openclaw/openclaw", "openclaw/clawsweeper"])),
+    strictPublicStatusProjection(projected, new Set(["openclaw/openclaw", "bianca-git/clawsweeper"])),
     projected,
   );
   const noAllowlist = strictPublicStatusProjection(projected);
@@ -900,7 +900,7 @@ test("public Bay actions fail closed for malformed, private, and over-cap shapes
     repairing: 0,
   };
   const safeAction = {
-    repository: "openclaw/clawsweeper",
+    repository: "bianca-git/clawsweeper",
     run_id: 7001,
     job_id: 8001,
     status: "in_progress",
@@ -938,7 +938,7 @@ test("public Bay actions fail closed for malformed, private, and over-cap shapes
         recent: {},
         diagnostics: { errors: [], error_count: 0 },
       },
-      new Set(["openclaw/openclaw", "openclaw/clawsweeper"]),
+      new Set(["openclaw/openclaw", "bianca-git/clawsweeper"]),
     );
 
   const malformedActions = [

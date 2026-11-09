@@ -96,7 +96,7 @@ test("packet readers use the typed decision instead of stale report metadata", (
   decision.maintainerDecision.likelyOwner = { ...productDecision.likelyOwner };
   const line = reviewRecordFrontMatterLine(
     { decision },
-    { repo: "openclaw/clawsweeper", number: 321, kind: "pull_request" },
+    { repo: "bianca-git/clawsweeper", number: 321, kind: "pull_request" },
   );
   assert.ok(line);
   const report = decisionReport({ triage_priority: "P3", maintainer_decision: "none" }).replace(
@@ -189,7 +189,7 @@ type: issue
 maintainer_decision: ${JSON.stringify(productDecision)}
 ---
 number: 321
-repository: openclaw/clawsweeper
+repository: bianca-git/clawsweeper
 type: issue
 maintainer_decision: ${JSON.stringify(emptyMaintainerDecision())}
 ---
@@ -370,7 +370,7 @@ test("apply-artifacts anchors packet pointers to an explicit record root", () =>
       "dist/clawsweeper.js",
       "apply-artifacts",
       "--target-repo",
-      "openclaw/clawsweeper",
+      "bianca-git/clawsweeper",
       "--artifact-dir",
       artifactDir,
       "--record-root",
@@ -400,10 +400,10 @@ test("apply-artifacts anchors packet pointers to an explicit record root", () =>
 function decisionReport(overrides: Record<string, unknown> = {}): string {
   const frontmatter = {
     number: 321,
-    repository: "openclaw/clawsweeper",
+    repository: "bianca-git/clawsweeper",
     type: "issue",
     title: JSON.stringify("Render maintainer decision"),
-    url: "https://github.com/openclaw/clawsweeper/issues/321",
+    url: "https://github.com/bianca-git/clawsweeper/issues/321",
     reviewed_at: "2026-06-23T10:00:00.000Z",
     item_created_at: "2026-06-20T00:00:00Z",
     item_updated_at: "2026-06-21T00:00:00Z",
@@ -447,7 +447,7 @@ for (const body of [
     const packet = buildDecisionPacketFromReport(required);
     assert.ok(packet);
     assert.equal(packet.subject.title, 'Original "quoted"\nline');
-    assert.equal(packet.subject.repo, "openclaw/clawsweeper");
+    assert.equal(packet.subject.repo, "bianca-git/clawsweeper");
     assert.equal(packet.subject.number, 321);
     assert.equal(packet.question, productDecision.question);
   });
@@ -504,7 +504,7 @@ for (const [name, suffix] of [
 ]) {
   test(`decision packets do not treat ${name} as mapping keys`, () => {
     const report = withReviewRecord(
-      `---\nrepository: openclaw/clawsweeper\ntype: issue\nnumber: 321\ntitle: Original\nmaintainer_decision: none\n${suffix}`,
+      `---\nrepository: bianca-git/clawsweeper\ntype: issue\nnumber: 321\ntitle: Original\nmaintainer_decision: none\n${suffix}`,
     );
     assert.deepEqual(maintainerDecisionFromReport(report), emptyMaintainerDecision());
     assert.equal(buildDecisionPacketFromReport(report), null);
@@ -515,7 +515,7 @@ for (const [name, suffix] of [
     assert.deepEqual(maintainerDecisionFromReport(required), productDecision);
     const packet = buildDecisionPacketFromReport(required);
     assert.ok(packet);
-    assert.equal(packet.subject.repo, "openclaw/clawsweeper");
+    assert.equal(packet.subject.repo, "bianca-git/clawsweeper");
     assert.equal(packet.subject.number, 321);
     assert.equal(packet.subject.title, "Original");
     assert.equal(packet.question, productDecision.question);
@@ -549,7 +549,7 @@ for (const [name, body] of [
     assert.deepEqual(maintainerDecisionFromReport(required), productDecision);
     const packet = buildDecisionPacketFromReport(required);
     assert.ok(packet);
-    assert.equal(packet.subject.repo, "openclaw/clawsweeper");
+    assert.equal(packet.subject.repo, "bianca-git/clawsweeper");
     assert.equal(packet.subject.number, 321);
     assert.equal(packet.subject.title, "Original");
     assert.equal(packet.question, productDecision.question);

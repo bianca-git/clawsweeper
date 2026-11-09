@@ -44,7 +44,7 @@ env:
   OPENROUTER_API_KEY: ${{ vars.CLAWSWEEPER_RUNNER == 'openclaw' && secrets.OPENROUTER_API_KEY || '' }}
 
 concurrency:
-  group: ${{ format('{0}-{1}', github.event_name == 'workflow_dispatch' && format('clawsweeper-operator-dispatch-{0}', github.run_id) || 'clawsweeper-audit', github.event.inputs.target_repo || ((github.event.schedule == '17 */6 * * *') && 'openclaw/clawsweeper' || ((github.event.schedule == '12 */6 * * *') && 'openclaw/clawhub' || 'openclaw/openclaw'))) }}
+  group: ${{ format('{0}-{1}', github.event_name == 'workflow_dispatch' && format('clawsweeper-operator-dispatch-{0}', github.run_id) || 'clawsweeper-audit', github.event.inputs.target_repo || ((github.event.schedule == '17 */6 * * *') && 'bianca-git/clawsweeper' || ((github.event.schedule == '12 */6 * * *') && 'openclaw/clawhub' || 'openclaw/openclaw'))) }}
   cancel-in-progress: false
 
 jobs:
@@ -52,7 +52,7 @@ jobs:
     if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || (github.event_name == 'repository_dispatch' && github.event.action == 'clawsweeper_target_sweep') }}
     uses: ./.github/workflows/hosted-target-admission.yml
     with:
-      target_repo: ${{ github.event.inputs.target_repo || github.event.client_payload.target_repo || ((github.event.schedule == '17 */6 * * *') && 'openclaw/clawsweeper' || ((github.event.schedule == '12 */6 * * *') && 'openclaw/clawhub' || 'openclaw/openclaw')) }}
+      target_repo: ${{ github.event.inputs.target_repo || github.event.client_payload.target_repo || ((github.event.schedule == '17 */6 * * *') && 'bianca-git/clawsweeper' || ((github.event.schedule == '12 */6 * * *') && 'openclaw/clawhub' || 'openclaw/openclaw')) }}
     secrets:
       CLAWSWEEPER_APP_PRIVATE_KEY: ${{ secrets.CLAWSWEEPER_APP_PRIVATE_KEY }}
 
@@ -81,7 +81,7 @@ jobs:
                 target_repo="openclaw/clawhub"
                 ;;
               "17 */6 * * *")
-                target_repo="openclaw/clawsweeper"
+                target_repo="bianca-git/clawsweeper"
                 ;;
               *)
                 target_repo="openclaw/openclaw"
@@ -196,5 +196,5 @@ jobs:
           GH_TOKEN: ${{ steps.state-token.outputs.token }}
         run: |
           gh workflow run dashboard.yml \
-            --repo openclaw/clawsweeper-state \
+            --repo bianca-git/clawsweeper-state \
             --ref main || echo "Best-effort dashboard refresh dispatch failed; scheduled state dashboard will retry."

@@ -19,7 +19,7 @@ const suppliedHead = process.argv[3];
 if (suppliedHead && !/^[a-f0-9]{40}$/.test(suppliedHead))
   throw new Error("Invalid proof source head");
 const now = Date.now();
-const repo = "openclaw/clawsweeper";
+const repo = "bianca-git/clawsweeper";
 const originalFetch = globalThis.fetch;
 globalThis.fetch = async () => {
   throw new Error("Proof refuses external queue network");
@@ -233,7 +233,7 @@ try {
           recent_claims_per_target: 5,
         },
         limits:
-          "Controlled local queue/storage records, no live GitHub or production mutation; public repository allowlist fixed to openclaw/clawsweeper. No source revision/trigger or workflow URL inferred from claim history.",
+          "Controlled local queue/storage records, no live GitHub or production mutation; public repository allowlist fixed to bianca-git/clawsweeper. No source revision/trigger or workflow URL inferred from claim history.",
       },
       null,
       2,

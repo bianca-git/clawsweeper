@@ -129,7 +129,7 @@ test("exact local bootstrap rejects a same-number report from another repository
   const report = [
     "---",
     `number: ${ITEM_NUMBER}`,
-    "repository: openclaw/clawsweeper",
+    "repository: bianca-git/clawsweeper",
     "review_status: complete",
     "---",
     "Foreign report",
@@ -143,7 +143,7 @@ test("exact local bootstrap rejects a same-number report from another repository
   assert.equal(
     localExactBootstrapReviewCommentBody(
       report,
-      { repo: "openclaw/clawsweeper", number: ITEM_NUMBER },
+      { repo: "bianca-git/clawsweeper", number: ITEM_NUMBER },
       render,
     ),
     "rendered review history",
@@ -159,7 +159,7 @@ test("exact local bootstrap rejects a same-number report from another repository
   assert.equal(
     localExactBootstrapReviewCommentBody(
       report,
-      { repo: "openclaw/clawsweeper", number: ITEM_NUMBER + 1 },
+      { repo: "bianca-git/clawsweeper", number: ITEM_NUMBER + 1 },
       render,
     ),
     "",

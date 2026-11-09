@@ -65,7 +65,7 @@ function fixture() {
     schema_version: 1,
     created_at: "2026-08-18T12:00:00Z",
     workflow: {
-      repository: "openclaw/clawsweeper",
+      repository: "bianca-git/clawsweeper",
       source_sha: sourceSha,
       run_id: "8001",
       run_attempt: 1,
@@ -106,7 +106,7 @@ function fixture() {
     run_attempt: 1,
     path: ".github/workflows/sweep.yml",
     head_sha: sourceSha,
-    repository: { id: 42, full_name: "openclaw/clawsweeper" },
+    repository: { id: 42, full_name: "bianca-git/clawsweeper" },
     conclusion: "failure",
   };
   const target = {
@@ -371,7 +371,7 @@ test("unsigned archive download refuses insecure or looping redirects", async ()
     prepareClosedPublicationRetirement(f.input, "token-sentinel", async (url, options) => {
       if (
         String(url) ===
-          "https://api.github.com/repos/openclaw/clawsweeper/actions/artifacts/9001/zip" ||
+          "https://api.github.com/repos/bianca-git/clawsweeper/actions/artifacts/9001/zip" ||
         String(url) === "https://blob.example.test/loop"
       ) {
         requests += 1;

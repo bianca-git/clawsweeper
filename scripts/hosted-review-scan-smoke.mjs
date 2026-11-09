@@ -188,11 +188,11 @@ ${live ? `const child = require('node:child_process').spawnSync(${JSON.stringify
     () =>
       runCodexForTest({
         item: {
-          repo: "openclaw/clawsweeper",
+          repo: "bianca-git/clawsweeper",
           number: itemNumber,
           kind: "pull_request",
           title: "Synthetic hosted review canary",
-          url: "https://github.com/openclaw/clawsweeper",
+          url: "https://github.com/bianca-git/clawsweeper",
           createdAt: "2026-09-04T00:00:00Z",
           updatedAt: "2026-09-04T00:00:00Z",
           author: "clawsweeper-canary",
@@ -390,7 +390,7 @@ stream_idle_timeout_ms = 10000
           number: 990_002,
           kind: "issue",
           title: "Synthetic provider failure",
-          url: "https://github.com/openclaw/clawsweeper",
+          url: "https://github.com/bianca-git/clawsweeper",
           createdAt: "2026-09-04T00:00:00Z",
           updatedAt: "2026-09-04T00:00:00Z",
           author: "clawsweeper-canary",
