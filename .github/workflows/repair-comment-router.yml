@@ -172,8 +172,8 @@ jobs:
 
       - uses: ./.github/actions/setup-state
         with:
-          coordinator-url: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
-          records-url: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
+          coordinator-url: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
+          records-url: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
           records-secret: ${{ secrets.CLAWSWEEPER_WEBHOOK_SECRET }}
           records-repo-slugs: ${{ steps.target.outputs.target_slug }}
           records-item-number: ${{ steps.target.outputs.records_item_number || '' }}
@@ -201,7 +201,7 @@ jobs:
           CLAWSWEEPER_ACTION_LEDGER_INVOCATION: initial
           CLAWSWEEPER_WEBHOOK_SECRET: ${{ secrets.CLAWSWEEPER_WEBHOOK_SECRET }}
           CLAWSWEEPER_TARGET_INSTALLATION_ID: ${{ steps.app_token.outputs.installation-id }}
-          QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
+          QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
           INPUT_TARGET_REPO: ${{ github.event_name == 'workflow_dispatch' && inputs.target_repo || vars.CLAWSWEEPER_TARGET_REPO || 'openclaw/openclaw' }}
           INPUT_TARGET_BRANCH: ${{ github.event_name == 'workflow_dispatch' && inputs.target_branch || '' }}
           INPUT_LOOKBACK_MINUTES: ${{ github.event_name == 'workflow_dispatch' && inputs.lookback_minutes || vars.CLAWSWEEPER_COMMENT_LOOKBACK_MINUTES || '180' }}
@@ -347,7 +347,7 @@ jobs:
         if: always()
         env:
           CLAWSWEEPER_WEBHOOK_SECRET: ${{ secrets.CLAWSWEEPER_WEBHOOK_SECRET }}
-          QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
+          QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
           STEPS_TARGET_OUTPUTS_TARGET_SLUG: ${{ steps.target.outputs.target_slug }}
         run: |
           if jq -e '.short_circuited == true' results/comment-router-latest.json >/dev/null 2>&1; then
@@ -400,7 +400,7 @@ jobs:
         if: ${{ always() && steps.setup-pnpm.outcome == 'success' && steps.finalize-command-action-ledger.outputs.publish == 'true' }}
         env:
           CLAWSWEEPER_WEBHOOK_SECRET: ${{ secrets.CLAWSWEEPER_WEBHOOK_SECRET }}
-          QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
+          QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
         run: |
           set -euo pipefail
           source_root="${CLAWSWEEPER_ACTION_LEDGER_OUTPUT_ROOT:?setup-action-ledger output root is required}"

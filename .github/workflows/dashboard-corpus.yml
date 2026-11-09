@@ -81,7 +81,7 @@ jobs:
         id: refresh
         timeout-minutes: 75
         env:
-          CLAWSWEEPER_RECORDS_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
+          CLAWSWEEPER_RECORDS_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
           CLAWSWEEPER_RECORDS_SECRET: ${{ secrets.CLAWSWEEPER_WEBHOOK_SECRET }}
           EVENT_NAME: ${{ github.event_name }}
           SCHEDULE: ${{ github.event.schedule }}

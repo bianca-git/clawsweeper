@@ -1794,7 +1794,7 @@ export async function workerRecordsMain(argv: string[], env: NodeJS.ProcessEnv =
   const webhookSecret = env.CLAWSWEEPER_RECORDS_SECRET ?? env.CLAWSWEEPER_WEBHOOK_SECRET ?? "";
   if (!webhookSecret) throw new Error("CLAWSWEEPER_WEBHOOK_SECRET is required");
   const baseUrl =
-    values["records-url"] ?? env.CLAWSWEEPER_RECORDS_URL ?? "https://clawsweeper.openclaw.ai";
+    values["records-url"] ?? env.CLAWSWEEPER_RECORDS_URL ?? "https://clawsweeper-status.bianca-codes.workers.dev";
   if (command === "snapshot-bootstrap-cold") {
     if (values["repo-slug"]) throw new Error("snapshot-bootstrap-cold takes no --repo-slug");
     if (replayBudget !== undefined)

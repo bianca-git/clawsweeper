@@ -506,7 +506,7 @@ async function main() {
     "invalid_input",
   );
   const result = await verifyCanonicalRecords({
-    baseUrl: env.EXACT_REVIEW_QUEUE_URL ?? "https://clawsweeper.openclaw.ai",
+    baseUrl: env.EXACT_REVIEW_QUEUE_URL ?? "https://clawsweeper-status.bianca-codes.workers.dev",
     webhookSecret: env.CLAWSWEEPER_WEBHOOK_SECRET ?? "",
     repoSlug: env.VERIFICATION_REPO_SLUG ?? "",
     deploymentSha: env.EXPECTED_DEPLOYMENT_SHA ?? "",

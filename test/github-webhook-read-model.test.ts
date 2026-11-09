@@ -1197,7 +1197,7 @@ test("dashboard health ignores repair-fed workflow rows without subscription cov
   };
   try {
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       {
         CLAWSWEEPER_REPO: "openclaw/openclaw",
         TARGET_REPOS: "openclaw/openclaw",
@@ -1244,7 +1244,7 @@ test("exact-review lease capability reads only its own item without the webhook 
   const lease = githubReadModelLeaseItemRequest(
     { repository: "openclaw/openclaw", number: 700 },
     {
-      QUEUE_URL: "https://clawsweeper.openclaw.ai",
+      QUEUE_URL: "https://clawsweeper-status.bianca-codes.workers.dev",
       EXACT_REVIEW_ITEM_KEY: "openclaw/openclaw#700",
       EXACT_REVIEW_LEASE_ID: "lease-700",
       EXACT_REVIEW_LEASE_REVISION: "1",
@@ -1365,7 +1365,7 @@ async function signedRead(
   const body = JSON.stringify(payload);
   const signature = `sha256=${createHmac("sha256", secret).update(body).digest("hex")}`;
   const response = await worker.fetch(
-    new Request(`https://clawsweeper.openclaw.ai/internal/state/github-read-model/${operation}`, {
+    new Request(`https://clawsweeper-status.bianca-codes.workers.dev/internal/state/github-read-model/${operation}`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

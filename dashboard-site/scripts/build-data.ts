@@ -22,7 +22,7 @@ import { type CorpusCache } from "./records.ts";
 import { summarizeOperations } from "./operations.ts";
 import { readCoverageForBuild, publicDashboardInputs } from "./coverage.ts";
 
-const ORIGIN = "https://clawsweeper.openclaw.ai";
+const ORIGIN = "https://clawsweeper-status.bianca-codes.workers.dev";
 const site = new URL("../", import.meta.url).pathname;
 
 const { values } = parseArgs({

@@ -53,7 +53,7 @@ test("dashboard verification exposes only the existing signing secret to the smo
   assert.equal(verify.steps[1].with["node-version"], "24.22.1");
   assert.equal(verify.steps.filter((step: { run?: string }) => step.run).length, 1);
   assert.deepEqual(smoke.env, {
-    CLAWSWEEPER_STATUS_URL: "https://clawsweeper.openclaw.ai",
+    CLAWSWEEPER_STATUS_URL: "https://clawsweeper-status.bianca-codes.workers.dev",
     CLAWSWEEPER_EXPECTED_DEPLOY_SHA: "${{ inputs.expected_deployment_sha }}",
     CLAWSWEEPER_WEBHOOK_SECRET: "${{ secrets.CLAWSWEEPER_WEBHOOK_SECRET }}",
   });
@@ -78,7 +78,7 @@ test("dashboard verification validates its revision before invoking the existing
     );
   const valid = run("a".repeat(40));
   assert.equal(valid.status, 0, valid.stderr);
-  assert.equal(valid.stdout, "scripts/dashboard-smoke.mjs https://clawsweeper.openclaw.ai\n");
+  assert.equal(valid.stdout, "scripts/dashboard-smoke.mjs https://clawsweeper-status.bianca-codes.workers.dev\n");
   assert.equal(valid.stderr, "");
   for (const sha of ["", "a".repeat(39), "a".repeat(41), "A".repeat(40), "$(private-marker)"]) {
     const invalid = run(sha);

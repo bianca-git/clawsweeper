@@ -234,7 +234,7 @@ test("codec corruption stays an infrastructure failure through queue reads and H
   const call = (body: Record<string, unknown>, signed = true) => {
     const text = JSON.stringify(body);
     return worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/internal/exact-review/read-model/compression", {
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/read-model/compression", {
         method: "POST",
         body: text,
         headers: signed

@@ -1,6 +1,6 @@
 import { assert, test, worker } from "./dashboard-worker-harness.ts";
 
-const ORIGIN = "https://clawsweeper.openclaw.ai";
+const ORIGIN = "https://clawsweeper-status.bianca-codes.workers.dev";
 
 test("agent pages preserve GET, HEAD and redirects without proxying mutations or credentials", async () => {
   const originalFetch = globalThis.fetch;

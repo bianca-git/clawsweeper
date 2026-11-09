@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const statusUrl = trimTrailingSlash(
-  process.env.CLAWSWEEPER_STATUS_URL || "https://clawsweeper.openclaw.ai",
+  process.env.CLAWSWEEPER_STATUS_URL || "https://clawsweeper-status.bianca-codes.workers.dev",
 );
 const ingestUrl = process.env.CLAWSWEEPER_STATUS_INGEST_URL || `${statusUrl}/api/events`;
 const ingestToken = process.env.CLAWSWEEPER_STATUS_INGEST_TOKEN || "";

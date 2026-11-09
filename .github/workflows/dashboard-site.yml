@@ -1,7 +1,7 @@
 name: Dashboard site
 
 # Static operator dashboard (dashboard-site/), rebuilt every 15 minutes and published to
-# Cloudflare Pages. The clawsweeper.openclaw.ai Worker serves its pages from there; webhooks,
+# Cloudflare Pages. The clawsweeper-status.bianca-codes.workers.dev Worker serves its pages from there; webhooks,
 # the queue and /api/* stay on the Worker and are never redeployed by this workflow.
 # Review totals, quality and closes come from the corpus aggregate, which the separate Dashboard
 # corpus workflow (dashboard-corpus.yml) refreshes incrementally every hour. This workflow never

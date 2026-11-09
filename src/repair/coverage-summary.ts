@@ -272,6 +272,6 @@ export function renderPublicCoverageSummary(
     (a?.recordAt ?? "Unknown") +
     ". Source generated: " +
     (a?.generatedAt ?? "Unknown") +
-    ".\n\nPer-repository identities/cardinalities and collection-window details are intentionally not copied into the public job summary. See the observer-only [Coverage page](https://clawsweeper.openclaw.ai/coverage/), whose build owns current public-visibility verification.\n"
+    ".\n\nPer-repository identities/cardinalities and collection-window details are intentionally not copied into the public job summary. See the observer-only [Coverage page](https://clawsweeper-status.bianca-codes.workers.dev/coverage/), whose build owns current public-visibility verification.\n"
   );
 }

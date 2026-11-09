@@ -66,7 +66,7 @@ globalThis.fetch = async (input, options) => {
           : response({}, 404);
     }
   }
-  if (url.origin === "https://clawsweeper.openclaw.ai") {
+  if (url.origin === "https://clawsweeper-status.bianca-codes.workers.dev") {
     if (url.pathname === "/api/exact-review-queue") return response(fixture.queue);
     if (url.pathname === "/api/review-coverage") return response(fixture.coverage);
     if (url.pathname === "/api/health-history")

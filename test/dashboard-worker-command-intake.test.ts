@@ -152,7 +152,7 @@ test("signed command intake rejects nonpublic visibility before storing command 
     const body = JSON.stringify(intake);
     const secret = "synthetic-intake-proof";
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/internal/exact-review/command-intake", {
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/command-intake", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -327,7 +327,7 @@ test("Worker forwards its eligibility fact without a second queue lookup", async
   let workerEligibilityChecks = 0;
 
   const response = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/exact-review/command-intake", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/command-intake", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -426,7 +426,7 @@ test("durable command intake survives target throttling before queue admission",
     .digest("hex")}`;
 
   const accepted = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/github/webhook", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/github/webhook", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -505,7 +505,7 @@ test("durable command intake survives target throttling before queue admission",
   assert.equal(fixture.reactions, 1);
 
   const redelivery = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/github/webhook", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/github/webhook", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -556,7 +556,7 @@ test("hosted durable command intake deduplicates redelivery and records canonica
   const { STATUS_STORE: _statusStore, ...envWithoutStatusStore } = env;
 
   const accepted = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/github/webhook", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/github/webhook", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -571,7 +571,7 @@ test("hosted durable command intake deduplicates redelivery and records canonica
   );
   assert.equal(accepted.status, 202);
   const redelivery = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/github/webhook", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/github/webhook", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -668,7 +668,7 @@ test("hosted durable command intake deduplicates redelivery and records canonica
     .digest("hex")}`;
   const acknowledgement = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/lifecycle/command-ack/observed",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/lifecycle/command-ack/observed",
       {
         method: "POST",
         headers: {
@@ -706,7 +706,7 @@ test("hosted durable command intake deduplicates redelivery and records canonica
     .update(completionBody)
     .digest("hex")}`;
   const completion = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/github/webhook", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/github/webhook", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -1124,7 +1124,7 @@ test("keyless OIDC comment intake uses live authority and coalesces with the App
   };
   const queue = new ExactReviewQueue({ storage }, env);
   const bindings = { ...env, EXACT_REVIEW_QUEUE: new MemoryDurableNamespace(queue) };
-  const endpoint = "https://clawsweeper.openclaw.ai/github/target-dispatch";
+  const endpoint = "https://clawsweeper-status.bianca-codes.workers.dev/github/target-dispatch";
   const workflow = "openclaw/openclaw/.github/workflows/clawsweeper-dispatch.yml@refs/heads/main";
   const now = Math.floor(Date.now() / 1000);
   const token = (overrides: Record<string, unknown> = {}) => {
@@ -1217,7 +1217,7 @@ test("keyless OIDC comment intake uses live authority and coalesces with the App
   const signature =
     "sha256=" + createHmac("sha256", env.CLAWSWEEPER_WEBHOOK_SECRET).update(body).digest("hex");
   const duplicate = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/github/webhook", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/github/webhook", {
       method: "POST",
       headers: {
         "x-github-event": "issue_comment",
@@ -1253,7 +1253,7 @@ test("keyless OIDC comment intake uses live authority and coalesces with the App
     "sha256=" +
     createHmac("sha256", env.CLAWSWEEPER_WEBHOOK_SECRET).update(editedBody).digest("hex");
   const appFirst = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/github/webhook", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/github/webhook", {
       method: "POST",
       headers: {
         "x-github-event": "issue_comment",
@@ -1342,7 +1342,7 @@ test("keyless OIDC comment intake uses live authority and coalesces with the App
     },
   });
   const appStop = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/github/webhook", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/github/webhook", {
       method: "POST",
       headers: {
         "x-github-event": "issue_comment",

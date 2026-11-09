@@ -702,7 +702,7 @@ for (const route of ["router-receipt", "terminal-disposition"] as const) {
       });
       const post = (target: string, body: string) =>
         worker.fetch(
-          new Request(`https://clawsweeper.openclaw.ai/internal/exact-review/lifecycle/${target}`, {
+          new Request(`https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/lifecycle/${target}`, {
             method: "POST",
             headers: {
               "x-clawsweeper-exact-review-signature": `sha256=${createHmac("sha256", "synthetic-replay-secret").update(body).digest("hex")}`,
@@ -984,7 +984,7 @@ test("canonical record operator auth is scoped to items", async () => {
   };
   const signedRequest = (secret: string, collection: string) =>
     new Request(
-      `https://clawsweeper.openclaw.ai/internal/state/records/openclaw-openclaw/${collection}/1148`,
+      `https://clawsweeper-status.bianca-codes.workers.dev/internal/state/records/openclaw-openclaw/${collection}/1148`,
       {
         headers: {
           "x-clawsweeper-exact-review-signature": `sha256=${createHmac("sha256", secret).update("").digest("hex")}`,
@@ -1072,7 +1072,7 @@ test("direct publication endpoint authenticates, dedupes, and returns a structur
     lifecycle: { kind: "router" },
   };
   const body = JSON.stringify(payload);
-  const url = "https://clawsweeper.openclaw.ai/internal/exact-review/publication-results";
+  const url = "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/publication-results";
   const unsigned = await worker.fetch(new Request(url, { method: "POST", body }), env);
   assert.equal(unsigned.status, 401);
 
@@ -1338,7 +1338,7 @@ test("direct publication endpoint authenticates, dedupes, and returns a structur
   const targetMismatchBody = JSON.stringify(targetMismatchPayload);
   const targetMismatchSignature = `sha256=${createHmac("sha256", "test-secret").update(targetMismatchBody).digest("hex")}`;
   const targetMismatch = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/exact-review/publication-batch-results", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/publication-batch-results", {
       method: "POST",
       headers: { "x-clawsweeper-exact-review-signature": targetMismatchSignature },
       body: targetMismatchBody,
@@ -1353,7 +1353,7 @@ test("direct publication endpoint authenticates, dedupes, and returns a structur
   const batchBody = JSON.stringify(batchPayload);
   const batchSignature = `sha256=${createHmac("sha256", "test-secret").update(batchBody).digest("hex")}`;
   const batchResponse = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/exact-review/publication-batch-results", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/publication-batch-results", {
       method: "POST",
       headers: { "x-clawsweeper-exact-review-signature": batchSignature },
       body: batchBody,
@@ -1372,7 +1372,7 @@ test("direct publication endpoint authenticates, dedupes, and returns a structur
     state_commit_sha: "do-revision:4",
   });
   const repeatedBatch = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/exact-review/publication-batch-results", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/publication-batch-results", {
       method: "POST",
       headers: { "x-clawsweeper-exact-review-signature": batchSignature },
       body: batchBody,
@@ -1392,7 +1392,7 @@ test("direct publication endpoint authenticates, dedupes, and returns a structur
   const driftedBatchBody = JSON.stringify(driftedBatchPayload);
   const driftedBatchSignature = `sha256=${createHmac("sha256", "test-secret").update(driftedBatchBody).digest("hex")}`;
   const driftedBatch = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/exact-review/publication-batch-results", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/publication-batch-results", {
       method: "POST",
       headers: { "x-clawsweeper-exact-review-signature": driftedBatchSignature },
       body: driftedBatchBody,
@@ -1444,7 +1444,7 @@ test("direct publication endpoint authenticates, dedupes, and returns a structur
   const wrongFenceBody = JSON.stringify(wrongFencePayload);
   const wrongFenceSignature = `sha256=${createHmac("sha256", "test-secret").update(wrongFenceBody).digest("hex")}`;
   const wrongFence = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/exact-review/publication-batch-results", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/publication-batch-results", {
       method: "POST",
       headers: { "x-clawsweeper-exact-review-signature": wrongFenceSignature },
       body: wrongFenceBody,
@@ -1465,7 +1465,7 @@ test("direct publication endpoint authenticates, dedupes, and returns a structur
     Date.now(),
   );
   const staleBatch = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/exact-review/publication-batch-results", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/publication-batch-results", {
       method: "POST",
       headers: { "x-clawsweeper-exact-review-signature": batchSignature },
       body: batchBody,
@@ -1515,7 +1515,7 @@ test("direct publication endpoint authenticates, dedupes, and returns a structur
   );
 
   const recordUrl =
-    "https://clawsweeper.openclaw.ai/internal/state/records/openclaw-openclaw/items/701";
+    "https://clawsweeper-status.bianca-codes.workers.dev/internal/state/records/openclaw-openclaw/items/701";
   const unsignedRecord = await worker.fetch(new Request(recordUrl), env);
   assert.equal(unsignedRecord.status, 401);
   const emptySignature = `sha256=${createHmac("sha256", "test-secret").update("").digest("hex")}`;
@@ -1543,7 +1543,7 @@ test("direct publication endpoint authenticates, dedupes, and returns a structur
   });
   const listingSignature = `sha256=${createHmac("sha256", "test-secret").update(listingBody).digest("hex")}`;
   const listingResponse = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/state/records/list", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/state/records/list", {
       method: "POST",
       headers: { "x-clawsweeper-exact-review-signature": listingSignature },
       body: listingBody,
@@ -1813,7 +1813,7 @@ test("direct publication keeps GitHub casing while using lowercase canonical rec
     CLAWSWEEPER_WEBHOOK_SECRET: "mixed-case-direct-secret",
     EXACT_REVIEW_QUEUE: new MemoryDurableNamespace(queue),
   };
-  const url = "https://clawsweeper.openclaw.ai/internal/exact-review/publication-results";
+  const url = "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/publication-results";
 
   for (const fixture of fixtures) {
     const canonicalTargetKey = `${fixture.targetRepo}#${fixture.itemNumber}`;
@@ -2060,7 +2060,7 @@ test("direct lifecycle requeue becomes a fresh fenced source-drift revision", as
   const body = JSON.stringify(payload);
   const signature = `sha256=${createHmac("sha256", "test-secret").update(body).digest("hex")}`;
   const accepted = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/exact-review/publication-results", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/publication-results", {
       method: "POST",
       headers: { "x-clawsweeper-exact-review-signature": signature },
       body,
@@ -2137,7 +2137,7 @@ async function savedDirectRequeueFixture(
   const post = (route: string, value: unknown, signed = true) => {
     const body = JSON.stringify(value);
     return worker.fetch(
-      new Request(`https://clawsweeper.openclaw.ai/internal/exact-review/${route}`, {
+      new Request(`https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/${route}`, {
         method: "POST",
         headers: signed
           ? {
@@ -2889,7 +2889,7 @@ test("direct lifecycle requeue preserves a newer command follow-up revision", as
     .update(publicationBody)
     .digest("hex")}`;
   const accepted = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/exact-review/publication-results", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/publication-results", {
       method: "POST",
       headers: { "x-clawsweeper-exact-review-signature": publicationSignature },
       body: publicationBody,
@@ -3026,7 +3026,7 @@ test("direct lifecycle router completion preserves a newer command follow-up rev
     .update(publicationBody)
     .digest("hex")}`;
   const accepted = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/exact-review/publication-results", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/publication-results", {
       method: "POST",
       headers: { "x-clawsweeper-exact-review-signature": publicationSignature },
       body: publicationBody,
@@ -3065,7 +3065,7 @@ test("direct lifecycle router completion preserves a newer command follow-up rev
     .update(routerBody)
     .digest("hex")}`;
   const routed = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/exact-review/lifecycle/router-receipt", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/lifecycle/router-receipt", {
       method: "POST",
       headers: { "x-clawsweeper-exact-review-signature": routerSignature },
       body: routerBody,
@@ -3160,7 +3160,7 @@ test("direct lifecycle router completion preserves a newer command follow-up rev
     .update(successorPublicationBody)
     .digest("hex")}`;
   const successorAccepted = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/exact-review/publication-results", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/publication-results", {
       method: "POST",
       headers: { "x-clawsweeper-exact-review-signature": successorPublicationSignature },
       body: successorPublicationBody,
@@ -3244,7 +3244,7 @@ test("durable direct command acknowledgement survives successor lease expiry", a
   assert.equal(
     (
       await worker.fetch(
-        new Request("https://clawsweeper.openclaw.ai/internal/exact-review/publication-results", {
+        new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/publication-results", {
           method: "POST",
           headers: { "x-clawsweeper-exact-review-signature": publicationSignature },
           body: publicationBody,
@@ -3323,7 +3323,7 @@ test("durable direct command acknowledgement survives successor lease expiry", a
     (
       await worker.fetch(
         new Request(
-          "https://clawsweeper.openclaw.ai/internal/exact-review/lifecycle/router-receipt",
+          "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/lifecycle/router-receipt",
           {
             method: "POST",
             headers: { "x-clawsweeper-exact-review-signature": routerSignature },
@@ -3403,7 +3403,7 @@ test("durable direct command acknowledgement survives successor lease expiry", a
   };
   const rejectedNewerMarker = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/terminal-finalization/attempt",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/terminal-finalization/attempt",
       {
         method: "POST",
         body: JSON.stringify({
@@ -3427,7 +3427,7 @@ test("durable direct command acknowledgement survives successor lease expiry", a
   });
   const permittedOldMarker = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/terminal-finalization/attempt",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/terminal-finalization/attempt",
       {
         method: "POST",
         body: JSON.stringify({
@@ -3477,7 +3477,7 @@ test("durable direct command acknowledgement survives successor lease expiry", a
   assert.equal((await failed.json()).released, true);
   const retried = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/terminal-finalization/retry",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/terminal-finalization/retry",
       {
         method: "POST",
         body: JSON.stringify(finalizerTuple),
@@ -3519,7 +3519,7 @@ test("durable direct command acknowledgement survives successor lease expiry", a
   const retryClaimBody = await retryClaim.json();
   const retriedAttempt = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/terminal-finalization/attempt",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/terminal-finalization/attempt",
       {
         method: "POST",
         body: JSON.stringify({
@@ -3550,7 +3550,7 @@ test("durable direct command acknowledgement survives successor lease expiry", a
     .digest("hex")}`;
   const observed = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/lifecycle/command-ack/observed",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/lifecycle/command-ack/observed",
       {
         method: "POST",
         headers: { "x-clawsweeper-exact-review-signature": observedSignature },
@@ -3621,7 +3621,7 @@ test("terminal disposition materializes a direct acknowledgement driver after le
   assert.equal(
     (
       await worker.fetch(
-        new Request("https://clawsweeper.openclaw.ai/internal/exact-review/publication-results", {
+        new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/publication-results", {
           method: "POST",
           headers: { "x-clawsweeper-exact-review-signature": publicationSignature },
           body: publicationBody,
@@ -3661,7 +3661,7 @@ test("terminal disposition materializes a direct acknowledgement driver after le
     .digest("hex")}`;
   const terminal = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/lifecycle/terminal-disposition",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/lifecycle/terminal-disposition",
       {
         method: "POST",
         headers: { "x-clawsweeper-exact-review-signature": dispositionSignature },
@@ -3777,7 +3777,7 @@ test("fallback canonical routing materializes an acknowledgement driver after le
     (
       await worker.fetch(
         new Request(
-          "https://clawsweeper.openclaw.ai/internal/exact-review/lifecycle/canonical-receipt",
+          "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/lifecycle/canonical-receipt",
           {
             method: "POST",
             headers: { "x-clawsweeper-exact-review-signature": canonicalSignature },
@@ -3819,7 +3819,7 @@ test("fallback canonical routing materializes an acknowledgement driver after le
     (
       await worker.fetch(
         new Request(
-          "https://clawsweeper.openclaw.ai/internal/exact-review/lifecycle/router-receipt",
+          "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/lifecycle/router-receipt",
           {
             method: "POST",
             headers: { "x-clawsweeper-exact-review-signature": routerSignature },
@@ -3874,7 +3874,7 @@ test("fallback canonical routing materializes an acknowledgement driver after le
   assert.equal(claimed.status, 200);
   const attempted = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/terminal-finalization/attempt",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/terminal-finalization/attempt",
       {
         method: "POST",
         body: JSON.stringify({
@@ -4184,7 +4184,7 @@ test("direct command publication retains its terminal acknowledgement driver aft
   const body = JSON.stringify(publication);
   const signature = `sha256=${createHmac("sha256", "direct-command-secret").update(body).digest("hex")}`;
   const published = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/exact-review/publication-results", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/publication-results", {
       method: "POST",
       headers: { "x-clawsweeper-exact-review-signature": signature },
       body,
@@ -4256,7 +4256,7 @@ test("authenticated fanout cursors round-trip through durable storage", async ()
   const path = "/internal/state/cursors/normal-review";
   const request = (method: "GET" | "PUT", payload?: unknown, signed = true) => {
     const body = method === "PUT" ? JSON.stringify(payload) : "";
-    return new Request(`https://clawsweeper.openclaw.ai${path}`, {
+    return new Request(`https://clawsweeper-status.bianca-codes.workers.dev${path}`, {
       method,
       headers: signed
         ? {
@@ -4319,7 +4319,7 @@ test("placeholder recovery cursor survives queue reconstruction", async () => {
   };
   const request = (method: "GET" | "PUT", payload?: unknown) => {
     const body = method === "PUT" ? JSON.stringify(payload) : "";
-    return new Request(`https://clawsweeper.openclaw.ai${path}`, {
+    return new Request(`https://clawsweeper-status.bianca-codes.workers.dev${path}`, {
       method,
       headers: {
         "content-type": "application/json",
@@ -4379,7 +4379,7 @@ test("Worker lifecycle projection permits one command acknowledgement after dura
   const postSigned = async (path: string, payload: Record<string, unknown>) => {
     const body = JSON.stringify(payload);
     return worker.fetch(
-      new Request(`https://clawsweeper.openclaw.ai${path}`, {
+      new Request(`https://clawsweeper-status.bianca-codes.workers.dev${path}`, {
         method: "POST",
         headers: {
           "x-clawsweeper-exact-review-signature": `sha256=${createHmac("sha256", secret).update(body).digest("hex")}`,
@@ -4606,7 +4606,7 @@ test("signed Worker records a status-ID-only terminal acknowledgement", async ()
   const body = JSON.stringify(payload);
   const response = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/lifecycle/command-ack/observed",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/lifecycle/command-ack/observed",
       {
         method: "POST",
         headers: {
@@ -4705,7 +4705,7 @@ test("signed Worker supersedes only an acknowledgement-safe exact stale publicat
   const postSigned = (path: string, payload: Record<string, unknown>) => {
     const body = JSON.stringify(payload);
     return worker.fetch(
-      new Request(`https://clawsweeper.openclaw.ai/internal/exact-review/${path}`, {
+      new Request(`https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/${path}`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -5818,7 +5818,7 @@ test("signed terminal receipts bind legacy migration to its admitted status comm
     });
     return worker.fetch(
       new Request(
-        "https://clawsweeper.openclaw.ai/internal/exact-review/lifecycle/command-ack/observed",
+        "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/lifecycle/command-ack/observed",
         {
           method: "POST",
           headers: {
@@ -5962,7 +5962,7 @@ test("signed migrated receipts cannot complete a newer same-marker lifecycle rev
   const body = JSON.stringify(payload);
   const response = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/lifecycle/command-ack/observed",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/lifecycle/command-ack/observed",
       {
         method: "POST",
         headers: {
@@ -6021,7 +6021,7 @@ test("audit cursor checkpoints survive reconstruction and reject stale batch wri
   const secret = "synthetic-audit-cursor";
   let queue = new ExactReviewQueue({ storage }, {});
   const store = {
-    baseUrl: "https://clawsweeper.openclaw.ai",
+    baseUrl: "https://clawsweeper-status.bianca-codes.workers.dev",
     webhookSecret: secret,
     mode: "audit",
     attempts: 1,

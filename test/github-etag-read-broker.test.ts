@@ -763,7 +763,7 @@ test("publisher HMAC endpoints persist and confirm bodies while operator scope i
   const request = githubEtagCacheRequestBody(key, "apply");
   const body = JSON.stringify({ number: 7, state: "open" });
   const storeBody = JSON.stringify({ ...request, etag: '"issue-v1"', body });
-  const storeUrl = "https://clawsweeper.openclaw.ai/internal/exact-review/github-etag-cache/store";
+  const storeUrl = "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/github-etag-cache/store";
 
   assert.equal(
     (await worker.fetch(signedRequest(storeUrl, storeBody, operatorSecret), env)).status,
@@ -777,7 +777,7 @@ test("publisher HMAC endpoints persist and confirm bodies while operator scope i
   const lookupBody = JSON.stringify(request);
   const lookup = await worker.fetch(
     signedRequest(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/github-etag-cache/lookup",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/github-etag-cache/lookup",
       lookupBody,
       webhookSecret,
     ),
@@ -794,7 +794,7 @@ test("publisher HMAC endpoints persist and confirm bodies while operator scope i
   });
   const confirmed = await worker.fetch(
     signedRequest(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/github-etag-cache/confirm",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/github-etag-cache/confirm",
       confirmBody,
       webhookSecret,
     ),

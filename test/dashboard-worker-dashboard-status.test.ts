@@ -211,7 +211,7 @@ test("dashboard polling ignores workflow snapshots without disabling other durab
       STATUS_STORE: new MemoryKv(),
       CACHE_TTL_SECONDS: "-1",
     };
-    const request = new Request("https://clawsweeper.openclaw.ai/api/status");
+    const request = new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status");
     const first = await worker.fetch(request, env);
     const snapshot = await first.json();
     assert.equal(first.status, 200);
@@ -873,7 +873,7 @@ test("dashboard exposes active worker jobs and their current steps", async () =>
 
   try {
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       {
         CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
@@ -1034,7 +1034,7 @@ test("dashboard exposes active worker jobs and their current steps", async () =>
       false,
     );
     const privacyCachedResponse = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       {
         CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
@@ -1124,7 +1124,7 @@ test("dashboard keeps control-plane workflow fallbacks out of Codex capacity", a
 
   try {
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       {
         CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
@@ -1246,7 +1246,7 @@ test("dashboard bounds worker job detail request concurrency", async () => {
 
   try {
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       {
         CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
@@ -1348,7 +1348,7 @@ test("dashboard paginates worker jobs beyond GitHub's first page", async () => {
 
   try {
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       {
         CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
@@ -1472,7 +1472,7 @@ test("dashboard reports worker health without treating worker jobs as lifecycle 
       STATUS_STORE: new MemoryKv(),
     };
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       env,
       { waitUntil: () => undefined },
     );
@@ -1546,7 +1546,7 @@ for (const failure of ["http_503", "missing_attempt", "wrong_attempt"] as const)
       const env = { STATUS_STORE: store };
       const background: Promise<unknown>[] = [];
       const ctx = { waitUntil: (promise: Promise<unknown>) => background.push(promise) };
-      const request = new Request("https://clawsweeper.openclaw.ai/api/status");
+      const request = new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status");
       const first = await (await worker.fetch(request, env, ctx)).json();
       await Promise.allSettled(background);
       assert.deepEqual(first.diagnostics.errors, [expectedError]);
@@ -1615,7 +1615,7 @@ test("dashboard cold-cache status bounds a stalled forty-run worker-health refre
   try {
     const startedAt = Date.now();
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       {
         CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
@@ -1756,7 +1756,7 @@ test("dashboard exposes apply health from sweep status without broad scans", asy
   };
 
   try {
-    const response = await worker.fetch(new Request("https://clawsweeper.openclaw.ai/api/status"), {
+    const response = await worker.fetch(new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"), {
       STATUS_STORE: new MemoryKv(),
       CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
       TARGET_REPOS: "openclaw/openclaw",
@@ -1851,7 +1851,7 @@ test("dashboard reads stored CI status for active PR rows", async () => {
       CACHE_TTL_SECONDS: "0",
     };
     const ingest = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/events", {
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/events", {
         method: "POST",
         headers: {
           Authorization: "Bearer test-token",
@@ -1878,7 +1878,7 @@ test("dashboard reads stored CI status for active PR rows", async () => {
     assert.equal(ingest.status, 200);
 
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       env,
       {
         waitUntil: () => undefined,
@@ -1924,7 +1924,7 @@ test("dashboard skips raw event persistence when the private status store is not
       CACHE_TTL_SECONDS: "0",
     };
     const ingest = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/events", {
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/events", {
         method: "POST",
         headers: {
           Authorization: "Bearer test-token",
@@ -1951,7 +1951,7 @@ test("dashboard skips raw event persistence when the private status store is not
     assert.deepEqual(writes, []);
 
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       env,
       {
         waitUntil: () => undefined,
@@ -1980,7 +1980,7 @@ test("dashboard stale refresh coalesces concurrent polling requests", async () =
     value: { default: cache },
   });
   await cache.put(
-    new Request("https://clawsweeper.openclaw.ai/api/status-cache/v8/_/stale"),
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status-cache/v8/_/stale"),
     jsonResponse({
       schema_version: 1,
       generated_at: "2026-06-13T18:00:00Z",
@@ -2067,7 +2067,7 @@ test("dashboard stale refresh coalesces concurrent polling requests", async () =
       },
     };
     const caller = new AbortController();
-    const request = new Request("https://clawsweeper.openclaw.ai/api/status", {
+    const request = new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status", {
       signal: caller.signal,
     });
     const [first, second] = await Promise.all([
@@ -2131,7 +2131,7 @@ test("dashboard status survives cache persistence failures", async () => {
   globalThis.fetch = activePrFetch;
 
   try {
-    const response = await worker.fetch(new Request("https://clawsweeper.openclaw.ai/api/status"), {
+    const response = await worker.fetch(new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"), {
       CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
       TARGET_REPOS: "openclaw/openclaw",
       CACHE_TTL_SECONDS: "0",
@@ -2178,7 +2178,7 @@ test("dashboard caches historical closed-item telemetry across live status refre
       TARGET_REPOS: "openclaw/openclaw",
       CACHE_TTL_SECONDS: "-1",
     };
-    const request = new Request("https://clawsweeper.openclaw.ai/api/status");
+    const request = new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status");
     const first = await worker.fetch(request, env);
     assert.equal(first.status, 200);
     assert.equal((await first.json()).recent.closed_stats.total, 0);
@@ -2219,7 +2219,7 @@ test("dashboard preserves repeated untargeted activity events", async () => {
     };
     for (const title of ["Probe one", "Probe two"]) {
       const ingest = await worker.fetch(
-        new Request("https://clawsweeper.openclaw.ai/api/events", {
+        new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/events", {
           method: "POST",
           headers: {
             Authorization: "Bearer test-token",
@@ -2239,7 +2239,7 @@ test("dashboard preserves repeated untargeted activity events", async () => {
     }
 
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       env,
       {
         waitUntil: () => undefined,
@@ -2291,7 +2291,7 @@ test("dashboard counts review operations without retired repair counters", async
     ];
     for (const event of events) {
       const ingest = await worker.fetch(
-        new Request("https://clawsweeper.openclaw.ai/api/events", {
+        new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/events", {
           method: "POST",
           headers: {
             Authorization: "Bearer test-token",
@@ -2309,7 +2309,7 @@ test("dashboard counts review operations without retired repair counters", async
     }
 
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       env,
       {
         waitUntil: () => undefined,
@@ -2368,7 +2368,7 @@ test("dashboard keeps workflow CI status when live PR checks fail", async () => 
 
   try {
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       {
         CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
@@ -2463,7 +2463,7 @@ test("dashboard reuses live PR CI hydration within one status snapshot", async (
 
   try {
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       {
         CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
@@ -2581,7 +2581,7 @@ test("dashboard CI status counts check runs beyond the first page", async () => 
 
   try {
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       {
         CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
@@ -2703,7 +2703,7 @@ test("dashboard reconciles workflow observations before deriving lifecycle views
         throw new Error(`unexpected fetch ${url}`);
       };
       const response = await worker.fetch(
-        new Request("https://clawsweeper.openclaw.ai/api/status"),
+        new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
         { STATUS_STORE: new MemoryKv(), CACHE_TTL_SECONDS: "-1" },
       );
       const status = await response.json();
@@ -2844,7 +2844,7 @@ test("dashboard counts active runs that are older than the latest unfiltered pag
 
   try {
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       {
         CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
@@ -2912,7 +2912,7 @@ test("dashboard bounds active-run pagination without hiding incomplete telemetry
         throw new Error(`unexpected fetch ${url}`);
       };
       const response = await worker.fetch(
-        new Request("https://clawsweeper.openclaw.ai/api/status"),
+        new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
         {
           CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
           TARGET_REPOS: "openclaw/openclaw",
@@ -2976,7 +2976,7 @@ test("dashboard rebuilds inconsistent active censuses without replaying memoized
         throw new Error(`unexpected fetch ${url}`);
       };
       const response = await worker.fetch(
-        new Request("https://clawsweeper.openclaw.ai/api/status"),
+        new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
         { CLAWSWEEPER_REPO: "bianca-git/clawsweeper", CACHE_TTL_SECONDS: "0" },
         { waitUntil: () => undefined },
       );
@@ -3063,7 +3063,7 @@ test("dashboard surfaces stale queue ghosts as zombies without active cards", as
 
   try {
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       {
         CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
@@ -3126,7 +3126,7 @@ test("dashboard health retains in-progress runs beyond the queued ghost window",
 
   try {
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       {
         CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
@@ -3219,7 +3219,7 @@ test("dashboard exposes ClawSweeper-owned recent closes and 24h stats", async ()
       CACHE_TTL_SECONDS: "0",
     };
     const ingest = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/events", {
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/events", {
         method: "POST",
         headers: {
           Authorization: "Bearer test-token",
@@ -3239,7 +3239,7 @@ test("dashboard exposes ClawSweeper-owned recent closes and 24h stats", async ()
     );
     assert.equal(ingest.status, 200);
     const prClose = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/events", {
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/events", {
         method: "POST",
         headers: {
           Authorization: "Bearer test-token",
@@ -3259,7 +3259,7 @@ test("dashboard exposes ClawSweeper-owned recent closes and 24h stats", async ()
     );
     assert.equal(prClose.status, 200);
     const blocked = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/events", {
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/events", {
         method: "POST",
         headers: {
           Authorization: "Bearer test-token",
@@ -3280,7 +3280,7 @@ test("dashboard exposes ClawSweeper-owned recent closes and 24h stats", async ()
     assert.equal(blocked.status, 200);
 
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       env,
       {
         waitUntil: () => undefined,
@@ -3365,7 +3365,7 @@ test("dashboard fetches additional closed pages only when the first page is full
 
   try {
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       {
         CLAWSWEEPER_REPO: "bianca-git/clawsweeper",
         TARGET_REPOS: "openclaw/openclaw",
@@ -3436,7 +3436,7 @@ for (const scenario of [
     };
     try {
       const response = await worker.fetch(
-        new Request("https://clawsweeper.openclaw.ai/api/triage"),
+        new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/triage"),
         {
           TARGET_REPOS: "openclaw/openclaw",
           TRIAGE_ITEMS_PER_VIEW: "500",
@@ -3516,7 +3516,7 @@ test("triage focused views use direct search when broad snapshot is capped", asy
 
   try {
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/triage"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/triage"),
       {
         TARGET_REPOS: "openclaw/openclaw",
         TRIAGE_ITEMS_PER_VIEW: "500",
@@ -3600,7 +3600,7 @@ test("triage focused fallbacks reserve search budget for later repos", async () 
 
   try {
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/triage"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/triage"),
       {
         TRIAGE_TARGET_REPOS: "openclaw/openclaw,openclaw/other",
         TRIAGE_ITEMS_PER_VIEW: "500",
@@ -3670,7 +3670,7 @@ test("triage focused search errors fall back to loaded broad rows", async () => 
 
   try {
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/triage"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/triage"),
       {
         TARGET_REPOS: "openclaw/openclaw",
         TRIAGE_ITEMS_PER_VIEW: "500",
@@ -3726,7 +3726,7 @@ test("triage skips repos after root search budget is exhausted", async () => {
   try {
     const repos = Array.from({ length: 10 }, (_, index) => `openclaw/repo-${index}`).join(",");
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/triage"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/triage"),
       {
         TRIAGE_TARGET_REPOS: repos,
         TRIAGE_CACHE_TTL_SECONDS: "0",
@@ -3777,7 +3777,7 @@ test("triage debits failed root searches from the search budget", async () => {
   try {
     const repos = Array.from({ length: 10 }, (_, index) => `openclaw/repo-${index}`).join(",");
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/triage"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/triage"),
       {
         TRIAGE_TARGET_REPOS: repos,
         TRIAGE_CACHE_TTL_SECONDS: "0",
@@ -3847,7 +3847,7 @@ test("triage uses ClawSweeper GitHub App credentials when no static token is con
 
   try {
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/triage"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/triage"),
       {
         CLAWSWEEPER_APP_CLIENT_ID: "Iv23test",
         CLAWSWEEPER_APP_PRIVATE_KEY: String(privateKey),
@@ -3904,7 +3904,7 @@ test("triage writes and reprojects aggregate-only fresh cache bodies", async () 
 
   try {
     const writes: Promise<unknown>[] = [];
-    const request = new Request("https://clawsweeper.openclaw.ai/api/triage");
+    const request = new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/triage");
     const first = await worker.fetch(
       request,
       { TARGET_REPOS: "synthetic/target" },
@@ -3918,7 +3918,7 @@ test("triage writes and reprojects aggregate-only fresh cache bodies", async () 
     await Promise.all(writes);
 
     const cached = await cache.match(
-      new Request("https://clawsweeper.openclaw.ai/api/triage-cache/v3/fresh"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/triage-cache/v3/fresh"),
     );
     assert.ok(cached);
     const cachedText = await cached.text();
@@ -3959,7 +3959,7 @@ test("triage routes reproject raw legacy fresh caches", async () => {
       const marker = `synthetic-legacy-marker-${fixture.viewIds.length}`;
       const cache = new MemoryCache();
       await cache.put(
-        new Request(`https://clawsweeper.openclaw.ai${fixture.cachePath}`),
+        new Request(`https://clawsweeper-status.bianca-codes.workers.dev${fixture.cachePath}`),
         jsonResponse(legacyTriageSnapshot(fixture.viewIds, marker)),
       );
       Object.defineProperty(globalThis, "caches", {
@@ -3967,7 +3967,7 @@ test("triage routes reproject raw legacy fresh caches", async () => {
         value: { default: cache },
       });
       const response = await worker.fetch(
-        new Request(`https://clawsweeper.openclaw.ai${fixture.endpoint}`),
+        new Request(`https://clawsweeper-status.bianca-codes.workers.dev${fixture.endpoint}`),
         {},
         { waitUntil: () => undefined },
       );
@@ -3986,7 +3986,7 @@ test("triage reprojects raw legacy stale cache after a failed refresh", async ()
   const marker = "synthetic-stale-identity-marker";
   const cache = new MemoryCache();
   await cache.put(
-    new Request("https://clawsweeper.openclaw.ai/api/triage-cache/v2/stale"),
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/triage-cache/v2/stale"),
     jsonResponse(legacyTriageSnapshot(ISSUE_TRIAGE_VIEW_IDS, marker)),
   );
   Object.defineProperty(globalThis, "caches", {
@@ -3999,7 +3999,7 @@ test("triage reprojects raw legacy stale cache after a failed refresh", async ()
 
   try {
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/triage"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/triage"),
       { TARGET_REPOS: "synthetic/target" },
       { waitUntil: () => undefined },
     );
@@ -4050,7 +4050,7 @@ test("triage fails closed for malformed, nested, and over-cap cached input", asy
       const malformed = legacyTriageSnapshot(ISSUE_TRIAGE_VIEW_IDS, marker);
       mutate(malformed);
       await cache.put(
-        new Request("https://clawsweeper.openclaw.ai/api/triage-cache/v3/fresh"),
+        new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/triage-cache/v3/fresh"),
         jsonResponse(malformed),
       );
       Object.defineProperty(globalThis, "caches", {
@@ -4064,7 +4064,7 @@ test("triage fails closed for malformed, nested, and over-cap cached input", asy
         },
       });
       const response = await worker.fetch(
-        new Request("https://clawsweeper.openclaw.ai/api/triage"),
+        new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/triage"),
         env,
         { waitUntil: () => undefined },
       );
@@ -4124,7 +4124,7 @@ for (const stalled of ["cache-read", "cache-body"] as const) {
     globalThis.fetch = activePrFetch;
     context.mock.timers.enable({ apis: ["setTimeout", "Date"], now: Date.now() });
     try {
-      const request = new Request("https://clawsweeper.openclaw.ai/api/status");
+      const request = new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status");
       const env = Object.freeze({ CACHE_TTL_SECONDS: "0" });
       const pending = worker.fetch(request, env);
       await statusTurn();
@@ -4201,7 +4201,7 @@ test("cold status deadline releases its owner and stops additional job waves and
   };
   context.mock.timers.enable({ apis: ["setTimeout", "Date"], now: Date.now() });
   try {
-    const request = new Request("https://clawsweeper.openclaw.ai/api/status");
+    const request = new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status");
     const env = {
       CACHE_TTL_SECONDS: "0",
       WORKER_JOB_FETCH_CONCURRENCY: "12",
@@ -4286,7 +4286,7 @@ test("delayed durable publication cannot replace a newer snapshot or restore old
   try {
     const env = Object.freeze({ STATUS_STORE: store, CACHE_TTL_SECONDS: "60" });
     const ctx = { waitUntil: (promise: Promise<unknown>) => pending.push(promise) };
-    const request = new Request("https://clawsweeper.openclaw.ai/api/status");
+    const request = new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status");
     const first = await (await worker.fetch(request, env, ctx)).json();
     assert.equal(first.fleet.active_codex_jobs, 17);
     assert.equal(writes, 1);
@@ -4304,7 +4304,7 @@ test("delayed durable publication cannot replace a newer snapshot or restore old
     assert.equal(stored.generated_at, second.generated_at);
     for (const bucket of ["fresh", "stale"]) {
       await cache.put(
-        new Request(`https://clawsweeper.openclaw.ai/api/status-cache/v8/_/${bucket}`),
+        new Request(`https://clawsweeper-status.bianca-codes.workers.dev/api/status-cache/v8/_/${bucket}`),
         jsonResponse(first),
       );
     }
@@ -4424,7 +4424,7 @@ test("status timeout does not cancel shared GitHub App token acquisition", async
   });
   try {
     const statusRequest = worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       env,
     );
     await tokenStarted.promise;
@@ -4444,7 +4444,7 @@ test("status timeout does not cancel shared GitHub App token acquisition", async
         expires_at: new Date(Date.now() + 3_600_000).toISOString(),
       }),
     );
-    await worker.fetch(new Request("https://clawsweeper.openclaw.ai/api/status"), { ...env });
+    await worker.fetch(new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"), { ...env });
     assert.equal(tokenRequests, 2, "subsequent status reuses the settled value-keyed token");
   } finally {
     tokenGate.release(jsonResponse({ token: "synthetic-status-token" }));

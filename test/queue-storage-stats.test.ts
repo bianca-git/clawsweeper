@@ -113,7 +113,7 @@ test("queue storage stats are served only to signed internal requests", async ()
   storage.kv.put("record-hydration-cache-cleanup:v1", cleanup);
 
   const unsigned = await worker.fetch(
-    stateAppendQueueRequest(path, {}, "https://clawsweeper.openclaw.ai"),
+    stateAppendQueueRequest(path, {}, "https://clawsweeper-status.bianca-codes.workers.dev"),
     env,
   );
   assert.equal(unsigned.status, 401);

@@ -378,7 +378,7 @@ test("canary signs exactly four fixed records with only HMAC and never retries",
   for (const [index, call] of f.calls.entries()) {
     assert.equal(
       call.url.href,
-      "https://clawsweeper.openclaw.ai/internal/exact-review/review-usage",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/review-usage",
     );
     assert.equal(call.method, "POST");
     assert.equal(call.headers.authorization, undefined);

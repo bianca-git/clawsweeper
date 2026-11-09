@@ -168,7 +168,7 @@ async function main() {
     .map((value) => value.trim())
     .filter(Boolean);
   const statusUrl =
-    process.env.CLAWSWEEPER_STATUS_URL ?? "https://clawsweeper.openclaw.ai/api/status";
+    process.env.CLAWSWEEPER_STATUS_URL ?? "https://clawsweeper-status.bianca-codes.workers.dev/api/status";
   const { scale, findings } = await collectScaleFindings(repositories, async () => {
     const response = await fetch(statusUrl, { signal: AbortSignal.timeout(30_000) });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);

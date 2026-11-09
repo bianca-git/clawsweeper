@@ -40,7 +40,7 @@ inputs:
   coordinator-url:
     description: Durable FIFO coordinator used before a git-backed state mutation.
     required: false
-    default: https://clawsweeper.openclaw.ai
+    default: https://clawsweeper-status.bianca-codes.workers.dev
   coordinator-class:
     description: Durable state-writer scheduling class
     required: false
@@ -48,7 +48,7 @@ inputs:
   records-url:
     description: Canonical Worker base URL.
     required: false
-    default: https://clawsweeper.openclaw.ai
+    default: https://clawsweeper-status.bianca-codes.workers.dev
   records-repo-slugs:
     description: Optional comma/newline-separated record repository slugs.
     required: false

@@ -924,7 +924,7 @@ function enqueueClawSweeperReReview(command: LooseRecord): LooseRecord {
     identity: intake,
     operation: () =>
       postExactReviewCommandIntakeSync({
-        queueUrl: process.env.QUEUE_URL || "https://clawsweeper.openclaw.ai",
+        queueUrl: process.env.QUEUE_URL || "https://clawsweeper-status.bianca-codes.workers.dev",
         secret,
         intake,
       }),

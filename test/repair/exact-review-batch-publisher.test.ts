@@ -11,7 +11,7 @@ test("direct producer retries bounded failures then requests legacy enqueue fall
   const requests: Array<{ url: string; body: unknown }> = [];
   const payload = directPayload();
   const result = await postDirectPublicationResult({
-    baseUrl: "https://clawsweeper.openclaw.ai",
+    baseUrl: "https://clawsweeper-status.bianca-codes.workers.dev",
     webhookSecret: "test-secret",
     payload,
     attempts: 3,
@@ -29,7 +29,7 @@ test("direct producer retries bounded failures then requests legacy enqueue fall
   assert.deepEqual(
     requests,
     Array.from({ length: 3 }, () => ({
-      url: "https://clawsweeper.openclaw.ai/internal/exact-review/publication-results",
+      url: "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/publication-results",
       body: payload,
     })),
   );
@@ -44,7 +44,7 @@ test("direct producer retries bounded failures then requests legacy enqueue fall
 test("direct producer treats structured 413 as immediate legacy fallback", async () => {
   let calls = 0;
   const result = await postDirectPublicationResult({
-    baseUrl: "https://clawsweeper.openclaw.ai",
+    baseUrl: "https://clawsweeper-status.bianca-codes.workers.dev",
     webhookSecret: "test-secret",
     payload: directPayload(),
     attempts: 3,
@@ -64,7 +64,7 @@ test("direct producer treats structured 413 as immediate legacy fallback", async
 
 test("direct producer includes a structured rejection detail in its fallback reason", async () => {
   const result = await postDirectPublicationResult({
-    baseUrl: "https://clawsweeper.openclaw.ai",
+    baseUrl: "https://clawsweeper-status.bianca-codes.workers.dev",
     webhookSecret: "test-secret",
     payload: directPayload(),
     fetch: async () =>
@@ -102,7 +102,7 @@ test("direct and batch producers accept fenced supersession without legacy fallb
       state_commit_sha: null,
     };
     const result = await postDirectPublicationResult({
-      baseUrl: "https://clawsweeper.openclaw.ai",
+      baseUrl: "https://clawsweeper-status.bianca-codes.workers.dev",
       webhookSecret: "test-secret",
       payload: directPayload(),
       path,

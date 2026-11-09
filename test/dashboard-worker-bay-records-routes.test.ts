@@ -290,7 +290,7 @@ test("verified unchanged legacy receipts acknowledge without a webhook", async (
   const sendReceipt = () =>
     worker.fetch(
       new Request(
-        "https://clawsweeper.openclaw.ai/internal/exact-review/lifecycle/command-ack/observed",
+        "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/lifecycle/command-ack/observed",
         {
           method: "POST",
           headers: {
@@ -410,7 +410,7 @@ test("migrated modern acknowledgement receipts preserve the canonical completion
   });
   const receipt = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/lifecycle/command-ack/observed",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/lifecycle/command-ack/observed",
       {
         method: "POST",
         headers: {
@@ -444,7 +444,7 @@ test("unsigned terminal receipts are rejected before their JSON body is parsed",
   try {
     const response = await worker.fetch(
       new Request(
-        "https://clawsweeper.openclaw.ai/internal/exact-review/lifecycle/command-ack/observed",
+        "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/lifecycle/command-ack/observed",
         {
           method: "POST",
           headers: {
@@ -646,7 +646,7 @@ test("Worker lifecycle keeps retryable publication work ineligible for final ack
   const body = JSON.stringify(acknowledgement);
   const attempted = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/lifecycle/command-ack/attempt",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/lifecycle/command-ack/attempt",
       {
         method: "POST",
         headers: {
@@ -813,7 +813,7 @@ test("Worker retains a committed terminal command acknowledgement for fenced ret
   assert.equal(finalizationClaimBody.terminal_finalization?.disposition, "dead_letter");
   const staleClaim = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/terminal-finalization/attempt",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/terminal-finalization/attempt",
       {
         method: "POST",
         body: JSON.stringify({
@@ -838,7 +838,7 @@ test("Worker retains a committed terminal command acknowledgement for fenced ret
   storage.sql.replaceNormalizedQueue(expiredState);
   const expiredLease = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/terminal-finalization/attempt",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/terminal-finalization/attempt",
       {
         method: "POST",
         body: JSON.stringify({
@@ -863,7 +863,7 @@ test("Worker retains a committed terminal command acknowledgement for fenced ret
   storage.sql.replaceNormalizedQueue(restoredState);
   const acknowledgement = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/terminal-finalization/attempt",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/terminal-finalization/attempt",
       {
         method: "POST",
         body: JSON.stringify({
@@ -908,7 +908,7 @@ test("Worker retains a committed terminal command acknowledgement for fenced ret
   assert.equal((await released.json()).released, true);
   const requeued = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/terminal-finalization/retry",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/terminal-finalization/retry",
       {
         method: "POST",
         body: JSON.stringify({
@@ -952,7 +952,7 @@ test("Worker retains a committed terminal command acknowledgement for fenced ret
   );
   const retriedAcknowledgement = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/terminal-finalization/attempt",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/terminal-finalization/attempt",
       {
         method: "POST",
         body: JSON.stringify({
@@ -1132,7 +1132,7 @@ test("Worker completes a locked terminal acknowledgement as a projection-backed 
   };
   const attempted = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/terminal-finalization/attempt",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/terminal-finalization/attempt",
       {
         method: "POST",
         body: JSON.stringify(tuple),
@@ -1143,7 +1143,7 @@ test("Worker completes a locked terminal acknowledgement as a projection-backed 
   assert.equal((await attempted.json()).attempt_id, "ack:1");
   const skipped = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/terminal-finalization/skip",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/terminal-finalization/skip",
       {
         method: "POST",
         body: JSON.stringify({ ...tuple, attempt_id: "ack:1", reason: "locked_conversation" }),
@@ -1242,7 +1242,7 @@ test("Worker completes a missing status comment terminal acknowledgement as a du
   };
   const attempted = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/terminal-finalization/attempt",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/terminal-finalization/attempt",
       {
         method: "POST",
         body: JSON.stringify(tuple),
@@ -1253,7 +1253,7 @@ test("Worker completes a missing status comment terminal acknowledgement as a du
   assert.equal((await attempted.json()).attempt_id, "ack:1");
   const rejected = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/terminal-finalization/skip",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/terminal-finalization/skip",
       {
         method: "POST",
         body: JSON.stringify({ ...tuple, attempt_id: "ack:1", reason: "operator_override" }),
@@ -1265,7 +1265,7 @@ test("Worker completes a missing status comment terminal acknowledgement as a du
   assert.deepEqual(await rejected.json(), { error: "invalid_terminal_finalization_skip" });
   const skipped = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/terminal-finalization/skip",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/terminal-finalization/skip",
       {
         method: "POST",
         body: JSON.stringify({ ...tuple, attempt_id: "ack:1", reason: "missing_status_comment" }),
@@ -1350,7 +1350,7 @@ test("Worker observes the generic durable terminal failure acknowledgement", asy
   };
   const attempted = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/terminal-finalization/attempt",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/terminal-finalization/attempt",
       {
         method: "POST",
         body: JSON.stringify({
@@ -1540,7 +1540,7 @@ test("canonical commit records and tuples export with one monotonic revision", a
   const ingestPayload = { repo_slug: "openclaw-openclaw", records: seedRecords };
   const ingestPath = "/internal/state/records/commits";
   const unsigned = await worker.fetch(
-    stateAppendQueueRequest(ingestPath, ingestPayload, "https://clawsweeper.openclaw.ai"),
+    stateAppendQueueRequest(ingestPath, ingestPayload, "https://clawsweeper-status.bianca-codes.workers.dev"),
     env,
   );
   assert.equal(unsigned.status, 401);
@@ -1594,7 +1594,7 @@ test("canonical commit records and tuples export with one monotonic revision", a
   const publicationBody = JSON.stringify(publication);
   const publicationSignature = `sha256=${createHmac("sha256", secret).update(publicationBody).digest("hex")}`;
   const published = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/exact-review/publication-results", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/publication-results", {
       method: "POST",
       headers: { "x-clawsweeper-exact-review-signature": publicationSignature },
       body: publicationBody,
@@ -1617,7 +1617,7 @@ test("canonical commit records and tuples export with one monotonic revision", a
     limit: 1,
   };
   const unsignedExport = await worker.fetch(
-    stateAppendQueueRequest(exportPath, pageOnePayload, "https://clawsweeper.openclaw.ai"),
+    stateAppendQueueRequest(exportPath, pageOnePayload, "https://clawsweeper-status.bianca-codes.workers.dev"),
     env,
   );
   assert.equal(unsignedExport.status, 401);
@@ -1695,7 +1695,7 @@ test("record slug discovery authenticates and lists per-repository revisions", a
   };
   const slugsPath = "/internal/state/records/slugs";
   const unsigned = await worker.fetch(
-    stateAppendQueueRequest(slugsPath, {}, "https://clawsweeper.openclaw.ai"),
+    stateAppendQueueRequest(slugsPath, {}, "https://clawsweeper-status.bianca-codes.workers.dev"),
     env,
   );
   assert.equal(unsigned.status, 401);
@@ -1746,7 +1746,7 @@ test("record snapshots authenticate, stream multipart R2 objects, serve ranges, 
   const triggerPath = "/internal/state/records/snapshots/trigger";
   const triggerBody = { repoSlug: "openclaw-openclaw" };
   const unsigned = await worker.fetch(
-    stateAppendQueueRequest(triggerPath, triggerBody, "https://clawsweeper.openclaw.ai"),
+    stateAppendQueueRequest(triggerPath, triggerBody, "https://clawsweeper-status.bianca-codes.workers.dev"),
     unavailableEnv,
   );
   assert.equal(unsigned.status, 401);
@@ -2685,9 +2685,9 @@ test("Bay queue projection samples normal direct work across stages before hidde
 });
 
 test("public triage pages expose aggregate counts without identity controls", async () => {
-  const issuePage = await worker.fetch(new Request("https://clawsweeper.openclaw.ai/triage"), {});
+  const issuePage = await worker.fetch(new Request("https://clawsweeper-status.bianca-codes.workers.dev/triage"), {});
   const proofPage = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/pr-proof-triage"),
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/pr-proof-triage"),
     {},
   );
   const issueHtml = await issuePage.text();
@@ -2783,7 +2783,7 @@ test("public triage application script extraction is case-insensitive", () => {
 });
 
 test("public triage UI renders only closed aggregate definitions and bounded counts", async () => {
-  const response = await worker.fetch(new Request("https://clawsweeper.openclaw.ai/triage"), {});
+  const response = await worker.fetch(new Request("https://clawsweeper-status.bianca-codes.workers.dev/triage"), {});
   const html = await response.text();
   const marker = "synthetic-ui-identity-marker";
   const viewIds = [
@@ -2866,7 +2866,7 @@ test("public triage UI fails closed for malformed and unavailable snapshots", as
 
   for (const page of pages) {
     const response = await worker.fetch(
-      new Request(`https://clawsweeper.openclaw.ai${page.pathname}`),
+      new Request(`https://clawsweeper-status.bianca-codes.workers.dev${page.pathname}`),
       {},
     );
     const html = await response.text();
@@ -2991,11 +2991,11 @@ test("public triage pages accept the snapshots their APIs collect", async () => 
     ]) {
       const env = { TARGET_REPOS: "openclaw/openclaw", GITHUB_TOKEN: "synthetic-fixture-only" };
       const page = await worker.fetch(
-        new Request(`https://clawsweeper.openclaw.ai${pathname}`),
+        new Request(`https://clawsweeper-status.bianca-codes.workers.dev${pathname}`),
         env,
       );
       const api = await worker.fetch(
-        new Request(`https://clawsweeper.openclaw.ai${endpoint}`),
+        new Request(`https://clawsweeper-status.bianca-codes.workers.dev${endpoint}`),
         env,
       );
       assert.equal(api.status, 200, endpoint);
@@ -3022,7 +3022,7 @@ test("public triage pages accept the snapshots their APIs collect", async () => 
 });
 
 test("dashboard health identifies the deployed revision", async () => {
-  const response = await worker.fetch(new Request("https://clawsweeper.openclaw.ai/api/health"), {
+  const response = await worker.fetch(new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/health"), {
     CLAWSWEEPER_DEPLOY_SHA: "abc123",
   });
 

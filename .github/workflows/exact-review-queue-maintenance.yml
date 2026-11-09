@@ -117,7 +117,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     env:
-      EXACT_REVIEW_QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
+      EXACT_REVIEW_QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
     steps:
       # Read-only: one signed request; the queue counts rows and samples row sizes per table.
       - name: Report queue storage by table
@@ -182,7 +182,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
-      EXACT_REVIEW_QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
+      EXACT_REVIEW_QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -247,7 +247,7 @@ jobs:
         if: ${{ inputs.execute }}
         env:
           CLAWSWEEPER_WEBHOOK_SECRET: ${{ secrets.CLAWSWEEPER_WEBHOOK_SECRET }}
-          EXACT_REVIEW_QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
+          EXACT_REVIEW_QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
           REVIEWED_PLAN_SHA256: ${{ inputs.reviewed_plan_sha256 }}
         run: |
           pnpm run --silent repair:exact-review-queue-maintenance retire-closed-publication \
@@ -273,7 +273,7 @@ jobs:
       - name: Verify bounded canonical record sample
         env:
           CLAWSWEEPER_WEBHOOK_SECRET: ${{ secrets.CLAWSWEEPER_WEBHOOK_SECRET }}
-          EXACT_REVIEW_QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
+          EXACT_REVIEW_QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
           EXPECTED_DEPLOYMENT_SHA: ${{ inputs.expected_deployment_sha }}
           REVIEWED_PLAN_SHA256: ${{ inputs.reviewed_plan_sha256 }}
           VERIFICATION_EXECUTE: ${{ inputs.execute }}
@@ -302,7 +302,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: 91b59577e757131d68d55a471fe32aca
           CLOUDFLARE_API_TOKEN: ${{ secrets.OPENCLAW_CLOUDFLARE_WORKERS_API_TOKEN || secrets.OPENCLAW_CLOUDFLARE_API_TOKEN }}
           CLAWSWEEPER_WEBHOOK_SECRET: ${{ secrets.CLAWSWEEPER_WEBHOOK_SECRET }}
-          EXACT_REVIEW_QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
+          EXACT_REVIEW_QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
           CANONICAL_ACTION: ${{ inputs.canonical_action }}
           EXECUTE: ${{ inputs.execute }}
           EXPECTED_DEPLOYMENT_SHA: ${{ inputs.expected_deployment_sha }}
@@ -338,7 +338,7 @@ jobs:
       - name: Preview or compress retained read models
         env:
           CLAWSWEEPER_WEBHOOK_SECRET: ${{ secrets.CLAWSWEEPER_WEBHOOK_SECRET }}
-          EXACT_REVIEW_QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
+          EXACT_REVIEW_QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
           EXECUTE: ${{ inputs.execute }}
           EXPECTED_DEPLOYMENT_SHA: ${{ inputs.expected_deployment_sha }}
           REVIEWED_PLAN_SHA256: ${{ inputs.reviewed_plan_sha256 }}

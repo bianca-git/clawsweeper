@@ -116,7 +116,7 @@ try {
     },
   };
   const response = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/api/exact-review-queue"),
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/exact-review-queue"),
     env,
   );
   assert.equal(response.status, 200, await response.clone().text());

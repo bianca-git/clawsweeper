@@ -18,7 +18,7 @@ type WorkflowDocument = { jobs?: Record<string, WorkflowJob> };
 
 const workflowDirectory = ".github/workflows";
 const workerUrl =
-  "${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}";
+  "${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}";
 const workerSecret = "${{ secrets.CLAWSWEEPER_WEBHOOK_SECRET }}";
 
 test("state hydration retains canonical defaults with explicit publisher modes", () => {

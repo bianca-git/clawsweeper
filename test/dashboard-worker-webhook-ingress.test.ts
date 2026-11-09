@@ -3811,7 +3811,7 @@ test("dashboard shares in-flight GitHub App installation token across parallel r
 
   try {
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       {
         CLAWSWEEPER_APP_CLIENT_ID: "Iv23parallel",
         CLAWSWEEPER_APP_PRIVATE_KEY: String(privateKey),

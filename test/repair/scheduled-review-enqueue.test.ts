@@ -113,7 +113,7 @@ function scheduledCandidate(number: number) {
 }
 
 function signedScheduledWorkerRequest(body: string) {
-  return new Request("https://clawsweeper.openclaw.ai/internal/exact-review/enqueue", {
+  return new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/enqueue", {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -524,7 +524,7 @@ for (const scenario of [
       lane: "normal_backfill",
       targetRepo: "openclaw/gogcli",
       targetBranch: "main",
-      queueUrl: "https://clawsweeper.openclaw.ai",
+      queueUrl: "https://clawsweeper-status.bianca-codes.workers.dev",
       secret: scheduledReplaySecret,
       deliveryPrefix: `scheduled:response-loss:${scenario.summaryField}`,
       fetchImpl,

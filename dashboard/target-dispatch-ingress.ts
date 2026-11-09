@@ -10,7 +10,7 @@ import {
  * `clawsweeper_item` client payload it would otherwise relay through
  * `repository_dispatch`, so no ClawSweeper Actions run is spent per event.
  */
-export const TARGET_DISPATCH_ENDPOINT = "https://clawsweeper.openclaw.ai/github/target-dispatch";
+export const TARGET_DISPATCH_ENDPOINT = "https://clawsweeper-status.bianca-codes.workers.dev/github/target-dispatch";
 export const TARGET_DISPATCH_MAX_BODY_BYTES = 16 * 1024;
 export const TARGET_DISPATCH_WORKFLOW_PATH = ".github/workflows/clawsweeper-dispatch.yml";
 

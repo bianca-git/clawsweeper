@@ -73,7 +73,7 @@ jobs:
         env:
           CLAWSWEEPER_WEBHOOK_SECRET: ${{ secrets.CLAWSWEEPER_WEBHOOK_SECRET }}
           GH_TOKEN: ${{ github.token }}
-          QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
+          QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
         run: node scripts/review-run-observer.mjs --event-file "$GITHUB_EVENT_PATH"
 
   sweep:
@@ -94,7 +94,7 @@ jobs:
         env:
           CLAWSWEEPER_WEBHOOK_SECRET: ${{ secrets.CLAWSWEEPER_WEBHOOK_SECRET }}
           GH_TOKEN: ${{ github.token }}
-          QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
+          QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
         run: |
           set -euo pipefail
           curl -fsSL --retry 3 --retry-all-errors --retry-connrefused "https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_SHA}/src/repair/exact-review-queue-reconcile.ts" -o "$RUNNER_TEMP/exact-review-queue-reconcile.mts"
@@ -138,8 +138,8 @@ jobs:
           CLAWSWEEPER_WEBHOOK_SECRET: ${{ secrets.CLAWSWEEPER_WEBHOOK_SECRET }}
           GH_TOKEN: ${{ github.token }}
           TARGET_WRITE_TOKEN: ${{ steps.target-write-token.outputs.token }}
-          QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
-          REVIEW_PLACEHOLDER_CURSOR_STORE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
+          QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
+          REVIEW_PLACEHOLDER_CURSOR_STORE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
           REVIEW_PLACEHOLDER_LOOKBACK_HOURS: ${{ vars.REVIEW_PLACEHOLDER_LOOKBACK_HOURS || '48' }}
           REVIEW_PLACEHOLDER_MAX_CHECKS: ${{ vars.REVIEW_PLACEHOLDER_MAX_CHECKS || '20' }}
           REVIEW_PLACEHOLDER_MAX_RECOVERIES: ${{ vars.REVIEW_PLACEHOLDER_MAX_RECOVERIES || '5' }}

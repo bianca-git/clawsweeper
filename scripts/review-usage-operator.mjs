@@ -284,7 +284,7 @@ async function main(env) {
       const signature =
         "sha256=" + createHmac("sha256", env.CLAWSWEEPER_WEBHOOK_SECRET).update(body).digest("hex");
       const result = await request(
-        "https://clawsweeper.openclaw.ai/internal/exact-review/review-usage",
+        "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/review-usage",
         {
           method: "POST",
           headers: {

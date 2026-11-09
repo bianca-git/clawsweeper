@@ -14,7 +14,7 @@ const validRepoName = (value: string) =>
 export async function readCoverageForBuild(
   secret: string | undefined,
   fetchImpl: typeof fetch = fetch,
-  origin = "https://clawsweeper.openclaw.ai",
+  origin = "https://clawsweeper-status.bianca-codes.workers.dev",
 ): Promise<Json> {
   if (!secret) throw new Error("coverage_build_secret_required");
   try {

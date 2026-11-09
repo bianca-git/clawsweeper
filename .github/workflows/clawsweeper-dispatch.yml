@@ -57,7 +57,7 @@ jobs:
           ITEM_KIND: ${{ github.event_name == 'pull_request_target' && 'pull_request' || 'issue' }}
           SOURCE_EVENT: ${{ github.event_name }}
           SOURCE_ACTION: ${{ github.event.action }}
-          TARGET_DISPATCH_URL: https://clawsweeper.openclaw.ai/github/target-dispatch
+          TARGET_DISPATCH_URL: https://clawsweeper-status.bianca-codes.workers.dev/github/target-dispatch
         run: |
           set -euo pipefail
           source_identity_json="$(node <<'NODE'
@@ -215,7 +215,7 @@ jobs:
           ITEM_NUMBER: ${{ github.event.issue.number }}
           COMMENT_ID: ${{ github.event.comment.id }}
           SOURCE_ACTION: ${{ github.event.action }}
-          TARGET_DISPATCH_URL: https://clawsweeper.openclaw.ai/github/target-dispatch
+          TARGET_DISPATCH_URL: https://clawsweeper-status.bianca-codes.workers.dev/github/target-dispatch
         run: |
           set -euo pipefail
           client_payload="$(jq -nc \

@@ -151,7 +151,7 @@ function workerGithubWebhookRequest() {
   };
   const body = JSON.stringify(payload);
   const signature = createHmac("sha256", "worker-error-test").update(body).digest("hex");
-  return new Request("https://clawsweeper.openclaw.ai/github/webhook", {
+  return new Request("https://clawsweeper-status.bianca-codes.workers.dev/github/webhook", {
     method: "POST",
     headers: {
       "content-type": "application/json",

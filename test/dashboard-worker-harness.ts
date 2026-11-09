@@ -771,7 +771,7 @@ function signedGithubWebhookBodyRequest({
   deliveryId?: string;
 }) {
   const signature = `sha256=${createHmac("sha256", secret).update(body).digest("hex")}`;
-  return new Request("https://clawsweeper.openclaw.ai/github/webhook", {
+  return new Request("https://clawsweeper-status.bianca-codes.workers.dev/github/webhook", {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -794,7 +794,7 @@ function stateAppendQueueRequest(path: string, payload: unknown, origin = "https
 function signedStateAppendRequest(path: string, payload: unknown, secret: string) {
   const body = JSON.stringify(payload);
   const signature = `sha256=${createHmac("sha256", secret).update(body).digest("hex")}`;
-  return new Request(`https://clawsweeper.openclaw.ai${path}`, {
+  return new Request(`https://clawsweeper-status.bianca-codes.workers.dev${path}`, {
     method: "POST",
     headers: {
       "content-type": "application/json",

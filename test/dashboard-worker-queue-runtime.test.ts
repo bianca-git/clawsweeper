@@ -9533,7 +9533,7 @@ test("worker exposes review coverage through the public API route", async () => 
   });
   const inventorySignature = `sha256=${createHmac("sha256", secret).update(inventoryBody).digest("hex")}`;
   const inventoryResponse = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/review-coverage/inventory", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/review-coverage/inventory", {
       method: "POST",
       headers: { "x-clawsweeper-exact-review-signature": inventorySignature },
       body: inventoryBody,
@@ -9543,7 +9543,7 @@ test("worker exposes review coverage through the public API route", async () => 
   assert.equal(inventoryResponse.status, 202);
   const publicQueryMarker = ["synthetic", "coverage", "filter"].join("_");
   const response = await worker.fetch(
-    new Request(`https://clawsweeper.openclaw.ai/api/review-coverage?repo=${publicQueryMarker}`),
+    new Request(`https://clawsweeper-status.bianca-codes.workers.dev/api/review-coverage?repo=${publicQueryMarker}`),
     env,
   );
   assert.equal(response.status, 200);
@@ -9558,7 +9558,7 @@ test("worker exposes review coverage through the public API route", async () => 
   assert.equal(JSON.stringify(payload).includes(publicQueryMarker), false);
 
   const unconfigured = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/api/review-coverage"),
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/review-coverage"),
     {},
   );
   assert.equal(unconfigured.status, 503);
@@ -10055,7 +10055,7 @@ test("internal state endpoints reject invalid HMAC signatures", async () => {
     stateAppendQueueRequest(
       "/internal/state/records/tuples",
       payload,
-      "https://clawsweeper.openclaw.ai",
+      "https://clawsweeper-status.bianca-codes.workers.dev",
     ),
     env,
   );
@@ -10093,7 +10093,7 @@ test("internal state writer routes authenticate and preserve durable ticket iden
     stateAppendQueueRequest(
       "/internal/state-writer/acquire",
       acquire,
-      "https://clawsweeper.openclaw.ai",
+      "https://clawsweeper-status.bianca-codes.workers.dev",
     ),
     env,
   );
@@ -10202,7 +10202,7 @@ test("authenticated legacy exact-review intake enters the durable queue", async 
   const signature = `sha256=${createHmac("sha256", "test-secret").update(payload).digest("hex")}`;
 
   const accepted = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/exact-review/enqueue", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/enqueue", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -10239,7 +10239,7 @@ test("authenticated legacy exact-review intake enters the durable queue", async 
   );
 
   const denied = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/exact-review/enqueue", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/enqueue", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: payload,
@@ -10276,7 +10276,7 @@ test("authenticated legacy pull request intake reserves source authority", async
   const signature = `sha256=${createHmac("sha256", "test-secret").update(payload).digest("hex")}`;
 
   const accepted = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/exact-review/source-authority", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/source-authority", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -10310,7 +10310,7 @@ test("authenticated legacy intake durably reserves missing branch authority", as
   });
   const signature = `sha256=${createHmac("sha256", "test-secret").update(payload).digest("hex")}`;
   const accepted = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/exact-review/branch-authority", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/branch-authority", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -11842,7 +11842,7 @@ test("a re-admitted item never reuses a revision it already published directly",
       .update(body)
       .digest("hex");
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/internal/exact-review/publication-results", {
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/publication-results", {
         method: "POST",
         headers: { "x-clawsweeper-exact-review-signature": `sha256=${signature}` },
         body,
@@ -14449,7 +14449,7 @@ test("signed exact-review reconciliation releases only immutable terminal runs",
       include_all_claimed: true,
     });
     const unsigned = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/internal/exact-review/reconcile", {
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/reconcile", {
         method: "POST",
         body,
       }),
@@ -14462,7 +14462,7 @@ test("signed exact-review reconciliation releases only immutable terminal runs",
     });
     const oversizedSignature = `sha256=${createHmac("sha256", "test-secret").update(oversizedBody).digest("hex")}`;
     const oversized = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/internal/exact-review/reconcile", {
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/reconcile", {
         method: "POST",
         headers: { "x-clawsweeper-exact-review-signature": oversizedSignature },
         body: oversizedBody,
@@ -14474,7 +14474,7 @@ test("signed exact-review reconciliation releases only immutable terminal runs",
 
     const signature = `sha256=${createHmac("sha256", "test-secret").update(body).digest("hex")}`;
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/internal/exact-review/reconcile", {
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/reconcile", {
         method: "POST",
         headers: { "x-clawsweeper-exact-review-signature": signature },
         body,
@@ -14507,7 +14507,7 @@ test("signed exact-review reconciliation releases only immutable terminal runs",
     });
     const staleAttemptSignature = `sha256=${createHmac("sha256", "test-secret").update(staleAttemptBody).digest("hex")}`;
     const staleAttempt = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/internal/exact-review/reconcile", {
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/reconcile", {
         method: "POST",
         headers: { "x-clawsweeper-exact-review-signature": staleAttemptSignature },
         body: staleAttemptBody,
@@ -14523,7 +14523,7 @@ test("signed exact-review reconciliation releases only immutable terminal runs",
     });
     const unavailableSignature = `sha256=${createHmac("sha256", "test-secret").update(unavailableBody).digest("hex")}`;
     const unavailable = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/internal/exact-review/reconcile", {
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/reconcile", {
         method: "POST",
         headers: { "x-clawsweeper-exact-review-signature": unavailableSignature },
         body: unavailableBody,
@@ -14560,7 +14560,7 @@ test("signed exact-review reconciliation releases only immutable terminal runs",
     const replayBody = JSON.stringify({ runs: [{ run_id: "9001", run_attempt: 1 }] });
     const replaySignature = `sha256=${createHmac("sha256", "test-secret").update(replayBody).digest("hex")}`;
     const replay = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/internal/exact-review/reconcile", {
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/reconcile", {
         method: "POST",
         headers: { "x-clawsweeper-exact-review-signature": replaySignature },
         body: replayBody,
@@ -14675,7 +14675,7 @@ test("exact-review reconciliation targets leases beyond 64 entries without accep
     });
     const signature = `sha256=${createHmac("sha256", "test-secret").update(body).digest("hex")}`;
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/internal/exact-review/reconcile", {
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/reconcile", {
         method: "POST",
         headers: { "x-clawsweeper-exact-review-signature": signature },
         body,
@@ -14798,7 +14798,7 @@ test("exact-review reconciliation cannot release a later attempt with the same r
     });
     const signature = `sha256=${createHmac("sha256", "test-secret").update(body).digest("hex")}`;
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/internal/exact-review/reconcile", {
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/reconcile", {
         method: "POST",
         headers: { "x-clawsweeper-exact-review-signature": signature },
         body,

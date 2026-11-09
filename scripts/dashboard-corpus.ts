@@ -419,7 +419,7 @@ async function main(argv: string[]) {
   const summary = await refreshCorpusRecords({
     stateDir: values.state,
     mode,
-    baseUrl: process.env.CLAWSWEEPER_RECORDS_URL || "https://clawsweeper.openclaw.ai",
+    baseUrl: process.env.CLAWSWEEPER_RECORDS_URL || "https://clawsweeper-status.bianca-codes.workers.dev",
     webhookSecret: secret,
   });
   const { bytes } = sealCorpusState(values.state, values.archive, secret);

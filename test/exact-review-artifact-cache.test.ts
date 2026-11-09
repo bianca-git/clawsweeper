@@ -132,7 +132,7 @@ test("Worker artifact receipt endpoints use publisher scope, not operator scope"
     EXACT_REVIEW_QUEUE: new MemoryDurableNamespace(queue),
   };
   const storeBody = JSON.stringify({ ...tuple, digest, bytes: content.byteLength });
-  const url = "https://clawsweeper.openclaw.ai/internal/exact-review/artifact-cache/receipt/store";
+  const url = "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/artifact-cache/receipt/store";
 
   assert.equal(
     (await worker.fetch(new Request(url, { method: "POST", body: storeBody }), env)).status,
@@ -149,7 +149,7 @@ test("Worker artifact receipt endpoints use publisher scope, not operator scope"
   const lookupBody = JSON.stringify(tuple);
   const lookup = await worker.fetch(
     signedRequest(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/artifact-cache/receipt/lookup",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/artifact-cache/receipt/lookup",
       lookupBody,
       webhookSecret,
     ),

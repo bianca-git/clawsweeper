@@ -1220,7 +1220,7 @@ test("public status filters a legacy cached body before it can be served", async
 
   try {
     await globalThis.caches.default.put(
-      new Request("https://clawsweeper.openclaw.ai/api/status-cache/v8/_/fresh"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status-cache/v8/_/fresh"),
       new Response(
         JSON.stringify({
           schema_version: 1,
@@ -1261,7 +1261,7 @@ test("public status filters a legacy cached body before it can be served", async
     );
 
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       {},
     );
     const body = await response.json();
@@ -1300,9 +1300,9 @@ test("public status filters a legacy cached body before it can be served", async
       ),
     );
 
-    entries.delete("https://clawsweeper.openclaw.ai/api/status-cache/v8/_/fresh");
+    entries.delete("https://clawsweeper-status.bianca-codes.workers.dev/api/status-cache/v8/_/fresh");
     await globalThis.caches.default.put(
-      new Request("https://clawsweeper.openclaw.ai/api/status-cache/v8/_/stale"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status-cache/v8/_/stale"),
       new Response(
         JSON.stringify({
           schema_version: 1,
@@ -1327,7 +1327,7 @@ test("public status filters a legacy cached body before it can be served", async
       ),
     );
     const staleResponse = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       {},
       { waitUntil: (promise: Promise<unknown>) => pending.push(promise) },
     );
@@ -1343,9 +1343,9 @@ test("public status filters a legacy cached body before it can be served", async
     );
     await Promise.all(pending);
 
-    entries.delete("https://clawsweeper.openclaw.ai/api/status-cache/v8/_/stale");
+    entries.delete("https://clawsweeper-status.bianca-codes.workers.dev/api/status-cache/v8/_/stale");
     await globalThis.caches.default.put(
-      new Request("https://clawsweeper.openclaw.ai/api/status-cache/v8/_/fresh"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status-cache/v8/_/fresh"),
       new Response(
         JSON.stringify({
           schema_version: 1,
@@ -1355,7 +1355,7 @@ test("public status filters a legacy cached body before it can be served", async
       ),
     );
     const rejectedResponse = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       {},
     );
     assert.deepEqual(await rejectedResponse.json(), {
@@ -1369,15 +1369,15 @@ test("public status filters a legacy cached body before it can be served", async
       },
     });
 
-    entries.delete("https://clawsweeper.openclaw.ai/api/status-cache/v8/_/fresh");
+    entries.delete("https://clawsweeper-status.bianca-codes.workers.dev/api/status-cache/v8/_/fresh");
     await globalThis.caches.default.put(
-      new Request("https://clawsweeper.openclaw.ai/api/status-cache/v8/_/fresh"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status-cache/v8/_/fresh"),
       new Response('{"schema_version":1,"generated_at":', {
         headers: { "x-private-marker": "synthetic-malformed-header" },
       }),
     );
     const malformedResponse = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       {},
     );
     assert.deepEqual(await malformedResponse.json(), {
@@ -1914,19 +1914,19 @@ test("public per-item queue routes are input-independent and never call private 
   };
   const first = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/api/exact-review-queue/item?repo=generated-owner%2Fgenerated-repo&item_number=41",
+      "https://clawsweeper-status.bianca-codes.workers.dev/api/exact-review-queue/item?repo=generated-owner%2Fgenerated-repo&item_number=41",
     ),
     env,
   );
   const second = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/api/exact-review-queue/item?repo=unrelated-owner%2Funrelated-repo&item_number=99",
+      "https://clawsweeper-status.bianca-codes.workers.dev/api/exact-review-queue/item?repo=unrelated-owner%2Funrelated-repo&item_number=99",
     ),
     env,
   );
   const reviews = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/api/exact-review-queue/reviews?repo=generated-owner%2Fgenerated-repo&item_number=41",
+      "https://clawsweeper-status.bianca-codes.workers.dev/api/exact-review-queue/reviews?repo=generated-owner%2Fgenerated-repo&item_number=41",
     ),
     env,
   );
@@ -2077,7 +2077,7 @@ test("public queue HTTP route applies the closed projector before serialization"
     },
   };
   const response = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/api/exact-review-queue"),
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/exact-review-queue"),
     {
       EXACT_REVIEW_QUEUE: {
         idFromName() {

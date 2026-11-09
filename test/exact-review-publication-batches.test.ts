@@ -3601,7 +3601,7 @@ test("batch and canonical maintenance routes require the shared internal signatu
         }),
       },
     };
-    const url = "https://clawsweeper.openclaw.ai/internal/exact-review" + path;
+    const url = "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review" + path;
     const unauthorized = await worker.fetch(new Request(url, { method: "POST", body }), env);
     assert.equal(unauthorized.status, 401);
     assert.equal(forwardedPath, "");
@@ -3932,7 +3932,7 @@ test("authenticated publication reconciliation dry-run reports without mutation"
     },
   };
   const body = JSON.stringify({ apply: false, max_items: 1 });
-  const url = "https://clawsweeper.openclaw.ai/internal/exact-review/publications/reconcile";
+  const url = "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/publications/reconcile";
   const unauthorized = await worker.fetch(new Request(url, { method: "POST", body }), env);
   assert.equal(unauthorized.status, 401);
 

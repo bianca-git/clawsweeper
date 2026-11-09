@@ -232,8 +232,8 @@ jobs:
 
       - uses: ./clawsweeper/.github/actions/setup-state
         with:
-          coordinator-url: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
-          records-url: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
+          coordinator-url: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
+          records-url: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
           records-secret: ${{ secrets.CLAWSWEEPER_WEBHOOK_SECRET }}
           records-repo-slugs: ${{ steps.target.outputs.target_slug }}
           records-item-number: ${{ steps.requested-items.outputs.item_numbers }}
@@ -248,7 +248,7 @@ jobs:
         working-directory: clawsweeper
         env:
           CLAWSWEEPER_WEBHOOK_SECRET: ${{ secrets.CLAWSWEEPER_WEBHOOK_SECRET }}
-          QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
+          QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
           STEPS_TARGET_OUTPUTS_TARGET_REPO: ${{ steps.target.outputs.target_repo }}
           WORKFLOW_REPOSITORY: ${{ github.repository }}
           WORKFLOW_RUN_ID: ${{ github.run_id }}
@@ -272,7 +272,7 @@ jobs:
           MANUAL_EXPLICIT: ${{ github.event_name == 'workflow_dispatch' && (github.event.inputs.item_number != '' || github.event.inputs.item_numbers != '') && 'true' || 'false' }}
           HOT_INTAKE: ${{ ((github.event_name == 'repository_dispatch' && github.event.client_payload.hot_intake == 'true') || (github.event_name == 'workflow_dispatch' && github.event.inputs.hot_intake == 'true') || (github.event_name == 'schedule' && (github.event.schedule == '*/5 * * * *' || github.event.schedule == '2/5 * * * *'))) && 'true' || 'false' }}
           GH_TOKEN: ${{ github.token }}
-          QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
+          QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
           CLAWSWEEPER_QUEUE_PRESSURE_SOFT_PENDING: ${{ vars.CLAWSWEEPER_QUEUE_PRESSURE_SOFT_PENDING || '' }}
           CLAWSWEEPER_QUEUE_PRESSURE_HARD_PENDING: ${{ vars.CLAWSWEEPER_QUEUE_PRESSURE_HARD_PENDING || '' }}
           CLAWSWEEPER_QUEUE_PRESSURE_SOFT_AGE_MS: ${{ vars.CLAWSWEEPER_QUEUE_PRESSURE_SOFT_AGE_MS || '' }}
@@ -354,7 +354,7 @@ jobs:
         env:
           CLAWSWEEPER_WEBHOOK_SECRET: ${{ secrets.CLAWSWEEPER_WEBHOOK_SECRET }}
           GH_TOKEN: ${{ steps.target-read-token.outputs.token || github.token }}
-          QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
+          QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
           TARGET_REPO: ${{ steps.target.outputs.target_repo }}
           TARGET_BRANCH: ${{ steps.target.outputs.target_branch }}
           ITEM_NUMBER: ${{ github.event.inputs.item_number }}
@@ -382,7 +382,7 @@ jobs:
         env:
           CLAWSWEEPER_WEBHOOK_SECRET: ${{ secrets.CLAWSWEEPER_WEBHOOK_SECRET }}
           GH_TOKEN: ${{ steps.target-read-token.outputs.token || github.token }}
-          QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
+          QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
           REQUESTED_TARGET_BRANCH: ${{ steps.target.outputs.target_branch }}
           CODEX_TIMEOUT_MS: ${{ steps.mode.outputs.codex_timeout_ms }}
           ADDITIONAL_PROMPT: ${{ github.event.inputs.additional_prompt || github.event.client_payload.review_options.additional_prompt || github.event.client_payload.additional_prompt || '' }}

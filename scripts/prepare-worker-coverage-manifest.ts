@@ -47,7 +47,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.ar
   try {
     const result = await prepareWorkerCoverageManifest({
       worktreeRoot: process.cwd(),
-      baseUrl: process.env.CLAWSWEEPER_RECORDS_URL ?? "https://clawsweeper.openclaw.ai",
+      baseUrl: process.env.CLAWSWEEPER_RECORDS_URL ?? "https://clawsweeper-status.bianca-codes.workers.dev",
       webhookSecret:
         process.env.CLAWSWEEPER_RECORDS_SECRET ?? process.env.CLAWSWEEPER_WEBHOOK_SECRET ?? "",
     });

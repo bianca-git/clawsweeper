@@ -40,7 +40,7 @@ async function signedIntake(route: string, decision: Record<string, unknown>, ho
     },
   });
   const response = await worker.fetch(
-    new Request(`https://clawsweeper.openclaw.ai/internal/exact-review/${route}`, {
+    new Request(`https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/${route}`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

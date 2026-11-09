@@ -60,7 +60,7 @@ test("public durable publication event endpoint returns bounded aggregate-only w
     return exec(query, ...bindings);
   };
   const response = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/api/recent-durable-publication-events?window=6h"),
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/recent-durable-publication-events?window=6h"),
     { EXACT_REVIEW_QUEUE: new MemoryDurableNamespace(queue) },
   );
   const body = (await response.json()) as {
@@ -75,7 +75,7 @@ test("public durable publication event endpoint returns bounded aggregate-only w
   assert.equal(JSON.stringify(body).includes("openclaw/openclaw#898"), false);
   assert.doesNotMatch(JSON.stringify(body), /"workflow(?:_run)?"\s*:/);
   const cached = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/api/recent-durable-publication-events?window=6h"),
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/recent-durable-publication-events?window=6h"),
     { EXACT_REVIEW_QUEUE: new MemoryDurableNamespace(queue) },
   );
   assert.equal(cached.status, 200);
@@ -96,7 +96,7 @@ test("public GitHub egress observability normalizes its query and withholds revi
   });
   const response = await worker.fetch(
     new Request(
-      `https://clawsweeper.openclaw.ai/api/github-egress-observability?hours=99&repo=${privateMarker}`,
+      `https://clawsweeper-status.bianca-codes.workers.dev/api/github-egress-observability?hours=99&repo=${privateMarker}`,
     ),
     { EXACT_REVIEW_QUEUE: namespace },
   );
@@ -110,7 +110,7 @@ test("public GitHub egress observability normalizes its query and withholds revi
   assert.equal(body.privacy.revision_digests, "withheld");
 
   const sevenDayResponse = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/api/github-egress-observability?hours=168"),
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/github-egress-observability?hours=168"),
     { EXACT_REVIEW_QUEUE: namespace },
   );
   const sevenDayBody = await sevenDayResponse.json();
@@ -142,7 +142,7 @@ test("public telemetry routes contain malformed and rejecting durable reads", as
       },
     };
     for (const [path, status, error] of queueRoutes) {
-      const response = await worker.fetch(new Request(`https://clawsweeper.openclaw.ai${path}`), {
+      const response = await worker.fetch(new Request(`https://clawsweeper-status.bianca-codes.workers.dev${path}`), {
         EXACT_REVIEW_QUEUE: new MemoryDurableNamespace(rejecting),
       });
       const body = await response.json();
@@ -165,7 +165,7 @@ test("public telemetry routes contain malformed and rejecting durable reads", as
       else assert.deepEqual(body, { recent_durable_publication_events: null });
     }
     for (const [path, error] of storeRoutes) {
-      const response = await worker.fetch(new Request(`https://clawsweeper.openclaw.ai${path}`), {
+      const response = await worker.fetch(new Request(`https://clawsweeper-status.bianca-codes.workers.dev${path}`), {
         STATUS_STORE: new MemoryDurableNamespace(rejecting),
       });
       assert.equal(response.status, 503);
@@ -245,7 +245,7 @@ test("operator lifecycle audit inventory is signed, redacted, paginated, snapsho
     EXACT_REVIEW_QUEUE: new MemoryDurableNamespace(queue),
   };
   const endpoint =
-    "https://clawsweeper.openclaw.ai/internal/exact-review/lifecycle-audit/inventory";
+    "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/lifecycle-audit/inventory";
   const request = async (body: string, secret = "operator-secret") =>
     worker.fetch(
       new Request(endpoint, {
@@ -402,7 +402,7 @@ test("apply observability accepts signed durable events and exposes the API summ
   };
   const publicQueryMarker = ["synthetic", "apply", "filter"].join("_");
   const accepted = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/apply-observability", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/apply-observability", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -416,7 +416,7 @@ test("apply observability accepts signed durable events and exposes the API summ
   const summary = await (
     await worker.fetch(
       new Request(
-        `https://clawsweeper.openclaw.ai/api/apply-observability?range=24h&repo=${publicQueryMarker}`,
+        `https://clawsweeper-status.bianca-codes.workers.dev/api/apply-observability?range=24h&repo=${publicQueryMarker}`,
       ),
       env,
     )
@@ -438,7 +438,7 @@ test("apply observability accepts signed durable events and exposes the API summ
   const staleClawhubBody = JSON.stringify(staleClawhubPayload);
   const staleClawhubSignature = `sha256=${createHmac("sha256", secret).update(staleClawhubBody).digest("hex")}`;
   const staleClawhubAccepted = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/apply-observability", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/apply-observability", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -451,7 +451,7 @@ test("apply observability accepts signed durable events and exposes the API summ
   assert.equal(staleClawhubAccepted.status, 200);
   const withoutStaleClawhub = await (
     await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/apply-observability?range=6h"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/apply-observability?range=6h"),
       env,
     )
   ).json();
@@ -469,7 +469,7 @@ test("apply observability accepts signed durable events and exposes the API summ
   const runningClawhubBody = JSON.stringify(runningClawhubPayload);
   const runningClawhubSignature = `sha256=${createHmac("sha256", secret).update(runningClawhubBody).digest("hex")}`;
   const runningClawhubAccepted = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/apply-observability", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/apply-observability", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -482,7 +482,7 @@ test("apply observability accepts signed durable events and exposes the API summ
   assert.equal(runningClawhubAccepted.status, 200);
   const withRunningClawhub = await (
     await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/apply-observability?range=6h"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/apply-observability?range=6h"),
       env,
     )
   ).json();
@@ -495,7 +495,7 @@ test("apply observability accepts signed durable events and exposes the API summ
   const clawhubBody = JSON.stringify(currentClawhubPayload);
   const clawhubSignature = `sha256=${createHmac("sha256", secret).update(clawhubBody).digest("hex")}`;
   const clawhubAccepted = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/apply-observability", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/apply-observability", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -508,7 +508,7 @@ test("apply observability accepts signed durable events and exposes the API summ
   assert.equal(clawhubAccepted.status, 200);
   const withClawhub = await (
     await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/apply-observability?range=24h"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/apply-observability?range=24h"),
       env,
     )
   ).json();
@@ -544,7 +544,7 @@ test("apply observability merges bucketed writes with legacy rows without double
   }
 
   const response = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/api/apply-observability?range=24h"),
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/apply-observability?range=24h"),
     { STATUS_STORE: namespace, APPLY_TARGET_REPOS: "openclaw/openclaw" },
   );
   const summary = await response.json();
@@ -572,7 +572,7 @@ test("apply observability stores a UTC-boundary replay exactly once", async () =
   storage.resetGetHistory();
 
   const response = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/api/apply-observability?range=24h"),
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/apply-observability?range=24h"),
     { STATUS_STORE: namespace, APPLY_TARGET_REPOS: "openclaw/openclaw" },
   );
   const summary = await response.json();
@@ -712,7 +712,7 @@ test("dashboard reuses a current snapshot from the matching shared status scope"
 
   try {
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       {
         CACHE_TTL_SECONDS: "60",
         STATUS_STORE: statusStore,
@@ -779,7 +779,7 @@ test("dashboard rejects a current snapshot from a different public scope", async
 
   try {
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       {
         CACHE_TTL_SECONDS: "60",
         STATUS_STORE: statusStore,
@@ -806,7 +806,7 @@ test("dashboard isolates fresh edge caches by public Bay scope", async () => {
     value: { default: cache },
   });
   await cache.put(
-    new Request("https://clawsweeper.openclaw.ai/api/status-cache/v8/openclaw%2Fopenclaw/fresh"),
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status-cache/v8/openclaw%2Fopenclaw/fresh"),
     jsonResponse({
       schema_version: 1,
       generated_at: new Date().toISOString(),
@@ -836,7 +836,7 @@ test("dashboard isolates fresh edge caches by public Bay scope", async () => {
   };
 
   try {
-    const response = await worker.fetch(new Request("https://clawsweeper.openclaw.ai/api/status"), {
+    const response = await worker.fetch(new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"), {
       PUBLIC_BAY_REPOS: "bianca-git/clawsweeper",
     });
     const status = await response.json();
@@ -885,7 +885,7 @@ test("dashboard refreshes a durable snapshot from an obsolete cache generation",
 
   try {
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       { CACHE_TTL_SECONDS: "60", STATUS_STORE: statusStore },
       { waitUntil: () => undefined },
     );
@@ -931,7 +931,7 @@ test("dashboard does not publish a malformed durable root as the current snapsho
 
   try {
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       { CACHE_TTL_SECONDS: "60", STATUS_STORE: statusStore },
       { waitUntil: () => undefined },
     );
@@ -943,11 +943,11 @@ test("dashboard does not publish a malformed durable root as the current snapsho
     assert.equal(body.freshness.state, "unavailable");
     assert.equal(await statusStore.get("snapshot:bay-scope:v2:_"), null);
     assert.equal(
-      await cache.match(new Request("https://clawsweeper.openclaw.ai/api/status-cache/v8/_/stale")),
+      await cache.match(new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status-cache/v8/_/stale")),
       undefined,
     );
     assert.equal(
-      await cache.match(new Request("https://clawsweeper.openclaw.ai/api/status-cache/v8/_/fresh")),
+      await cache.match(new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status-cache/v8/_/fresh")),
       undefined,
     );
   } finally {
@@ -1046,7 +1046,7 @@ test("dashboard health history persists five-minute samples and serves a bounded
   );
 
   const sixHourResponse = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/api/health-history?range=6h"),
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/health-history?range=6h"),
     { STATUS_STORE: namespace },
   );
   const sixHourHistory = await sixHourResponse.json();
@@ -1071,7 +1071,7 @@ test("dashboard health history persists five-minute samples and serves a bounded
   assert.equal(sixHourHistory.freshness.maximum_age_ms, 12 * 60_000);
 
   const emptyResponse = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/api/health-history?range=6h"),
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/health-history?range=6h"),
     { STATUS_STORE: new MemoryKv() },
   );
   const emptyHistory = await emptyResponse.json();
@@ -1098,7 +1098,7 @@ test("dashboard health history persists five-minute samples and serves a bounded
     ["invalid", "24h"],
   ]) {
     const response = await worker.fetch(
-      new Request(`https://clawsweeper.openclaw.ai/api/health-history?range=${query}`),
+      new Request(`https://clawsweeper-status.bianca-codes.workers.dev/api/health-history?range=${query}`),
       { STATUS_STORE: namespace },
     );
     const history = await response.json();
@@ -1208,7 +1208,7 @@ test("dashboard health history deduplicates and caps malformed legacy cardinalit
   }
 
   const response = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/api/health-history?range=6h"),
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/health-history?range=6h"),
     { STATUS_STORE: statusStore },
   );
   const history = await response.json();
@@ -1280,7 +1280,7 @@ test("dashboard cron records only exact-review history without GitHub queries", 
     assert.equal(queueReads, 1);
 
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/health-history?range=24h"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/health-history?range=24h"),
       { STATUS_STORE: namespace },
     );
     const history = await response.json();
@@ -1311,7 +1311,7 @@ test("dashboard cron records only exact-review history without GitHub queries", 
     );
     await failureRecording;
     const afterFailure = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/health-history?range=6h"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/health-history?range=6h"),
       { STATUS_STORE: namespace },
     );
     const failedQueueHistory = await afterFailure.json();
@@ -1381,7 +1381,7 @@ test("optional exact-review telemetry failures do not freeze an idle status snap
 
   try {
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       env,
       { waitUntil: () => undefined },
     );
@@ -1394,7 +1394,7 @@ test("optional exact-review telemetry failures do not freeze an idle status snap
     assert.equal(JSON.stringify(status).includes("queue_read_failed"), false);
 
     const cached = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       env,
       { waitUntil: () => undefined },
     );
@@ -1470,7 +1470,7 @@ test("optional queue status failures remain bounded in public and persisted snap
 
   try {
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       env,
       { waitUntil: () => undefined },
     );
@@ -1491,7 +1491,7 @@ test("optional queue status failures remain bounded in public and persisted snap
     assert.equal(persisted.includes("exact_review_queue_error"), false);
 
     const cached = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       env,
       { waitUntil: () => undefined },
     );
@@ -1532,7 +1532,7 @@ test("optional queue status failure retains the last complete public Bay queue s
   );
   assert.equal(enqueue.status, 202);
   const publicQueueResponse = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/api/exact-review-queue"),
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/exact-review-queue"),
     {
       EXACT_REVIEW_QUEUE: new MemoryDurableNamespace(queue),
       PUBLIC_BAY_REPOS: "openclaw/openclaw",
@@ -1627,7 +1627,7 @@ test("optional queue status failure retains the last complete public Bay queue s
 
   try {
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       env,
       { waitUntil: () => undefined },
     );
@@ -1662,7 +1662,7 @@ test("optional queue status failure retains the last complete public Bay queue s
     assert.equal(persisted.includes(rejectionMarker), false);
 
     const cached = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       env,
       { waitUntil: () => undefined },
     );
@@ -1690,7 +1690,7 @@ test("optional queue status failure retains the last complete public Bay queue s
       }),
     );
     const staleRoot = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       env,
       { waitUntil: () => undefined },
     );
@@ -1725,7 +1725,7 @@ test("optional queue status failure retains the last complete public Bay queue s
       }),
     );
     const expired = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       env,
       { waitUntil: () => undefined },
     );
@@ -1737,7 +1737,7 @@ test("optional queue status failure retains the last complete public Bay queue s
       value: { default: new MemoryCache() },
     });
     const unbound = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       {
         CACHE_TTL_SECONDS: "60",
         STATUS_STORE: statusStore,
@@ -1776,7 +1776,7 @@ test("dashboard health grades fresh queue telemetry while retaining prior public
   );
   assert.equal(enqueue.status, 202);
   const publicQueueResponse = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/api/exact-review-queue"),
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/exact-review-queue"),
     {
       EXACT_REVIEW_QUEUE: new MemoryDurableNamespace(queue),
       PUBLIC_BAY_REPOS: "openclaw/openclaw",
@@ -1857,7 +1857,7 @@ test("dashboard health grades fresh queue telemetry while retaining prior public
 
   try {
     const response = await worker.fetch(
-      new Request("https://clawsweeper.openclaw.ai/api/status"),
+      new Request("https://clawsweeper-status.bianca-codes.workers.dev/api/status"),
       {
         CACHE_TTL_SECONDS: "60",
         STATUS_STORE: statusStore,

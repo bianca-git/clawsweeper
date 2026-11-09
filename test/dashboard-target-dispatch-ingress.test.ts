@@ -254,7 +254,7 @@ test("direct target dispatch enqueues once into the real queue and dedupes the r
     };
     const post = (token: string, payload: unknown) =>
       worker.fetch(
-        new Request("https://clawsweeper.openclaw.ai/github/target-dispatch", {
+        new Request("https://clawsweeper-status.bianca-codes.workers.dev/github/target-dispatch", {
           method: "POST",
           headers: { authorization: `Bearer ${token}`, "content-type": "application/json" },
           body: JSON.stringify(payload),
@@ -308,7 +308,7 @@ test("direct target dispatch fails closed before the queue", async () => {
     };
     const post = (headers: Record<string, string>, body: string, extraEnv = {}) =>
       worker.fetch(
-        new Request("https://clawsweeper.openclaw.ai/github/target-dispatch", {
+        new Request("https://clawsweeper-status.bianca-codes.workers.dev/github/target-dispatch", {
           method: "POST",
           headers: { "content-type": "application/json", ...headers },
           body,

@@ -29,7 +29,7 @@ test("authenticated canonical maintenance exposes only closed platform categorie
     let trace: string | null = null;
     const response = await worker.fetch(
       new Request(
-        "https://clawsweeper.openclaw.ai/internal/exact-review/canonical-bodies/maintenance",
+        "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/canonical-bodies/maintenance",
         {
           method: "POST",
           body,
@@ -78,7 +78,7 @@ function newQueue(storage: MemoryDurableStorage) {
 }
 
 function signedPublicationsListRequest(body: string, secret: string) {
-  return new Request("https://clawsweeper.openclaw.ai/internal/exact-review/publications/list", {
+  return new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/publications/list", {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -407,7 +407,7 @@ test("webhook and internal enqueue preserve retryable admission responses before
               installation: { id: 123 },
             },
           })
-        : new Request("https://clawsweeper.openclaw.ai/internal/exact-review/enqueue", {
+        : new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/enqueue", {
             method: "POST",
             body,
             headers: {

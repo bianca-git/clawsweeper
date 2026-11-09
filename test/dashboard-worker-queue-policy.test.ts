@@ -2553,7 +2553,7 @@ test("direct lifecycle recovery bypasses publication batching", async () => {
     assert.equal(
       (
         await worker.fetch(
-          new Request("https://clawsweeper.openclaw.ai/internal/exact-review/publication-results", {
+          new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/publication-results", {
             method: "POST",
             headers: { "x-clawsweeper-exact-review-signature": publicationSignature },
             body: publicationBody,
@@ -4550,7 +4550,7 @@ test("exact-review heartbeat refreshes only the matching live lease tuple", asyn
     run_attempt: 1,
   });
   const response = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/exact-review/heartbeat", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/heartbeat", {
       method: "POST",
       body,
     }),
@@ -4575,7 +4575,7 @@ test("exact-review heartbeat refreshes only the matching live lease tuple", asyn
   assert.ok(heartbeatAt > 0);
 
   const finalizing = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/exact-review/heartbeat", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/heartbeat", {
       method: "POST",
       body: JSON.stringify({ ...JSON.parse(body), phase: "finalizing" }),
     }),
@@ -4601,7 +4601,7 @@ test("exact-review heartbeat refreshes only the matching live lease tuple", asyn
     run_attempt: 1,
   });
   const mismatch = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/exact-review/heartbeat", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/heartbeat", {
       method: "POST",
       body: mismatchBody,
     }),
@@ -4652,7 +4652,7 @@ test("signed claimed-run snapshot feeds tuple-safe terminal reconciliation", asy
   const claimedBody = JSON.stringify({ runs: [], include_all_claimed: true });
   const claimedSignature = `sha256=${createHmac("sha256", "test-token-placeholder").update(claimedBody).digest("hex")}`;
   const claimed = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/exact-review/claimed-runs", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/claimed-runs", {
       method: "POST",
       headers: { "x-clawsweeper-exact-review-signature": claimedSignature },
       body: claimedBody,
@@ -4677,7 +4677,7 @@ test("signed claimed-run snapshot feeds tuple-safe terminal reconciliation", asy
   });
   const terminalSignature = `sha256=${createHmac("sha256", "test-token-placeholder").update(terminalBody).digest("hex")}`;
   const reconciled = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/exact-review/reconcile", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/reconcile", {
       method: "POST",
       headers: { "x-clawsweeper-exact-review-signature": terminalSignature },
       body: terminalBody,
@@ -4703,7 +4703,7 @@ test("fresh dead-letter recovery is available only through the signed internal r
   const body = JSON.stringify({ ids: ["missing-dead-letter"], idempotency_key: "operator:test" });
   const unsigned = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/dead-letters/recover-fresh",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/dead-letters/recover-fresh",
       {
         method: "POST",
         body,
@@ -4716,7 +4716,7 @@ test("fresh dead-letter recovery is available only through the signed internal r
   const sharedSignature = `sha256=${createHmac("sha256", "test-token-placeholder").update(body).digest("hex")}`;
   const sharedSigned = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/dead-letters/recover-fresh",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/dead-letters/recover-fresh",
       {
         method: "POST",
         headers: { "x-clawsweeper-exact-review-signature": sharedSignature },
@@ -4730,7 +4730,7 @@ test("fresh dead-letter recovery is available only through the signed internal r
   const signature = `sha256=${createHmac("sha256", "operator-token-placeholder").update(body).digest("hex")}`;
   const signed = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/internal/exact-review/dead-letters/recover-fresh",
+      "https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/dead-letters/recover-fresh",
       {
         method: "POST",
         headers: { "x-clawsweeper-exact-review-signature": signature },
@@ -4775,7 +4775,7 @@ test("parked review inventory and mutations require the operator signature", asy
   ];
   for (const { path, payload } of requests) {
     const body = JSON.stringify(payload);
-    const url = `https://clawsweeper.openclaw.ai/internal/exact-review/parked-reviews/${path}`;
+    const url = `https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/parked-reviews/${path}`;
     assert.equal((await worker.fetch(new Request(url, { method: "POST", body }), env)).status, 401);
     const sharedSignature = `sha256=${createHmac("sha256", "test-token-placeholder").update(body).digest("hex")}`;
     assert.equal(

@@ -74,8 +74,8 @@ jobs:
       - uses: ./.github/actions/setup-state
         if: ${{ github.event.schedule == '37 */6 * * *' }}
         with:
-          coordinator-url: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
-          records-url: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
+          coordinator-url: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
+          records-url: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
           records-secret: ${{ secrets.CLAWSWEEPER_WEBHOOK_SECRET }}
           hydrate-git-state: "false"
           hydrate-state-blobs: "false"
@@ -88,7 +88,7 @@ jobs:
       - name: Prepare canonical coverage identities
         if: ${{ github.event.schedule == '14/20 * * * *' }}
         env:
-          CLAWSWEEPER_RECORDS_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
+          CLAWSWEEPER_RECORDS_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
           CLAWSWEEPER_RECORDS_SECRET: ${{ secrets.CLAWSWEEPER_WEBHOOK_SECRET }}
         run: node scripts/prepare-worker-coverage-manifest.ts
 
@@ -140,7 +140,7 @@ jobs:
           FANOUT_MODE: ${{ github.event.schedule == '14/20 * * * *' && 'normal-review' || (github.event.schedule == '37 */6 * * *' && 'audit' || 'hot-intake') }}
           FANOUT_LIMIT: ${{ github.event.schedule == '14/20 * * * *' && '12' || (github.event.schedule == '37 */6 * * *' && '12' || '20') }}
           COVERAGE_MANIFEST: ${{ github.event.schedule == '37 */6 * * *' && '.artifacts/worker-records-manifest.json' || '.artifacts/worker-coverage-manifest.json' }}
-          REVIEW_COVERAGE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
+          REVIEW_COVERAGE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
         run: |
           set -euo pipefail
           pnpm run target-fanout -- \
@@ -185,5 +185,5 @@ jobs:
           CLAWSWEEPER_INVENTORY_TOKEN_OPENCLAW: ${{ steps.openclaw-coverage-token.outputs.token || '__public__' }}
           CLAWSWEEPER_INVENTORY_TOKEN_STEIPETE: ${{ steps.steipete-coverage-token.outputs.token || '__public__' }}
           CLAWSWEEPER_WEBHOOK_SECRET: ${{ secrets.CLAWSWEEPER_WEBHOOK_SECRET }}
-          REVIEW_COVERAGE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
+          REVIEW_COVERAGE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
         run: pnpm run target-fanout -- coverage --window-days 7 --publish-url "$REVIEW_COVERAGE_URL" >> "$GITHUB_STEP_SUMMARY"

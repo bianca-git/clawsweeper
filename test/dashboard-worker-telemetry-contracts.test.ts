@@ -192,7 +192,7 @@ test("removed per-item review telemetry write routes return not found", async ()
   );
   const queueGet = await queue.fetch(new Request("https://queue/review-telemetry"));
   const internal = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/exact-review/review-telemetry", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/review-telemetry", {
       method: "POST",
       body: "{}",
     }),
@@ -204,7 +204,7 @@ test("removed per-item review telemetry write routes return not found", async ()
 test("public per-item review read contract returns a stable empty envelope", async () => {
   const response = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/api/exact-review-queue/reviews?repo=openclaw%2Fopenclaw&item_number=674&limit=100",
+      "https://clawsweeper-status.bianca-codes.workers.dev/api/exact-review-queue/reviews?repo=openclaw%2Fopenclaw&item_number=674&limit=100",
     ),
     {},
   );
@@ -219,7 +219,7 @@ test("public per-item review read contract returns a stable empty envelope", asy
 test("public per-item review read contract ignores identifying queries", async () => {
   const response = await worker.fetch(
     new Request(
-      "https://clawsweeper.openclaw.ai/api/exact-review-queue/reviews?repo=openclaw&item_number=0&limit=101",
+      "https://clawsweeper-status.bianca-codes.workers.dev/api/exact-review-queue/reviews?repo=openclaw&item_number=0&limit=101",
     ),
     {},
   );
@@ -253,7 +253,7 @@ test("review observer write is signed while aggregate telemetry remains read-onl
     EXACT_REVIEW_QUEUE: new MemoryDurableNamespace(queue),
   };
   const denied = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/exact-review/review-run-telemetry", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/review-run-telemetry", {
       method: "POST",
       body: record,
     }),
@@ -263,7 +263,7 @@ test("review observer write is signed while aggregate telemetry remains read-onl
 
   const signature = `sha256=${createHmac("sha256", "test-token-placeholder").update(record).digest("hex")}`;
   const accepted = await worker.fetch(
-    new Request("https://clawsweeper.openclaw.ai/internal/exact-review/review-run-telemetry", {
+    new Request("https://clawsweeper-status.bianca-codes.workers.dev/internal/exact-review/review-run-telemetry", {
       method: "POST",
       headers: { "x-clawsweeper-exact-review-signature": signature },
       body: record,
@@ -274,7 +274,7 @@ test("review observer write is signed while aggregate telemetry remains read-onl
   const publicQueryMarker = ["synthetic", "review", "filter"].join("_");
   const aggregate = await worker.fetch(
     new Request(
-      `https://clawsweeper.openclaw.ai/api/review-observability?range=24h&repo=${publicQueryMarker}`,
+      `https://clawsweeper-status.bianca-codes.workers.dev/api/review-observability?range=24h&repo=${publicQueryMarker}`,
     ),
     env,
   );

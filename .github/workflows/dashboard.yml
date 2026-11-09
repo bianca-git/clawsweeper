@@ -39,7 +39,7 @@ jobs:
       CLOUDFLARE_WORKER_NAME: clawsweeper-status
       CLOUDFLARE_API_TOKEN: ${{ secrets.OPENCLAW_CLOUDFLARE_WORKERS_API_TOKEN || secrets.OPENCLAW_CLOUDFLARE_API_TOKEN }}
       CF_API_TOKEN: ${{ secrets.OPENCLAW_CLOUDFLARE_WORKERS_API_TOKEN || secrets.OPENCLAW_CLOUDFLARE_API_TOKEN }}
-      CLAWSWEEPER_STATUS_URL: https://clawsweeper.openclaw.ai
+      CLAWSWEEPER_STATUS_URL: https://clawsweeper-status.bianca-codes.workers.dev
       CLAWSWEEPER_EXPECTED_DEPLOY_SHA: ${{ github.sha }}
       CLAWSWEEPER_STATUS_INGEST_TOKEN: ${{ secrets.CLAWSWEEPER_STATUS_INGEST_TOKEN }}
       CLAWSWEEPER_APP_PRIVATE_KEY: ${{ secrets.CLAWSWEEPER_APP_PRIVATE_KEY }}
@@ -124,7 +124,7 @@ jobs:
 
       - name: Verify live dashboard without deploying
         env:
-          CLAWSWEEPER_STATUS_URL: https://clawsweeper.openclaw.ai
+          CLAWSWEEPER_STATUS_URL: https://clawsweeper-status.bianca-codes.workers.dev
           CLAWSWEEPER_EXPECTED_DEPLOY_SHA: ${{ inputs.expected_deployment_sha }}
           CLAWSWEEPER_WEBHOOK_SECRET: ${{ secrets.CLAWSWEEPER_WEBHOOK_SECRET }}
         run: |

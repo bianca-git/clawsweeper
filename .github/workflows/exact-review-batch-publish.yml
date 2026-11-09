@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     env:
-      EXACT_REVIEW_QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
+      EXACT_REVIEW_QUEUE_URL: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
       CLAWSWEEPER_AUTO_CLOSE_REASONS: ${{ vars.CLAWSWEEPER_AUTO_CLOSE_REASONS || 'all' }}
       CLAWSWEEPER_UNCONFIRMED_PRODUCT_DIRECTION_CLOSE_ENABLED: ${{ vars.CLAWSWEEPER_UNCONFIRMED_PRODUCT_DIRECTION_CLOSE_ENABLED || 'false' }}
       CLAWSWEEPER_UNSPONSORED_FEATURE_CLOSE_ENABLED: ${{ vars.CLAWSWEEPER_UNSPONSORED_FEATURE_CLOSE_ENABLED || 'false' }}
@@ -108,7 +108,7 @@ jobs:
       - uses: ./.github/actions/setup-state
         if: ${{ steps.batch.outputs.claimed == 'true' && steps.batch.outputs.item_count != '0' }}
         with:
-          coordinator-url: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper.openclaw.ai' }}
+          coordinator-url: ${{ vars.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL || 'https://clawsweeper-status.bianca-codes.workers.dev' }}
           hydrate-records: "false"
           hydrate-git-state: "false"
           hydrate-state-blobs: "false"

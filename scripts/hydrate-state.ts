@@ -53,7 +53,7 @@ export async function hydrateState(
     args.recordsUrl ??
     env.CLAWSWEEPER_RECORDS_URL ??
     env.CLAWSWEEPER_STATE_COORDINATOR_URL ??
-    "https://clawsweeper.openclaw.ai";
+    "https://clawsweeper-status.bianca-codes.workers.dev";
   const webhookSecret = env.CLAWSWEEPER_RECORDS_SECRET ?? env.CLAWSWEEPER_WEBHOOK_SECRET ?? "";
   if ((hydrateRecords || hydrateStateBlobs) && !webhookSecret) {
     throw new Error("CLAWSWEEPER_RECORDS_SECRET is required for canonical state hydration");

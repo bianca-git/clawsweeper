@@ -197,7 +197,7 @@ export async function handleGitHubWebhook({
       queueUrl:
         process.env.CLAWSWEEPER_EXACT_REVIEW_QUEUE_URL ||
         process.env.QUEUE_URL ||
-        "https://clawsweeper.openclaw.ai",
+        "https://clawsweeper-status.bianca-codes.workers.dev",
       secret: process.env.CLAWSWEEPER_WEBHOOK_SECRET || "",
       intake,
     });

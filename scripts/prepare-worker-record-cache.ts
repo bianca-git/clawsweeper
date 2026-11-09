@@ -8,7 +8,7 @@ import {
 } from "./worker-records.ts";
 
 const repoSlugs = parseRepoSlugs(process.env.CLAWSWEEPER_RECORDS_REPO_SLUGS);
-const baseUrl = process.env.CLAWSWEEPER_RECORDS_URL ?? "https://clawsweeper.openclaw.ai";
+const baseUrl = process.env.CLAWSWEEPER_RECORDS_URL ?? "https://clawsweeper-status.bianca-codes.workers.dev";
 const webhookSecret =
   process.env.CLAWSWEEPER_RECORDS_SECRET ?? process.env.CLAWSWEEPER_WEBHOOK_SECRET ?? "";
 if (!webhookSecret) throw new Error("CLAWSWEEPER_RECORDS_SECRET is required");
